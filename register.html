@@ -12,6 +12,7 @@
     <!-- CSS  -->
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/animate.css" type="text/css" rel="stylesheet">
 
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -125,13 +126,13 @@
 <!-- Registration form-->
 <div class="row registration">
     <!-- Registration Header -->
-    <div class="row">
+    <div class="row animated slideInDown">
         <div class="col coll">
             <h1>Εγγραφή</h1>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row animated slideInDown">
         <div class="col l5 coll">
             <p class="flow-text">Εγγράψου συμπληρώνοντας τα στοιχεία σου παρακάτω και απόκτησε πρόσβαση σε
                 <b>100+</b>
@@ -142,17 +143,17 @@
 
     <div class="col center coll">
         <!-- Registration Form -->
-        <div class="reg-form z-depth-3 coll">
-            <form action="http://diskforyou.com/php_formulare/registrace_proces.php" autocomplete="off"
+        <div class="reg-form z-depth-3 coll animated slideInUp">
+            <form action="register.html" autocomplete="off"
                   method="POST">
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="mdi-action-assignment-ind prefix"></i>
-                        <input id="first_name" type="text" class="validate">
+                        <input id="first_name" type="text" class="validate" maxlength="15" required>
                         <label for="first_name">Όνομα</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
+                        <input id="last_name" type="text" class="validate" maxlength="30" required>
                         <label for="last_name">Επώνυμο</label>
                     </div>
                 </div>
@@ -174,21 +175,22 @@
                 </div>
                 <div class="input-field">
                     <i class="mdi-communication-phone prefix"></i>
-                    <input id="icon_telephone" type="tel" class="validate">
+                    <input id="icon_telephone" type="tel" pattern='[\+]\d{2}\d{10}'
+                           placeholder='Αριθμός τηλεφώνου (Format: +30699999999)' class="validate" required>
                     <label for="icon_telephone">Τηλέφωνο</label>
                 </div>
                 <div class="input-field">
                     <i class="mdi-social-cake prefix"></i>
-                    <input id="birthdate" type="date" class="datepicker picker__input">
+                    <input id="birthdate" type="date" class="datepicker picker__input" required>
                     <label for="birthdate">Ημερομηνία Γέννησης</label>
                 </div>
 
 
                 <div class="row">
-                    <label><h6>Φύλο</h1></label>
-                    <input name="group1" type="radio" id="male"/>
+                    <label><h6>Φύλο</h6></label>
+                    <input name="group1" type="radio" id="male" required/>
                     <label for="male">Άνδρας</label>
-                    <input name="group1" type="radio" id="female"/>
+                    <input name="group1" type="radio" id="female" required/>
                     <label for="female">Γυναίκα</label>
                 </div>
                 <div class="g-recaptcha coll" data-sitekey="6Ldc7AUTAAAAANnRbW3E9zA9nNaS5HVV9fmmxZaL"></div>
