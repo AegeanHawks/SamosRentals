@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="msapplication-TileColor" content="#fa7c1a">
+
+    <title>Samos Rentals - Registation</title>
+    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
+
+    <!-- CSS  -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .registration {
+            position: absolute;
+            width: 100%;
+            height: 91%;
+            text-align: center;
+            align-content: center;
+        }
+
+        .registration .coll {
+            display: inline-block;
+            float: none;
+        }
+
+        .registration .coll h1 {
+            margin-top: 4rem;
+        }
+
+        .registration h1 {
+            color: #fff;
+            text-align: center;
+            margin-top: 5%;
+            font-size: 3.5rem;
+        }
+
+        .registration p {
+            color: #fff;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .reg-form {
+            background-color: #fafafa;
+            margin: 1rem auto 3rem;
+            border-radius: 5px;
+            padding: 1.5rem 2rem 0.5rem !important;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+    </script>
+
+</head>
+<body class="light-blue">
+
+<!--Navigation Menu-->
+<div class="navbar-fixed ">
+    <nav class="blue darken-4" role="navigation">
+        <div class="nav-wrapper container">
+            <div class="valign-demo valign-wrapper left">
+                <a id="logo-container" href="index.html" class="brand-logo waves-effect waves-light">
+                    <div class="hide-on-med-and-down">
+                    <span class="left" style="padding-left:20px;"><img src="images/website/logo.png"
+                                                                       width="36px"></span>
+                        <span class="white-text left" style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
+
+                    </div>
+                    <div class="hide-on-large-only">
+                        <span class="white-text">Samos Rentals</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="right hide-on-med-and-down">
+                <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
+            </div>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html" class="white-text">Αρχική</a></li>
+                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
+                <li><a href="#" class="white-text">Δημοπρασία</a></li>
+                <li><a href="#" class="white-text">Καταχώρηση</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="right side-nav blue accent-3">
+                <li><a href="index.html" class="white-text">Αρχική</a></li>
+                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
+                <li><a href="#" class="white-text">Δημοπρασία</a></li>
+                <li><a href="#" class="white-text">Καταχώρηση</a></li>
+                <a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a>
+                <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
+            </ul>
+            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+        </div>
+    </nav>
+</div>
+<!--Navigation Menu-->
+
+<!-- Registration form-->
+<div class="row registration">
+    <!-- Registration Header -->
+    <div class="row">
+        <div class="col coll">
+            <h1>Εγγραφή</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col l5 coll">
+            <p class="flow-text">Εγγράψου συμπληρώνοντας τα στοιχεία σου παρακάτω και απόκτησε πρόσβαση σε
+                <b>100+</b>
+                ενοικιαζόμενα ή αν είσαι <b>κάτοχος</b> δωματίων δημοπράτησε τα!
+        </div>
+    </div>
+    <!-- Registration Header -->
+
+    <div class="col center coll">
+        <!-- Registration Form -->
+        <div class="reg-form z-depth-3 coll">
+            <form action="http://diskforyou.com/php_formulare/registrace_proces.php" autocomplete="off"
+                  method="POST">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="mdi-action-assignment-ind prefix"></i>
+                        <input id="first_name" type="text" class="validate">
+                        <label for="first_name">Όνομα</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Επώνυμο</label>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <i class="mdi-content-mail prefix"></i>
+                    <input type="email" name="email" id="email" maxlength="30" required>
+                    <label for="email">E-mail</label>
+                </div>
+                <div class="input-field">
+                    <i class="mdi-communication-vpn-key prefix"></i>
+                    <input type="password" name="password" id="password" maxlength="30" required>
+                    <label for="password">Κωδικός</label>
+                </div>
+                <div class="input-field">
+                    <i class="mdi-content-undo prefix"></i>
+                    <input type="password" name="password" id="reenter_password" maxlength="30" required>
+                    <label for="reenter_password">Ξαναβάλε τον κωδικό</label>
+                </div>
+                <div class="input-field">
+                    <i class="mdi-communication-phone prefix"></i>
+                    <input id="icon_telephone" type="tel" class="validate">
+                    <label for="icon_telephone">Τηλέφωνο</label>
+                </div>
+                <div class="input-field">
+                    <i class="mdi-social-cake prefix"></i>
+                    <input id="birthdate" type="date" class="datepicker picker__input">
+                    <label for="birthdate">Ημερομηνία Γέννησης</label>
+                </div>
+
+
+                <div class="row">
+                    <label><h6>Φύλο</h1></label>
+                    <input name="group1" type="radio" id="male"/>
+                    <label for="male">Άνδρας</label>
+                    <input name="group1" type="radio" id="female"/>
+                    <label for="female">Γυναίκα</label>
+                </div>
+                <div class="g-recaptcha coll" data-sitekey="6Ldc7AUTAAAAANnRbW3E9zA9nNaS5HVV9fmmxZaL"></div>
+                <div class="row">
+                    <button type="submit" class="center-btn waves-effect waves-light btn" id="register_btn"><i
+                            class="mdi-action-done left"></i>Εγγραφη
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- Registration Form -->
+    </div>
+</div>
+<!-- Registration form-->
+
+</body>
+</html>
