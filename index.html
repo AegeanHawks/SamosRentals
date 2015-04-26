@@ -12,7 +12,7 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
     <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <style>
@@ -29,7 +29,7 @@
         }
     </style>
 </head>
-<body>
+<body class="white">
 
 <!--Navigation Menu-->
 <div class="navbar-fixed">
@@ -38,8 +38,7 @@
             <div class="valign-demo valign-wrapper left">
                 <a id="logo-container" href="index.html" class="brand-logo waves-effect waves-light">
                     <div class="hide-on-med-and-down">
-                    <span class="left " style="padding-left:20px;"><img src="images/website/logo.png"
-                                                                       width="36px"></span>
+                        <span class="left " style="padding-left:20px;"><img src="images/website/logo.png"></span>
                         <span class="white-text left " style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
 
                     </div>
@@ -53,24 +52,86 @@
                 <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
             </div>
             <ul class="right hide-on-med-and-down">
-                <li><a href="index.html" class="white-text">Αρχική</a></li>
                 <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="#" class="white-text">Δημοπρασία</a></li>
-                <li><a href="#" class="white-text">Καταχώρηση</a></li>
+                <li><a href="#" class="white-text">Δημοπρασίες</a></li>
             </ul>
 
             <ul id="nav-mobile" class="right side-nav blue accent-3">
-                <li><a href="index.html" class="white-text">Αρχική</a></li>
                 <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="#" class="white-text">Δημοπρασία</a></li>
+                <li><a href="#" class="white-text">Δημοπρασίες</a></li>
                 <li><a href="#" class="white-text">Καταχώρηση</a></li>
-                <a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a>
-                <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
+                <li><a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
+                <li><a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
             </ul>
+
+
             <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
         </div>
     </nav>
 </div>
+
+<div class="parallax-container">
+    <div class="parallax"><img src="http://www.samosvillas.gr/images/samos1/2.jpg"></div>
+</div>
+
+<div class="section no-pad-bot" style="margin-top: -5%;">
+    <div class="row">
+        <div class="col offset-l3 l6 s12 white z-depth-3">
+            <div class="entry-content">
+                <div class="col l12 m8 s12">
+                    <h4 class="grey-text darken-2 light">Καλωσήρθες</h4>
+                    <h5 class="grey-text darken-2 light">Ανακάλυψε και κάνε κράτηση δωματίου για τις διακοπές των
+                        ονείρων σου...</h5>
+
+                    <p class="grey-text darken-3">Το Samos Rentals περιέχει μια τεράστια βάση από 100+ δωμάτια και
+                        ξενοδοχεία στο νησί. Αν έχεις ξενοδοχείο ή ενοικιαζόμενα δωμάτια τότε εγγράχου στην υπηρεσία μας
+                        και δες την επιχείρηση και τα κέρδη σου να απογειώνονται!!!</p>
+
+                    <p class="grey-text darken-3">Αν δεν έχεις γίνει ακόμα μέλος, τότε κάνε εγγραφή για να μπορείς και
+                        εσύ να κατωχειρόσεις ένα από τα δεκάδες δωμάτια που δημοπρατούνται καθημερινά...</p>
+
+                    <div class="col s6 offset-s4">
+                        <p><a class="waves-effect waves-light btn light-blue darken-3 "
+                              href="register.html"><i
+                                class="mdi-content-create left"></i>Εγγραψου τωρα!</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h2 class="grey-text darken-2 light center-align">Όλα τα ξενοδοχεία του νησιού</h2>
+
+                <p class="grey-text darken-2 light flow-text center-align .disBlock">Το Samos Rentals είναι μια μοναδική
+                    πλατφόρμα που
+                    βοηθά τουρίστες και ιδιοκτήτες ξενοδοχείων να αλληλεπιδορύν ακόμα καλύτερα. Αν είστε ξονοδόχος
+                    μπορείτε να διαφημίστε το ξενοδοχείο σας, καθώς και να αυξήσετε την πληρότητα των δωματίων σας μέσα
+                    από την μοναδική μηχανή μας.</p>
+            </div>
+
+            <div class="col s12 m11 offset-m1">
+                <div class="row" id="projects">
+                    <div class="col s4 m3">
+                        <img src="images/website/samos1.jpg" class="circle materialboxed responsive-img">
+                    </div>
+                    <div class="col s4 m3 offset-m1 offset-l1">
+                        <img src="images/website/samos2.jpg" class="circle materialboxed responsive-img">
+                    </div>
+                    <div class="col s4 m3 offset-m1 offset-l1">
+                        <img src="images/website/samos3.jpg" class="circle materialboxed responsive-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--footer-->
 <footer class="page-footer blue darken-3">
@@ -87,14 +148,16 @@
             <div class="col l3 s12">
                 <h5 class="white-text">Χρήσιμα</h5>
                 <ul>
-                    <li><a class="white-text" href="#!">Σχετικά</a></li>
-                    <li><a class="white-text" href="#!">Όροι χρήσης</a></li>
+                    <li><a class="white-text" href="#">Σχετικά</a></li>
+                    <li><a class="white-text" href="#">Όροι χρήσης</a></li>
                 </ul>
             </div>
             <div class="col l3 s12">
                 <h5 class="white-text">Κοινωνικά Δίκτυα</h5>
                 <ul>
-                    <li><a class="white-text" href="https://github.com/AegeanHawks">Github</a></li>
+                    <li>
+                        <i class="mdi-action-bug-report"></i><a class="white-text"
+                                                                href="https://github.com/AegeanHawks"> Github</a></li>
                 </ul>
             </div>
         </div>
