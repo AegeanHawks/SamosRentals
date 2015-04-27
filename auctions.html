@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Samos Rentals</title>
+    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
+
+    <!-- CSS  -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+    <!--  Scripts-->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+    <script type="text/javascript" src="js/jquery.countdown.js"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .countdown-styled div {
+            display: inline-block;
+            margin: 0 5px 1em;
+            font-size: 30px;
+            font-weight: 100;
+            line-height: 1;
+            text-align: right;
+
+            /* IE7 inline-block hack */
+            *display: inline;
+            *zoom: 1;
+        }
+
+        .countdown-styled div:first-child {
+            margin-left: 0;
+        }
+
+        .countdown-styled div:last-child {
+            margin-right: 0;
+        }
+
+        .countdown-styled div span {
+            display: block;
+            border-top: 1px solid #cecece;
+            padding-top: 3px;
+            font-size: 12px;
+            font-weight: normal;
+            text-transform: uppercase;
+            text-align: left;
+        }
+    </style>
+</head>
+<body class="white">
+
+<!--Navigation Menu-->
+<div class="navbar-fixed">
+    <nav class="blue darken-4 z-depth-3" role="navigation">
+        <div class="nav-wrapper container">
+            <div class="valign-demo valign-wrapper left">
+                <a id="logo-container" href="index.html" class="brand-logo waves-effect waves-light">
+                    <div class="hide-on-med-and-down">
+                        <span class="left " style="padding-left:20px;"><img src="images/website/logo.png"></span>
+                        <span class="white-text left " style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
+
+                    </div>
+                    <div class="hide-on-large-only">
+                        <span class="white-text truncate">Samos Rentals</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="right hide-on-med-and-down">
+                <div class="grey lighten-5 z-depth-2" style="padding-top: 10px;padding-left: 10px;padding-right: 5px;">
+                    <div class="row">
+                        <div class="col s2">
+                            <img src="images/website/avatar.jpg" style="height: 36px"
+                                 class="circle">
+                        </div>
+                        <div class="col s10">
+                            <div class="grey-text darken-2 truncate flow-text"><span>Νικόλαος Μπούσιος</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
+                <li><a href="#" class="white-text">Δημοπρασίες</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="right side-nav blue accent-3">
+                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
+                <li><a href="#" class="white-text">Δημοπρασίες</a></li>
+                <li><a href="#" class="white-text">Καταχώρηση</a></li>
+                <li><a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
+                <li><a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
+            </ul>
+
+
+            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+        </div>
+    </nav>
+</div>
+
+<!-- Rooms Auctions -->
+<div class="container" style="padding-top: 50px;">
+    <div class="row">
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Τρέχουσα τιμή: 140 Euro<i
+                    class="mdi-navigation-more-vert right"></i></span>
+                    <p>
+                    <div class="countdown-styled right-align"></div>
+
+                    <a href="#">Διάβασε περισσότερα...</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office1.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office2.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office1.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office2.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office1.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="images/office2.jpg">
+                </div>
+                <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-more-vert right"></i></span>
+
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title <i
+                    class="mdi-navigation-close right"></i></span>
+
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Rooms Auctions -->
+
+<div id="pages" class="container">
+    <ul class="pagination right">
+        <li class="disabled"><a href="#"><i class="mdi-navigation-chevron-left"></i></a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li class="waves-effect"><a href="#!" onClick="nextpage();">2</a></li>
+        <li class="waves-effect"><a href="#">3</a></li>
+        <li class="waves-effect"><a href="#">4</a></li>
+        <li class="waves-effect"><a href="#">5</a></li>
+        <li class="waves-effect"><a href="#"><i class="mdi-navigation-chevron-right"></i></a></li>
+    </ul>
+</div>
+
+<script>
+    function nextpage() {
+        document.getElementById('pages').getElementsByTagName('li').item(0).setAttribute('class', 'waves-effect');
+        document.getElementById('pages').getElementsByTagName('li').item(4).setAttribute('class', 'active');
+        alert(document.getElementById('pages').getElementsByTagName('li').item(0).classList);
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.countdown-styled').countdown({
+            render: function (data) {
+                var el = $(this.el);
+                el.empty()
+                        .
+                        append("<div>" + this.leadingZeros(data.days, 3) + " <span>μέρες</span></div>")
+                        .append("<div>" + this.leadingZeros(data.hours, 2) + " <span>ώρες</span></div>")
+                        .append("<div>" + this.leadingZeros(data.min, 2) + " <span>λεπτά</span></div>")
+                        .append("<div>" + this.leadingZeros(data.sec, 2) + " <span>δεύτερα</span></div>");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
