@@ -77,21 +77,46 @@
 </div>
 <!--Navigation Menu-->
 
-<div class="row container" style="padding-top: 50px">
+<div class="row container" style="padding-top: 60px">
     <div class="col s12 m4">
         <div class="col s12 m12">
-            <div class="card grey lighten-2" style="height: 270px;width: 270px;">
-                <div style="height: 250px;width: 250px;padding-top: 20px;padding-left: 20px">
-                    <img class="circle responsive-img" src="images/website/avatar.jpg">
+            <div class="card white materialboxed">
+                <div class="center-align" style="padding: 20px">
+                    <img class="circle responsive-img " src="images/website/avatar.jpg">
                 </div>
             </div>
         </div>
-        <div class="col s12 m10">
-            <span>card</span>
+        <div class="col s12 m12">
+            <ul class="collapsible popout" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header active"><i class="mdi-action-perm-contact-cal"></i>Πληροφορίες</div>
+                    <div class="collapsible-body"><p>Επεξεργαστείτε προσωπικές πληροφορίες.</p></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</div>
+                    <div class="collapsible-body collection">
+                        <a href="#!" class="collection-item">Ενεργές</a>
+                        <a href="#!" class="collection-item">Ιστορικό</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="mdi-social-person-add"></i>Aναβάθμιση</div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="mdi-action-delete"></i>Διαγραφή</div>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="col s12 m8">
 
+    <div class="col s12 m8">
+        <div class="col s12 m12">
+            <div class="card grey lighten-4" style="height: 100px;">
+                <div class="center-align" style="padding: 20px">
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php
