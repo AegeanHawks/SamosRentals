@@ -77,5 +77,25 @@
 </div>
 <!--Navigation Menu-->
 
+<div class="row container" style="padding-top: 50px">
+    <div class="col s12 m4">
+        <div class="col s12 m12">
+            <div class="card grey lighten-2" style="height: 270px;width: 270px;">
+                <div style="height: 250px;width: 250px;padding-top: 20px;padding-left: 20px">
+                    <img class="circle responsive-img" src="images/website/avatar.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m10">
+            <span>card</span>
+        </div>
+    </div>
+    <div class="col s12 m8">
+
+    </div>
+</div>
+<?php
+include 'footer.php';
+?>
 </body>
 </html>

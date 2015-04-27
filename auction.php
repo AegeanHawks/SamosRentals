@@ -16,22 +16,12 @@ and open the template in the editor.
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
         <style>
-            ::-webkit-scrollbar {
-                width: 12px;
-            }
-
-            ::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            }
-
-            ::-webkit-scrollbar-thumb {
-                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-            }
-            .row > .grid-example{
-                background-color: orange;
-                text-align: center;
-            }
             .bidnumber{
                 font-size: 90px !important; 
                 color: white !important;   
@@ -60,7 +50,6 @@ and open the template in the editor.
                         <div class="col l12 m8 s12">
                             <h4 class="grey-text darken-2 light">Grand budapest hotel</h4>
                             <p class="grey-text darken-3">Replacing the former Olympic Palace Hotel in the heart of Athens, originally built in 1958 by Iasonas Rizos, the modernisit architecture of the outside is matched by a blend of art, sculpture and design on the inside. Replacing the former Olympic Palace Hotel in the heart of Athens, originally built in 1958 by Iasonas Rizos, the modernisit architecture of the outside is matched by a blend of art, sculpture and design on the inside.</p>
-
                         </div>
                     </div>
                 </div>
@@ -99,20 +88,24 @@ and open the template in the editor.
                         </li>
                     </ul>
                 </div>
-                <div class="col s1"><p></p></div>
-                <div class="col s12 m12 l7">
-                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px" ><h5 class="grey-text bidheader truncate">TΩΡΙΝΗ ΤΙΜΗ</h5><p class="bidnumber">33</p></div>
-                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px;height: 285px;" >
+                <div class="col s12 m12 l7 right">
+                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px; height: 285px;">
+                        <h5 class="grey-text bidheader truncate">TΩΡΙΝΗ ΤΙΜΗ</h5>
+
+                        <p class="bidnumber">33</p>
+                    </div>
+                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px; height: 285px;">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Πλειοδοτησε 
                             <i class="mdi-content-send right"></i>
                         </button>
                         <input class="validate bidnumber" style="height: 90px; margin-top: 66px" placeholder="" size="90" id="last_name" type="text" >
                     </div>
-                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px">
+                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px;height: 285px;">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Αγορασε τωρα
                             <i class="mdi-content-send right"></i>
                         </button>
-                        <p class="bidnumber">33</p></div>
+                        <p class="bidnumber">33</p>
+                    </div>
                 </div>
             </div>
             <!--Slider-->
@@ -151,14 +144,8 @@ and open the template in the editor.
             <!--Slider End-->
         </div>
 
-
-
         <?php
         include 'footer.php';
         ?>
-        <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="js/materialize.js"></script>
-        <script src="js/init.js"></script>
     </body>
 </html>

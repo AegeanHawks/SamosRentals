@@ -63,7 +63,7 @@
         }
     </style>
 </head>
-<body class="white">
+<body class="grey lighten-3">
 
 <!--Navigation Menu-->
 <div class="navbar-fixed">
@@ -82,19 +82,28 @@
                 </a>
             </div>
 
-            <div class="right hide-on-med-and-down">
-                <div class="deep-purple accent-3 z-depth-2" style="padding-top: 10px;padding-left: 10px;padding-right: 5px;">
-                    <div class="row">
-                        <div class="col s2">
-                            <img src="images/website/avatar.jpg" style="height: 36px"
-                                 class="circle">
-                        </div>
-                        <div class="col s10">
-                            <div class="white-text truncate flow-text"><span>Νικόλαος Μπούσιος</span></div>
-                        </div>
-                    </div>
+            <!-- Dropdown Menu - Structure -->
+            <a class="dropdown-button right hide-on-med-and-down" data-beloworigin="true" data-activates='dropdown'
+               href='#'>
+                <div class="card white z-depth-2 valign-wrapper">
+                        <span class="grey-text truncate valign"
+                              style="margin-right: 10px; margin-left: 10px; font-size: 1.2em;"><img
+                                src="images/website/avatar.jpg "
+                                style="padding-top: 5px;height: 48px;margin-right: 10px;"
+                                class="valign circle left"><span>Νικόλαος Μπούσιος</span></span>
                 </div>
-            </div>
+            </a>
+
+            <ul id='dropdown' class='card dropdown-content'>
+                <li><a href="#!"><span class="mdi-action-settings left black-text"
+                                       style="padding-right: 10px"></span>Ρυθμίσεις</a></li>
+                <li><a href="#!"><span class="mdi-social-person left black-text"
+                                       style="padding-right: 10px"></span>Προφίλ</a></li>
+                <li class="divider"></li>
+                <li><a href="#!"><span class="mdi-action-settings-power left black-text"
+                                       style="padding-right: 10px"></span>Αποσύνδεση</a></li>
+            </ul>
+            <!-- Dropdown Menu - Structure -->
 
             <ul class="right hide-on-med-and-down">
                 <li><a href="#" class="white-text">Ξενοδοχία</a></li>
@@ -109,11 +118,11 @@
                 <li><a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
             </ul>
 
-
             <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
         </div>
     </nav>
 </div>
+<!--Navigation Menu-->
 
 <!-- Rooms Auctions -->
 <div class="container" style="padding-top: 50px;">
@@ -360,8 +369,9 @@
 <script>
     function nextpage() {
         document.getElementById('pages').getElementsByTagName('li').item(0).setAttribute('class', 'waves-effect');
-        document.getElementById('pages').getElementsByTagName('li').item(4).setAttribute('class', 'active');
-        alert(document.getElementById('pages').getElementsByTagName('li').item(0).classList);
+        document.getElementById('pages').getElementsByTagName('li').item(1).setAttribute('class', 'waves-effect');
+        document.getElementById('pages').getElementsByTagName('li').item(2).setAttribute('class', 'active');
+        //alert(document.getElementById('pages').getElementsByTagName('li').item(0).classList);
     }
 </script>
 

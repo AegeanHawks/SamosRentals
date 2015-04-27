@@ -1,7 +1,6 @@
 <?php
 
 echo '
-<!--Navigation Menu-->
 <div class="navbar-fixed">
     <nav class="blue darken-4 z-depth-3" role="navigation">
         <div class="nav-wrapper container">
@@ -19,7 +18,8 @@ echo '
             </div>
 
             <div class="right hide-on-med-and-down">
-                <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
+                <p><a href="login.html" class="waves-effect waves-light btn white-text"><span
+                        class="mdi-action-input right" style="padding-left: 10px"></span>Συνδεση</a></p>
             </div>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#" class="white-text">Ξενοδοχία</a></li>
