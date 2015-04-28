@@ -24,10 +24,6 @@
                     $("#section_" + num).show();
                 });
             });
-
-            $(".icn").click(function () {
-            });
-            
         </script>
         <style>
             .tabregion{

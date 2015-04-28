@@ -36,10 +36,10 @@
             </div>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#users" class="white-text">Χρήστες</a></li>
-                <li><a href="#auctions" class="white-text">Δημοπρασίες</a></li>
-                <li><a href="#hotels" class="white-text">Ξενοδοχία</a></li>
-                <li class="tab red"><a href="#" class="white-text">Αποσύνδεση</a></li>
+                <li><a href="admin.php?page=user" class="white-text">Χρήστες</a></li>
+                <li><a href="admin.php?page=auction" class="white-text">Δημοπρασίες</a></li>
+                <li><a href="admin.php?page=hotel" class="white-text">Ξενοδοχία</a></li>
+                <li class="tab red"><a href="" class="white-text">Αποσύνδεση</a></li>
             </ul>
 
             <ul id="nav-mobile" class="right side-nav blue accent-3">
@@ -56,15 +56,12 @@
 <!--Navigation Menu-->
 
 <?php
-if ($_GET["page"] === "user") {
+if ($_GET["page"] === "hotel") {
 
 } else if ($_GET["page"] === "auction") {
 
-} else if ($_GET["page"] === "hotel") {
-
-}
-?>
-
+} else if(empty($_GET) || $_GET["page"] === "user") {
+    echo '
 <div class="container" style="padding-top: 60px;">
     <div class="row">
         <ul class="collapsible" data-collapsible="accordion">
@@ -134,7 +131,7 @@ if ($_GET["page"] === "user") {
                             </div>
                         </div>
                     </div>
-                    <a onclick="Materialize.toast('<span>Η Αλλαγή Ολοκληρώθηκε!</span><a class=\'btn-flat yellow-text\' href=\'#!\'>Αναιρεση<a>', 5000, 'rounded')"
+                    <a onclick="Materialize.toast(\'<span>Η Αλλαγή Ολοκληρώθηκε!</span><a class=\\\'btn-flat yellow-text\\\' href=\\\'#!\\\'>Αναιρεση<a>\', 5000, \'rounded\')"
                        class="waves-effect green waves-light btn right"><i class="mdi-content-save left"></i>Αποθήκευση</a>
                     <a class="waves-effect red waves-light btn modal-trigger left" href="#delete_question"><i
                             class="mdi-content-save left"></i>Διαγραφή</a>
@@ -179,16 +176,18 @@ if ($_GET["page"] === "user") {
     <div class="modal-content">
         <h4>Διαγραφή</h4>
 
-        Είσαι σίγουρος ότι θέλεις να διαγράψεις τον χρήστη;<br>
-        Μετά από αυτό δεν υπάρχει γυρισμός φιλαράκο!!!
+    Είσαι σίγουρος ότι θέλεις να διαγράψεις τον χρήστη;<br>
+    Μετά από αυτό δεν υπάρχει γυρισμός φιλαράκο!!!
     </div>
     <div class="modal-footer">
-        <a onclick="Materialize.toast('<span>Ο χρήστης πήρε τον π...</span>', 3000, 'rounded')" href="#!"
+        <a onclick="Materialize.toast(\'<span>Ο χρήστης πήρε τον π...</span>\', 3000, \'rounded\')" href="#!"
            class=" modal-action modal-close waves-effect waves-green btn-flat">Ναι</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Όχι</a>
     </div>
 </div>
-<!-- Modal Structure -->
+<!-- Modal Structure -->';
+}
+?>
 
 </body>
 </html>
