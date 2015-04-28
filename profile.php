@@ -115,7 +115,7 @@
                             <div class="collapsible-body"><p>Επεξεργαστείτε προσωπικές πληροφορίες.</p></div>
                         </li>
                         <li>
-                            <a class="collapsible-header mytab" href="#"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</a>
+                            <a class="collapsible-header mytab"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</a>
                             <div class="collapsible-body collection">
                                 <a href="#2" class="collection-item mytab" id="mytab_2">Ενεργές</a>
                                 <a href="#3" class="collection-item mytab" id="mytab_3">Ιστορικό</a>
@@ -192,7 +192,7 @@
                 <div class="col s12 m12">
                     <div class="center-align card" style="height: 400px;">
                         <div class="flow-text" style="padding: 20px">
-                            <p>Με την αναβάθμιση του λογαριασμού σας ώστε να έχετε το δικαίωμα να θέτετε σε δημοπρασία τα δωμάτια του ξενοδοχείου σας</p>
+                            <p>Με την αναβάθμιση του λογαριασμού σας έχετε το δικαίωμα να θέτετε σε δημοπρασία τα δωμάτια του ξενοδοχείου σας</p>
                         </div>
                         <button class="btn waves-effect waves-light" type="submit" name="action">ΑΝΑΒΑΘΜΙΣΗ ΤΩΡΑ
                             <i class="mdi-content-send right"></i>
