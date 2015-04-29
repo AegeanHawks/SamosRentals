@@ -23,7 +23,7 @@ and open the template in the editor.
 
         <style>
             .bidnumber{
-                font-size: 90px !important; 
+                font-size: 80px !important; 
                 color: white !important;   
                 text-shadow: -2px 0 orange, 0 2px orange, 2px 0 orange, 0 -2px orange !important;
                 text-align: center;
@@ -62,20 +62,24 @@ and open the template in the editor.
                         <li class="collection-item avatar" >
                             <i class="mdi-action-accessibility circle blue"></i>
                             <span class="title truncate">Αριθμός ατόμων</span>
-                            <p>2
+                            <p>
+                                2
                             </p>                                            
                         </li>
                         <li class="collection-item avatar">
                             <i class="mdi-communication-messenger circle orange"></i>
                             <span class="title truncate">Πληροφορίες ξενοδοχείου</span>
-                            <p><a href="#">Grand Budapest Hotel</a>
+                            <p><a href="#">
+                                    Grand Budapest Hotel
+                                </a>
                             </p>                                            
                         </li>
 
                         <li class="collection-item avatar" >
                             <i class="mdi-communication-phone circle green"></i>
                             <span class="title">Τηλέφωνο επικοινωνίας</span>
-                            <p>2
+                            <p>
+                                2
                             </p>
                         </li>
                         <li class="collection-item" >
@@ -88,22 +92,19 @@ and open the template in the editor.
                         </li>
                     </ul>
                 </div>
-                <div class="col s12 m12 l7 right">
-                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px; height: 285px;">
+                <div class="col s12 m12 l8 center-align">
+                    <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
                         <h5 class="grey-text bidheader truncate">TΩΡΙΝΗ ΤΙΜΗ</h5>
 
                         <p class="bidnumber">33</p>
                     </div>
-                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px; height: 285px;">
+                    <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Πλειοδοτησε 
-                            <i class="mdi-content-send right"></i>
                         </button>
-                        <input class="validate bidnumber" style="height: 90px; margin-top: 66px" placeholder="" size="90" id="last_name" type="text" >
+                        <input class="validate bidnumber" style="height: 90px; margin-top: 45px" placeholder="" size="90" id="last_name" type="text" >
                     </div>
-                    <div class="col s12 m6 l4 z-depth-1" style="padding: 20px;height: 285px;">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Αγορασε τωρα
-                            <i class="mdi-content-send right"></i>
-                        </button>
+                    <div class="col s12 z-depth-1" style="padding: 10px; height: 190px;">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Αγορασε τωρα</button>
                         <p class="bidnumber">33</p>
                     </div>
                 </div>
