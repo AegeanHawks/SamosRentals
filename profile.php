@@ -117,8 +117,8 @@
                         <li>
                             <a class="collapsible-header mytab"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</a>
                             <div class="collapsible-body collection">
-                                <a href="#2" class="collection-item mytab" id="mytab_2">Ενεργές</a>
-                                <a href="#3" class="collection-item mytab" id="mytab_3">Ιστορικό</a>
+                                <a href="#2" class="collection-item mytab" id="mytab_2">Ιστορικό</a>
+                                <a href="#3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
                             </div>
                         </li>
                         <li>
@@ -133,7 +133,7 @@
 
             <!--Tab Panels-->
             <!--User Details-->
-            <div class="col s12 m8 tabregion" id="section_1" style="display: inline">
+            <div class="col s12 m8 tabregion" id="section_1"><!-- style="display: inline">-->
                 <div class="col s12 m12">
                     <div class="white lighten-4" style="height: 400px;">
                         <div class="left-align" style="padding: 10px">
@@ -167,25 +167,51 @@
             </div>
             <!--User Details-->
 
-            <div class="col s12 m8 tabregion" id="section_2">
-                <div class="col s12 m12">
-                    <div class="card grey lighten-4" style="height: 100px;">
-                        <div class="center-align" style="padding: 20px">
-                            2
-                        </div>
-                    </div>
+            <!-- Auction History -->
+            <div class="col s12 m8 tabregion" id="section_2" >
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
+                    <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
+                    <div class="col s1"><i class="mdi-navigation-check"> </i></div>
+                </div>
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
+                    <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
+                    <div class="col s1"><i class="mdi-navigation-close"> </i></div>
                 </div>
             </div>
+            <!-- Auction History -->
 
-            <div class="col s12 m8 tabregion" id="section_3">
-                <div class="col s12 m12">
-                    <div class="card grey lighten-4" style="height: 100px;">
-                        <div class="center-align" style="padding: 20px">
-                            3
-                        </div>
+            <!-- Auctions won -->
+            <div class="col s12 m8 tabregion" id="section_3" style="display: inline">
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
+                    <a class="col s12 m4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
+                    <div class="col s12 m4 l2">
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle grey accent-3"></i>
+                            <i class="mdi-action-star-rate circle grey accent-3"></i>
+                    </div>
+                </div>
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Motel </a>
+                    <a class="col s12 m4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ανευκαιρίας </a>
+                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>120</a>
+                    <div class="col s12 m4 l2">
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle amber accent-3"></i>
+                            <i class="mdi-action-star-rate circle grey accent-3"></i>
                     </div>
                 </div>
             </div>
+            <!-- Auctions won -->
 
             <!--Upgrade user-->
             <div class="col s12 m8 tabregion" id="section_4">
