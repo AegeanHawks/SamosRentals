@@ -29,6 +29,11 @@
             .tabregion{
                 display: none;
             }
+            .tabformatting{
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
             .detailshead{
                 font-weight: bold; 
                 font-size: 20px;
@@ -100,6 +105,7 @@
         <!--Navigation Menu-->
 
         <div class="row container" style="padding-top: 60px">
+            <!-- Side menu -->
             <div class="col s12 m4">
                 <div class="col s12 m12">
                     <div class="card white materialboxed">
@@ -123,7 +129,7 @@
                             </div>
                         </li>
                         <li>
-                            <a class="collapsible-header mytab" id="mytab_4"  href="#"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
+                            <a class="collapsible-header mytab" id="mytab_4"  href="#"><i class="mdi-maps-hotel"></i>Ξενοδοχείο</a>
                         </li>
                         <li>
                             <a class="collapsible-header mytab" href="#" id="mytab_5"><i class="mdi-action-delete"></i>Διαγραφή</a>
@@ -131,6 +137,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- Side menu -->
 
             <!--Tab Panels-->
             <!--User Details-->
@@ -169,31 +176,36 @@
             <!--User Details-->
 
             <!-- Create Auction -->
-            <div class="col s12 m8 tabregion" id="section_6"  style="display: inline">
+            <div class="col s12 m8 tabregion" id="section_6">
                 <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;"> 
                     <div class="input-field col s12">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">Τίτλος</label>
+                        <i class="mdi-action-account-circle prefix"></i>
+                        <input id="AuctionTitleInput" type="text" class="validate">
+                        <label for="AuctionTitleInput">Τίτλος</label>
                     </div>
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Περιγραφή</label>
+                                <i class="mdi-social-people prefix"></i>
+                                <textarea id="AuctionDescriptionInput" class="materialize-textarea"></textarea>
+                                <label for="AuctionDescriptionInput">Περιγραφή</label>
                             </div>
                         </div>
                     </form>
-                    <div class="input-field col s6 m6 l4">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">Αριθμός ατόμων</label>
+                    <div class="input-field col s12 m12 l6">
+                        <i class="mdi-editor-attach-money prefix"></i>
+                        <input id="AuctionStartPrice" type="text" class="validate">
+                        <label for="AuctionStartPrice">Τιμή εκκίνησης</label>
                     </div>
-                    <div class="input-field col s6 m6 l4">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">Τιμή εκκίνησης</label>
+                    <div class="input-field col s12 m12 l6">
+                        <i class="mdi-editor-attach-money prefix"></i>
+                        <input id="AuctionBuyPriceInput" type="text" class="validate">
+                        <label for="AuctionBuyPriceInput">Τιμή αγοράς</label>
                     </div>
-                    <div class="input-field col s12 m12 l4">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">Τιμή αγοράς</label>
+                    <div class="input-field col s12">
+                        <i class="mdi-action-description prefix"></i>
+                        <input id="AuctionPeopleInput" type="text" class="validate">
+                        <label for="AuctionPeopleInput">Αριθμός ατόμων</label>
                     </div>
                     <div class="input-field col s12">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Υποβολή
@@ -206,64 +218,117 @@
 
             <!-- Auction History -->
             <div class="col s12 m8 tabregion" id="section_2">
-                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
-                    <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
-                    <div class="col s1"><i class="mdi-navigation-check"> </i></div>
+                <div class="z-depth-3 white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">                           
+                    <div class="col s12 m3">Τίτλος</div>                       
+                    <div class="col s12 m3">Τιμή Έναρξης</div>               
+                    <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>     
+                    <div class="col s12 m2">Ενεργά</div>     
                 </div>
-                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
-                    <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
-                    <div class="col s1"><i class="mdi-navigation-close"> </i></div>
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">         
+                    <a class="col s12 m3" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <div class="col s12 m3"><i class="mdi-editor-attach-money"> </i>35</div>
+                    <div class="col s12 m4"><i class="mdi-editor-attach-money"> </i>55</div>
+                    <div class="col s12 m2"><i class="mdi-av-play-circle-outline circle green"> </i></div>
+                </div>
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">         
+                    <a class="col s12 m3" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <div class="col s12 m3"><i class="mdi-editor-attach-money"> </i>35</div>
+                    <div class="col s12 m4"><i class="mdi-editor-attach-money"> </i>40</div>
+                    <div class="col s12 m2"><i class="mdi-av-pause circle red"> </i></div>
                 </div>
             </div>
             <!-- Auction History -->
 
             <!-- Users evaluation -->
-            <div class="col s12 m8 tabregion" id="section_3"> <!--style="display: inline">-->
+            <div class="col s12 m8 tabregion" id="section_3">
+                <div class="z-depth-3 white col s12 " style="padding-top: 15px;padding-bottom: 15px;">                           
+                    <div class="col s12 m4 l4">Ονομ/νυμο</div>                       
+                    <div class="col s12 m3 l4">Δωμάτιο</div>             
+                    <div class="col s12 m5 l4">Βαθμολόγηση</div>     
+                </div>
                 <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
-                    <a class="col s12 m4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
-                    <div class="col s12 m4 l2">
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle grey accent-3"></i>
-                        <i class="mdi-action-star-rate circle grey accent-3"></i>
+                    <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Κωνσταντίνος Χασιώτης </a>
+                    <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <div class="col s12 m5 l4">
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
                     </div>
                 </div>
                 <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Motel </a>
-                    <a class="col s12 m4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ανευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>120</a>
-                    <div class="col s12 m4 l2">
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle grey accent-3"></i>
+                    <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Κωνσταντίνος Χασιώτης </a>
+                    <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <div class="col s12 m5 l4">
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
                     </div>
                 </div>
             </div>
             <!-- Users evaluation -->
+            
+            <!--Hotel details-->
+            <div class="z-depth-3 col s12 m8 tabregion" id="section_4" style="display: inline">   
 
-            <!--Upgrade user-->
-            <div class="col s12 m8 tabregion" id="section_4">
-                <div class="col s12 m12">
-                    <div class="center-align card" style="height: 400px;">
-                        <div class="flow-text" style="padding: 20px">
-                            <p>Με την αναβάθμιση του λογαριασμού σας έχετε το δικαίωμα να θέτετε σε δημοπρασία τα δωμάτια του ξενοδοχείου σας</p>
+                <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
+                    <a class="waves-effect waves-light orange darken-1 btn">ΠΡΟΒΟΛΗ ΣΕΛΙΔΑΣ</a>
+                </div>
+                <div class="input-field col s6">
+                    <i class="mdi-action-account-circle prefix"></i>
+                    <input id="HotelNameInput" type="text" class="validate">
+                    <label for="HotelNameInput">Όνομα ξενοδοχείου</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="mdi-communication-location-on prefix"></i>
+                    <input id="HotelLocationInput" type="text" class="validate">
+                    <label for="HotelLocationInput">Τοποθεσία</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="mdi-action-description prefix"></i>
+                    <textarea id="HotelDescriptionInput" class="materialize-textarea"></textarea>
+                    <label for="HotelDescriptionInput">Περιγραφή</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="mdi-action-face-unlock prefix"></i>
+                    <textarea id="HotelDescriptionInput" class="materialize-textarea"></textarea>
+                    <label for="HotelDescriptionInput">Ανέσεις</label>
+                </div>
+                <div class="col s12 m12 l5 file-field input-field">
+                    <form action="#">
+                        <div class="file-field input-field">
+                            <input placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" />
+                            </div>
                         </div>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">ΑΝΑΒΑΘΜΙΣΗ ΤΩΡΑ
-                            <i class="mdi-content-send right"></i>
-                        </button>
-                    </div>
+                    </form>
+                </div>
+                <div class="col s6 m6 l5 file-field input-field">
+                    <form action="#">
+                        <div class="file-field input-field">
+                            <input placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="offset-s1 offset-m1 col s3 m5 l2 input-field">
+                    <a class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-content-add"></i></a>
+                </div>
+                <div class="col s12" style="padding-bottom: 20px;padding-top: 40px">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">ΚΑΤΑΧΩΡΗΣΗ
+                        <i class="mdi-content-send right"></i>
+                    </button>
                 </div>
             </div>
-            <!--Upgrade user-->
+            <!--Hotel details-->
 
             <!--Delete user-->
             <div class="col s12 m8 tabregion" id="section_5">
