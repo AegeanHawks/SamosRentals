@@ -141,7 +141,7 @@
 
             <!--Tab Panels-->
             <!--User Details-->
-            <div class="col s12 m8 tabregion" id="section_1"><!-- style="display: inline">-->
+            <div class="col s12 m8 tabregion" id="section_1" style="display: inline">
                 <div class="col s12 m12">
                     <div class="white lighten-4" style="height: 400px;">
                         <div class="left-align" style="padding: 10px">
@@ -270,9 +270,9 @@
                 </div>
             </div>
             <!-- Users evaluation -->
-            
+
             <!--Hotel details-->
-            <div class="z-depth-3 col s12 m8 tabregion" id="section_4" style="display: inline">   
+            <div class="z-depth-3 col s12 m8 tabregion" id="section_4">   
 
                 <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
                     <a class="waves-effect waves-light orange darken-1 btn">ΠΡΟΒΟΛΗ ΣΕΛΙΔΑΣ</a>
