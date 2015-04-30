@@ -56,11 +56,15 @@
 <!--Navigation Menu-->
 
 <?php
-if ($_GET["page"] === "hotel") {
 
-} else if ($_GET["page"] === "auction") {
-
-} else if(empty($_GET) || $_GET["page"] === "user") {
+if (isset($_GET["page"])) {
+    $page = htmlspecialchars($_GET["page"]);
+}
+if ($page === "hotel") {
+    echo '<div>gamhsou</div>';
+} else if ($page === "auction") {
+    echo '<div>gamhsou</div>';
+} else if (empty($page) || $page === "user") {
     echo '
 <div class="container" style="padding-top: 60px;">
     <div class="row">
