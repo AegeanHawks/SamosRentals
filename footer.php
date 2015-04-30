@@ -1,6 +1,3 @@
-<?php
-
-echo '
 <footer class="page-footer blue darken-3">
     <div class="container">
         <div class="row">
@@ -16,7 +13,7 @@ echo '
                 <h5 class="white-text">Χρήσιμα</h5>
                 <ul>
                     <li><a class="white-text" href="#">Σχετικά</a></li>
-                    <li><a class="white-text" href="#">Όροι χρήσης</a></li>
+                    <li><a class="modal-trigger white-text" href="#agreement">Όροι χρήσης</a></li>
                 </ul>
             </div>
             <div class="col l3 s12">
@@ -37,5 +34,6 @@ echo '
         </div>
     </div>
 </footer>
-'
+<?php
+include 'agreement.php';
 ?>
