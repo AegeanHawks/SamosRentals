@@ -81,44 +81,10 @@
 <body class="light-blue">
 
 <!--Navigation Menu-->
-<div class="navbar-fixed">
-    <nav class="blue darken-4 z-depth-3" role="navigation">
-        <div class="nav-wrapper container">
-            <div class="valign-demo valign-wrapper left">
-                <a id="logo-container" href="index.php" class="brand-logo waves-effect waves-light">
-                    <div class="hide-on-med-and-down">
-                    <span class="left" style="padding-left:20px;"><img src="images/website/logo.png"></span>
-                        <span class="white-text left" style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
-
-                    </div>
-                    <div class="hide-on-large-only">
-                        <span class="white-text truncate">Samos Rentals</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="right hide-on-med-and-down">
-                <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
-            </div>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="index.php" class="white-text">Αρχική</a></li>
-                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="#" class="white-text">Δημοπρασία</a></li>
-                <li><a href="#" class="white-text">Καταχώρηση</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="right side-nav blue accent-3">
-                <li><a href="index.php" class="white-text">Αρχική</a></li>
-                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="#" class="white-text">Δημοπρασία</a></li>
-                <li><a href="#" class="white-text">Καταχώρηση</a></li>
-                <a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a>
-                <a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a>
-            </ul>
-            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
-        </div>
-    </nav>
-</div>
+<?php
+include 'header.php';
+?>
+<!--Navigation Menu-->
 
 <!-- Φόρμα σύνδεσης -->
 <div class="row Login">
@@ -147,7 +113,7 @@
                     <button type="submit" class="waves-effect waves-light green btn" id="login_btn"><i
                             class="mdi-content-send right"></i>Εισοδος
                     </button>
-                    <a class="waves-effect waves-light btn light-blue" id="register_btn" href="register.html"><i
+                    <a class="waves-effect waves-light btn light-blue" id="register_btn" href="register.php"><i
                             class="mdi-social-person-add left"></i>Εγγραφη ως νεος Χρηστης</a>
                 </div>
             </form>

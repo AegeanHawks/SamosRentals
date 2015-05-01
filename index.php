@@ -45,7 +45,7 @@ include 'header.php';
                         εσύ να κατωχειρόσεις ένα από τα δεκάδες δωμάτια που δημοπρατούνται καθημερινά...</p>
 
                     <div class="col s6 offset-s4">
-                        <p><a class="waves-effect waves-light btn light-blue darken-3 " href="register.html"><i
+                        <p><a class="waves-effect waves-light btn light-blue darken-3 " href="register.php"><i
                                 class="mdi-content-create left"></i>Εγγραψου τωρα!</a>
                         </p>
                     </div>

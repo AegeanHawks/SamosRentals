@@ -15,7 +15,7 @@
             </div>
 
             <div class="right hide-on-med-and-down">
-                <p><a href="login.html" class="waves-effect waves-light btn white-text"><span
+                <p><a href="login.php" class="waves-effect waves-light btn white-text"><span
                         class="mdi-action-input right" style="padding-left: 10px"></span>Συνδεση</a></p>
             </div>
             <ul class="right hide-on-med-and-down">
@@ -26,8 +26,8 @@
             <ul id="nav-mobile" class="right side-nav blue accent-3">
                 <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
                 <li><a href="auctions.html" class="white-text">Δημοπρασίες</a></li>
-                <li><a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
-                <li><a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
+                <li><a href="register.php" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
+                <li><a href="login.php" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
             </ul>
 
 
