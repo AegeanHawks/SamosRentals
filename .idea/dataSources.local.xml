@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="WAMP MySQL - @localhost" uuid="f41106b3-6c1b-4ccf-ad12-54f6831aeedf">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>samosrentals.*</schema-pattern>
+      <default-schemas>information_schema.*</default-schemas>
+    </data-source>
+  </component>
+</project>
