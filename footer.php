@@ -9,14 +9,14 @@
                     το Samos Rentals ως μέρος πανεπιστημιακής εργασίας. Η εγγραφή και η
                     συμμετοχής σας είναι χρήσιμη για την συνεχισή του.</p>
             </div>
-            <div class="col l3 s12">
+            <div class="col l3 m6 s12">
                 <h5 class="white-text">Χρήσιμα</h5>
                 <ul>
                     <li><a class="white-text" href="#">Σχετικά</a></li>
                     <li><a class="modal-trigger white-text" href="#agreement">Όροι χρήσης</a></li>
                 </ul>
             </div>
-            <div class="col l3 s12">
+            <div class="col l3 m6 s12">
                 <h5 class="white-text">Κοινωνικά Δίκτυα</h5>
 
                 <div class="valign-wrapper center">
@@ -29,8 +29,10 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            Κατασκευάσθηκε από τους <a class="brown-text text-lighten-3" href="https://github.com/Rambou">Rambou</a> και
-            <a class="brown-text text-lighten-3" href="https://github.com/Armageddonas">Armageddona</a>
+            <span class="left"> © 2014-2015 AegeanHawks, All rights reserved.</span>
+            <span class="right">Κατασκευάσθηκε από τους <a class="brown-text text-lighten-3"
+                                                           href="https://github.com/Rambou">Rambou</a> και
+                <a class="brown-text text-lighten-3" href="https://github.com/Armageddonas">Armageddona</a></span>
         </div>
     </div>
 </footer>

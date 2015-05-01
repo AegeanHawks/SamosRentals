@@ -1,6 +1,3 @@
-<?php
-
-echo '
 <div class="navbar-fixed">
     <nav class="blue darken-4 z-depth-3" role="navigation">
         <div class="nav-wrapper container">
@@ -22,14 +19,13 @@ echo '
                         class="mdi-action-input right" style="padding-left: 10px"></span>Συνδεση</a></p>
             </div>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
+                <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
                 <li><a href="auctions.html" class="white-text">Δημοπρασίες</a></li>
             </ul>
 
             <ul id="nav-mobile" class="right side-nav blue accent-3">
-                <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="#" class="white-text">Δημοπρασίες</a></li>
-                <li><a href="#" class="white-text">Καταχώρηση</a></li>
+                <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
+                <li><a href="auctions.html" class="white-text">Δημοπρασίες</a></li>
                 <li><a href="register.html" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
                 <li><a href="login.html" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
             </ul>
@@ -38,5 +34,4 @@ echo '
             <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
         </div>
     </nav>
-</div>'
-?>
+</div>

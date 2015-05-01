@@ -235,7 +235,7 @@
                     <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
                     <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>55</div>
                     <div class="col s12 m2 flow-text">
-                        <div class="btn-floating"><i class="mdi-av-play-circle-outline circle green"> </i></div>
+                        <div class="btn-floating green"><i class="mdi-av-play-circle-outline"> </i></div>
                     </div>
                     <div class="divider"></div>
                 </div>
@@ -246,7 +246,7 @@
                     <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
                     <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>40</div>
                     <div class="col s12 m2 flow-text">
-                        <div class="btn-floating"><i class="mdi-av-pause red"></i></div>
+                        <div class="btn-floating red disabled"><i class="mdi-av-pause"></i></div>
                     </div>
                 </div>
             </div>
