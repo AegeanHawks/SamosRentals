@@ -27,8 +27,19 @@ function db_connect()
 
 function islogged()
 {
-    if (isset($_SESSION['role']) && $_SESSION['role'] >= 0) {
+    if (isset($_SESSION['expire'])) {
+        $now = time();
+        if ($now > $_SESSION['expire']) {
+            session_destroy();
+            return false;
+        }
+        //renew expiration
+        $_SESSION['start'] = time(); // Taking now logged in time.
+        $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
+
+        if (isset($_SESSION['role']) && $_SESSION['role'] >= 0) {
             return true;
+        }
     }
     return false;
 }

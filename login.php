@@ -39,6 +39,8 @@ function authenticate()
         $_SESSION['fname'] = $row['FirstName'];
         $_SESSION['lname'] = $row['LastName'];
         $_SESSION['avatar'] = $row['Image'];
+        $_SESSION['start'] = time(); // Taking now logged in time.
+        $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
 
         header("Location: index.php");
     }
