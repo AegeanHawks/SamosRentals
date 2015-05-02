@@ -1,3 +1,15 @@
+<?php
+
+if (isset($_POST) && !empty($_POST)) {
+    //Gather Data from post
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+
+    session_start();
+    // Store Session Data
+    $_SESSION['login_user']= $username;  // Initializing Session with value of PHP Variable
+}
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -98,10 +110,11 @@ include 'header.php';
 
     <div class="col center">
         <div class="animated tada login-form z-depth-3">
-            <form action="authenication.php" autocomplete="on" method="POST">
+            <form action="login.php" autocomplete="on" method="POST">
                 <div class="input-field">
                     <i class="mdi-action-account-circle prefix"></i>
-                    <input type="text" id="username" name="username" maxlength="30" required>
+                    <input type="text" id="username" name="username" maxlength="30"
+                           value="<?php if (!empty($username)) echo $username; ?>" required>
                     <label for="username">Όνομα χρήστη</label>
                 </div>
                 <div class="input-field">

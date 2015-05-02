@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae94a44f-04a9-452b-a8c8-2441bbee9242" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/configuration.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/install.php" />
-      <change type="MOVED" beforePath="C:\Users\Nickos\Desktop\SamosRentals\login.html" afterPath="$PROJECT_DIR$/login.php" />
-      <change type="MOVED" beforePath="C:\Users\Nickos\Desktop\SamosRentals\register.html" afterPath="$PROJECT_DIR$/register.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/auctions.html" afterPath="$PROJECT_DIR$/auctions.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/header.php" afterPath="$PROJECT_DIR$/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hotelierprofile.php" afterPath="$PROJECT_DIR$/hotelierprofile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hotelierprofile_nikos.php" afterPath="$PROJECT_DIR$/hotelierprofile_nikos.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hotels.php" afterPath="$PROJECT_DIR$/hotels.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logged.html" afterPath="$PROJECT_DIR$/logged.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samosrentals.sql" afterPath="$PROJECT_DIR$/samosrentals.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/logout.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/register.php" afterPath="$PROJECT_DIR$/register.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SamosRentals.iws" />
@@ -54,37 +42,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="install.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/install.php">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.153846" vertical-offset="1520" max-vertical-offset="2006">
-              <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-              <folding>
-                <marker date="1430523852717" expanded="true" signature="804:1059" placeholder="CREATE TABLE..IF..." />
-                <marker date="1430523852717" expanded="true" signature="1023:1474" placeholder="CREATE TABLE..IF..." />
-                <marker date="1430523852717" expanded="true" signature="1626:1907" placeholder="CREATE TABLE..User..." />
-                <marker date="1430523852717" expanded="true" signature="1909:2205" placeholder="CREATE TABLE..Hotel..." />
-                <marker date="1430523852717" expanded="true" signature="2207:2474" placeholder="CREATE TABLE..Auction..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.4615383" vertical-offset="1197" max-vertical-offset="1683">
-              <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+            <state vertical-scroll-proportion="-11.115385" vertical-offset="1683" max-vertical-offset="2618">
+              <caret line="116" column="81" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="81" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/login.php">
+      <file leaf-file-name="logout.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logout.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="2397">
-              <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+            <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="238">
+              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -93,10 +65,16 @@
       <file leaf-file-name="register.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/register.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14197531" vertical-offset="1631" max-vertical-offset="3196">
-              <caret line="138" column="45" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.41469195" vertical-offset="381" max-vertical-offset="2346">
+              <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
               <folding>
-                <element signature="e#1537#2381#0#HTML" expanded="false" />
+                <element signature="e#1312#3386#0#HTML" expanded="false" />
+                <element signature="e#4390#5403#0#HTML" expanded="false" />
+                <element signature="e#5421#5858#0#HTML" expanded="false" />
+                <element signature="e#5876#6264#0#HTML" expanded="false" />
+                <element signature="e#6282#6916#0#HTML" expanded="false" />
+                <element signature="e#6933#7277#0#HTML" expanded="false" />
+                <element signature="e#7294#7770#0#HTML" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -135,8 +113,11 @@
         <option value="$PROJECT_DIR$/install.php" />
         <option value="$PROJECT_DIR$/admin/configuration.php" />
         <option value="db-console:/3a24e28/f41106b3-6c1b-4ccf-ad12-54f6831aeedf/" />
-        <option value="$PROJECT_DIR$/login.php" />
         <option value="$PROJECT_DIR$/admin/install.php" />
+        <option value="$PROJECT_DIR$/test.php" />
+        <option value="$PROJECT_DIR$/login.php" />
+        <option value="$PROJECT_DIR$/logout.php" />
+        <option value="$PROJECT_DIR$/session.php" />
         <option value="$PROJECT_DIR$/register.php" />
       </list>
     </option>
@@ -212,34 +193,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamosRentals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamosRentals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="font" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamosRentals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SamosRentals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -265,7 +218,7 @@
       <recent name="C:\Users\Nickos\Desktop\SamosRentals\admin" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.register.php">
+  <component name="RunManager" selected="JavaScript Debug.login.php">
     <configuration default="false" name="auction.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SamosRentals/auction.php">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -359,9 +312,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.register.php" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.install.php" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.login.php" />
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.login.php" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.register.php" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.install.php" />
         <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.auction.php" />
         <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.hotel.php" />
       </list>
@@ -402,7 +355,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850778" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -410,7 +363,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1652452" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3986637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -685,14 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/materialize.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.14962122" vertical-offset="43616" max-vertical-offset="134844">
-          <caret line="2561" column="0" selection-start-line="2561" selection-start-column="0" selection-end-line="2561" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hotel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7788845" vertical-offset="595" max-vertical-offset="2278">
@@ -731,28 +676,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/configuration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3715847" vertical-offset="0" max-vertical-offset="549">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="8" />
-          <folding>
-            <element signature="e#6#89#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://db-console:/3a24e28/f41106b3-6c1b-4ccf-ad12-54f6831aeedf/">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24954128" vertical-offset="0" max-vertical-offset="748">
           <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="2397">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -770,21 +697,59 @@
         <state vertical-scroll-proportion="-12.153846" vertical-offset="1520" max-vertical-offset="2006">
           <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
           <folding>
-            <marker date="1430523852717" expanded="true" signature="804:1059" placeholder="CREATE TABLE..IF..." />
-            <marker date="1430523852717" expanded="true" signature="1023:1474" placeholder="CREATE TABLE..IF..." />
-            <marker date="1430523852717" expanded="true" signature="1626:1907" placeholder="CREATE TABLE..User..." />
-            <marker date="1430523852717" expanded="true" signature="1909:2205" placeholder="CREATE TABLE..Hotel..." />
-            <marker date="1430523852717" expanded="true" signature="2207:2474" placeholder="CREATE TABLE..Auction..." />
+            <marker date="1430523852717" expanded="true" signature="-1:-1" placeholder="CREATE TABLE..IF..." />
+            <marker date="1430523852717" expanded="true" signature="-1:-1" placeholder="CREATE TABLE..IF..." />
+            <marker date="1430523852717" expanded="true" signature="-1:-1" placeholder="CREATE TABLE..User..." />
+            <marker date="1430523852717" expanded="true" signature="-1:-1" placeholder="CREATE TABLE..Hotel..." />
+            <marker date="1430523852717" expanded="true" signature="-1:-1" placeholder="CREATE TABLE..Auction..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/materialize.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33266532" vertical-offset="102752" max-vertical-offset="134844">
+          <caret line="6054" column="0" selection-start-line="6054" selection-start-column="0" selection-end-line="6054" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/configuration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24485597" vertical-offset="0" max-vertical-offset="486">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.115385" vertical-offset="1683" max-vertical-offset="2618">
+          <caret line="116" column="81" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="238">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/register.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14197531" vertical-offset="1631" max-vertical-offset="3196">
-          <caret line="138" column="45" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.41469195" vertical-offset="381" max-vertical-offset="2346">
+          <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
           <folding>
-            <element signature="e#1537#2381#0#HTML" expanded="false" />
+            <element signature="e#1312#3386#0#HTML" expanded="false" />
+            <element signature="e#4390#5403#0#HTML" expanded="false" />
+            <element signature="e#5421#5858#0#HTML" expanded="false" />
+            <element signature="e#5876#6264#0#HTML" expanded="false" />
+            <element signature="e#6282#6916#0#HTML" expanded="false" />
+            <element signature="e#6933#7277#0#HTML" expanded="false" />
+            <element signature="e#7294#7770#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
