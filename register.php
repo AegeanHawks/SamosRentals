@@ -1,4 +1,11 @@
 <?php
+include 'admin/configuration.php';
+session_start();
+
+//Check if already logged
+if (islogged()) {
+    echo "<script>window.history.back()</script>";
+}
 
 if (isset($_POST) && !empty($_POST)) {
     //Gather Data from post
@@ -31,10 +38,20 @@ if (isset($_POST) && !empty($_POST)) {
     if (empty($tel) || preg_match('/[\+]\d{2}\d{10}/', $tel)) {
     }
 
-    if (empty($birthday) || preg_match('/^[0-9]{2}[ ][a-zA-Z]{3,}[,][0-9]{4}$/', $birthday)) {
+    if (empty($sex) || empty($birthday) || preg_match('/^[0-9]{2}[ ][a-zA-Z]{3,}[,][0-9]{4}$/', $birthday)) {
 
     }
 
+    //Connect
+    $con = db_connect();
+    if ($con->connect_errno) {
+        return;
+    }
+    // SQL query to fetch information of registerd users and finds user match.
+    $result = mysqli_query($con, "INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role)
+      VALUE ('$username', '$password', '$fname', '$lname', '$sex', '$email','$tel','$birthday', 2);");
+
+    $con->close();
     //debug
     debug_to_console($username . " " . $password . " " . $fname . " " . $lname . " " . $birthday . " " . $tel . " " . $sex . " " . $email);
 }
@@ -231,16 +248,3 @@ include 'header.php';
 
 </body>
 </html>
-
-<?php
-
-function debug_to_console($data)
-{
-    if (is_array($data) || is_object($data)) {
-        echo("<script>console.log('PHP: " . json_encode($data) . "');</script>");
-    } else {
-        echo("<script>console.log('PHP: " . $data . "');</script>");
-    }
-}
-
-?>

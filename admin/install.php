@@ -38,7 +38,7 @@ if ($conn->connect_error) {
 Print_MSG("Επιτυχής σύνδεση στην βάση!");
 
 // Create database
-$sql = "CREATE DATABASE " . $DB_NAME;
+$sql = "CREATE DATABASE " . $DB_NAME . " COLLATE utf8_general_ci;";;
 if ($conn->query($sql) === TRUE) {
     Print_MSG("Η βάση " . $DB_NAME . " δημιουργήθηκε επιτυχώς!<br>");
 } else {
@@ -46,53 +46,60 @@ if ($conn->query($sql) === TRUE) {
 }
 
 //Select Database
-$sql = "USE " . $DB_NAME . ";";
-if ($conn->query($sql) === FALSE) {
-    die("Πρόβλημα κατά την επιλογή της βάσης: " . $conn->error . "<br>");
-}
+$db = mysqli_select_db($conn, $DB_NAME);
 
 // Create Tables
 $sql = "
-CREATE TABLE User(
-  Username varchar(255) UNIQUE,
-  Password  varchar(30) NOT NULL,
-  LastName varchar(30) NOT NULL,
-  FirstName varchar(30) NOT NULL,
-  Sex varchar(20) NOT NULL,
-  Mail varchar(255) NOT NULL UNIQUE,
-  Birthday date,
-  Role int NOT NULL,
+SET CHARACTER SET 'utf8';
+SET NAMES 'utf8';
+CREATE TABLE User (
+  Username  VARCHAR(255) UNIQUE,
+  Password  VARCHAR(30)  NOT NULL,
+  LastName  VARCHAR(30)  NOT NULL,
+  FirstName VARCHAR(30)  NOT NULL,
+  Sex       VARCHAR(20)  NOT NULL,
+  Tel       VARCHAR(20),
+  Mail      VARCHAR(255) NOT NULL UNIQUE,
+  Birthday  VARCHAR(255),
+  Image     TEXT,
+  Role      INT          NOT NULL,
   PRIMARY KEY (Username)
 );
-CREATE TABLE Hotel(
-  ID int AUTO_INCREMENT,
-  Title varchar(255) NOT NULL,
-  Tel varchar(255) NOT NULL,
-  Description varchar(255) NOT NULL,
-  Coordinates varchar(255) NOT NULL,
-  Grade int NOT NULL,
-  Manager varchar(255),
+
+CREATE TABLE Hotel (
+  ID          INT UNIQUE AUTO_INCREMENT,
+  Name        VARCHAR(255) NOT NULL,
+  Tel         VARCHAR(255) NOT NULL,
+  Description VARCHAR(255) NOT NULL,
+  Coordinates VARCHAR(255) NOT NULL,
+  Grade       INT          NOT NULL,
+  Manager     VARCHAR(255),
   PRIMARY KEY (ID),
-  FOREIGN KEY (Manager) REFERENCES User(Username)
+  FOREIGN KEY (Manager) REFERENCES User (Username)
 );
-CREATE TABLE Auction(
-  ID int AUTO_INCREMENT,
-  Title varchar(255) NOT NULL,
-  Description varchar(255) NOT NULL,
-  Status int NOT NULL,
-  Bid_Price int NOT NULL,
-  End_Price int NOT NULL,
-  Hotel int,
+
+CREATE TABLE Auction (
+  ID          INT UNIQUE AUTO_INCREMENT,
+  Name        VARCHAR(255) NOT NULL,
+  Description VARCHAR(255) NOT NULL,
+  Status      INT          NOT NULL,
+  Bid_Price   INT          NOT NULL,
+  End_Price   INT          NOT NULL,
+  Hotel       INT,
   PRIMARY KEY (ID),
-  FOREIGN KEY (Hotel) REFERENCES Hotel(ID)
+  FOREIGN KEY (Hotel) REFERENCES Hotel (ID)
 );
+INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
+VALUE ('rambou', 'admin', 'Νικόλαος', 'Μπούσιος', 'male', 'rambou@samosrentals.gr', 0, '9 September,1992','https://avatars2.githubusercontent.com/u/4427553?v=3&s=460');
+INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
+VALUE ('armageddonas', 'admin', 'Κωνσταντίνος', 'Χασιώτης', 'male', 'armageddonas@samosrentals.gr', 0, '9 September,1992','images/website/avatar.jpg');
 ";
 
 if ($conn->multi_query($sql) === TRUE) {
     Print_MSG("Οι πίνακες δημιουργήθηκαν επιτυχώς!");
 } else {
-    $conn->query("DROP DATABASE " . $DB_NAME . ";");
     Print_MSG("Πρόβλημα κατά την δημιουργία πινάκων: " . $conn->error);
+    mysqli_query($conn, "DROP DATABASE " . $DB_NAME . ";");
 }
 
 //Close Connection

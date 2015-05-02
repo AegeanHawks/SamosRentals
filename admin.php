@@ -1,3 +1,12 @@
+<?php
+include 'admin/configuration.php';
+session_start();
+
+//Check if already logged
+if (!isAdmin()) {
+    echo "<script>window.history.back()</script>";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">

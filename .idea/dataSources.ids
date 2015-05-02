@@ -6,5 +6,47 @@
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="samosrentals"/>
+    <table name="auction" schema="" catalog="samosrentals" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Description" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Bid_Price" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="End_Price" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Hotel" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="auction_ibfk_1" columns="Hotel" ref-table="hotel" ref-schema="" ref-catalog="samosrentals" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ID" unique="true" columns="ID"/>
+    </table>
+    <table name="hotel" schema="" catalog="samosrentals" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Tel" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Description" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Coordinates" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Grade" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Manager" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="hotel_ibfk_1" columns="Manager" ref-table="user" ref-schema="" ref-catalog="samosrentals" ref-columns="Username" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="auction_ibfk_1" table="auction" schema="" catalog="samosrentals" columns="Hotel"/>
+      <index name="ID" unique="true" columns="ID"/>
+    </table>
+    <table name="user" schema="" catalog="samosrentals" type="TABLE">
+      <column name="Username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="Password" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LastName" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FirstName" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Sex" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Tel" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Mail" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Birthday" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Image" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Role" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Username"/>
+      <exported-key name="hotel_ibfk_1" table="hotel" schema="" catalog="samosrentals" columns="Manager"/>
+      <index name="Mail" unique="true" columns="Mail"/>
+      <index name="Username" unique="true" columns="Username"/>
+    </table>
   </data-source>
 </component>

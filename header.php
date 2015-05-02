@@ -14,18 +14,47 @@
                 </a>
             </div>
 
+            <?php
+            global $logged;
+            if (!$logged) {
+                echo '
             <div class="right hide-on-med-and-down">
                 <p><a href="login.php" class="waves-effect waves-light btn white-text"><span
                         class="mdi-action-input right" style="padding-left: 10px"></span>Συνδεση</a></p>
-            </div>
+            </div>';
+            } else {
+                echo '
+                    <a class="dropdown-button right hide-on-med-and-down" data-beloworigin="true" data-activates="dropdown"
+                       href="#">
+                        <div class="card waves-effect waves-teal white z-depth-2 valign-wrapper">
+                                <span class="grey-text truncate valign"
+                                      style="margin-right: 10px; margin-left: 10px; font-size: 1.2em;"><img
+                                        src="'.$_SESSION['avatar'].'"
+                                        style="padding-top: 5px;height: 48px;margin-right: 10px;"
+                                        class="valign circle left"><span>'.$_SESSION['fname'].' '.$_SESSION['lname'].'</span></span>
+                        </div>
+                    </a>
+
+                    <ul id="dropdown" class="card dropdown-content">
+                        <li><a href="#"><span class="mdi-action-settings left black-text"
+                                               style="padding-right: 10px"></span>Ρυθμίσεις</a></li>
+                        <li><a href="profile.php"><span class="mdi-social-person left black-text"
+                                               style="padding-right: 10px"></span>Προφίλ</a></li>
+                        <li class="divider"></li>
+                        <li><a href="logout.php"><span class="mdi-action-settings-power left black-text"
+                                               style="padding-right: 10px"></span>Αποσύνδεση</a></li>
+                    </ul>
+                ';
+            }
+            ?>
             <ul class="right hide-on-med-and-down">
                 <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="auctions.html" class="white-text">Δημοπρασίες</a></li>
+                <li><a href="auctions.php" class="white-text">Δημοπρασίες</a></li>
             </ul>
 
             <ul id="nav-mobile" class="right side-nav blue accent-3">
                 <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="auctions.html" class="white-text">Δημοπρασίες</a></li>
+                <li><a href="auctions.php" class="white-text">Δημοπρασίες</a></li>
                 <li><a href="register.php" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
                 <li><a href="login.php" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
             </ul>

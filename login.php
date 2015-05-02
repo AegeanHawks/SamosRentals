@@ -1,15 +1,50 @@
 <?php
+include 'admin/configuration.php';
+session_start();
 
+//Check if already logged
+if (islogged()) {
+    echo "<script>window.history.back()</script>";
+}
+
+//Check if post send and authenticate
 if (isset($_POST) && !empty($_POST)) {
     //Gather Data from post
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
 
-    session_start();
-    // Store Session Data
-    $_SESSION['login_user']= $username;  // Initializing Session with value of PHP Variable
+    //Authenticate person
+    authenticate();
+}
+
+function authenticate()
+{
+    global $username, $password;
+
+    //Connect
+    $con = db_connect();
+    if ($con->connect_errno) {
+        return;
+    }
+    // SQL query to fetch information of registerd users and finds user match.
+    $result = mysqli_query($con, "SELECT * FROM user WHERE Password='$password' AND Username='$username'");
+    $num_row = mysqli_num_rows($result);
+    if ($num_row == 1) {
+
+        // Store Session Data
+        $row = mysqli_fetch_array($result);
+
+        $_SESSION['userid'] = $row['Username'];
+        $_SESSION['role'] = $row['Role'];
+        $_SESSION['fname'] = $row['FirstName'];
+        $_SESSION['lname'] = $row['LastName'];
+        $_SESSION['avatar'] = $row['Image'];
+
+        header("Location: index.php");
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">

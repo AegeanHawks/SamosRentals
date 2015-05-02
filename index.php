@@ -1,7 +1,18 @@
+<?php
+include 'admin/configuration.php';
+session_start();
+
+//Check if logged
+$logged = false;
+if (islogged()) {
+    $logged = true;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Samos Rentals</title>
@@ -27,34 +38,39 @@ include 'header.php';
 <div class="parallax-container" style="height: 550px">
     <div class="parallax"><img src="images/website/header.jpg"></div>
 </div>
+<?php
+if (!$logged)
+    echo '
+    <div class="section no-pad-bot" style="margin-top: -8%;">
+        <div class="row">
+            <div class="col offset-l3 l6 s12 white z-depth-3">
+                <div class="entry-content">
 
-<div class="section no-pad-bot" style="margin-top: -8%;">
-    <div class="row">
-        <div class="col offset-l3 l6 s12 white z-depth-3">
-            <div class="entry-content">
-                <div class="col l12 m8 s12">
-                    <h4 class="grey-text darken-2 light">Καλωσήρθες</h4>
-                    <h5 class="grey-text darken-2 light">Ανακάλυψε και κάνε κράτηση δωματίου για τις διακοπές των
-                        ονείρων σου...</h5>
+                    <div class="col l12 m8 s12">
+                        <h4 class="grey-text darken-2 light">Καλωσήρθες</h4>
+                        <h5 class="grey-text darken-2 light">Ανακάλυψε και κάνε κράτηση δωματίου για τις διακοπές των
+                            ονείρων σου...</h5>
 
-                    <p class="grey-text darken-3">Το Samos Rentals περιέχει μια τεράστια βάση από 100+ δωμάτια και
-                        ξενοδοχεία στο νησί. Αν έχεις ξενοδοχείο ή ενοικιαζόμενα δωμάτια τότε εγγράχου στην υπηρεσία μας
-                        και δες την επιχείρηση και τα κέρδη σου να απογειώνονται!!!</p>
+                        <p class="grey-text darken-3">Το Samos Rentals περιέχει μια τεράστια βάση από 100+ δωμάτια και
+                            ξενοδοχεία στο νησί. Αν έχεις ξενοδοχείο ή ενοικιαζόμενα δωμάτια τότε εγγράχου στην υπηρεσία μας
+                            και δες την επιχείρηση και τα κέρδη σου να απογειώνονται!!!</p>
 
-                    <p class="grey-text darken-3">Αν δεν έχεις γίνει ακόμα μέλος, τότε κάνε εγγραφή για να μπορείς και
-                        εσύ να κατωχειρόσεις ένα από τα δεκάδες δωμάτια που δημοπρατούνται καθημερινά...</p>
+                        <p class="grey-text darken-3">Αν δεν έχεις γίνει ακόμα μέλος, τότε κάνε εγγραφή για να μπορείς και
+                            εσύ να κατοχυρώσεις ένα από τα δεκάδες δωμάτια που δημοπρατούνται καθημερινά...</p>
 
-                    <div class="col s6 offset-s4">
-                        <p><a class="waves-effect waves-light btn light-blue darken-3 " href="register.php"><i
-                                class="mdi-content-create left"></i>Εγγραψου τωρα!</a>
-                        </p>
+                        <div class="col s6 offset-s4">
+                            <p><a class="waves-effect waves-light btn light-blue darken-3 " href="register.php"><i
+                                    class="mdi-content-create left"></i>Εγγραψου τωρα!</a>
+                            </p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+';
+?>
 <div class="" id="about">
     <div class="container">
         <div class="row">
@@ -63,7 +79,7 @@ include 'header.php';
 
                 <p class="grey-text darken-2 light flow-text center-align .disBlock">Το Samos Rentals είναι μια μοναδική
                     πλατφόρμα που
-                    βοηθά τουρίστες και ιδιοκτήτες ξενοδοχείων να αλληλεπιδορύν ακόμα καλύτερα. Αν είστε ξενοδόχος
+                    βοηθά τουρίστες και ιδιοκτήτες ξενοδοχείων να αλληλεπιδρούν ακόμα καλύτερα. Αν είστε ξενοδόχος
                     μπορείτε να διαφημίσετε το ξενοδοχείο σας, καθώς και να αυξήσετε την πληρότητα των δωματίων σας μέσα
                     από την μοναδική μηχανή μας. Αν πάλι ψάχνετε δωμάτιο τότε μπορείτε απλά να κάνετε κράτηση!</p>
             </div>

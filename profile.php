@@ -1,3 +1,44 @@
+<?php
+include 'admin/configuration.php';
+session_start();
+
+//Check if already logged
+$logged = true;
+if (!islogged()) {
+    echo "<script>window.history.back()</script>";
+}
+
+//Connect
+$con = db_connect();
+if ($con->connect_errno) {
+    return;
+}
+// SQL query to fetch information of registerd users and finds user match.
+$uid = $_SESSION['userid'];
+$result = mysqli_query($con, "SELECT * FROM user WHERE Username='$uid'");
+$num_row = mysqli_num_rows($result);
+if ($num_row == 1) {
+    // Store Session Data
+    $row = mysqli_fetch_array($result);
+
+    $username = $row['Username'];
+    $fname = $row['FirstName'];
+    $lname = $row['LastName'];
+    $tel = $row['Tel'];
+    $mail = $row['Mail'];
+    $sex = $row['Sex'];
+    $birthday = $row['Birthday'];
+    if ($row['Role'] == 0) {
+        $role = "Διαχειριστής";
+    } else if ($row['Role'] == 1) {
+        $role = "Μάνατζερ";
+    } else {
+        $role = "Χρήστης";
+    }
+    $image = $row['Image'];
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head lang="en">
@@ -41,72 +82,17 @@
     <body class="white">
 
         <!--Navigation Menu-->
-        <div class="navbar-fixed">
-            <nav class="blue darken-4 z-depth-3" role="navigation">
-                <div class="nav-wrapper container">
-                    <div class="valign-demo valign-wrapper left">
-                        <a id="logo-container" href="index.php" class="brand-logo waves-effect waves-light">
-                            <div class="hide-on-med-and-down">
-                                <span class="left " style="padding-left:20px;"><img src="images/website/logo.png"></span>
-                                <span class="white-text left " style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
+        <?php
+        include 'header.php';
+        ?>
 
-                            </div>
-                            <div class="hide-on-large-only">
-                                <span class="white-text truncate">Samos Rentals</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Dropdown Menu - Structure -->
-                    <a class="dropdown-button right hide-on-med-and-down" data-beloworigin="true" data-activates='dropdown'
-                       href='#'>
-                        <div class="card waves-effect waves-teal white z-depth-2 valign-wrapper">
-                            <span class="grey-text truncate valign"
-                                  style="margin-right: 10px; margin-left: 10px; font-size: 1.2em;"><img
-                                    src="images/website/avatar.jpg "
-                                    style="padding-top: 5px;height: 48px;margin-right: 10px;"
-                                    class="valign circle left"><span>Νικόλαος Μπούσιος</span></span>
-                        </div>
-                    </a>
-
-                    <ul id='dropdown' class='card dropdown-content'>
-                        <li><a href="#!"><span class="mdi-action-settings left black-text"
-                                               style="padding-right: 10px"></span>Ρυθμίσεις</a></li>
-                        <li><a href="#!"><span class="mdi-social-person left black-text"
-                                               style="padding-right: 10px"></span>Προφίλ</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#!"><span class="mdi-action-settings-power left black-text"
-                                               style="padding-right: 10px"></span>Αποσύνδεση</a></li>
-                    </ul>
-                    <!-- Dropdown Menu - Structure -->
-
-                    <ul class="right hide-on-med-and-down">
-                        <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                        <li><a href="#" class="white-text">Δημοπρασίες</a></li>
-                    </ul>
-
-                    <ul id="nav-mobile" class="right side-nav blue accent-3">
-                        <li><a href="#" class="white-text">Ξενοδοχία</a></li>
-                        <li><a href="#" class="white-text">Δημοπρασίες</a></li>
-                        <li><a href="#" class="white-text">Καταχώρηση</a></li>
-                        <li><a href="register.php" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
-                        <li><a href="login.php" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
-                    </ul>
-
-                    <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
-                </div>
-            </nav>
-        </div>
         <!--Navigation Menu-->
 
         <div class="row container" style="padding-top: 60px">
             <div class="col s12 m4">
-                <div class="col s12 m12">
-                    <div class="card white materialboxed">
-                        <div class="center-align" style="padding: 20px">
-                            <img class="circle responsive-img " src="images/website/avatar.jpg">
-                        </div>
-                    </div>
+                <div class="center-align col s12 m12 materialboxed">
+                    <img class=" circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
+                         src="<?php echo $image; ?>">
                 </div>
                 <div class="col s12 m12">
                     <ul class="collapsible popout" data-collapsible="accordion">
@@ -133,36 +119,47 @@
 
             <!--Tab Panels-->
             <!--User Details-->
-            <div class="col s12 m8 tabregion" id="section_1" style="display: inline">
-                <div class="col s12 m12">
-                    <div class="white lighten-4" style="height: 400px;">
-                        <div class="left-align" style="padding: 10px">
-                            <div class="col s12 grey lighten-4 z-depth-1" >
-                                <p class="col s4 detailshead">Όνομα: </p> 
-                                <p  class="col s3 detailsbody">Κωνσταντίνος</p>
-                            </div>
-                            <div class="col s12 grey lighten-4 z-depth-1" >
-                                <p class="col s4 detailshead">Επώνυμο: </p> 
-                                <p  class="col s3 detailsbody">Χασιώτης</p>
-                            </div>
-                            <div class="col s12 grey lighten-4 z-depth-1" >
-                                <p class="col s4 detailshead">Ψευδώνυμο: </p> 
-                                <p  class="col s3 detailsbody">Armageddonas</p>
-                            </div>
-                            <div class="col s12 grey lighten-4 z-depth-1" >
-                                <p class="col s4 detailshead">Τηλέφωνο: </p> 
-                                <p  class="col s3 detailsbody">6944444444</p>
-                            </div>
-                            <div class="col s12 grey lighten-4 z-depth-1" >
-                                <p class="col s4 detailshead">E-mail: </p> 
-                                <p  class="col s3 detailsbody">icsd11175@icsd.aegean.gr</p>
-                            </div>
-                            <div class="col s12 grey lighten-4 z-depth-1" >
-                                <p class="col s4 detailshead">Ημερομηνία γέννησης: </p> 
-                                <p  class="col s3 detailsbody">25/2/1993</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="card row col s12 m8 tabregion" id="section_1" style="display: inline">
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">Όνομα: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $fname; ?></p>
+                </div>
+                <div class="col offset-s1 s10 divider"></div>
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">Επώνυμο: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $lname; ?></p>
+                </div>
+                <div class="col offset-s1 s10 divider"></div>
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">Ψευδώνυμο: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $username; ?></p>
+                </div>
+                <div class="col offset-s1 s10 divider"></div>
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">Τηλέφωνο: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $tel; ?></p>
+                </div>
+                <div class="col offset-s1 s10 divider"></div>
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">E-mail: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $mail; ?></p>
+                </div>
+                <div class="col offset-s1 s10 divider"></div>
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">Ημερομηνία γέννησης: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $birthday; ?></p>
+                </div>
+                <div class="col offset-s1 s10 divider"></div>
+                <div class="col offset-s1 s10">
+                    <p class="col s4 detailshead">Ρόλος: </p>
+
+                    <p class="col s8 detailsbody"><?php echo $role; ?></p>
                 </div>
             </div>
             <!--User Details-->
@@ -256,6 +253,7 @@
             <!--Tab Panels-->
 
         </div>
+
         <?php
         include 'footer.php';
         ?>
