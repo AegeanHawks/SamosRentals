@@ -158,14 +158,14 @@ include 'header.php';
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <i class="mdi-action-assignment-ind prefix"></i>
-                        <input type="text" name="first_name" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$" class="validate"
+                        <input type="text" id="first_name" name="first_name" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$" class="validate"
                                value="<?php if (!empty($fname)) echo $fname; ?>"
                                maxlength="15"
                                required form="register">
                         <label for="first_name">Όνομα</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input name="last_name" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{2,20}$" type="text" class="validate"
+                        <input id="last_name" name="last_name" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{2,20}$" type="text" class="validate"
                                value="<?php if (!empty($lname)) echo $lname; ?>"
                                maxlength="30"
                                required form="register">
@@ -175,7 +175,7 @@ include 'header.php';
 
                 <div class="input-field">
                     <i class="mdi-social-person prefix"></i>
-                    <input type="text" name="username" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$"
+                    <input type="text" id="username" name="username" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$"
                            value="<?php if (!empty($username)) echo $username; ?>"
                            maxlength="30" class="validate" required form="register">
                     <label for="username">Όνομα Χρήστη</label>
@@ -205,7 +205,7 @@ include 'header.php';
                 </div>
                 <div class="input-field">
                     <i class="mdi-communication-phone prefix"></i>
-                    <input name="tel" type="tel" pattern='[\+]\d{2}\d{10}'
+                    <input id="tel" name="tel" type="tel" pattern='[\+]\d{2}\d{10}'
                            value="<?php if (!empty($tel)) echo $tel; ?>"
                            placeholder='Κινητό ή σταθερό (+30699999999 ή +302222022222)' class="validate" required
                            form="register">
@@ -213,14 +213,14 @@ include 'header.php';
                 </div>
                 <div class="input-field">
                     <i class="mdi-social-cake prefix"></i>
-                    <input name="birthday" type="date" class="datepicker picker__input"
+                    <input id="birthday" name="birthday" type="date" class="datepicker picker__input"
                            value="<?php if (!empty($birthday)) echo $birthday; ?>"
                            required form="register">
                     <label for="birthday">Ημερομηνία Γέννησης</label>
                 </div>
 
                 <div class="input-field col offset-s1 s11">
-                    <select name="sex" class="validate" required form="register">
+                    <select id="sex" name="sex" class="validate" required form="register">
                         <option value="male" <?php if (!empty($sex)) if ($sex == "male") echo "selected"; ?>>Άνδρας
                         </option>
                         <option value="female" <?php if (!empty($sex)) if ($sex == "female") echo "selected"; ?>>Γυναίκα
