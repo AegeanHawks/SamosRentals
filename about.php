@@ -31,23 +31,26 @@ include 'header.php';
 
 <div class="container" style="padding: 80px 0px 100px 0px;">
     <div class="row center-align">
-        <div class="col l4 m5 offset-l1" style="padding: 20px">
+        <div class="col l4 m6 offset-l1" style="padding: 20px">
             <img class="circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
                  src="images/website/rambou.jpg">
 
             <div class="card">
-                <p><span class="flow-text">Νικόλαος Μπούσιος<br>A.K.A Rambou<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span>
-                </p>
+                <p><span class="flow-text">Νικόλαος Μπούσιος<br>A.K.A Rambou<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span><br>
+                    <span class="flow-text">Skills:</span><br>Programmer, Hacker, UI/UX Designer, Software Engineer,
+                    Developer</p>
                 <iframe src="https://ghbtns.com/github-btn.html?user=rambou&type=follow&count=true&size=large"
                         frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
             </div>
         </div>
-        <div class="col l4 m5 offset-m2 offset-l2" style="padding: 20px">
+        <div class="col l4 m6 offset-l2" style="padding: 20px">
             <img class="circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
                  src=" images/website/armageddonas.jpg">
 
             <div class="card">
-                <p><span class="flow-text">Κώστας Χασιώτης<br>A.K.A Armageddonas<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span>
+                <p><span class="flow-text">Κώστας Χασιώτης<br>A.K.A Armageddonas<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span><br>
+                    <span class="flow-text">Skills:</span><br>Programmer, Software Designer, Software Engineer,
+                    Developer
                 </p>
                 <iframe src="https://ghbtns.com/github-btn.html?user=armageddonas&type=follow&count=true&size=large"
                         frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
