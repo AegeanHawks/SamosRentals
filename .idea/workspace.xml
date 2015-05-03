@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae94a44f-04a9-452b-a8c8-2441bbee9242" name="Default" comment="About more info added">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/about.php" afterPath="$PROJECT_DIR$/about.php" />
+    <list default="true" id="ae94a44f-04a9-452b-a8c8-2441bbee9242" name="Default" comment="Profile Images added">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/auction.php" afterPath="$PROJECT_DIR$/auction.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SamosRentals.iws" />
@@ -50,11 +50,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="about.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="about.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/about.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7061311" vertical-offset="533" max-vertical-offset="1326">
-              <caret line="51" column="109" selection-start-line="51" selection-start-column="109" selection-end-line="51" selection-end-column="109" />
+            <state vertical-scroll-proportion="-10.884615" vertical-offset="278" max-vertical-offset="1343">
+              <caret line="33" column="61" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auction.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/auction.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14376321" vertical-offset="0" max-vertical-offset="2754">
+              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -90,7 +100,6 @@
         <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/login.html" />
         <option value="$PROJECT_DIR$/css/style.css" />
-        <option value="$PROJECT_DIR$/auction.php" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/profile.html" />
         <option value="$PROJECT_DIR$/auctions.html" />
@@ -118,6 +127,7 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/footer.php" />
         <option value="$PROJECT_DIR$/about.php" />
+        <option value="$PROJECT_DIR$/auction.php" />
       </list>
     </option>
   </component>
@@ -398,7 +408,19 @@
       <option name="project" value="LOCAL" />
       <updated>1430674568888</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="About more shit added">
+      <created>1430674726023</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1430674726023</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Profile Images added">
+      <created>1430674765533</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1430674765533</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -473,7 +495,9 @@
     <MESSAGE value="Profile fixed (case user is wasn't logged)" />
     <MESSAGE value="About page added" />
     <MESSAGE value="About more info added" />
-    <option name="LAST_COMMIT_MESSAGE" value="About more info added" />
+    <MESSAGE value="About more shit added" />
+    <MESSAGE value="Profile Images added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Profile Images added" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -711,13 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20318726" vertical-offset="918" max-vertical-offset="2125">
-          <caret line="92" column="25" selection-start-line="60" selection-start-column="20" selection-end-line="92" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/samosrentals.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24" vertical-offset="355" max-vertical-offset="1785">
@@ -947,8 +964,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/about.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7061311" vertical-offset="533" max-vertical-offset="1326">
-          <caret line="51" column="109" selection-start-line="51" selection-start-column="109" selection-end-line="51" selection-end-column="109" />
+        <state vertical-scroll-proportion="-10.884615" vertical-offset="278" max-vertical-offset="1343">
+          <caret line="33" column="61" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14376321" vertical-offset="0" max-vertical-offset="2754">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
           <folding />
         </state>
       </provider>
