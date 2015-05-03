@@ -49,7 +49,8 @@ include 'header.php';
 
             <div class="card">
                 <p><span class="flow-text">Κώστας Χασιώτης<br>A.K.A Armageddonas<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span><br>
-                    <span class="flow-text">Skills:</span><br>Programmer, Software Designer, Software Engineer,
+                    <span class="flow-text">Skills:</span><br>Programmer, Software Designer, UI/UX Designer, Software
+                    Engineer,
                     Developer
                 </p>
                 <iframe src="https://ghbtns.com/github-btn.html?user=armageddonas&type=follow&count=true&size=large"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae94a44f-04a9-452b-a8c8-2441bbee9242" name="Default" comment="About page added">
+    <list default="true" id="ae94a44f-04a9-452b-a8c8-2441bbee9242" name="Default" comment="About more info added">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/about.php" afterPath="$PROJECT_DIR$/about.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -53,8 +53,8 @@
       <file leaf-file-name="about.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/about.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09513742" vertical-offset="533" max-vertical-offset="1292">
-              <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.7061311" vertical-offset="533" max-vertical-offset="1326">
+              <caret line="51" column="109" selection-start-line="51" selection-start-column="109" selection-end-line="51" selection-end-column="109" />
               <folding />
             </state>
           </provider>
@@ -392,7 +392,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430672333059</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="About more info added">
+      <created>1430674568888</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1430674568888</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -466,7 +472,8 @@
     <MESSAGE value="Fixed Profile&#10;Added Delete&#10;Profile is ready for view by multiple user for multi purposes!" />
     <MESSAGE value="Profile fixed (case user is wasn't logged)" />
     <MESSAGE value="About page added" />
-    <option name="LAST_COMMIT_MESSAGE" value="About page added" />
+    <MESSAGE value="About more info added" />
+    <option name="LAST_COMMIT_MESSAGE" value="About more info added" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -940,8 +947,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/about.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09513742" vertical-offset="533" max-vertical-offset="1292">
-          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.7061311" vertical-offset="533" max-vertical-offset="1326">
+          <caret line="51" column="109" selection-start-line="51" selection-start-column="109" selection-end-line="51" selection-end-column="109" />
           <folding />
         </state>
       </provider>
