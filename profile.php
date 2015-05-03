@@ -115,7 +115,7 @@ if ($num_row == 1) {
                             <a class="collapsible-header active mytab" id="mytab_1" href="#"><i
                                     class="mdi-action-perm-contact-cal"></i>Πληροφορίες</a>
                             <?php
-                            if ($_SESSION['userid'] == $user) {
+                            if (islogged() && $_SESSION['userid'] == $user) {
                                 ?>
                                 <div class="collapsible-body"><p>Επεξεργαστείτε προσωπικές πληροφορίες.</p></div>
                             <?php
@@ -130,14 +130,14 @@ if ($num_row == 1) {
                             </div>
                         </li>
                         <?php
-                        if ($_SESSION['role'] > 1) {
+                        if (islogged() && $_SESSION['role'] > 1) {
                             ?>
                         <li>
                             <a class="collapsible-header mytab" id="mytab_4"  href="#"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
                         </li>
                         <?php
                         }
-                        if ($_SESSION['userid'] == $user) {
+                        if (islogged() && $_SESSION['userid'] == $user) {
                             ?>
                         <li>
                             <a class="collapsible-header mytab" href="#" id="mytab_5"><i class="mdi-action-delete"></i>Διαγραφή</a>
@@ -243,7 +243,7 @@ if ($num_row == 1) {
             <!-- Auctions won -->
 
             <?php
-            if ($_SESSION['role'] > 1) {
+            if (islogged() && $_SESSION['role'] > 1) {
                 ?>
                 <!--Upgrade user-->
                 <div class="col s12 m8 tabregion" id="section_4">
@@ -262,7 +262,7 @@ if ($num_row == 1) {
                 <!--Upgrade user-->
             <?php
             }
-            if ($_SESSION['userid'] == $user) {
+            if (islogged() && $_SESSION['userid'] == $user) {
                 ?>
                 <!--Delete user-->
                 <div class="col s12 m8 tabregion" id="section_5">
