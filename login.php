@@ -4,11 +4,11 @@ session_start();
 
 //Check if already logged
 if (islogged()) {
-    echo "<script>window.history.back()</script>";
+    die("<script>window.history.back()</script>");
 }
 
-//Check if post send and authenticate
-if (isset($_POST) && !empty($_POST)) {
+//Check if Method is POST and authenticate
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Gather Data from post
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
@@ -26,8 +26,12 @@ function authenticate()
     if ($con->connect_errno) {
         return;
     }
-    // SQL query to fetch information of registerd users and finds user match.
-    $result = mysqli_query($con, "SELECT * FROM user WHERE Password='$password' AND Username='$username'");
+    // SQL query with prepared statement(sql injections) to fetch information of registerd users and finds user match.
+    $sql = $con->prepare('SELECT * FROM user WHERE Password = ? AND Username= ?');
+    $sql->bind_param('ss', $password, $username);
+    $sql->execute();
+
+    $result = $sql->get_result();
     $num_row = mysqli_num_rows($result);
     if ($num_row == 1) {
 
