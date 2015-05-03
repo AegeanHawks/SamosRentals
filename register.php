@@ -1,61 +1,12 @@
 <?php
 include 'admin/configuration.php';
 session_start();
+$registered = false;
 
 //Check if already logged
 if (islogged()) {
-    echo "<script>window.history.back()</script>";
+    die("<script>window.history.back()</script>");
 }
-
-if (isset($_POST) && !empty($_POST)) {
-    //Gather Data from post
-    $username = htmlspecialchars($_POST['username']);
-    $password = htmlspecialchars($_POST['password']);
-    $fname = htmlspecialchars($_POST['first_name']);
-    $lname = htmlspecialchars($_POST['last_name']);
-    $birthday = htmlspecialchars($_POST['birthday']);
-    $tel = htmlspecialchars($_POST['tel']);
-    $sex = htmlspecialchars($_POST['sex']);
-    $email = htmlspecialchars($_POST['email']);
-
-
-    //Validate Data
-    if (empty($fname) || preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $fname)) {
-    }
-
-    if (empty($lname) || preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $lname)) {
-    }
-
-    if (empty($username) || preg_match('/^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$/', $username)) {
-    }
-
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    }
-
-    if (empty($password) || preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password)) {
-    }
-
-    if (empty($tel) || preg_match('/[\+]\d{2}\d{10}/', $tel)) {
-    }
-
-    if (empty($sex) || empty($birthday) || preg_match('/^[0-9]{2}[ ][a-zA-Z]{3,}[,][0-9]{4}$/', $birthday)) {
-
-    }
-
-    //Connect
-    $con = db_connect();
-    if ($con->connect_errno) {
-        return;
-    }
-    // SQL query to fetch information of registerd users and finds user match.
-    $result = mysqli_query($con, "INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role)
-      VALUE ('$username', '$password', '$fname', '$lname', '$sex', '$email','$tel','$birthday', 2);");
-
-    $con->close();
-    //debug
-    debug_to_console($username . " " . $password . " " . $fname . " " . $lname . " " . $birthday . " " . $tel . " " . $sex . " " . $email);
-}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,13 +23,6 @@ if (isset($_POST) && !empty($_POST)) {
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/animate.css" type="text/css" rel="stylesheet">
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-
     <style>
         .registration {
             position: absolute;
@@ -118,12 +62,12 @@ if (isset($_POST) && !empty($_POST)) {
         }
 
     </style>
-    <script type="text/javascript">
-        $('.datepicker').pickadate({
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
-        });
-    </script>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 <body class="light-blue">
@@ -134,7 +78,141 @@ include 'header.php';
 ?>
 <!--Navigation Menu-->
 
-<!-- Registration form-->
+
+<?php
+//Check if Method Is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //Gather Data from post
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+    $fname = htmlspecialchars($_POST['first_name']);
+    $lname = htmlspecialchars($_POST['last_name']);
+    $birthday = htmlspecialchars($_POST['birthday']);
+    $tel = htmlspecialchars($_POST['tel']);
+    $sex = htmlspecialchars($_POST['sex']);
+    $email = htmlspecialchars($_POST['email']);
+
+    //Validate Data
+    if (preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $fname)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $lname)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (preg_match('/^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$/', $username)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (preg_match('/[\+]\d{2}\d{10}/', $tel)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (preg_match('/(male)|(female)/', $sex)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    if (preg_match('/^[0-9]{2}[ ][a-zA-Z]{3,}[,][ ][0-9]{4}$/', $birthday)) {
+        $valid = true;
+    } else {
+        $valid = false;
+    }
+
+    //Send post to google recaptcha server to check whether user insert the correct data
+    include("getCurlData.php");
+    $google_url = "https://www.google.com/recaptcha/api/siteverify";
+    $secret = '6Ldc7AUTAAAAAAXcvwdsViWimL2UE014Y27imAeG';
+    $url = $google_url . "?secret=" . $secret . "&response=" . $_POST["g-recaptcha-response"] . "&remoteip=" . $_SERVER['REMOTE_ADDR'];
+    $res = getCurlData($url);
+    $res = json_decode($res, true);
+
+    //reCaptcha success check
+    if (!$res['success']) {
+        // What happens when the CAPTCHA was entered incorrectly
+        $valid = false;
+        $error_msg = "Εισάγετε σωστά το reCaptcha!";
+        echo "<script>Materialize.toast('" . $error_msg . "', 5000)</script>";
+    } else {
+        //Connect
+        $con = db_connect();
+        if ($con->connect_errno) {
+            return;
+        }
+
+        // SQL query to fetch information of registerd users and finds user match.
+        $result = mysqli_query($con, "SELECT * FROM user WHERE Username='$username'");
+        $num_row = mysqli_num_rows($result);
+        if ($num_row != 0) {
+            $valid = false;
+            $error_msg = "Το Όνομα Χρήστη υπάρχει!";
+        }
+
+        $result = mysqli_query($con, "SELECT * FROM user WHERE Mail='$email'");
+        $num_row = mysqli_num_rows($result);
+        if ($num_row != 0) {
+            $valid = false;
+            $error_msg = "Το Email υπάρχει!";
+        }
+
+        // SQL query to fetch information of registerd users and finds user match.
+        if (!$valid) {
+            echo "<script>Materialize.toast('" . $error_msg . "', 5000)</script>";
+        } else {
+            $result = mysqli_query($con, "INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role,Image)
+              VALUE ('$username', '$password', '$fname', '$lname', '$sex', '$email','$tel','$birthday', 2,'images/website/avatar.jpg');");
+            $registered = true;
+        }
+
+        $con->close();
+    }
+}
+?>
+
+<?php
+if ($registered){
+    ?>
+    <div class="row registration">
+        <!-- Registration Header -->
+        <div class="row animated slideInDown center-align">
+            <h1>Καλωσήρθατε</h1>
+
+            <div class="col l6 offset-l3">
+                <p class="flow-text">Η εγγραφή ολοκληρώθηκε <b>επιτυχώς</b>!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function Redirect() {
+            window.location = "login.php";
+        }
+        setTimeout('Redirect()', 3000);
+    </script>
+<?php
+}else{
+?>
 <div class="row registration">
     <!-- Registration Header -->
     <div class="row animated slideInDown center-align">
@@ -148,11 +226,11 @@ include 'header.php';
     </div>
     <!-- Registration Header -->
 
-    <div class="row animated slideInUp center-align">
-        <!-- Registration Form -->
+
+    <!-- Registration Form -->
+    <div class="row animated slideInUp center-align ">
         <div class="white reg-form z-depth-3 coll"> <!--"reg-form z-depth-3 col s10 m8 l6 offset-s1 offset-m2 offset-l3"-->
             <form id="register" action="register.php" autocomplete="off" accept-charset='UTF-8'
-                  enctype="multipart/form-data"
                   method="POST">
 
                 <div class="row">
@@ -197,12 +275,14 @@ include 'header.php';
                            maxlength="30" class="validate" required form="register">
                     <label for="password">Κωδικός</label>
                 </div>
+
                 <div class="input-field">
                     <i class="mdi-action-verified-user prefix"></i>
                     <input type="password" name="password" id="reenter_password" maxlength="30" class="validate"
                            required>
                     <label for="reenter_password">Ξαναβάλε τον κωδικό</label>
                 </div>
+
                 <div class="input-field">
                     <i class="mdi-communication-phone prefix"></i>
                     <input id="tel" name="tel" type="tel" pattern='[\+]\d{2}\d{10}'
@@ -211,9 +291,10 @@ include 'header.php';
                            form="register">
                     <label for="tel">Τηλέφωνο</label>
                 </div>
+
                 <div class="input-field">
                     <i class="mdi-social-cake prefix"></i>
-                    <input id="birthday" name="birthday" type="date" class="datepicker picker__input"
+                    <input id="birthday" name="birthday" type="text" class="datepicker picker__input"
                            value="<?php if (!empty($birthday)) echo $birthday; ?>"
                            required form="register">
                     <label for="birthday">Ημερομηνία Γέννησης</label>
@@ -231,20 +312,24 @@ include 'header.php';
 
                 <div class="g-recaptcha coll validate" name="recaptcha"
                      data-sitekey="6Ldc7AUTAAAAANnRbW3E9zA9nNaS5HVV9fmmxZaL"
-                     form="register" required></div>
+                     form="register" required>
+                </div>
+
                 <div class="row">
                     <button type="submit" class="center-btn waves-effect waves-light btn" id="register_btn"
                             form="register"><i
                             class="mdi-action-done left"></i>Εγγραφη
                     </button>
                 </div>
-
             </form>
         </div>
-        <!-- Registration Form -->
     </div>
+    <!-- Registration Form -->
 </div>
-<!-- Registration form-->
 
 </body>
 </html>
+<?php
+}
+?>
+
