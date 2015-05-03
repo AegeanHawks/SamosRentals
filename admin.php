@@ -4,7 +4,7 @@ session_start();
 
 //Check if already logged
 if (!isAdmin()) {
-    echo "<script>window.history.back()</script>";
+    die("<script>window.history.back()</script>");
 }
 ?>
 <!DOCTYPE html>

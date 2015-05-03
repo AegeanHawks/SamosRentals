@@ -90,9 +90,9 @@ CREATE TABLE Auction (
   FOREIGN KEY (Hotel) REFERENCES Hotel (ID)
 );
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
-VALUE ('rambou', 'admin', 'Νικόλαος', 'Μπούσιος', 'male', 'rambou@samosrentals.gr', 0, '9 September,1992','https://avatars2.githubusercontent.com/u/4427553?v=3&s=460');
+VALUE ('rambou', 'Password1', 'Νικόλαος', 'Μπούσιος', 'male', 'rambou@samosrentals.gr', 0, '9 September,1992','https://avatars2.githubusercontent.com/u/4427553?v=3&s=460');
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
-VALUE ('armageddonas', 'admin', 'Κωνσταντίνος', 'Χασιώτης', 'male', 'armageddonas@samosrentals.gr', 0, '9 September,1992','images/website/avatar.jpg');
+VALUE ('armageddonas', 'Password1', 'Κωνσταντίνος', 'Χασιώτης', 'male', 'armageddonas@samosrentals.gr', 0, '9 September,1992','images/website/avatar.jpg');
 ";
 
 if ($conn->multi_query($sql) === TRUE) {

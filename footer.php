@@ -29,13 +29,15 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            <span class="left"> © 2014-2015 AegeanHawks, All rights reserved.</span>
+            <span class="left"> © <?php echo '2014' . '-' . date('Y'); ?>
+                AegeanHawks, All rights reserved.</span>
             <span class="right">Κατασκευάσθηκε από τους <a class="brown-text text-lighten-3"
                                                            href="https://github.com/Rambou">Rambou</a> και
                 <a class="brown-text text-lighten-3" href="https://github.com/Armageddonas">Armageddona</a></span>
         </div>
     </div>
 </footer>
+
 <?php
 include 'agreement.php';
 ?>
