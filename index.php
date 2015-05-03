@@ -103,7 +103,6 @@ if (!$logged)
 </div>
 
 <?php
-include 'about.php';
 include 'footer.php';
 ?>
 
