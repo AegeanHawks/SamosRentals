@@ -163,14 +163,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // SQL query to fetch information of registerd users and finds user match.
-        $result = mysqli_query($con, "SELECT * FROM user WHERE Username='$username'");
+        $sql = $con->prepare('SELECT * FROM user WHERE Username= ?');
+        $sql->bind_param('s', $username);
+        $sql->execute();
+
+        $result = $sql->get_result();
         $num_row = mysqli_num_rows($result);
         if ($num_row != 0) {
             $valid = false;
             $error_msg = "Το Όνομα Χρήστη υπάρχει!";
         }
 
-        $result = mysqli_query($con, "SELECT * FROM user WHERE Mail='$email'");
+        $sql = $con->prepare('SELECT * FROM user WHERE Mail= ?');
+        $sql->bind_param('s', $email);
+        $sql->execute();
+
+        $result = $sql->get_result();
         $num_row = mysqli_num_rows($result);
         if ($num_row != 0) {
             $valid = false;
@@ -181,8 +189,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$valid) {
             echo "<script>Materialize.toast('" . $error_msg . "', 5000)</script>";
         } else {
-            $result = mysqli_query($con, "INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role,Image)
-              VALUE ('$username', '$password', '$fname', '$lname', '$sex', '$email','$tel','$birthday', 2,'images/website/avatar.jpg');");
+            $sql = $con->prepare("INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role,Image)
+              VALUE (?, ?, ?, ?, ?, ?, ?, ?, 2,'images/website/avatar.jpg')");
+            $sql->bind_param('ssssssss', $username, $password, $fname, $lname, $sex, $email, $tel, $birthday);
+            $sql->execute();
+
+            $result = $sql->get_result();
             $registered = true;
         }
 
