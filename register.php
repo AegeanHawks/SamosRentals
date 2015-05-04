@@ -91,7 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tel = htmlspecialchars($_POST['tel']);
     $sex = htmlspecialchars($_POST['sex']);
     $email = htmlspecialchars($_POST['email']);
+    if (!empty($_POST['hotelier']) && $_POST['hotelier'] == 'on')
+        $hotelier = 1;
+    else
+        $hotelier = 0;
 
+    debug_to_console($_POST);
     //Validate Data
     if (preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $fname)) {
         $valid = true;
@@ -149,8 +154,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $res = getCurlData($url);
     $res = json_decode($res, true);
 
+    if (!$valid) {
+        echo "<script>Materialize.toast('Εισάγετε όλα τα στοιχεία!', 5000)</script>";
+    }
     //reCaptcha success check
-    if (!$res['success']) {
+    else if (!$res['success']) {
         // What happens when the CAPTCHA was entered incorrectly
         $valid = false;
         $error_msg = "Εισάγετε σωστά το reCaptcha!";
@@ -189,9 +197,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$valid) {
             echo "<script>Materialize.toast('" . $error_msg . "', 5000)</script>";
         } else {
-            $sql = $con->prepare("INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role,Image)
-              VALUE (?, ?, ?, ?, ?, ?, ?, ?, 2,'images/website/avatar.jpg')");
-            $sql->bind_param('ssssssss', $username, $password, $fname, $lname, $sex, $email, $tel, $birthday);
+            $sql = $con->prepare("INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role, Image, Upgrade)
+              VALUE (?, ?, ?, ?, ?, ?, ?, ?, 2,'images/website/avatar.jpg',?)");
+            $sql->bind_param('ssssssssi', $username, $password, $fname, $lname, $sex, $email, $tel, $birthday, $hotelier);
             $sql->execute();
 
             $result = $sql->get_result();
@@ -320,6 +328,19 @@ if ($registered){
                         </option>
                     </select>
                     <label for="sex">Φύλο</label>
+                </div>
+
+                <div class="row">
+                    <span class="col s8">Είσαι ιδιοκτήτης Ξενοδοχείου;</span>
+                    <!-- Switch -->
+                    <div class="switch">
+                        <label>
+                            Όχι
+                            <input id="hotelier" name="hotelier" type="checkbox" form="register">
+                            <span class="lever"></span>
+                            Ναι
+                        </label>
+                    </div>
                 </div>
 
                 <div class="g-recaptcha coll validate" name="recaptcha"
