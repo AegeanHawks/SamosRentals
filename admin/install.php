@@ -92,7 +92,11 @@ CREATE TABLE Auction (
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
 VALUE ('rambou', 'Password1', 'Νικόλαος', 'Μπούσιος', 'male', 'rambou@samosrentals.gr', 0, '9 September,1992','https://avatars2.githubusercontent.com/u/4427553?v=3&s=460');
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
-VALUE ('armageddonas', 'Password1', 'Κωνσταντίνος', 'Χασιώτης', 'male', 'armageddonas@samosrentals.gr', 0, '9 September,1992','images/website/avatar.jpg');
+VALUE ('armageddonas', 'Password1', 'Κωνσταντίνος', 'Χασιώτης', 'male', 'armageddonas@samosrentals.gr', 0, '25 February,1993','images/website/avatar.jpg');
+INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
+VALUE ('hotelier', 'Password1', 'hotelier', 'hotelier', 'male', 'armageddonas@samosrentals.gr', 1, '9 September,1992','images/website/avatar.jpg');
+INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
+VALUE ('user', 'Password1', 'user', 'user', 'male', 'armageddonas@samosrentals.gr', 2, '9 September,1992','images/website/avatar.jpg');
 ";
 
 if ($conn->multi_query($sql) === TRUE) {
