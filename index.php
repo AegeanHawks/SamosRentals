@@ -79,13 +79,16 @@ if (!$logged) {
             <div class="col s12 m11 offset-m1">
                 <div class="row" id="projects">
                     <div class="col s4 m3">
-                        <img src="images/website/samos1.jpg" class="circle materialboxed responsive-img">
+                        <img src="images/website/samos1.jpg"
+                             class="circle materialboxed responsive-img z-depth-1 grey lighten-2" style="padding: 5px">
                     </div>
                     <div class="col s4 m3 offset-m1 offset-l1">
-                        <img src="images/website/samos2.jpg" class="circle materialboxed responsive-img">
+                        <img src="images/website/samos2.jpg"
+                             class="circle materialboxed responsive-img z-depth-1 grey lighten-2" style="padding: 5px">
                     </div>
                     <div class="col s4 m3 offset-m1 offset-l1">
-                        <img src="images/website/samos3.jpg" class="circle materialboxed responsive-img">
+                        <img src="images/website/samos3.jpg"
+                             class="circle materialboxed responsive-img z-depth-1 grey lighten-2" style="padding: 5px">
                     </div>
                 </div>
             </div>

@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Installer</title>
-    <link rel="icon" type="image/png" href="../images/website/favicon.ico"/>
+    <?php
+    /**
+     * Created by PhpStorm.
+     * User: Nickos
+     * Date: 2/5/2015
+     * Time: 12:16 πμ
+     */
+    include 'configuration.php';
 
-    <!-- CSS  -->
-    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!--  Scripts-->
-    <script src="../js/jquery-2.1.1.min.js"></script>
-    <script src="../js/materialize.js"></script>
-    <script src="../js/init.js"></script>
+    $Page_Title = "Ξενοδοχεία";
+    include '../head.php';
+    ?>
 </head>
 <body class="white">
-
 <?php
-/**
- * Created by PhpStorm.
- * User: Nickos
- * Date: 2/5/2015
- * Time: 12:16 πμ
- */
-include 'configuration.php';
 
 // Create connection
 $conn = new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD);
@@ -38,7 +28,13 @@ if ($conn->connect_error) {
 Print_MSG("Επιτυχής σύνδεση στην βάση!");
 
 // Create database
-$sql = "CREATE DATABASE " . $DB_NAME . " COLLATE utf8_general_ci;";;
+$sql = "DROP DATABASE IF EXISTS " . $DB_NAME;
+if ($conn->query($sql) === TRUE) {
+    Print_MSG("Η παλιά βάση " . $DB_NAME . " διαγράφηκε επιτυχώς!<br>");
+}
+
+// Create database
+$sql = "CREATE DATABASE " . $DB_NAME . " COLLATE utf8_general_ci;";
 if ($conn->query($sql) === TRUE) {
     Print_MSG("Η βάση " . $DB_NAME . " δημιουργήθηκε επιτυχώς!<br>");
 } else {
@@ -73,7 +69,8 @@ CREATE TABLE Hotel (
   Tel         VARCHAR(255) NOT NULL,
   Description VARCHAR(255) NOT NULL,
   Coordinates VARCHAR(255) NOT NULL,
-  Grade       FLOAT          NOT NULL,
+  Comforts    VARCHAR(255) NOT NULL,
+  Grade       FLOAT        NOT NULL,
   Manager     VARCHAR(255),
   Image       TEXT,
   PRIMARY KEY (ID),
@@ -84,10 +81,12 @@ CREATE TABLE Auction (
   ID          INT UNIQUE AUTO_INCREMENT,
   Name        VARCHAR(255) NOT NULL,
   Description VARCHAR(255) NOT NULL,
+  People      INT          NOT NULL,
   Status      INT          NOT NULL,
   Bid_Price   INT          NOT NULL,
   End_Price   INT          NOT NULL,
-  Hotel       INT,
+  Hotel       INT          NOT NULL,
+  Images      TEXT         NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (Hotel) REFERENCES Hotel (ID)
 );
@@ -116,8 +115,8 @@ function Print_MSG($msq)
 {
     echo '<span class="flow-text">';
     echo $msq;
-    echo '<br>';
     echo '</span>';
+    echo '<br>';
 }
 
 ?>
