@@ -51,7 +51,7 @@ if ($num_row == 1) {
 //Εδώ πρέπει να παρθούν και άλλες πληροφορίες δημοπρασίες hoteliers κτλ
 } else {
 //Returns error that page not found
-    die(include '404.html');
+    die(include '404.php');
 }
 
 function isRole($role) {
@@ -72,37 +72,20 @@ function isRole($role) {
 }
 
 function ownsProfile() {
-    if (!islogged()) {
-        return false;
-    }
-
-
-
-    if ($_SESSION['userid'] == $GLOBALS['user']) {
+    if (islogged() && $_SESSION['userid'] == $GLOBALS['user']) {
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
 ?>
 
 <!DOCTYPE html>
 <html>
     <head lang="en">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <title>Samos Rentals</title>
-        <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-        <!-- CSS  -->
-        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-        <!--  Scripts  -->
-        <script src="js/jquery-2.1.1.min.js"></script>
-        <script src="js/materialize.js"></script>
-        <script src="js/init.js"></script>
+        <?php
+        $Page_Title = "Προφίλ - " . $user;
+        include 'head.php';
+        ?>
         <script>
             $(document).ready(function () {
                 $('.mytab').focus(function () {
@@ -118,7 +101,7 @@ function ownsProfile() {
                 display: none;
             }
             .detailshead{
-                font-weight: bold; 
+                font-weight: bold;
                 font-size: 20px;
             }
             .detailsbody{
@@ -136,9 +119,24 @@ function ownsProfile() {
 
         <div class="row container" style="padding-top: 60px">
             <div class="col s12 m4">
-                <div class="center-align col s12 m12 materialboxed">
-                    <img class=" circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
+                <div class="center-align col s12 m12">
+                    <img id="img_prof" onclick="rotate('img_prof')"
+                         class=" circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
                          src="<?php echo $image; ?>">
+                    <script>
+                        function rotate(id) {
+                            console.log(document.getElementById(id).className);
+                            var cont = document.getElementById(id).className;
+                            if (cont.indexOf('rotateIn') != -1) {
+                                $('#' + id).removeClass('rotateIn');
+                            } else {
+                                $('#' + id).addClass('animated rotateIn');
+                                setTimeout(function () {
+                                    $('#' + id).removeClass('rotateIn');
+                                }, 1000);
+                            }
+                        }
+                    </script>
                 </div>
                 <div class="col s12 m12">
                     <ul class="collapsible popout" data-collapsible="accordion">
@@ -163,8 +161,7 @@ function ownsProfile() {
                                     <a href="#2" class="collection-item mytab" id="mytab_2">Ιστορικό</a>
                                     <a href="#3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
                                 <?php }
-                                ?>
-                                <?php
+
                                 if ((isRole("admin") || isRole("hotelier")) && ownsProfile()) {
                                     ?>
                                     <a href="#6" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
@@ -178,15 +175,14 @@ function ownsProfile() {
                             <li>
                                 <a class="collapsible-header mytab" id="mytab_5"  href="#"><i class="mdi-maps-hotel"></i>Ξενοδοχείο</a>
                             </li>
-                        <?php }
-                        ?>
                         <?php
+                        }
                         if (isRole("user")) {
                             ?>
                             <li>
                                 <a class="collapsible-header mytab" id="mytab_6"  href="#"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
                             </li>
-                            <?php
+                        <?php
                         }
                         if (ownsProfile()) {
                             ?>
