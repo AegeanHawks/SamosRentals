@@ -69,7 +69,8 @@ CREATE TABLE Hotel (
   Tel         VARCHAR(255) NOT NULL,
   Description VARCHAR(255) NOT NULL,
   Coordinates VARCHAR(255) NOT NULL,
-  Grade       FLOAT          NOT NULL,
+  Comforts    VARCHAR(255) NOT NULL,
+  Grade       FLOAT        NOT NULL,
   Manager     VARCHAR(255),
   Image       TEXT,
   PRIMARY KEY (ID),
@@ -80,10 +81,12 @@ CREATE TABLE Auction (
   ID          INT UNIQUE AUTO_INCREMENT,
   Name        VARCHAR(255) NOT NULL,
   Description VARCHAR(255) NOT NULL,
+  People      INT          NOT NULL,
   Status      INT          NOT NULL,
   Bid_Price   INT          NOT NULL,
   End_Price   INT          NOT NULL,
-  Hotel       INT,
+  Hotel       INT          NOT NULL,
+  Images      TEXT         NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (Hotel) REFERENCES Hotel (ID)
 );
