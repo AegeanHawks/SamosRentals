@@ -10,9 +10,9 @@ session_start();
     $Page_Title = "Ποίοι είμαστε";
     include 'head.php';
     ?>
+    <script src="js/typewriter.js"></script>
     <script>
         function rotate(id) {
-            console.log(document.getElementById(id).className);
             var cont = document.getElementById(id).className;
             if (cont.indexOf('rotateIn') != -1) {
                 $('#' + id).removeClass('rotateIn');
@@ -35,6 +35,18 @@ include 'header.php';
 
 <div class="container" style="padding: 50px 0px 10px 0px;">
     <div class="row center-align">
+        <div class="col s6 offset-s3 center-align" style="padding: 20px">
+            <div class="flow-text easter_egg"></div>
+            <script>
+                var tw = new Typewriter('.easter_egg', {
+                    text: 'Μια φορά και έναν καιρό, στο μακρινό βασίλειο του Καρλοβάσου ζούσαν 2 πλάσματα περίεργα. Το ένα ήταν ατάλαντος κιθαρίστας και το άλλο ένα άθλιο TROLL....',
+                    interval: 'human',
+                    lowerBound: 30,
+                    upperBound: 130
+                });
+                tw.type();
+            </script>
+        </div>
         <div class="col l4 m6 offset-l1" style="padding: 20px">
             <img id="rambou" onclick="rotate('rambou')" class="circle responsive-img z-depth-1 grey lighten-3"
                  style="padding: 5px"

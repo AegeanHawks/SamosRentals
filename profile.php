@@ -2,7 +2,6 @@
 include 'admin/configuration.php';
 session_start();
 
-
 //Check if user is not logged and he's requesting for Noone!
 if (!islogged() && empty($_GET['user'])) {
     die("<script>window.history.back()</script>");
@@ -95,6 +94,18 @@ function ownsProfile() {
                     $("#section_" + num).show();
                 });
             });
+
+            function rotate(id) {
+                var cont = document.getElementById(id).className;
+                if (cont.indexOf('rotateIn') != -1) {
+                    $('#' + id).removeClass('rotateIn');
+                } else {
+                    $('#' + id).addClass('animated rotateIn');
+                    setTimeout(function () {
+                        $('#' + id).removeClass('rotateIn');
+                    }, 1000);
+                }
+            }
         </script>
         <style>
             .tabregion{
@@ -123,20 +134,6 @@ function ownsProfile() {
                     <img id="img_prof" onclick="rotate('img_prof')"
                          class=" circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
                          src="<?php echo $image; ?>">
-                    <script>
-                        function rotate(id) {
-                            console.log(document.getElementById(id).className);
-                            var cont = document.getElementById(id).className;
-                            if (cont.indexOf('rotateIn') != -1) {
-                                $('#' + id).removeClass('rotateIn');
-                            } else {
-                                $('#' + id).addClass('animated rotateIn');
-                                setTimeout(function () {
-                                    $('#' + id).removeClass('rotateIn');
-                                }, 1000);
-                            }
-                        }
-                    </script>
                 </div>
                 <div class="col s12 m12">
                     <ul class="collapsible popout" data-collapsible="accordion">
