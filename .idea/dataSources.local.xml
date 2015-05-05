@@ -5,7 +5,7 @@
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-pattern>samosrentals.*</schema-pattern>
-      <default-schemas>information_schema.*</default-schemas>
+      <default-schemas>information_schema.* samosrentals.*</default-schemas>
     </data-source>
   </component>
 </project>

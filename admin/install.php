@@ -73,8 +73,9 @@ CREATE TABLE Hotel (
   Tel         VARCHAR(255) NOT NULL,
   Description VARCHAR(255) NOT NULL,
   Coordinates VARCHAR(255) NOT NULL,
-  Grade       INT          NOT NULL,
+  Grade       FLOAT          NOT NULL,
   Manager     VARCHAR(255),
+  Image       TEXT,
   PRIMARY KEY (ID),
   FOREIGN KEY (Manager) REFERENCES User (Username)
 );

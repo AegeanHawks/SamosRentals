@@ -35,16 +35,29 @@ include 'header.php';
 
 <div class="container" style="padding: 50px 0px 10px 0px;">
     <div class="row center-align">
-        <div class="col s8 offset-s2 center-align" style="padding: 20px">
+        <div class="col s12 m8 offset-m2 center-align">
             <div class="flow-text grey-text darken-2 light easter_egg"></div>
             <script>
                 var tw = new Typewriter('.easter_egg', {
-                    text: 'Μια φορά και έναν καιρό, στο μακρινό βασίλειο του Καρλοβάσου ζούσαν 2 πλάσματα περίεργα. Το ένα ήταν ατάλαντος κιθαρίστας και το άλλο ένα άθλιο TROLL.... Μαζί θα κατασκεύζαν μια εκπληκτική, fully responsive σελίδα!',
+                    text: 'Μια φορά και έναν καιρό, στο μακρινό βασίλειο του Καρλοβάσου, ' +
+                    'την χώρα των "Ιγκουάνα" και των "αποδημητικών πουλιών", ζούσαν 2 πλάσματα. ' +
+                    'Το ένα ήταν ατάλαντος κιθαρίστας και το άλλο ένα άθλιο TROLL.... Μαζί θα κατασκεύζαν μια εκπληκτική, ' +
+                    'fully responsive Web εφαρμογή! Everyday i\'m rolling...',
                     interval: 'human',
                     lowerBound: 30,
                     upperBound: 130
                 });
-                tw.type();
+                tw.type(function () {
+                    rotate('rambou');
+                    rotate('armag');
+                    setTimeout(function () {
+                        $('.easter_egg').addClass('animated zoomOut');
+                        setTimeout(function () {
+                            $('.easter_egg').remove();
+                        }, 500);
+                    }, 2000);
+
+                });
             </script>
         </div>
         <div class="col l4 m6 offset-l1" style="padding: 20px">
@@ -54,8 +67,9 @@ include 'header.php';
 
             <div class="card">
                 <p><span class="flow-text">Νικόλαος Μπούσιος<br>A.K.A Rambou<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span><br>
-                    <span class="flow-text">Skills:</span><br>Programmer, Hacker, UI/UX Designer, Software Engineer,
-                    Developer</p>
+                    <span class="flow-text">Skills:</span><br><span class="grey-text darken-2">Programmer, Hacker, UI/UX Designer, Software Engineer,
+                    Developer</span>
+                </p>
                 <iframe src="https://ghbtns.com/github-btn.html?user=rambou&type=follow&count=true&size=large"
                         frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
             </div>
@@ -68,9 +82,9 @@ include 'header.php';
 
             <div class="card">
                 <p><span class="flow-text">Κώστας Χασιώτης<br>A.K.A Armageddonas<br></span><span>Προπτυχιακός φοιτητής στο Τμήμα Μηχανικών Πληροφοριακών και επικοινωνιακών συστημάτων του Πανεπιστημίου Αιγαίου.</span><br>
-                    <span class="flow-text">Skills:</span><br>Programmer, Software Designer, UI/UX Designer, Software
+                    <span class="flow-text">Skills:</span><br><span class="grey-text darken-2">Programmer, Software Designer, UI/UX Designer, Software
                     Engineer,
-                    Developer
+                    Developer</span>
                 </p>
                 <iframe src="https://ghbtns.com/github-btn.html?user=armageddonas&type=follow&count=true&size=large"
                         frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
