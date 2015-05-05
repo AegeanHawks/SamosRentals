@@ -1,3 +1,13 @@
+<?php
+include 'admin/configuration.php';
+session_start();
+
+//Check if logged
+$logged = false;
+if (islogged()) {
+    $logged = true;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">

@@ -91,7 +91,8 @@ include 'header.php';
         <div class="nav-wrapper">
             <form method="get" class="offset-l2 col l8 m12">
                 <div class="input-field">
-                    <input id="search" name="search" type="search" placeholder="Αναζητήστε εδώ..." required>
+                    <input id="search" name="search" type="search" placeholder="              Αναζητήστε εδώ..."
+                           required>
                     <label for="search"><i class="mdi-action-search"></i></label>
                     <i class="mdi-navigation-close"></i>
                 </div>

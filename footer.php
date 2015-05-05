@@ -13,6 +13,7 @@
                 <h5 class="white-text">Χρήσιμα</h5>
                 <ul>
                     <li><a class="white-text" href="about.php">Σχετικά</a></li>
+                    <li><a class="white-text" href="partners.php">Συνεργάτες</a></li>
                     <li><a class="modal-trigger white-text" href="#agreement">Όροι χρήσης</a></li>
                 </ul>
             </div>

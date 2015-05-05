@@ -8,6 +8,33 @@ if (islogged()) {
     $logged = true;
 }
 
+//Connect
+$con = db_connect();
+if ($con->connect_errno) {
+    return;
+}
+
+//Get number of all hotels in database
+$sql = $con->prepare('SELECT COUNT(id) AS allAuction FROM Auction');
+$sql->execute();
+$result = $sql->get_result();
+$row = mysqli_fetch_array($result);
+$AllAuction = $row['allAuction'];
+
+//We check for next page request
+$page = 1;
+if (isset($_GET['page'])) {
+    $page = htmlspecialchars($_GET['page']);
+}
+
+//Calculate how many page do we need
+$pages = ceil($AllAuction / 6);
+//debug_to_console($page . ' ' . $pages);
+
+if ($page > $pages || $page < 1) {
+    //Returns error that page not found
+    die(include '404.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,22 +44,35 @@ if (islogged()) {
     $Page_Title = "Δημοπρασίες";
     include 'head.php';
     ?>
-
+    <!--Scripts-->
+    <script src="js/Masonry.js"></script>
     <script type="text/javascript" src="js/jquery.countdown.js"></script>
+    <script>
+        function flip(id) {
+            var cont = document.getElementById(id).className;
+            if (cont.indexOf('flipInY') != -1) {
+                $('#' + id).removeClass('flipInY');
+            } else {
+                $('#' + id).addClass('animated flipInY');
+                setTimeout(function () {
+                    $('#' + id).removeClass('flipInY');
+                }, 1000);
+            }
+        }
+        function rotate(id) {
+            var cont = document.getElementById(id).className;
+            if (cont.indexOf('rotateIn') != -1) {
+                $('#' + id).removeClass('rotateIn');
+            } else {
+                $('#' + id).addClass('animated rotateIn');
+                setTimeout(function () {
+                    $('#' + id).removeClass('rotateIn');
+                }, 1000);
+            }
+        }
+    </script>
 
     <style>
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-        }
-
         .countdown-styled div {
             display: inline-block;
             margin: 0 5px 1em;
@@ -72,194 +112,212 @@ if (islogged()) {
 include 'header.php';
 ?>
 <!--Navigation Menu-->
+
+<!--Search-->
+<div class="row">
+    <nav class="blue z-depth-1">
+        <div class="nav-wrapper">
+            <form method="get" class="offset-l2 col l8 m12">
+                <div class="input-field">
+                    <input id="search" name="search" type="search" placeholder="Αναζητήστε εδώ..." required>
+                    <label for="search"><i class="mdi-action-search"></i></label>
+                    <i class="mdi-navigation-close"></i>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+<!--Search-->
+
 <!-- Rooms Auctions -->
 <div class="container" style="padding-top: 50px;">
-    <div class="row1 row">
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Τρέχουσα τιμή: 140 Euro<i
-                    class="mdi-navigation-more-vert right"></i></span>
-                    <p>
-                    <div class="countdown-styled right-align"></div>
+    <div class="row">
+        <div id="stream">
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Τρέχουσα τιμή: 140 Euro<i
+                        class="mdi-navigation-more-vert right"></i></span>
 
-                    <a href="#">Διάβασε περισσότερα...</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
+                        <p>
 
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
+                        <div class="countdown-styled right-align"></div>
 
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office1.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
+                        <a href="#">Διάβασε περισσότερα...</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
 
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office2.jpg">
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office1.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
                 </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
+            </div>
 
-                    <p><a href="#">This is a link</a></p>
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office2.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
                 </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
+            </div>
 
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office1.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office2.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office1.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="images/office2.jpg">
+                    </div>
+                    <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-more-vert right"></i></span>
+
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i
+                        class="mdi-navigation-close right"></i></span>
+
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row2 row">
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
-
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office1.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
-
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office2.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
-
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row3 row">
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
-
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office1.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
-
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col s12 m12 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="images/office2.jpg">
-                </div>
-                <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-more-vert right"></i></span>
-
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title <i
-                    class="mdi-navigation-close right"></i></span>
-
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
         <div id="pages">
             <ul class="pagination right">
@@ -281,15 +339,6 @@ include 'header.php';
 include 'footer.php'
 ?>
 <!--footer-->
-
-<script>
-    function nextpage() {
-        document.getElementById('pages').getElementsByTagName('li').item(0).setAttribute('class', 'waves-effect');
-        document.getElementById('pages').getElementsByTagName('li').item(1).setAttribute('class', 'waves-effect');
-        document.getElementById('pages').getElementsByTagName('li').item(2).setAttribute('class', 'active');
-        //alert(document.getElementById('pages').getElementsByTagName('li').item(0).classList);
-    }
-</script>
 
 <script type="text/javascript">
     $(function () {
