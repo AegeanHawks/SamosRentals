@@ -89,23 +89,23 @@ function ownsProfile() {
         ?>
         <script>
             $(document).ready(function () {
-                $('.mytab').focus(function () {
-                    var num = this.id.match(/\d+/)[0];
+            $('.mytab').focus(function () {
+            var num = this.id.match(/\d+/)[0];
                     $(".tabregion").hide();
                     $("#section_" + num).show();
-                });
             });
-            function rotate(id) {
-                var cont = document.getElementById(id).className;
-                if (cont.indexOf('rotateIn') != -1) {
+            });
+                    function rotate(id) {
+                    var cont = document.getElementById(id).className;
+                            if (cont.indexOf('rotateIn') != - 1) {
                     $('#' + id).removeClass('rotateIn');
-                } else {
+                    } else {
                     $('#' + id).addClass('animated rotateIn');
-                    setTimeout(function () {
-                        $('#' + id).removeClass('rotateIn');
-                    }, 1000);
-                }
-            }
+                            setTimeout(function () {
+                            $('#' + id).removeClass('rotateIn');
+                            }, 1000);
+                    }
+                    }
         </script>
         <style>
             .tabregion{
@@ -205,8 +205,8 @@ function ownsProfile() {
                                 ?>
                                 <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-social-people"></i>Χρήστες</a>
                                 <div class = "collapsible-body collection">
-                                    <a href="#12" class="collection-item mytab" id="mytab_12">Δημιουργία</a>
-                                    <a href="#13" class="collection-item mytab" id="mytab_13">Επεξεργασία</a>
+                                    <a href="#12" class="collection-item mytab" id="mytab_13">Δημιουργία</a>
+                                    <a href="#13" class="collection-item mytab" id="mytab_12">Επεξεργασία</a>
                                 </div>
 
                             <?php }
@@ -389,7 +389,7 @@ function ownsProfile() {
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <i class="mdi-social-people prefix"></i>
-                                        <textarea id="AuctionDescriptionInput" class="materialize-textarea"></textarea>
+                                        <textarea id="AuctionDescriptionInput" class="materialize-textarea" length="500"></textarea>
                                         <label for="AuctionDescriptionInput">Περιγραφή</label>
                                     </div>
                                 </div>
@@ -436,24 +436,13 @@ function ownsProfile() {
                         </div>
                         <div class="input-field col s12">
                             <i class="mdi-action-description prefix"></i>
-                            <textarea id="HotelDescriptionInput" class="materialize-textarea"></textarea>
+                            <textarea id="HotelDescriptionInput" class="materialize-textarea" length="500"></textarea>
                             <label for="HotelDescriptionInput">Περιγραφή</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="mdi-action-face-unlock prefix"></i>
                             <textarea id="HotelDescriptionInput" class="materialize-textarea"></textarea>
                             <label for="HotelDescriptionInput">Ανέσεις</label>
-                        </div>
-                        <div class="col s12 m12 l5 file-field input-field">
-                            <form action="#">
-                                <div class="file-field input-field">
-                                    <input placeholder="Φωτογραφία" class="file-path validate" type="text"/>
-                                    <div class="btn">
-                                        <span>File</span>
-                                        <input type="file" />
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                         <div class="col s6 m6 l5 file-field input-field">
                             <form action="#">
@@ -655,6 +644,163 @@ function ownsProfile() {
                         </div>
                     </div>
                     <!-- Auctionσ Edit -->
+
+
+                    <!-- Edit User -->
+                    <div class="col s12 m8 tabregion" id="section_12">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            <li>
+                                <div class="collapsible-header">
+                                    <div id="id" class="col s1 truncate">ID</div>
+                                    <div id="username" class="col s3 truncate">Ψευδώνυμο</div>
+                                    <div id="name" class="col s2 truncate">Όνομα</div>
+                                    <div id="lastname" class="col s3 truncate">Επώνυμο</div>
+                                    <div id="email" class="col s3 truncate">E-mail</div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <div class="row col s12">
+                                        <div class="input-field col m4 l3 s12">
+                                            <i class="mdi-action-account-circle prefix"></i>
+                                            <input id="icon_prefix" type="text" class="validate">
+                                            <label for="icon_prefix">Όνομα</label>
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <input id="icon_prefix" type="text" class="validate">
+                                            <label for="icon_prefix">Επώνυμο</label>
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <i class="mdi-action-assignment-ind prefix"></i>
+                                            <input id="icon_prefix" type="text" class="validate">
+                                            <label for="icon_prefix">Ψευδώνυμο</label>
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <i class="mdi-communication-vpn-key prefix"></i>
+                                            <input id="icon_prefix" type="password" class="validate">
+                                            <label for="icon_prefix">Κωδικός</label>
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <i class="mdi-communication-email prefix"></i>
+                                            <input id="icon_prefix" type="email" class="validate">
+                                            <label for="icon_prefix">Email</label>
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <i class="mdi-action-today prefix"></i>
+                                            <input id="icon_prefix" type="date" class="validate">
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <i class="mdi-maps-local-phone prefix"></i>
+                                            <input id="icon_prefix" type="tel" class="validate">
+                                            <label for="icon_prefix">Τηλέφωνο</label>
+                                        </div>
+                                        <div class="input-field col m4 l3 s12">
+                                            <select>
+                                                <option value="1">Άνδρας</option>
+                                                <option value="2" selected>Γυναίκα</option>
+                                            </select>
+                                            <label>Φύλο</label>
+                                        </div>
+
+                                        <div class="col s12 m12">
+                                            <div class="col s2 m4">
+                                                <img class="circle responsive-img " src="images/website/avatar.jpg">
+                                            </div>
+                                            <div class="col s10 m8 file-field input-field">
+                                                <input class="file-path validate" type="text"/>
+
+                                                <div class="btn">
+
+                                                    <span>File</span>
+                                                    <input type="file"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a onclick="Materialize.toast(\'<span>Η Αλλαγή Ολοκληρώθηκε!</span><a class=\\\'btn-flat yellow-text\\\' href=\\\'#!\\\'>Αναιρεση<a>\', 5000, \'rounded\')"
+                                       class="waves-effect green waves-light btn right"><i class="mdi-content-save left"></i>Αποθήκευση</a>
+                                    <a class="waves-effect red waves-light btn modal-trigger left" href="#delete_question"><i
+                                            class="mdi-content-save left"></i>Διαγραφή</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header">
+                                    <div id="id" class="col s1 truncate">ID</div>
+                                    <div id="username" class="col s3 truncate">Ψευδώνυμο</div>
+                                    <div id="name" class="col s2 truncate">Όνομα</div>
+                                    <div id="lastname" class="col s3 truncate">Επώνυμο</div>
+                                    <div id="email" class="col s3 truncate">E-mail</div>
+                                </div>
+                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header">
+                                    <div id="id" class="col s1 truncate">ID</div>
+                                    <div id="username" class="col s3 truncate">Ψευδώνυμο</div>
+                                    <div id="name" class="col s2 truncate">Όνομα</div>
+                                    <div id="lastname" class="col s3 truncate">Επώνυμο</div>
+                                    <div id="email" class="col s3 truncate">E-mail</div>
+                                </div>
+                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                            </li>
+                        </ul>
+
+                        <ul class="pagination">
+                            <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                            <li class="active"><a href="#!">1</a></li>
+                            <li class="waves-effect"><a href="#!">2</a></li>
+                            <li class="waves-effect"><a href="#!">3</a></li>
+                            <li class="waves-effect"><a href="#!">4</a></li>
+                            <li class="waves-effect"><a href="#!">5</a></li>
+                            <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- Edit User -->
+
+
+                    <!-- Create User -->
+                    <div class="card col s12 m8 tabregion" id="section_13">
+                        <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
+                            <div class="input-field col s6">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input id="Name" type="text" class="validate">
+                                <label for="Name">Όνομα</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-social-group prefix"></i>
+                                <input id="Surname" type="text" class="validate">
+                                <label for="Surname">Επώνυμο</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-social-whatshot prefix"></i>
+                                <input id="Username" type="text" class="validate">
+                                <label for="Username">Ψευδώνυμο</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-communication-phone prefix"></i>
+                                <input id="Phone" type="text" class="validate">
+                                <label for="Phone">Τηλέφωνο</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-communication-email prefix"></i>
+                                <input id="Mail" type="text" class="validate">
+                                <label for="Mail">E-mail</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <div class="input-field">
+                                    <i class="mdi-social-cake prefix"></i>
+                                    <input id="birthday" name="birthday" type="text" class="datepicker picker__input"
+                                           required form="register">
+                                    <label for="birthday">Ημερομηνία Γέννησης</label>
+                                </div>
+                            </div>
+                            <div class="input-field col s12" style="padding-top: 10px; padding-bottom: 10px">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">Καταχωρηση
+                                    <i class="mdi-content-send right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Create User -->
+
                     <?php
                 }
                 ?>
@@ -678,13 +824,13 @@ function ownsProfile() {
                                             θέλετε να συνεχίσετε;</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="#!"
-                                           class=" modal-action modal-close waves-effect waves-green btn-flat">Επιστροφή</a>
-                                        <a href="delete.php?account=my"
-                                           class=" modal-action modal-close waves-effect waves-green btn-flat">Διαγραφή
-                                            λογαριασμού</a>
+                                        <a onclick="Materialize.toast(\'<span>Ο χρήστης πήρε τον π...</span>\', 3000, \'rounded\')" href="#!"
+                                           class=" modal-action modal-close waves-effect waves-green btn-flat">Ναι</a>
+                                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Όχι</a>
                                     </div>
                                 </div>
+                                <!-- Modal Structure -->
+
                             </div>
                         </div>
                     </div>
