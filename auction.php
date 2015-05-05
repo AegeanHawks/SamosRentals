@@ -4,27 +4,12 @@ session_start();
 
 ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head lang="en">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <title>Auction</title>
-        <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-        <!-- CSS  -->
-        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-        <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="js/materialize.js"></script>
-        <script src="js/init.js"></script>
+        <?php
+        $Page_Title = "Δημοπρασία";
+        include 'head.php';
+        ?>
 
         <style>
             .bidnumber{

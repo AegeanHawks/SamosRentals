@@ -2,9 +2,10 @@
     <nav class="blue darken-4 z-depth-3" role="navigation">
         <div class="nav-wrapper container">
             <div class="valign-demo valign-wrapper left">
-                <a id="logo-container" href="index.php" class="brand-logo waves-effect waves-light">
+                <a id="logo-container" href="index.php" class="brand-logo"
+                   onclick="$('#logo-container').addClass('animated pulse')">
                     <div class="hide-on-med-and-down">
-                        <span class="left " style="padding-left:20px;"><img src="images/website/logo.png"></span>
+                        <span class="left"><img src="images/website/logo.png" style="height: 84px;"></span>
                         <span class="white-text left " style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
 
                     </div>
@@ -40,7 +41,7 @@
                         </div>
                     </a>
 
-                    <ul id="dropdown" class="card dropdown-content">
+                <ul id="dropdown" class="card dropdown-content animated swing">
                         <li><a href="#"><span class="mdi-action-settings left black-text"
                                                style="padding-right: 10px"></span>Ρυθμίσεις</a></li>
                         <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>"><span
@@ -69,8 +70,12 @@
             ?>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
-                <li><a href="auctions.php" class="white-text">Δημοπρασίες</a></li>
+                <li class="waves-effect waves-light"><a href="hotels.php" class="white-text" id="menu_hotels"
+                                                        onclick="$('#menu_hotels').addClass('animated swing')">Ξενοδοχία</a>
+                </li>
+                <li class="waves-effect waves-light"><a href="auctions.php" class="white-text" id="menu_auctions"
+                                                        onclick="$('#menu_auctions').addClass('animated swing')">Δημοπρασίες</a>
+                </li>
             </ul>
 
             <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>

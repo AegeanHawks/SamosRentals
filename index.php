@@ -11,21 +11,11 @@ if (islogged()) {
 
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Samos Rentals</title>
-    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-    <!-- CSS  -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!--  Scripts-->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+<head lang="gr">
+    <?php
+    $Page_Title = "Αρχική";
+    include 'head.php';
+    ?>
 </head>
 <body class="white">
 
@@ -39,8 +29,8 @@ include 'header.php';
     <div class="parallax"><img src="images/website/header.jpg"></div>
 </div>
 <?php
-if (!$logged)
-    echo '
+if (!$logged) {
+    ?>
     <div class="section no-pad-bot" style="margin-top: -8%;">
         <div class="row">
             <div class="col offset-l3 l6 s12 white z-depth-3">
@@ -59,7 +49,8 @@ if (!$logged)
                             εσύ να κατοχυρώσεις ένα από τα δεκάδες δωμάτια που δημοπρατούνται καθημερινά...</p>
 
                         <div class="col s6 offset-s4">
-                            <p><a class="waves-effect waves-light btn light-blue darken-3 " href="register.php"><i
+                            <p><a id="btn_register" onclick="$('#btn_register').addClass('animated fadeOutUp')"
+                                  class="waves-effect waves-light btn light-blue darken-3" href="register.php"><i
                                     class="mdi-content-create left"></i>Εγγραψου τωρα!</a>
                             </p>
                         </div>
@@ -69,7 +60,7 @@ if (!$logged)
             </div>
         </div>
     </div>
-';
+<?php }
 ?>
 <div class="" id="about">
     <div class="container">

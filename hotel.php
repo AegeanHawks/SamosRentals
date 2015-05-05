@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Samos Rentals</title>
-    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-    <!-- CSS  -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!--  Scripts-->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+    <?php
+    $Page_Title = "Ξενοδοχείο";
+    include 'head.php';
+    ?>
 
     <style>
         .video-container {

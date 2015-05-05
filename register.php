@@ -11,18 +11,11 @@ if (islogged()) {
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="msapplication-TileColor" content="#fa7c1a">
+    <?php
+    $Page_Title = "Εγγραφή";
+    include 'head.php';
+    ?>
 
-    <title>Samos Rentals - Registation</title>
-    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-    <!-- CSS  -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/animate.css" type="text/css" rel="stylesheet">
     <style>
         .registration {
             position: absolute;
@@ -64,9 +57,6 @@ if (islogged()) {
     </style>
 
     <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
@@ -77,7 +67,6 @@ if (islogged()) {
 include 'header.php';
 ?>
 <!--Navigation Menu-->
-
 
 <?php
 //Check if Method Is POST

@@ -7,25 +7,16 @@ $logged = false;
 if (islogged()) {
     $logged = true;
 }
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Samos Rentals</title>
-    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-    <!-- CSS  -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!--  Scripts-->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+    <?php
+    $Page_Title = "Δημοπρασίες";
+    include 'head.php';
+    ?>
 
     <script type="text/javascript" src="js/jquery.countdown.js"></script>
 
@@ -84,7 +75,7 @@ include 'header.php';
 <!-- Rooms Auctions -->
 <div class="container" style="padding-top: 50px;">
     <div class="row1 row">
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office.jpg">
@@ -106,7 +97,7 @@ include 'header.php';
             </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office1.jpg">
@@ -126,7 +117,7 @@ include 'header.php';
             </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office2.jpg">
@@ -147,7 +138,7 @@ include 'header.php';
         </div>
     </div>
     <div class="row2 row">
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office.jpg">
@@ -167,7 +158,7 @@ include 'header.php';
             </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office1.jpg">
@@ -187,7 +178,7 @@ include 'header.php';
             </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office2.jpg">
@@ -208,7 +199,7 @@ include 'header.php';
         </div>
     </div>
     <div class="row3 row">
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office.jpg">
@@ -228,7 +219,7 @@ include 'header.php';
             </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office1.jpg">
@@ -248,7 +239,7 @@ include 'header.php';
             </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m12 l4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="images/office2.jpg">
@@ -286,41 +277,9 @@ include 'header.php';
 <!-- Rooms Auctions -->
 
 <!--footer-->
-<footer class="page-footer blue darken-3">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Ποίοι είμαστε</h5>
-
-                <p class="grey-text text-lighten-4">Είμαστε μια ομάδα φοιτητών του τμηματος Μηχανικών Πληροφοριακών
-                    και επικοινωνιακών Συστημάτων στο πανεπιστήμιο Αιγαίου που κατασκευάσαν
-                    το Samos Rentals ως μέρος πανεπιστημιακής εργασίας. Η εγγραφή και η
-                    συμμετοχής σας είναι χρήσιμη για την συνεχισή του.</p>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Χρήσιμα</h5>
-                <ul>
-                    <li><a class="white-text" href="#">Σχετικά</a></li>
-                    <li><a class="white-text" href="#">Όροι χρήσης</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Κοινωνικά Δίκτυα</h5>
-                <ul>
-                    <li>
-                        <i class="mdi-action-bug-report"></i><a class="white-text"
-                                                                href="https://github.com/AegeanHawks"> Github</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            Κατασκευάσθηκε από τους <a class="brown-text text-lighten-3" href="https://github.com/Rambou">Rambou</a> και
-            <a class="brown-text text-lighten-3" href="https://github.com/Armageddonas">Armageddona</a>
-        </div>
-    </div>
-</footer>
+<?php
+include 'footer.php'
+?>
 <!--footer-->
 
 <script>

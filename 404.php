@@ -1,37 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Samos Rentals</title>
-    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-    <!-- CSS  -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+    <?php
+    $Page_Title = "Η σελίδα δεν βρέθηκε";
+    include 'head.php';
+    ?>
 
     <style>
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-        }
         .Error404 {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 90%;
             text-align: center;
         }
 
@@ -66,9 +45,12 @@
         }
     </style>
 </head>
-<body>
+<body class="light-blue">
+<?php
+include 'header.php';
+?>
 
-<div class="row Error404 light-blue">
+<div class="row Error404">
     <div class="col m6">
         <h1>Ooopsss, κάτι πήγε στραβά!</h1>
         <img id="error-404-img" src="images/website/error-404.png" alt="Chyba 404">

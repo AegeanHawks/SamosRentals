@@ -6,20 +6,24 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Samos Rentals</title>
-    <link rel="icon" type="image/png" href="images/website/favicon.ico"/>
-
-    <!-- CSS  -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!--  Scripts-->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+    <?php
+    $Page_Title = "Ποίοι είμαστε";
+    include 'head.php';
+    ?>
+    <script>
+        function rotate(id) {
+            console.log(document.getElementById(id).className);
+            var cont = document.getElementById(id).className;
+            if (cont.indexOf('rotateIn') != -1) {
+                $('#' + id).removeClass('rotateIn');
+            } else {
+                $('#' + id).addClass('animated rotateIn');
+                setTimeout(function () {
+                    $('#' + id).removeClass('rotateIn');
+                }, 1000);
+            }
+        }
+    </script>
 </head>
 <body class="white">
 
@@ -29,10 +33,11 @@ include 'header.php';
 ?>
 <!--Navigation Menu-->
 
-<div class="container" style="padding: 80px 0px 100px 0px;">
+<div class="container" style="padding: 50px 0px 10px 0px;">
     <div class="row center-align">
         <div class="col l4 m6 offset-l1" style="padding: 20px">
-            <img class="circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
+            <img id="rambou" onclick="rotate('rambou')" class="circle responsive-img z-depth-1 grey lighten-3"
+                 style="padding: 5px"
                  src="images/website/rambou.jpg">
 
             <div class="card">
@@ -43,8 +48,10 @@ include 'header.php';
                         frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
             </div>
         </div>
+
         <div class="col l4 m6 offset-l2" style="padding: 20px">
-            <img class="circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
+            <img id="armag" onclick="rotate('armag')" class="circle responsive-img z-depth-1 grey lighten-3"
+                 style="padding: 5px"
                  src=" images/website/armageddonas.jpg">
 
             <div class="card">
@@ -57,14 +64,9 @@ include 'header.php';
                         frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
             </div>
         </div>
-        <div class="col s12">
-
-
-        </div>
     </div>
 
 </div>
-
 <?php
 include 'footer.php';
 ?>
