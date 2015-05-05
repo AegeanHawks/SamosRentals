@@ -63,6 +63,7 @@ CREATE TABLE User (
   Birthday  VARCHAR(255),
   Image     TEXT,
   Role      INT          NOT NULL,
+  Upgrade   INT          NOT NULL,
   PRIMARY KEY (Username)
 );
 
@@ -94,9 +95,9 @@ VALUE ('rambou', 'Password1', 'Νικόλαος', 'Μπούσιος', 'male', 'r
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
 VALUE ('armageddonas', 'Password1', 'Κωνσταντίνος', 'Χασιώτης', 'male', 'armageddonas@samosrentals.gr', 0, '25 February,1993','images/website/avatar.jpg');
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
-VALUE ('hotelier', 'Password1', 'hotelier', 'hotelier', 'male', 'armageddonas@samosrentals.gr', 1, '9 September,1992','images/website/avatar.jpg');
+VALUE ('hotelier', 'Password1', 'Chuck', 'Norris', 'male', 'N.Chuck@samosrentals.gr', 1, '8 September,1970','images/hotelier.jpg');
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
-VALUE ('user', 'Password1', 'user', 'user', 'male', 'armageddonas@samosrentals.gr', 2, '9 September,1992','images/website/avatar.jpg');
+VALUE ('user', 'Password1', 'Alexis', 'Ren', 'female', 'R.Alexis@samosrentals.gr', 2, '9 September,1993','images/user.jpg');
 ";
 
 if ($conn->multi_query($sql) === TRUE) {
