@@ -2,6 +2,7 @@
 include 'admin/configuration.php';
 session_start();
 
+
 //Check if user is not logged and he's requesting for Noone!
 if (!islogged() && empty($_GET['user'])) {
     die("<script>window.history.back()</script>");
@@ -78,6 +79,7 @@ function ownsProfile() {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html>
     <head lang="en">
@@ -89,12 +91,10 @@ function ownsProfile() {
             $(document).ready(function () {
                 $('.mytab').focus(function () {
                     var num = this.id.match(/\d+/)[0];
-
                     $(".tabregion").hide();
                     $("#section_" + num).show();
                 });
             });
-
             function rotate(id) {
                 var cont = document.getElementById(id).className;
                 if (cont.indexOf('rotateIn') != -1) {
@@ -153,33 +153,72 @@ function ownsProfile() {
                             <a class="collapsible-header mytab"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</a>
                             <div class="collapsible-body collection">
                                 <?php
-                                if (!isRole("admin")) {
-                                    ?>
-                                    <a href="#2" class="collection-item mytab" id="mytab_2">Ιστορικό</a>
-                                    <a href="#3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
-                                <?php }
-
                                 if ((isRole("admin") || isRole("hotelier")) && ownsProfile()) {
                                     ?>
                                     <a href="#6" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
+
+                                    <a href="#2" class="collection-item mytab" id="mytab_2">Επεξεργασία</a>
+                                    <?php
+                                }
+                                if (isRole("hotelier") && ownsProfile()) {
+                                    ?>
+                                    <a href="#3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
+                                    <?php
+                                }
+                                if (isRole("user") && ownsProfile()) {
+                                    ?>
+                                    <a href="#2" class="collection-item mytab" id="mytab_11">Ιστορικό</a>
+                                    <a href="#3" class="collection-item mytab" id="mytab_10">Βαθμολόγηση</a>
                                 <?php }
                                 ?>
                             </div>
                         </li>
-                        <?php
-                        if (ownsProfile() && isRole("hotelier")) {
+                        <li>
+
+                        <li>
+                            <?php
+                            if (ownsProfile() && (isRole("admin") || isRole("hotelier"))) {
+                                ?>
+                                <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-maps-hotel"></i>Ξενοδοχεία</a>
+                                <div class = "collapsible-body collection">
+                                    <?php
+                                    if (ownsProfile() && isRole("hotelier")) {
+                                        ?>
+                                        <a href="#8" class="collection-item mytab" id="mytab_8">Στοιχεία</a>
+                                        <a href="#10" class="collection-item mytab" id="mytab_5">Επεξεργασία</a>
+                                        <?php
+                                    }
+                                    if (ownsProfile() && isRole("admin")) {
+                                        ?>
+                                        <a href="#6" class="collection-item mytab" id="mytab_5">Δημιουργία</a>
+                                        <a href="#9" class="collection-item mytab" id="mytab_9">Επεξεργασία</a>
+                                    <?php }
+                                    ?>
+                                </div>
+
+                            <?php }
                             ?>
-                            <li>
-                                <a class="collapsible-header mytab" id="mytab_5"  href="#"><i class="mdi-maps-hotel"></i>Ξενοδοχείο</a>
-                            </li>
+                        </li>
+                        <li>
+                            <?php
+                            if (ownsProfile() && isRole("admin")) {
+                                ?>
+                                <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-social-people"></i>Χρήστες</a>
+                                <div class = "collapsible-body collection">
+                                    <a href="#12" class="collection-item mytab" id="mytab_12">Δημιουργία</a>
+                                    <a href="#13" class="collection-item mytab" id="mytab_13">Επεξεργασία</a>
+                                </div>
+
+                            <?php }
+                            ?>
+                        </li>
                         <?php
-                        }
                         if (isRole("user")) {
                             ?>
                             <li>
                                 <a class="collapsible-header mytab" id="mytab_6"  href="#"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
                             </li>
-                        <?php
+                            <?php
                         }
                         if (ownsProfile()) {
                             ?>
@@ -240,59 +279,105 @@ function ownsProfile() {
             </div>
             <!--User Details-->
 
-            <!-- Auction History -->
-            <div class="col s12 m8 tabregion" id="section_2" >
-                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
-                    <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
-                    <div class="col s1"><i class="mdi-navigation-check"> </i></div>
+
+            <!-- Auctionσ History/Edit -->
+            <div class="card col s12 m8 tabregion" id="section_2">
+                <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
+                    <div class="col s12 m3">Τίτλος</div>                       
+                    <div class="col s12 m3">Τιμή Έναρξης</div>               
+                    <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>     
+                    <div class="col s12 m2">Επεξεργασία</div>     
                 </div>
-                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
-                    <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
-                    <div class="col s1"><i class="mdi-navigation-close"> </i></div>
+                <span class="divider col s12"></span>
+                <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
+                    <a class="col s12 m3 truncate" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας
+                        ευκαιρίας ευκαιρίας</a>
+
+                    <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
+                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>55</div>
+                    <div class="col s12 m2 flow-text">
+                        <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+                <span class="divider col s12"></span>
+                <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
+                    <a class="col s12 m3" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+
+                    <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
+                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>40</div>
+                    <div class="col s12 m2 flow-text">
+                        <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
+                    </div>
+                </div>
+                <span class="divider col s12"></span>
+                <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                        <li class="active"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!">2</a></li>
+                        <li class="waves-effect"><a href="#!">3</a></li>
+                        <li class="waves-effect"><a href="#!">4</a></li>
+                        <li class="waves-effect"><a href="#!">5</a></li>
+                        <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                    </ul>
                 </div>
             </div>
-            <!-- Auction History -->
+            <!-- Auctionσ History/Edit -->
 
-            <!-- Auctions won -->
+
+            <!-- Users evaluation -->
             <div class="col s12 m8 tabregion" id="section_3">
+                <div class="z-depth-3 white col s12 " style="padding-top: 15px;padding-bottom: 15px;">                           
+                    <div class="col s12 m4 l4">Ονομ/νυμο</div>                       
+                    <div class="col s12 m3 l4">Δωμάτιο</div>             
+                    <div class="col s12 m5 l4">Βαθμολόγηση</div>     
+                </div>
                 <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
-                    <a class="col s12 m4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>35</a>
-                    <div class="col s12 m4 l2">
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle grey accent-3"></i>
-                        <i class="mdi-action-star-rate circle grey accent-3"></i>
+                    <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Κωνσταντίνος Χασιώτης </a>
+                    <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <div class="col s12 m5 l4">
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
                     </div>
                 </div>
                 <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <a class="col s12 m4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Motel </a>
-                    <a class="col s12 m4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ανευκαιρίας </a>
-                    <a class="col s11 m2" href="#!" ><i class="mdi-editor-attach-money"> </i>120</a>
-                    <div class="col s12 m4 l2">
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle amber accent-3"></i>
-                        <i class="mdi-action-star-rate circle grey accent-3"></i>
+                    <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Κωνσταντίνος Χασιώτης </a>
+                    <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    <div class="col s12 m5 l4">
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                        <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
                     </div>
+                </div>
+                <span class="divider col s12"></span>
+                <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                        <li class="active"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!">2</a></li>
+                        <li class="waves-effect"><a href="#!">3</a></li>
+                        <li class="waves-effect"><a href="#!">4</a></li>
+                        <li class="waves-effect"><a href="#!">5</a></li>
+                        <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                    </ul>
                 </div>
             </div>
-            <!-- Auctions won -->
+            <!-- Users evaluation -->
 
 
-            <!-- Create Auction -->
+
 
             <?php
             if (ownsProfile()) {
                 if ((isRole("admin") || isRole("hotelier"))) {
                     ?>
+                    <!-- Create Auction -->
                     <div class="card col s12 m8 tabregion" id="section_4">
                         <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
                             <div class="input-field col s12">
@@ -333,7 +418,7 @@ function ownsProfile() {
                     </div>
                     <!-- Create Auction -->
 
-                    <!--Hotel details-->
+                    <!--Hotel Edit-->
                     <div class="z-depth-3 col s12 m8 tabregion" id="section_5">   
 
                         <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
@@ -387,12 +472,44 @@ function ownsProfile() {
                             </button>
                         </div>
                     </div>
+                    <!--Hotel Edit-->
                     <?php
                 }
-                ?>
-                <!--Hotel details-->
 
-                <?php
+
+                if (isRole("hotelier")) {
+                    ?>
+                    <!--Hotel Details-->
+                    <div class="card row col s12 m8 tabregion" id="section_8">
+                        <div class="col offset-s1 s10">
+                            <p class="col s4 detailshead">Όνομα: </p>
+
+                            <p class="col s8 detailsbody">Grand Budapest Hotel </p>
+                        </div>
+                        <div class="col offset-s1 s10 divider"></div>
+                        <div class="col offset-s1 s10">
+                            <p class="col s4 detailshead">Περιγραφή: </p>
+
+                            <p class="col s8 detailsbody">Ένα από τα πιο γνωστά ξενοδοχεία στο νησί, βρίσκεται στο πιο κεντρικό σημείο της γραφικής πρωτεύουσας Βαθύ. Προσφέρουμε ανέσεις και υπηρεσίες υψηλού επιπέδου στις διακοπές σας ή απλά στον καφέ που απολαμβάνετε κοντά μας. Η διεύθυνση και το προσωπικό καταβάλλουμε κάθε προσπάθεια για ευχάριστη παραμονή και αξέχαστες εμπειρίες. Χαρείτε τη διαμονή σας στη Σάμο, κάθε μέρα...</p>
+                        </div>
+                        <div class="col offset-s1 s10 divider"></div>
+                        <div class="col offset-s1 s10 divider"></div>
+                        <div class="col offset-s1 s10">
+                            <p class="col s4 detailshead">Τηλέφωνο: </p>
+
+                            <p class="col s8 detailsbody">6982444444</p>
+                        </div>
+                        <div class="col offset-s1 s10 divider"></div>
+                        <div class="col offset-s1 s10">
+                            <p class="col s4 detailshead">Βαθμολογία: </p>
+
+                            <p class="col s8 detailsbody">4/5</p>
+                        </div>
+                    </div>
+                    <!--Hotel Details-->
+                    <?php
+                }
+
                 if (isRole("user")) {
                     ?>
                     <!--Upgrade user-->
@@ -410,6 +527,134 @@ function ownsProfile() {
                         </div>
                     </div>
                     <!--Upgrade user-->
+
+                    <!-- Hotel evaluation -->
+                    <div class="z-depth-3 col s12 m8 tabregion" id="section_10">
+                        <div class="white col s12 " style="padding-top: 15px;padding-bottom: 15px;">                           
+                            <div class="col s12 m4 l4">Ξενοδοχείο</div>                       
+                            <div class="col s12 m3 l4">Δημοπρασία</div>             
+                            <div class="col s12 m5 l4">Βαθμολόγηση</div>     
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class=" white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                            <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
+                            <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                            <div class="col s12 m5 l4">
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                            </div>
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">                          
+                            <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
+                            <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                            <div class="col s12 m5 l4">
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                                <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
+                            </div>
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                                <li class="active"><a href="#!">1</a></li>
+                                <li class="waves-effect"><a href="#!">2</a></li>
+                                <li class="waves-effect"><a href="#!">3</a></li>
+                                <li class="waves-effect"><a href="#!">4</a></li>
+                                <li class="waves-effect"><a href="#!">5</a></li>
+                                <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Hotel evaluation -->
+
+                    <!-- Auctionσ History -->
+                    <div class="card col s12 m8 tabregion" id="section_11">
+                        <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
+                            <div class="col s12 m5">Τίτλος</div>                       
+                            <div class="col s12 m3">Τιμή Έναρξης</div>               
+                            <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>  
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <a class="col s12 m5 truncate" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας
+                                ευκαιρίας ευκαιρίας</a>
+
+                            <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
+                            <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>55</div>
+                            <div class="divider"></div>
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <a class="col s12 m5" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+
+                            <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
+                            <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>40</div>
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                                <li class="active"><a href="#!">1</a></li>
+                                <li class="waves-effect"><a href="#!">2</a></li>
+                                <li class="waves-effect"><a href="#!">3</a></li>
+                                <li class="waves-effect"><a href="#!">4</a></li>
+                                <li class="waves-effect"><a href="#!">5</a></li>
+                                <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Auctionσ History/Edit -->
+                    <?php
+                }
+                if (isRole("admin")) {
+                    ?>
+                    <!-- Auctionσ Edit -->
+                    <div class="card col s12 m8 tabregion" id="section_9">
+                        <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
+                            <div class="col s12 m5">Ξενοδοχεία</div>                       
+                            <div class="col s12 m5">Τηλέφωνο</div>                 
+                            <div class="col s12 m2">Επεξεργασία</div>     
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <a class="col s12 m5 truncate" href="#!"><i class="mdi-action-home"></i> Grand Budapest hotel</a>
+
+                            <div class="col s12 m5 flow-text">6982444444</div>
+                            <div class="col s12 m2 flow-text">
+                                <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
+                            </div>
+                            <div class="divider"></div>
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <a class="col s12 m5 truncate" href="#!"><i class="mdi-action-home"></i> Grand Budapest motel</a>
+
+                            <div class="col s12 m5 flow-text">6982444444</div>
+                            <div class="col s12 m2 flow-text">
+                                <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
+                            </div>
+                        </div>
+                        <span class="divider col s12"></span>
+                        <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                                <li class="active"><a href="#!">1</a></li>
+                                <li class="waves-effect"><a href="#!">2</a></li>
+                                <li class="waves-effect"><a href="#!">3</a></li>
+                                <li class="waves-effect"><a href="#!">4</a></li>
+                                <li class="waves-effect"><a href="#!">5</a></li>
+                                <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Auctionσ Edit -->
                     <?php
                 }
                 ?>
@@ -445,6 +690,8 @@ function ownsProfile() {
                     </div>
                 </div>
                 <!--Delete user-->
+
+
                 <?php
             }
             ?>
