@@ -35,11 +35,11 @@ include 'header.php';
 
 <div class="container" style="padding: 50px 0px 10px 0px;">
     <div class="row center-align">
-        <div class="col s6 offset-s3 center-align" style="padding: 20px">
-            <div class="flow-text easter_egg"></div>
+        <div class="col s8 offset-s2 center-align" style="padding: 20px">
+            <div class="flow-text grey-text darken-2 light easter_egg"></div>
             <script>
                 var tw = new Typewriter('.easter_egg', {
-                    text: 'Μια φορά και έναν καιρό, στο μακρινό βασίλειο του Καρλοβάσου ζούσαν 2 πλάσματα περίεργα. Το ένα ήταν ατάλαντος κιθαρίστας και το άλλο ένα άθλιο TROLL....',
+                    text: 'Μια φορά και έναν καιρό, στο μακρινό βασίλειο του Καρλοβάσου ζούσαν 2 πλάσματα περίεργα. Το ένα ήταν ατάλαντος κιθαρίστας και το άλλο ένα άθλιο TROLL.... Μαζί θα κατασκεύζαν μια εκπληκτική, fully responsive σελίδα!',
                     interval: 'human',
                     lowerBound: 30,
                     upperBound: 130

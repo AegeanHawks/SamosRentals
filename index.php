@@ -37,7 +37,7 @@ if (!$logged) {
                 <div class="entry-content">
 
                     <div class="col l12 m8 s12">
-                        <h4 class="grey-text darken-2 light">Καλωσήρθες</h4>
+                        <h4 class="grey-text darken-2 light center-align">Καλωσήρθες</h4>
                         <h5 class="grey-text darken-2 light">Ανακάλυψε και κάνε κράτηση δωματίου για τις διακοπές των
                             ονείρων σου...</h5>
 
