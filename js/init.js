@@ -96,3 +96,11 @@
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+
+$(window).load(function () {
+    if ($('#stream').length > 0) {
+        var container = document.querySelector('#stream');
+        var msnry = new Masonry(container, {itemSelector: '.col'});
+    }
+    $('.tabs-content').addClass('moved');
+});
