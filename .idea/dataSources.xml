@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="468584499">
+  <component name="DataSourceManagerImpl" format="xml" hash="522411630">
     <data-source source="LOCAL" name="WAMP MySQL - @localhost" uuid="f41106b3-6c1b-4ccf-ad12-54f6831aeedf">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>

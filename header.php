@@ -5,9 +5,8 @@
                 <a id="logo-container" href="index.php" class="brand-logo"
                    onclick="$('#logo-container').addClass('animated pulse')">
                     <div class="hide-on-med-and-down">
-                        <span class="left"><img src="images/website/logo.png" style="height: 84px;"></span>
+                        <span class="left" style="height: 74px; z-index: 99;"><img src="images/website/logo.png"></span>
                         <span class="white-text left " style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
-
                     </div>
                     <div class="hide-on-large-only">
                         <span class="white-text truncate">Samos Rentals</span>

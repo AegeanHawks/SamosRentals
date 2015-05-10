@@ -1,10 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nickos
- * Date: 2/5/2015
- * Time: 12:18 πμ
- */
+
+//Check if browser is internet Explorer and die, multiple times....
+$firefox = strpos($_SERVER["HTTP_USER_AGENT"], 'Firefox') ? true : false;
+$safari = strpos($_SERVER["HTTP_USER_AGENT"], 'Safari') ? true : false;
+$chrome = strpos($_SERVER["HTTP_USER_AGENT"], 'Chrome') ? true : false;
+
+if (!($firefox || $safari || $chrome)) {
+    $Error_404 = "<b>Ο Internet Explorer</b> προς το παρών <b>δεν</b> υποστηρίζεται. Παρακαλώ δοκιμάστε άλλον περιηγητή!";
+    die(include '404.php');
+}
 
 mb_internal_encoding( 'UTF-8' );
 
@@ -19,7 +23,14 @@ function db_connect()
     global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 
     // Establishing Connection with Server
-    $mysqli = new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+    $mysqli = @new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+
+
+    if ($mysqli->connect_error) {
+        $Error_404 = "<b>Η βάση δεδομένων</b> φαίνεται να είναι offline, παρακαλώ προσπαθείστε αργότερα.";
+        die(include '404.php');
+    }
+
     mysqli_set_charset($mysqli, "utf8");
 
     return $mysqli;

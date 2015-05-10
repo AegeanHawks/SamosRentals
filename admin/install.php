@@ -49,14 +49,14 @@ $sql = "
 SET CHARACTER SET 'utf8';
 SET NAMES 'utf8';
 CREATE TABLE User (
-  Username  VARCHAR(255) UNIQUE,
+  Username  VARCHAR(60) UNIQUE,
   Password  VARCHAR(30)  NOT NULL,
   LastName  VARCHAR(30)  NOT NULL,
   FirstName VARCHAR(30)  NOT NULL,
-  Sex       VARCHAR(20)  NOT NULL,
+  Sex       VARCHAR(12)  NOT NULL,
   Tel       VARCHAR(20),
   Mail      VARCHAR(255) NOT NULL UNIQUE,
-  Birthday  VARCHAR(255),
+  Birthday  VARCHAR(30),
   Image     TEXT,
   Role      INT          NOT NULL,
   Upgrade   INT          NOT NULL,
@@ -73,6 +73,7 @@ CREATE TABLE Hotel (
   Grade       FLOAT        NOT NULL,
   Manager     VARCHAR(255),
   Image       TEXT,
+  Website     VARCHAR(255),
   PRIMARY KEY (ID),
   FOREIGN KEY (Manager) REFERENCES User (Username)
 );
@@ -87,9 +88,20 @@ CREATE TABLE Auction (
   End_Price   INT          NOT NULL,
   Hotel       INT          NOT NULL,
   Images      TEXT         NOT NULL,
+  End_Date    DATETIME     NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (Hotel) REFERENCES Hotel (ID)
 );
+
+CREATE TABLE Bid(
+    Username    VARCHAR(60),
+    idAuction   INT,
+    BidMoney    DECIMAL(2),
+    Won BOOLEAN,
+    FOREIGN KEY (Username) REFERENCES User (Username),
+    FOREIGN KEY (idAuction) REFERENCES Auction (ID)
+);
+
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
 VALUE ('rambou', 'Password1', 'Νικόλαος', 'Μπούσιος', 'male', 'rambou@samosrentals.gr', 0, '9 September,1992','https://avatars2.githubusercontent.com/u/4427553?v=3&s=460');
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
@@ -98,6 +110,15 @@ INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birt
 VALUE ('hotelier', 'Password1', 'Chuck', 'Norris', 'male', 'N.Chuck@samosrentals.gr', 1, '8 September,1970','images/hotelier.jpg');
 INSERT INTO User (username, Password, FirstName, LastName, sex, mail, Role, Birthday, Image)
 VALUE ('user', 'Password1', 'Alexis', 'Ren', 'female', 'R.Alexis@samosrentals.gr', 2, '9 September,1993','images/user.jpg');
+
+INSERT INTO Hotel (Name, Tel, Description, Coordinates, Grade, Manager, Image, Comforts)
+VALUE ('Marmara Hotel', '+306985584553', 'Το καλύτερο ξενοδοχείο της πόλης!', '37.7949982,26.6978236', 4.8, 'hotelier', 'images/office.jpg;images/office1.jpg;images/office2.jpg','Sou gamw to spiti');
+
+INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, End_Price, Hotel, Images, End_Date)
+VALUE ('Lux Suit', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 60, 1, 'images/office.jpg', NOW() + Interval 1 DAY );
+
+INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, End_Price, Hotel, Images, End_Date)
+VALUE ('mpla mpla', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 4.8, 1, 'images/office.jpg', NOW() + Interval 3 DAY );
 ";
 
 if ($conn->multi_query($sql) === TRUE) {

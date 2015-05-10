@@ -86,12 +86,12 @@ include 'header.php';
 <!--Navigation Menu-->
 
 <!--Search-->
-<div class="row">
+<div class="row" style="z-index: 100;">
     <nav class="blue z-depth-1">
         <div class="nav-wrapper">
-            <form method="get" class="offset-l2 col l8 m12">
-                <div class="input-field">
-                    <input id="search" name="search" type="search" placeholder="              Αναζητήστε εδώ..."
+            <form method="get" class="offset-l2 col l8 m12" style="margin-top: 10px;">
+                <div class="input-field ">
+                    <input id="search" name="search" type="search" placeholder="    Αναζητήστε εδώ..."
                            required>
                     <label for="search"><i class="mdi-action-search"></i></label>
                     <i class="mdi-navigation-close"></i>
@@ -107,14 +107,25 @@ include 'header.php';
     <div class="row">
         <div id="stream">
             <?php
-            // SQL query to fetch information of user.
-            $sql = $con->prepare('SELECT * FROM Hotel ORDER BY id DESC LIMIT ?');
-            $id = ($page - 1) * 6;
-            $id = $id . ', ' . $id + 6;
-            $sql->bind_param('s', $id);
-            $sql->execute();
+            if (isset($_GET['search'])) {
+                // SQL query to fetch information of hotel.
+                $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
+                $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager AND (Hotel.Name LIKE ? OR Hotel.Description LIKE ?) ORDER BY Hotel.id'); //SELECT * FROM Auction
+                $sql->bind_param('ss', $search, $search);
+                $sql->execute();
+            } else {
+                // SQL query to fetch information of hotel.
+                $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager ORDER BY Hotel.id DESC LIMIT ? , ?'); //SELECT * FROM Hotel
+                $id = ($page - 1) * 6;
+                $end = $id + 6;
+                $sql->bind_param('ii', $id, $end);
+                $sql->execute();
+            }
 
             $result = $sql->get_result();
+            if (mysqli_num_rows($result) == 0) {
+                //die(include '404.php');
+            }
             while ($row = mysqli_fetch_array($result)) {
                 $id = $row['ID'];
                 $Name = $row['Name'];
@@ -123,21 +134,9 @@ include 'header.php';
                 $Grade = $row['Grade'];
                 $Image = $row['Image'];
                 $Manager = $row['Manager'];
-
-                // SQL query to fetch information of user.
-                $sql = $con->prepare('SELECT LastName,FirstName,Image FROM User WHERE Username= ?');
-                $sql->bind_param('s', $Manager);
-                $sql->execute();
-                $result = $sql->get_result();
-                $num_row = mysqli_num_rows($result);
-                if ($num_row == 1) {
-                    //Fetch user's information
-                    $row = mysqli_fetch_array($result);
-                    $lname = $row['LastName'];
-                    $fname = $row['FirstName'];
-                    $m_image = $row['Image'];
-                }
-
+                $lname = $row['LastName'];
+                $fname = $row['FirstName'];
+                $m_image = $row['M_Image'];
                 ?>
                 <div class="col s12 m6 l4">
                     <div id="<?php echo 'hotel_' . $id; ?>" class="card">
@@ -146,8 +145,8 @@ include 'header.php';
                                  src="<?php echo $Image; ?>">
                         </div>
                         <div class="card-content">
-                        <span onclick="flip('hotel_1')" src="images/office1.jpg"
-                              class="card-title activator grey-text text-darken-4">Marmara Hotel<i
+                        <span onclick="flip('<?php echo 'hotel_' . $id; ?>')" src="images/office1.jpg"
+                              class="card-title activator grey-text text-darken-4"><?php echo $Name; ?><i
                                 class="mdi-navigation-more-vert right"></i></span>
 
                             <p><span><?php echo $Description; ?></span>
@@ -159,14 +158,15 @@ include 'header.php';
                                     περισσότερα...</a></p>
                         </div>
                         <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4" onclick="flip('hotel_1')">Περιγραφή</span>
+                            <span class="card-title grey-text text-darken-4"
+                                  onclick="flip('<?php echo 'hotel_' . $id; ?>')">Περιγραφή</span>
 
                             <p><?php echo $Description; ?>
 
                             <li class="divider"></li>
                             <div style="padding: 10px 0px 10px 0px;">Τηλέφωνο: <?php echo $Tel; ?></div>
                             <li class="divider"></li>
-                            <p>Βαθμολογία: <?php echo $Grade; ?>
+                            <p>Βαθμολογία: <?php echo round($Grade, 1); ?>
                                 <input id="input-id" type="number" class="rating" value="<?php echo $Grade; ?>" max="5"
                                        readonly="true" data-size="xs"></p>
                             <li class="divider"></li>
@@ -175,7 +175,8 @@ include 'header.php';
                                 Μάνατζερ: <?php echo $lname . ' ' . $fname; ?></div>
 
                             <div class="center valign-wrapper" style="padding: 5px 50px 0px 50px;">
-                                <img id="img_prof" onclick="rotate('img_prof')"
+                                <img id="<?php echo 'img_prof' . $id; ?>"
+                                     onclick="rotate('<?php echo 'img_prof' . $id; ?>')"
                                      class=" circle responsive-img z-depth-3 grey lighten-3" "
                                 src="<?php echo $m_image; ?>">
                             </div>
@@ -184,8 +185,6 @@ include 'header.php';
                     </div>
                 </div>
                 <?php
-
-                //debug_to_console($Name . $Tel . $Description . $Grade . $Manager);
             }
 
             mysqli_free_result($result);

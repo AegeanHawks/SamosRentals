@@ -182,6 +182,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_msg = "Το Email υπάρχει!";
         }
 
+        if ($birthday) {
+            $valid = false;
+            $error_msg = "Η ηλικία σας πρέπει να είναι 18+!";
+        }
+
         // SQL query to fetch information of registerd users and finds user match.
         if (!$valid) {
             echo "<script>Materialize.toast('" . $error_msg . "', 5000)</script>";

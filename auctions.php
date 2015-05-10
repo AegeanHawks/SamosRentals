@@ -14,7 +14,7 @@ if ($con->connect_errno) {
     return;
 }
 
-//Get number of all hotels in database
+//Get number of all Auctions in database
 $sql = $con->prepare('SELECT COUNT(id) AS allAuction FROM Auction');
 $sql->execute();
 $result = $sql->get_result();
@@ -29,12 +29,12 @@ if (isset($_GET['page'])) {
 
 //Calculate how many page do we need
 $pages = ceil($AllAuction / 6);
-//debug_to_console($page . ' ' . $pages);
 
 if ($page > $pages || $page < 1) {
     //Returns error that page not found
     die(include '404.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ if ($page > $pages || $page < 1) {
     ?>
     <!--Scripts-->
     <script src="js/Masonry.js"></script>
-    <script type="text/javascript" src="js/jquery.countdown.js"></script>
+    <script type="text/javascript" src="js/jquery.countdown.min.js"></script>
     <script>
         function flip(id) {
             var cont = document.getElementById(id).className;
@@ -70,8 +70,25 @@ if ($page > $pages || $page < 1) {
                 }, 1000);
             }
         }
+        function SetTimer(id, EndDate) {
+            $('#Auction_Time' + id).countdown({
+                date: EndDate,
+                render: function (data) {
+                    $(this.el).html("<div>" +
+                    this.leadingZeros(data.days, 3) + " " +
+                    "<span>days</span></div><div>" +
+                    this.leadingZeros(data.hours, 2) + " " +
+                    "<span>hrs</span></div><div>" +
+                    this.leadingZeros(data.min, 2) + " " +
+                    "<span>min</span></div><div>" +
+                    this.leadingZeros(data.sec, 2) + " " +
+                    "<span>sec</span></div>");
+                }
+            });
+        }
     </script>
 
+    <!--CSS-->
     <style>
         .countdown-styled div {
             display: inline-block;
@@ -114,12 +131,13 @@ include 'header.php';
 <!--Navigation Menu-->
 
 <!--Search-->
-<div class="row">
+<div class="row" style="z-index: 100;">
     <nav class="blue z-depth-1">
         <div class="nav-wrapper">
-            <form method="get" class="offset-l2 col l8 m12">
-                <div class="input-field">
-                    <input id="search" name="search" type="search" placeholder="Αναζητήστε εδώ..." required>
+            <form method="get" class="offset-l2 col l8 m12" style="margin-top: 10px;">
+                <div class="input-field ">
+                    <input id="search" name="search" type="search" placeholder="    Αναζητήστε εδώ..."
+                           required>
                     <label for="search"><i class="mdi-action-search"></i></label>
                     <i class="mdi-navigation-close"></i>
                 </div>
@@ -133,204 +151,139 @@ include 'header.php';
 <div class="container" style="padding-top: 50px;">
     <div class="row">
         <div id="stream">
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Τρέχουσα τιμή: 140 Euro<i
-                        class="mdi-navigation-more-vert right"></i></span>
+            <?php
+            if (isset($_GET['search'])) {
+                // SQL query to fetch information of hotel.
+                $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
+                $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel AND (Auction.Name LIKE ? OR Auction.Description LIKE ?) ORDER BY Auction.id'); //SELECT * FROM Auction
+                $sql->bind_param('ss', $search, $search);
+                $sql->execute();
+            } else {
+                // SQL query to fetch information of hotel.
+                $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel ORDER BY Auction.id DESC LIMIT ? , ?'); //SELECT * FROM Auction
+                $id = ($page - 1) * 6;
+                $end = $id + 6;
+                $sql->bind_param('ii', $id, $end);
+                $sql->execute();
+            }
 
-                        <p>
+            $result = $sql->get_result();
+            if (mysqli_num_rows($result) == 0) {
+                //die(include '404.php');
+            }
+            while ($row = mysqli_fetch_array($result)) {
+                $id = $row['ID'];
+                $Name = $row['Name'];
+                $Description = $row['Description'];
+                $Closed = $row['Closed'];
+                $Bid_Price = $row['Bid_Price'];
+                $End_Price = $row['End_Price'];
+                $Image = $row['Images'];
+                $Hotel = $row['Hotel'];
+                $HotelName = $row['HotelName'];
+                $HotelImage = $row['HotelImage'];
+                $End_Date = $row['End_Date'];
+                ?>
+                <div class="col s12 m6 l4">
+                    <div id="<?php echo 'Auction_' . $id; ?>" class="card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" onclick="flip('<?php echo 'Auction_' . $id; ?>')"
+                                 src="<?php echo $Image; ?>">
+                        </div>
+                        <div class="card-content">
+                        <span onclick="flip('<?php echo 'Auction_' . $id; ?>')" src="images/office1.jpg"
+                              class="card-title activator grey-text text-darken-4"><?php echo $Name; ?><i
+                                class="mdi-navigation-more-vert right"></i></span>
 
-                        <div class="countdown-styled right-align"></div>
+                            <div class="flow-text grey-text text-darken-2">Τρέχουσα τιμή: <?php echo $Bid_Price; ?>
+                                Euro
+                            </div>
+                            <p>
+                                <?php
+                                if ($Closed) {
+                                    echo '<div class="flow-text red">Πωλήθηκε!</div>';
+                                } else {
+                                    echo '<div id="Auction_Time' . $id . '" class="countdown-styled left-align"></div>';
+                                    echo '<script>SetTimer(' . $id . ',\'' . $End_Date . '\')</script>';
+                                }
+                                ?>
 
-                        <a href="#">Διάβασε περισσότερα...</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
+                            <p><a href="<?php echo 'auction.php?id=' . $id; ?>"
+                                  onclick="$('#<?php echo 'Auction_' . $id; ?>').addClass('animated  pulse')"
+                                  src="images/office1.jpg">Διαβάστε
+                                    περισσότερα...</a></p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4"
+                                  onclick="flip('<?php echo 'Auction_' . $id; ?>')">Περιγραφή</span>
 
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
+                            <p><?php echo $Description; ?>
 
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office1.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
+                            <li class="divider"></li>
+                            <p>Τιμή Αγοράς: <?php echo $End_Price; ?></p>
+                            <li class="divider"></li>
+                            <div
+                                style="padding-top: 10px; font-size: 1.2em;">
+                                Ξενοδοχείο: <a href="hotel.php?id=<?php echo $Hotel; ?>"><?php echo $HotelName; ?></a>
+                            </div>
 
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office2.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office1.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            <div class="center valign-wrapper" style="padding: 5px 50px 0px 50px;">
+                                <img id="<?php echo 'img_prof' . $id; ?>"
+                                     onclick="rotate('<?php echo 'img_prof' . $id; ?>')"
+                                     class=" circle responsive-img z-depth-3 grey lighten-3" "
+                                src="<?php echo $HotelImage; ?>">
+                            </div>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php
+            }
 
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office2.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office1.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="images/office2.jpg">
-                    </div>
-                    <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-more-vert right"></i></span>
-
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i
-                        class="mdi-navigation-close right"></i></span>
-
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
+            mysqli_free_result($result);
+            ?>
         </div>
     </div>
-    <div class="row">
-        <div id="pages">
-            <ul class="pagination right">
-                <li class="disabled"><a href="#"><i class="mdi-navigation-chevron-left"></i></a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li class="waves-effect"><a href="#!" onClick="nextpage();">2</a></li>
-                <li class="waves-effect"><a href="#">3</a></li>
-                <li class="waves-effect"><a href="#">4</a></li>
-                <li class="waves-effect"><a href="#">5</a></li>
-                <li class="waves-effect"><a href="#"><i class="mdi-navigation-chevron-right"></i></a></li>
-            </ul>
+
+    <?php
+    if ($AllAuction > 6) {
+        ?>
+        <div class="row">
+            <div id="pages">
+                <ul class="pagination right">
+                    <li class=<?php if ($page < 2) echo '"disabled"><a>'; else echo '"waves-effect"><a href="hotels.php?page=' . ($page - 1) . '">'; ?><i
+                        class="mdi-navigation-chevron-left"></i></a></li>
+                    <?php
+                    $i = 1;
+                    while ($i <= $pages && $i < 7) {
+                        if ($pages > 6 && $i == 6) {
+                            echo '<li>...</li><li class="';
+                            if ($page == $i) {
+                                echo 'active';
+                            } else {
+                                echo 'waves-effect';
+                            }
+                            echo '"><a href="hotels.php?page=' . $pages . '">' . $pages . '</a></li>';
+                        } else {
+                            echo '<li class="';
+                            if ($page == $i) {
+                                echo 'active';
+                            } else {
+                                echo 'waves-effect';
+                            }
+                            echo '"><a href="hotels.php?page=' . $i . '">' . $i . '</a></li>';
+                        }
+                        $i++;
+                    }
+                    ?>
+                    <li class=<?php if ($page + 1 > $pages) echo '"disabled"><a>'; else echo '"waves-effect"><a href="hotels.php?page=' . ($page + 1) . '">'; ?><i
+                        class="mdi-navigation-chevron-right"></i></a></li>
+                </ul>
+            </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
 </div>
 <!-- Rooms Auctions -->
 
@@ -339,29 +292,6 @@ include 'header.php';
 include 'footer.php'
 ?>
 <!--footer-->
-
-<script type="text/javascript">
-    $(function () {
-        $('.countdown-styled').countdown({
-            render: function (data) {
-                var el = $(this.el);
-                el.empty()
-                        .
-                        append("<div>" + this.leadingZeros(data.days, 3) + " <span>μέρες</span></div>")
-                        .append("<div>" + this.leadingZeros(data.hours, 2) + " <span>ώρες</span></div>")
-                        .append("<div>" + this.leadingZeros(data.min, 2) + " <span>λεπτά</span></div>")
-                        .append("<div>" + this.leadingZeros(data.sec, 2) + " <span>δεύτερα</span></div>");
-            }
-        });
-    });
-
-    var options = [
-        {selector: '.row1', offset: 50, callback: 'Materialize.showStaggeredList(".row2")' },
-        {selector: '#footer', offset: 205, callback: 'Materialize.toast("Please continue scrolling!", 1500 )' },
-        {selector: '#footer', offset: 400, callback: 'Materialize.showStaggeredList("#staggered-test")' }
-    ];
-    Materialize.scrollFire(options);
-</script>
 
 </body>
 </html>

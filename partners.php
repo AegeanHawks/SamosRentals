@@ -30,7 +30,7 @@ while ($row = mysqli_fetch_array($result)) {
 <html>
 <head lang="gr">
     <?php
-    $Page_Title = "Αρχική";
+    $Page_Title = "Συνεργάτες";
     include 'head.php';
     ?>
     <script src="http://maps.google.com/maps/api/js?sensor=false"
