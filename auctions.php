@@ -134,7 +134,7 @@ include 'header.php';
 <div class="row" style="z-index: 100;">
     <nav class="blue z-depth-1">
         <div class="nav-wrapper">
-            <form method="get" class="offset-l2 col l8 m12" style="margin-top: 10px;">
+            <form method="get" class="offset-l2 col l8 s12" style="margin-top: 10px;">
                 <div class="input-field ">
                     <input id="search" name="search" type="search" placeholder="    Αναζητήστε εδώ..."
                            required>
