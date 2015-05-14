@@ -36,7 +36,7 @@ if (!$logged) {
             <div class="col offset-l3 l6 s12 white z-depth-3">
                 <div class="entry-content">
 
-                    <div class="col l12 m8 s12">
+                    <div class="col s12">
                         <h4 class="grey-text darken-2 light center-align">Καλωσήρθες</h4>
                         <h5 class="grey-text darken-2 light">Ανακάλυψε και κάνε κράτηση δωματίου για τις διακοπές των
                             ονείρων σου...</h5>
