@@ -15,8 +15,10 @@ mb_internal_encoding( 'UTF-8' );
 //Server and Database
 $SERVER = "localhost";
 $DB_USERNAME = "root";
-$DB_PASSWORD = "";
+$DB_PASSWORD = "root";
 $DB_NAME = "samosrentals";
+
+$errorpath= "C:\Users\darknight\Documents\php.log";
 
 function db_connect()
 {

@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <?php
-    /**
-     * Created by PhpStorm.
-     * User: Nickos
-     * Date: 2/5/2015
-     * Time: 12:16 πμ
-     */
-    include 'configuration.php';
+    <head lang="en">
+        <?php
+        /**
+         * Created by PhpStorm.
+         * User: Nickos
+         * Date: 2/5/2015
+         * Time: 12:16 πμ
+         */
+        include 'configuration.php';
 
-    $Page_Title = "Ξενοδοχεία";
-    include '../head.php';
-    ?>
-</head>
-<body class="white">
-<?php
-
+        $Page_Title = "Ξενοδοχεία";
+        include '../head.php';
+        ?>
+    </head>
+    <body class="white">
+        <?php
 // Create connection
-$conn = new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD);
+        $conn = new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD);
 
 // Check connection
-Print_MSG('Σύνδεση στην βάση...');
-if ($conn->connect_error) {
-    die("Αποτυχία σύνδεσης: " . $conn->connect_error);
-}
-Print_MSG("Επιτυχής σύνδεση στην βάση!");
+        Print_MSG('Σύνδεση στην βάση...');
+        if ($conn->connect_error) {
+            die("Αποτυχία σύνδεσης: " . $conn->connect_error);
+        }
+        Print_MSG("Επιτυχής σύνδεση στην βάση!");
 
 // Create database
-$sql = "DROP DATABASE IF EXISTS " . $DB_NAME;
-if ($conn->query($sql) === TRUE) {
-    Print_MSG("Η παλιά βάση " . $DB_NAME . " διαγράφηκε επιτυχώς!<br>");
-}
+        $sql = "DROP DATABASE IF EXISTS " . $DB_NAME;
+        if ($conn->query($sql) === TRUE) {
+            Print_MSG("Η παλιά βάση " . $DB_NAME . " διαγράφηκε επιτυχώς!<br>");
+        }
 
 // Create database
-$sql = "CREATE DATABASE " . $DB_NAME . " COLLATE utf8_general_ci;";
-if ($conn->query($sql) === TRUE) {
-    Print_MSG("Η βάση " . $DB_NAME . " δημιουργήθηκε επιτυχώς!<br>");
-} else {
-    die("Πρόβλημα κατά την δημιουργία της βάσης: " . $conn->error . "<br>");
-}
+        $sql = "CREATE DATABASE " . $DB_NAME . " COLLATE utf8_general_ci;";
+        if ($conn->query($sql) === TRUE) {
+            Print_MSG("Η βάση " . $DB_NAME . " δημιουργήθηκε επιτυχώς!<br>");
+        } else {
+            die("Πρόβλημα κατά την δημιουργία της βάσης: " . $conn->error . "<br>");
+        }
 
 //Select Database
-$db = mysqli_select_db($conn, $DB_NAME);
+        $db = mysqli_select_db($conn, $DB_NAME);
 
 // Create Tables
-$sql = "
+        $sql = "
 SET CHARACTER SET 'utf8';
 SET NAMES 'utf8';
 CREATE TABLE User (
@@ -71,7 +70,7 @@ CREATE TABLE Hotel (
   Coordinates VARCHAR(255) NOT NULL,
   Comforts    VARCHAR(255) NOT NULL,
   Grade       FLOAT        NOT NULL,
-  Manager     VARCHAR(255),
+  Manager     VARCHAR(255) NOT NULL,
   Image       TEXT,
   Website     VARCHAR(255),
   PRIMARY KEY (ID),
@@ -83,9 +82,10 @@ CREATE TABLE Auction (
   Name        VARCHAR(255) NOT NULL,
   Description VARCHAR(255) NOT NULL,
   PeopleCount INT          NOT NULL,
-  Closed      INT          NOT NULL,
+  Closed      INT          NULL DEFAULT 0,
   Bid_Price   INT          NOT NULL,
-  End_Price   INT          NOT NULL,
+  End_Price   INT          NULL,
+  Buy_Price   INT          NOT NULL,
   Hotel       INT          NOT NULL,
   Images      TEXT         NOT NULL,
   End_Date    DATETIME     NOT NULL,
@@ -134,26 +134,24 @@ INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, End_Pric
 VALUE ('mpla mpla', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 4.8, 1, 'images/office.jpg', NOW() + Interval 3 DAY );
 ";
 
-if ($conn->multi_query($sql) === TRUE) {
-    Print_MSG("Οι πίνακες δημιουργήθηκαν επιτυχώς!");
-} else {
-    Print_MSG("Πρόβλημα κατά την δημιουργία πινάκων: " . $conn->error);
-    mysqli_query($conn, "DROP DATABASE " . $DB_NAME . ";");
-}
+        if ($conn->multi_query($sql) === TRUE) {
+            Print_MSG("Οι πίνακες δημιουργήθηκαν επιτυχώς!");
+        } else {
+            Print_MSG("Πρόβλημα κατά την δημιουργία πινάκων: " . $conn->error);
+            mysqli_query($conn, "DROP DATABASE " . $DB_NAME . ";");
+        }
 
 //Close Connection
-$conn->close();
-Print_MSG("Η σύνδεση με την βάση έκλεισε.");
+        $conn->close();
+        Print_MSG("Η σύνδεση με την βάση έκλεισε.");
 
-function Print_MSG($msq)
-{
-    echo '<span class="flow-text">';
-    echo $msq;
-    echo '</span>';
-    echo '<br>';
-}
+        function Print_MSG($msq) {
+            echo '<span class="flow-text">';
+            echo $msq;
+            echo '</span>';
+            echo '<br>';
+        }
+        ?>
 
-?>
-
-</body>
+    </body>
 </html>
