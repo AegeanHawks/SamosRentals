@@ -182,7 +182,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_msg = "Το Email υπάρχει!";
         }
 
-        if ($birthday) {
+        //Make sure that user's age is over 18+
+        if (time() < strtotime('+18 years', strtotime($birthday))) {
             $valid = false;
             $error_msg = "Η ηλικία σας πρέπει να είναι 18+!";
         }
