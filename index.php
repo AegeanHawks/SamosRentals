@@ -65,7 +65,7 @@ if (!$logged) {
 <div class="" id="about">
     <div class="container">
         <div class="row">
-            <div class="col s10 offset-s1">
+            <div class="col m12 l10 offset-l1">
                 <h2 class="grey-text darken-2 light center-align">Όλα τα ξενοδοχεία του νησιού</h2>
 
                 <p class="grey-text darken-2 light flow-text center-align .disBlock">Το Samos Rentals είναι μια μοναδική
