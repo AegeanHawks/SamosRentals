@@ -72,4 +72,8 @@ function debug_to_console($data)
     }
 }
 
+function cropOutput($str, $val)
+{
+    return strlen($str) <= $val ? $str : substr($str, 0, $val) . '...';
+}
 ?>

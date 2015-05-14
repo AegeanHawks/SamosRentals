@@ -34,6 +34,8 @@ if ($num_row == 1) {
     $Manager = $row['Manager'];
     //$website = $row['Website'];
     $Image = $row['Image'];
+    //Explode Image to get all images
+    $Images = explode(";", $Image);
 
     // SQL query to fetch information of Manager.
     $sql = $con->prepare('SELECT LastName,FirstName,Image FROM User WHERE Username= ?');
@@ -85,7 +87,7 @@ include 'header.php';
 ?>
 
 <div class="parallax-container" style="height: 600px">
-    <div class="parallax"><img src="images/hotel1.jpg"></div>
+    <div class="parallax"><img src="<?php echo $Images[0]; ?>"></div>
 </div>
 
 <div class="row container">
@@ -168,8 +170,6 @@ include 'header.php';
         <div class="slider col s12" style="margin-top: 15px;">
             <ul class="slides ">
                 <?php
-                //Explode Image to get all images
-                $Images = explode(";", $Image);
                 foreach ($Images as $img) {
                     ?>
                     <li>

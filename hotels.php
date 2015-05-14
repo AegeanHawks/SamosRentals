@@ -133,6 +133,8 @@ include 'header.php';
                 $Description = $row['Description'];
                 $Grade = $row['Grade'];
                 $Image = $row['Image'];
+                //Explode Image to get all images
+                $Images = explode(";", $Image);
                 $Manager = $row['Manager'];
                 $lname = $row['LastName'];
                 $fname = $row['FirstName'];
@@ -142,20 +144,20 @@ include 'header.php';
                     <div id="<?php echo 'hotel_' . $id; ?>" class="card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" onclick="flip('<?php echo 'hotel_' . $id; ?>')"
-                                 src="<?php echo $Image; ?>">
+                                 src="<?php echo $Images[0]; ?>">
                         </div>
                         <div class="card-content">
                         <span onclick="flip('<?php echo 'hotel_' . $id; ?>')" src="images/office1.jpg"
                               class="card-title activator grey-text text-darken-4"><?php echo $Name; ?><i
                                 class="mdi-navigation-more-vert right"></i></span>
 
-                            <p><span><?php echo $Description; ?></span>
+                            <p><span><?php echo cropOutput($Description, 290); ?></span>
                             </p>
 
                             <p><a href="<?php echo 'hotel.php?id=' . $id; ?>"
                                   onclick="$('#<?php echo 'hotel_' . $id; ?>').addClass('animated  pulse')"
                                   src="images/office1.jpg">Διαβάστε
-                                    περισσότερα...</a></p>
+                                    περισσότερα</a></p>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4"
@@ -177,8 +179,8 @@ include 'header.php';
                             <div class="center valign-wrapper" style="padding: 5px 50px 0px 50px;">
                                 <img id="<?php echo 'img_prof' . $id; ?>"
                                      onclick="rotate('<?php echo 'img_prof' . $id; ?>')"
-                                     class=" circle responsive-img z-depth-3 grey lighten-3" "
-                                src="<?php echo $m_image; ?>">
+                                     class="circle responsive-img z-depth-3 grey lighten-3"
+                                     src="<?php echo $m_image; ?>" style="height: 200px; width: 200px;">
                             </div>
                             </p>
                         </div>
