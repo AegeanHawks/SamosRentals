@@ -88,24 +88,38 @@ function ownsProfile() {
         include 'head.php';
         ?>
         <script>
-            $(document).ready(function () {
-            $('.mytab').focus(function () {
-            var num = this.id.match(/\d+/)[0];
+            function CurrentTab() {
+                var url = window.location.href;
+                var num = url.match(/#.*/);
+                //alert(num);
+
+                if (num == null) {
+                    $("#section_1").show();
+                } else {
+                    num = num[0].match(/\d+/)[0];
                     $(".tabregion").hide();
                     $("#section_" + num).show();
+                }
+            }
+
+            $(document).ready(function () {
+                $('.mytab').focus(function () {
+                    var num = this.id.match(/\d+/)[0];
+                            $(".tabregion").hide();
+                    $("#section_" + num).show();
+                });
             });
-            });
-                    function rotate(id) {
-                    var cont = document.getElementById(id).className;
-                            if (cont.indexOf('rotateIn') != - 1) {
+            function rotate(id) {
+                var cont = document.getElementById(id).className;
+                if (cont.indexOf('rotateIn') != -1) {
                     $('#' + id).removeClass('rotateIn');
-                    } else {
+                } else {
                     $('#' + id).addClass('animated rotateIn');
-                            setTimeout(function () {
-                            $('#' + id).removeClass('rotateIn');
-                            }, 1000);
-                    }
-                    }
+                    setTimeout(function () {
+                        $('#' + id).removeClass('rotateIn');
+                    }, 1000);
+                }
+            }
         </script>
         <style>
             .tabregion{
@@ -120,7 +134,7 @@ function ownsProfile() {
             }
         </style>
     </head>
-    <body class="white">
+    <body class="white" onload="CurrentTab()">
 
         <!--Navigation Menu-->
         <?php
@@ -129,6 +143,7 @@ function ownsProfile() {
         <!--Navigation Menu-->
 
         <div class="row container" style="padding-top: 60px">
+            <!--Tab Panels-->
             <div class="col s12 m4">
                 <div class="center-align col s12 m12">
                     <img id="img_prof" onclick="rotate('img_prof')"
@@ -139,7 +154,7 @@ function ownsProfile() {
                     <ul class="collapsible popout" data-collapsible="accordion">
 
                         <li>
-                            <a class="collapsible-header active mytab" id="mytab_1" href="#"><i
+                            <a class="collapsible-header active mytab" id="mytab_1" href="#gomytab_1"><i
                                     class="mdi-action-perm-contact-cal"></i>Πληροφορίες</a>
                                 <?php
                                 if (ownsProfile()) {
@@ -155,20 +170,20 @@ function ownsProfile() {
                                 <?php
                                 if ((isRole("admin") || isRole("hotelier")) && ownsProfile()) {
                                     ?>
-                                    <a href="#6" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
+                                    <a href="#gomytab_4" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
 
-                                    <a href="#2" class="collection-item mytab" id="mytab_2">Επεξεργασία</a>
+                                    <a href="#gomytab_2" class="collection-item mytab" id="mytab_2">Επεξεργασία</a>
                                     <?php
                                 }
                                 if (isRole("hotelier") && ownsProfile()) {
                                     ?>
-                                    <a href="#3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
+                                    <a href="#gomytab_3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
                                     <?php
                                 }
                                 if (isRole("user") && ownsProfile()) {
                                     ?>
-                                    <a href="#2" class="collection-item mytab" id="mytab_11">Ιστορικό</a>
-                                    <a href="#3" class="collection-item mytab" id="mytab_10">Βαθμολόγηση</a>
+                                    <a href="#gomytab_11" class="collection-item mytab" id="mytab_11">Ιστορικό</a>
+                                    <a href="#gomytab_10" class="collection-item mytab" id="mytab_10">Βαθμολόγηση</a>
                                 <?php }
                                 ?>
                             </div>
@@ -184,14 +199,14 @@ function ownsProfile() {
                                     <?php
                                     if (ownsProfile() && isRole("hotelier")) {
                                         ?>
-                                        <a href="#8" class="collection-item mytab" id="mytab_8">Στοιχεία</a>
-                                        <a href="#10" class="collection-item mytab" id="mytab_5">Επεξεργασία</a>
+                                        <a href="#gomytab_8" class="collection-item mytab" id="mytab_8">Στοιχεία</a>
+                                        <a href="#gomytab_5" class="collection-item mytab" id="mytab_5">Επεξεργασία</a>
                                         <?php
                                     }
                                     if (ownsProfile() && isRole("admin")) {
                                         ?>
-                                        <a href="#6" class="collection-item mytab" id="mytab_5">Δημιουργία</a>
-                                        <a href="#9" class="collection-item mytab" id="mytab_9">Επεξεργασία</a>
+                                        <a href="#gomytab_5" class="collection-item mytab" id="mytab_5">Δημιουργία</a>
+                                        <a href="#gomytab_9" class="collection-item mytab" id="mytab_9">Επεξεργασία</a>
                                     <?php }
                                     ?>
                                 </div>
@@ -205,8 +220,8 @@ function ownsProfile() {
                                 ?>
                                 <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-social-people"></i>Χρήστες</a>
                                 <div class = "collapsible-body collection">
-                                    <a href="#12" class="collection-item mytab" id="mytab_13">Δημιουργία</a>
-                                    <a href="#13" class="collection-item mytab" id="mytab_12">Επεξεργασία</a>
+                                    <a href="#gomytab_13" class="collection-item mytab" id="mytab_13">Δημιουργία</a>
+                                    <a href="#gomytab_12" class="collection-item mytab" id="mytab_12">Επεξεργασία</a>
                                 </div>
 
                             <?php }
@@ -216,14 +231,14 @@ function ownsProfile() {
                         if (isRole("user")) {
                             ?>
                             <li>
-                                <a class="collapsible-header mytab" id="mytab_6"  href="#"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
+                                <a class="collapsible-header mytab" id="mytab_6"  href="#gomytab_6"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
                             </li>
                             <?php
                         }
                         if (ownsProfile()) {
                             ?>
                             <li>
-                                <a class="collapsible-header mytab" href="#" id="mytab_7"><i class="mdi-action-delete"></i>Διαγραφή</a>
+                                <a class="collapsible-header mytab" href="#gomytab_7" id="mytab_7"><i class="mdi-action-delete"></i>Διαγραφή</a>
                             </li>
                             <?php
                         }
@@ -234,7 +249,7 @@ function ownsProfile() {
             <!--Tab Panels-->
 
             <!--User Details-->
-            <div class="card row col s12 m8 tabregion" id="section_1" style="display: inline">
+            <div class="card row col s12 m8 tabregion" id="section_1" style="display: none">
                 <div class="col offset-s1 s10">
                     <p class="col s4 detailshead">Όνομα: </p>
 
@@ -380,91 +395,160 @@ function ownsProfile() {
                     <!-- Create Auction -->
                     <div class="card col s12 m8 tabregion" id="section_4">
                         <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="AuctionTitleInput" type="text" class="validate">
-                                <label for="AuctionTitleInput">Τίτλος</label>
-                            </div>
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="mdi-social-people prefix"></i>
-                                        <textarea id="AuctionDescriptionInput" class="materialize-textarea" length="500"></textarea>
-                                        <label for="AuctionDescriptionInput">Περιγραφή</label>
+                            <form id="CreateEditAuction" action="profile/saveauction.php" method="GET">
+                                <div class="input-field col s6">
+                                    <i class="mdi-action-account-circle prefix"></i>
+                                    <input name="AuctionName" id="AuctionTitleInput" type="text" class="validate">
+                                    <label for="AuctionTitleInput">Τίτλος</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <select name="CreateAuctionHotelID" form="CreateEditAuction">
+                                        <option value="" disabled selected>Επιλέξτε εδώ</option>
+                                        <?php
+                                        // SQL query to fetch all hotels
+                                        $allhotels = $con->prepare('SELECT Name,ID FROM hotel ORDER BY Name');
+                                        $allhotels->execute();
+                                        $resultHotels = $allhotels->get_result();
+
+                                        for ($i = 0; $i < mysqli_num_rows($resultHotels); $i++) {
+                                            $hotelsRow = mysqli_fetch_array($resultHotels);
+                                            echo '<option value="' . $hotelsRow["ID"] . '">' . $hotelsRow["Name"] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <label>Ξενοδοχεία</label>
+                                </div>
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="mdi-social-people prefix"></i>
+                                            <textarea name="Description" id="AuctionDescriptionInput" class="materialize-textarea" length="500"></textarea>
+                                            <label for="AuctionDescriptionInput">Περιγραφή</label>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="input-field col s12 m12 l6">
+                                    <i class="mdi-editor-attach-money prefix"></i>
+                                    <input name="Bid_Price" id="AuctionStartPrice" type="text" class="validate">
+                                    <label for="AuctionStartPrice">Τιμή εκκίνησης</label>
+                                </div>
+                                <div class="input-field col s12 m12 l6">
+                                    <i class="mdi-editor-attach-money prefix"></i>
+                                    <input name="Buy_Price" id="AuctionBuyPriceInput" type="text" class="validate">
+                                    <label for="AuctionBuyPriceInput">Τιμή αγοράς</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-description prefix"></i>
+                                    <input name="PeopleCount" id="AuctionPeopleInput" type="text" class="validate">
+                                    <label for="AuctionPeopleInput">Αριθμός ατόμων</label>
+                                </div>                            
+                                <div class="input-field col s12">
+                                    <div class="input-field">
+                                        <i class="mdi-social-cake prefix"></i>
+                                        <input name="End_Date" id="birthday" type="text" class="datepicker picker__input">
+                                        <label for="birthday">Ημερομηνία λήξης</label>
+                                    </div>
+                                </div>
+                                <div class="col s12 file-field input-field">
+                                    <div class="file-field input-field">
+                                        <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+                                        <div class="btn">
+                                            <span>File</span>
+                                            <input type="file" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-field col s12" style="display: none;">
+                                    <input value="null" name="AuctionIDSave" type="text">
+                                </div>  
+                                <div class="input-field col s12">
+                                    <button class="btn waves-effect waves-light" type="submit">Υποβολή
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
                             </form>
-                            <div class="input-field col s12 m12 l6">
-                                <i class="mdi-editor-attach-money prefix"></i>
-                                <input id="AuctionStartPrice" type="text" class="validate">
-                                <label for="AuctionStartPrice">Τιμή εκκίνησης</label>
-                            </div>
-                            <div class="input-field col s12 m12 l6">
-                                <i class="mdi-editor-attach-money prefix"></i>
-                                <input id="AuctionBuyPriceInput" type="text" class="validate">
-                                <label for="AuctionBuyPriceInput">Τιμή αγοράς</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-description prefix"></i>
-                                <input id="AuctionPeopleInput" type="text" class="validate">
-                                <label for="AuctionPeopleInput">Αριθμός ατόμων</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Υποβολή
-                                    <i class="mdi-content-send right"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <!-- Create Auction -->
 
-                    <!--Hotel Edit-->
+                    <!--Create hotel-->
                     <div class="z-depth-3 col s12 m8 tabregion" id="section_5">   
 
                         <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
                             <a class="waves-effect waves-light orange darken-1 btn">ΠΡΟΒΟΛΗ ΣΕΛΙΔΑΣ</a>
                         </div>
-                        <div class="input-field col s6">
-                            <i class="mdi-action-account-circle prefix"></i>
-                            <input id="HotelNameInput" type="text" class="validate">
-                            <label for="HotelNameInput">Όνομα ξενοδοχείου</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="mdi-communication-location-on prefix"></i>
-                            <input id="HotelLocationInput" type="text" class="validate">
-                            <label for="HotelLocationInput">Τοποθεσία</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="mdi-action-description prefix"></i>
-                            <textarea id="HotelDescriptionInput" class="materialize-textarea" length="500"></textarea>
-                            <label for="HotelDescriptionInput">Περιγραφή</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="mdi-action-face-unlock prefix"></i>
-                            <textarea id="HotelDescriptionInput" class="materialize-textarea"></textarea>
-                            <label for="HotelDescriptionInput">Ανέσεις</label>
-                        </div>
-                        <div class="col s6 m6 l5 file-field input-field">
-                            <form action="#">
+
+                        <form action="profile/savehotel.php" method="GET" id="CreateEditHotel">
+                            <div class="input-field col s6">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input name="SaEdHotName" id="HotelNameInput" type="text" class="validate">
+                                <label for="HotelNameInput">Όνομα ξενοδοχείου</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select name="SaEdHotChooseHotelier" form="CreateEditHotel">
+                                    <option value="" disabled selected>Επιλέξτε εδώ</option>
+                                    <?php
+                                    // SQL query to fetch all hotels
+                                    $allhoteliersQuery="SELECT Username FROM user WHERE role=1 ORDER BY Username";
+                                    $allhoteliers = $con->prepare($allhoteliersQuery);
+                                    $allhoteliers->execute();
+
+                                    if ($allhoteliers == NULL) {
+                                        error_log("Could not run query: \"" . $allhoteliersQuery . "\"" . "\n", 3, $errorpath);
+                                        echo "0";
+                                    }
+                                    $resultHoteliers = $allhoteliers->get_result();
+
+                                    for ($i = 0; $i < mysqli_num_rows($resultHoteliers); $i++) {
+                                        $hoteliersRow = mysqli_fetch_array($resultHoteliers);
+                                        echo '<option value="' . $hoteliersRow["Username"] . '">' . $hoteliersRow["Username"] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                                <label>Ξενοδόχοι</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-communication-phone prefix"></i>
+                                <input name="SaEdHotTel" id="SaEdHotTel" type="text" class="validate">
+                                <label for="SaEdHotTel">Τηλέφωνο</label> 
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-communication-location-on prefix"></i>
+                                <input name="SaEdHotCoordinates" id="HotelLocationInput" type="text" class="validate">
+                                <label for="HotelLocationInput">Τοποθεσία</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-description prefix"></i>
+                                <textarea name="SaEdHotDescription" id="HotelDescriptionInput" class="materialize-textarea" length="500"></textarea>
+                                <label for="HotelDescriptionInput">Περιγραφή</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-face-unlock prefix"></i>
+                                <textarea name="SaEdHotComforts" id="HotelDescriptionInput" class="materialize-textarea"></textarea>
+                                <label for="HotelDescriptionInput">Ανέσεις</label>
+                            </div>
+                            <div class="col s6 m6 l5 file-field input-field">
                                 <div class="file-field input-field">
-                                    <input placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+                                    <input name="SaEdHotImage" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
                                     <div class="btn">
                                         <span>File</span>
                                         <input type="file" />
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col s12" style="padding-bottom: 20px;padding-top: 40px">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">ΚΑΤΑΧΩΡΗΣΗ
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                        </div>
+                            </div>
+                            <div class="input-field col s12" style="display: none;">
+                                <input value="null" name="SaEdHotID" type="text">
+                            </div>                              
+                            <div class="col s12" style="padding-bottom: 20px;padding-top: 40px">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">ΚΑΤΑΧΩΡΗΣΗ
+                                    <i class="mdi-content-send right"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <!--Hotel Edit-->
+                    <!--Create hotel-->
                     <?php
                 }
-
 
                 if (isRole("hotelier")) {
                     ?>
