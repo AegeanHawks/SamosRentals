@@ -329,7 +329,7 @@ function ownsProfile() {
                         <p class="col s8 detailsbody"><?php echo $birthday; ?></p>
                         <div class="col s6 input-field hidden_form_s_1">
                             <input  name="SaUsBirthday" type="text" class="datepicker picker__input" value="<?php echo $birthday; ?>"
-                                    required form="SaveCreateUser">
+                                    required form="EditUserForm">
                         </div>
                     </div>
                     <div class="col offset-s1 s10 divider hidden_form_s_1"></div>
@@ -340,7 +340,7 @@ function ownsProfile() {
                              data-tooltip="Ο κωδικός είναι 8 χαρακτήρων και περιέχει τουλάχιστον 1 αριθμό,κεφαλαίο και μικρό γράμμα.">
                             <input name="SaUsPassword" type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                                    onchange="form.reenter_password.pattern = this.value;"
-                                   maxlength="30" class="validate" value="<?php echo $pass; ?>">
+                                   maxlength="30" class="validate">
                         </div>
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
@@ -349,7 +349,7 @@ function ownsProfile() {
 
                         <p class="col s8 detailsbody"><?php echo $sex; ?></p>
                         <div class="input-field col s6 hidden_form_s_1">
-                            <select name="SaUsSex" class="validate" required form="SaveCreateUser">
+                            <select name="SaUsSex" class="validate" required form="EditUserForm">
                                 <option value="male">Άνδρας
                                 </option>
                                 <option value="female">Γυναίκα
@@ -366,7 +366,7 @@ function ownsProfile() {
                         if (isRole("admin")) {
                             ?>
                             <div class="offset-s1 input-field col s6 hidden_form_s_1">
-                                <select id="SaUsRole" name="SaUsRole" class="validate" required form="SaveCreateUser">
+                                <select id="SaUsRole" name="SaUsRole" class="validate" required form="EditUserForm">
                                     <option value="0">Administrator
                                     </option>
                                     <option value="1">Hotelier
@@ -1004,7 +1004,7 @@ function ownsProfile() {
                 </div>
                 <!--Delete user-->
 
-                <!-- User Create/Edit -->
+                <!-- User Create -->
                 <div class="card col s12 m8 tabregion" id="section_13">
                     <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
                         <h4 id='SaUsTitle'></h4>
@@ -1081,7 +1081,7 @@ function ownsProfile() {
                                 <label for="SaUsSex">Φύλο</label>
                             </div>
 
-                            <input name="SaUsState" id="SaUsState" style='display: none' placeholder="new">
+                            <input name="SaUsState" id="SaUsState" style='display: none' value="new">
 
                             <div class="input-field col s12" style="padding-top: 10px; padding-bottom: 10px">
                                 <button class="btn waves-effect waves-light" type="submit" name="action">Καταχωρηση
@@ -1091,7 +1091,7 @@ function ownsProfile() {
                         </form>
                     </div>
                 </div>
-                <!-- User Create/Edit -->
+                <!-- User Create -->
 
                 <?php
             }

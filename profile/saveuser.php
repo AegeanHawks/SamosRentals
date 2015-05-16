@@ -11,10 +11,8 @@ $formGetNames = array("SaUsFirstName", "SaUsLastname", "SaUsTel", "SaUsPassword"
 if ($_SESSION['role'] == 0) {
     array_push($dbColumns, "Role");
     array_push($formGetNames, "SaUsRole");
-        echo "nop1";
 
     if (strcmp($_GET["SaUsState"], "new") == 0) {
-        echo "nop2";
         array_push($dbColumns, "Username");
         array_push($formGetNames, "SaUsUsername");
     }
@@ -28,15 +26,12 @@ $formValues = array();
 //error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 //$_GET["SaUsBirthday"] = DateTime::createFromFormat('d F, Y', $_GET["SaUsBirthday"])->format('Y-m-d');
 for ($i = 0; $i < count($formGetNames); $i++) {
-    echo $formGetNames[$i]." ";
     $formValues[] = $_GET[$formGetNames[$i]];
 }
 //error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 // </editor-fold>
 
 if (strcmp($_GET["SaUsState"], "edit") == 0) {
-    echo "to implement code";
-
     // <editor-fold defaultstate="collapsed" desc="Connect to database">
     $con = db_connect();
     // </editor-fold>
@@ -49,14 +44,14 @@ if (strcmp($_GET["SaUsState"], "edit") == 0) {
 
     $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
 
-    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionIDSave"];
-    error_log("Statemnt: " . $statement . "\"" . "\n", 3, $errorpath);
+    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE Username='" . $_SESSION['userid']."'";
+    
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
         error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        error_log("Error: \"" . $mysqli->error . "\"" . "\n", 3, $errorpath);
+        error_log("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
