@@ -92,17 +92,27 @@ function ownsProfile() {
             .tabregion{
                 display: none;
             }
+            .hidden_form_s_8{
+                display: none;
+            }
             .hidden_form_s_1{
                 display: none;
             }
             .PaginAuctionsHiEd{
                 display: none;
             }
-            .detailshead{
+            .detailshead_s_1{
                 font-weight: bold;
                 font-size: 20px;
             }
-            .detailsbody{
+            .detailshead_s_8{
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .detailsbody_s_1{
+                font-size: 20px;
+            }
+            .detailsbody_s_8{
                 font-size: 20px;
             }
         </style>
@@ -172,8 +182,8 @@ function ownsProfile() {
                                     <?php
                                     if (ownsProfile() && isRole("hotelier")) {
                                         ?>
-                                        <a href="#gomytab_8" class="collection-item mytab" id="mytab_8">Στοιχεία</a>
-                                        <a href="#gomytab_5" class="collection-item mytab" id="mytab_5">Επεξεργασία</a>
+                                        <a href="#gomytab_14" class="collection-item mytab" id="mytab_14">Επεξεργασία</a>
+                                        <a href="#gomytab_8" class="collection-item mytab" id="mytab_8">Testing</a>
                                         <?php
                                     }
                                     if (ownsProfile() && isRole("admin")) {
@@ -226,58 +236,58 @@ function ownsProfile() {
                 <?php if (ownsProfile()) {
                     ?>
                     <div class="col offset-s1 s12" style='padding-bottom: 20px'>
-                        <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(true)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
+                        <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(true, 1)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
                     </div>
                 <?php }
                 ?>
                 <form action="profile/saveuser.php" method="Get" id="EditUserForm">
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">Όνομα: </p>
+                        <p class="col s4 detailshead_s_1">Όνομα: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $fname; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $fname; ?></p>
                         <div class="input-field col s6 hidden_form_s_1">
                             <input name="SaUsFirstName" type="text" class="validate" value="<?php echo $fname; ?>">
                         </div>
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">Επώνυμο: </p>
+                        <p class="col s4 detailshead_s_1">Επώνυμο: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $lname; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $lname; ?></p>
                         <div class="input-field col s6 hidden_form_s_1">
                             <input name="SaUsLastname" type="text" class="validate" value="<?php echo $lname; ?>">
                         </div>
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">Ψευδώνυμο: </p>
+                        <p class="col s4 detailshead_s_1">Ψευδώνυμο: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $username; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $username; ?></p>
                         <p class="col s8 hidden_form_s_1"><?php echo $username; ?></p>
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">Τηλέφωνο: </p>
+                        <p class="col s4 detailshead_s_1">Τηλέφωνο: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $tel; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $tel; ?></p>
                         <div class="input-field col s6 hidden_form_s_1">
                             <input name="SaUsTel" type="text" pattern='[0-9]{0,12}' class="validate" value="<?php echo $tel; ?>">
                         </div>
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">E-mail: </p>
+                        <p class="col s4 detailshead_s_1">E-mail: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $mail; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $mail; ?></p>
                         <div class="input-field col s6 hidden_form_s_1">
                             <input name="SaUsMail" type="text" class="validate" value="<?php echo $mail; ?>">
                         </div>
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">Ημερομηνία γέννησης: </p>
+                        <p class="col s4 detailshead_s_1">Ημερομηνία γέννησης: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $birthday; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $birthday; ?></p>
                         <div class="col s6 input-field hidden_form_s_1">
                             <input  name="SaUsBirthday" type="text" class="datepicker picker__input" value="<?php echo $birthday; ?>"
                                     required form="EditUserForm">
@@ -285,7 +295,7 @@ function ownsProfile() {
                     </div>
                     <div class="col offset-s1 s10 divider hidden_form_s_1"></div>
                     <div class="col offset-s1 s10 hidden_form_s_1">
-                        <p class="col s4 detailshead">Κωδικός: </p>
+                        <p class="col s4 detailshead_s_1">Κωδικός: </p>
 
                         <div class="col s8 input-field tooltipped" data-position="top" data-delay="50"
                              data-tooltip="Ο κωδικός είναι 8 χαρακτήρων και περιέχει τουλάχιστον 1 αριθμό,κεφαλαίο και μικρό γράμμα.">
@@ -296,9 +306,9 @@ function ownsProfile() {
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10">
-                        <p class="col s4 detailshead">Φύλλο: </p>
+                        <p class="col s4 detailshead_s_1">Φύλλο: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $sex; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $sex; ?></p>
                         <div class="input-field col s6 hidden_form_s_1">
                             <select name="SaUsSex" class="validate" required form="EditUserForm">
                                 <option value="male">Άνδρας
@@ -310,9 +320,9 @@ function ownsProfile() {
                     </div>
                     <div class="col offset-s1 s10 divider"></div>
                     <div class="col offset-s1 s10 hidden_form_s_1">
-                        <p class="col s4 detailshead">Ρόλος: </p>
+                        <p class="col s4 detailshead_s_1">Ρόλος: </p>
 
-                        <p class="col s8 detailsbody"><?php echo $role; ?></p>
+                        <p class="col s8 detailsbody_s_1"><?php echo $role; ?></p>
                         <?php
                         if (isRole("admin")) {
                             ?>
@@ -365,7 +375,7 @@ function ownsProfile() {
                 <?php
                 // SQL query to fetch all hotels
                 $acutionsStatment = "SELECT auction.Name,Buy_Price,End_Price,End_Date FROM auction, hotel WHERE hotel.Manager=? AND auction.hotel=hotel.id ORDER BY End_Date desc";
-                
+
                 if (!$userauctions = $con->prepare($acutionsStatment)) {
                     error_log("Prepare Error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
                 } else {
@@ -400,9 +410,9 @@ function ownsProfile() {
                         <li class="disabled"><a onclick="return PaginAuctionsHistory( - 2)" href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
                         <li class="active" id="PaginationNumAuct_0"><a onclick="return PaginAuctionsHistory(0)" href="#!">1</a></li>
                         <?php
-                        for ($i = 1; $i < mysqli_num_rows($resultuserauction)/6; $i++) {
+                        for ($i = 1; $i < mysqli_num_rows($resultuserauction) / 6; $i++) {
                             ?>
-                        <li class="waves-effect" id="PaginationNumAuct_<?php echo $i ?>"><a onclick="return PaginAuctionsHistory(<?php echo $i ?>)"><?php echo $i + 1 ?></a></li>
+                            <li class="waves-effect" id="PaginationNumAuct_<?php echo $i ?>"><a onclick="return PaginAuctionsHistory(<?php echo $i ?>)"><?php echo $i + 1 ?></a></li>
                             <?php
                         }
                         ?>
@@ -557,7 +567,7 @@ function ownsProfile() {
                     </div>
                     <!-- Create Auction -->
 
-                    <!--Create hotel-->
+                    <!-- Hotel Create -->
                     <div class="z-depth-3 col s12 m8 tabregion" id="section_5">
 
                         <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
@@ -623,16 +633,14 @@ function ownsProfile() {
                                 <label for="HotelDescriptionInput">Ανέσεις</label>
                             </div>
                             <div class="col s6 m6 l5 file-field input-field">
-                                <div class="file-field input-field">
-                                    <input name="SaEdHotImage" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
-                                    <div class="btn">
-                                        <span>File</span>
-                                        <input type="file" />
-                                    </div>
+                                <input name="SaEdHotImage" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input type="file" />
                                 </div>
                             </div>
                             <div class="input-field col s12" style="display: none;">
-                                <input value="null" name="SaEdHotID" type="text">
+                                <input value="new" name="SaEdHotAction" type="text">
                             </div>
                             <div class="col s12" style="padding-bottom: 20px;padding-top: 40px">
                                 <button class="btn waves-effect waves-light" type="submit" name="action">ΚΑΤΑΧΩΡΗΣΗ
@@ -641,41 +649,119 @@ function ownsProfile() {
                             </div>
                         </form>
                     </div>
-                    <!--Create hotel-->
+                    <!-- Hotel Create-->
                     <?php
                 }
 
                 if (isRole("hotelier")) {
                     ?>
                     <!--Hotel Details-->
-                    <div class="card row col s12 m8 tabregion" id="section_8">
-                        <div class="col offset-s1 s10">
-                            <p class="col s4 detailshead">Όνομα: </p>
-
-                            <p class="col s8 detailsbody">Grand Budapest Hotel </p>
-                        </div>
-                        <div class="col offset-s1 s10 divider"></div>
-                        <div class="col offset-s1 s10">
-                            <p class="col s4 detailshead">Περιγραφή: </p>
-
-                            <p class="col s8 detailsbody">Ένα από τα πιο γνωστά ξενοδοχεία στο νησί, βρίσκεται στο πιο κεντρικό σημείο της γραφικής πρωτεύουσας Βαθύ. Προσφέρουμε ανέσεις και υπηρεσίες υψηλού επιπέδου στις διακοπές σας ή απλά στον καφέ που απολαμβάνετε κοντά μας. Η διεύθυνση και το προσωπικό καταβάλλουμε κάθε προσπάθεια για ευχάριστη παραμονή και αξέχαστες εμπειρίες. Χαρείτε τη διαμονή σας στη Σάμο, κάθε μέρα...</p>
-                        </div>
-                        <div class="col offset-s1 s10 divider"></div>
-                        <div class="col offset-s1 s10 divider"></div>
-                        <div class="col offset-s1 s10">
-                            <p class="col s4 detailshead">Τηλέφωνο: </p>
-
-                            <p class="col s8 detailsbody">6982444444</p>
-                        </div>
-                        <div class="col offset-s1 s10 divider"></div>
-                        <div class="col offset-s1 s10">
-                            <p class="col s4 detailshead">Βαθμολογία: </p>
-
-                            <p class="col s8 detailsbody">4/5</p>
-                        </div>
-                    </div>
-                    <!--Hotel Details-->
                     <?php
+                    // SQL query to fetch all hotels
+                    if (isset($_GET['editHotel'])) {
+                        $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade FROM hotel WHERE hotel.Manager=? AND ID=?";
+
+                        if (!$hotelDetails = $con->prepare($hotelsDetailsStmt)) {
+                            error_log("Prepare Error: \"" . $hotelsDetailsStmt . "\"" . "\n", 3, $errorpath);
+                        } else {
+                            $hotelDetails->bind_param('si', $_SESSION['userid'], $_GET['editHotel']);
+
+                            if (!$hotelDetails->execute()) {
+                                error_log("Execute error: \"" . $hotelsDetailsStmt . "\"" . "\n", 3, $errorpath);
+                                error_log("Execute failed: (" . $hotelDetails->errno . ") " . $hotelDetails->error . "\"" . "\n", 3, $errorpath);
+                            } else {
+                                $resulthoteldetails = $hotelDetails->get_result();
+                                $hotelDetailsRow;
+                                for ($i = 0; $i < mysqli_num_rows($resulthoteldetails); $i++) {
+                                    $hotelDetailsRow = mysqli_fetch_array($resulthoteldetails);
+                                }
+                                echo mysqli_num_rows($resulthoteldetails);
+                                if (mysqli_num_rows($resulthoteldetails) == 1) {
+                                    ?>
+                                    <div class="card row col s12 m8 tabregion" id="section_8">
+
+                                        <div class="col offset-s1 s12" style='padding-bottom: 20px'>
+                                            <a class="waves-effect waves-light btn" href="#gomytab_8" onclick="return UserEditsProfile(true, 8)"><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
+                                        </div>
+                                        <form action="profile/savehotel.php" method="get" id="SaveHotelForm">
+                                            <div class="col offset-s1 s10">
+                                                <p class="col s4 detailshead_s_8">Όνομα: </p>
+
+                                                <p class="col s8 detailsbody_s_8"><?php echo $hotelDetailsRow["Name"] ?></p>
+                                                <div class="input-field col s6 hidden_form_s_8">
+                                                    <input name="SaEdHotName" id="HotelNameInput" type="text" class="validate" value="<?php echo $hotelDetailsRow["Name"] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col offset-s1 s10">
+                                                <p class="col s4 detailshead_s_8">Περιγραφή: </p>
+
+                                                <p class="col s8 detailsbody_s_8"><?php echo $hotelDetailsRow["Description"] ?></p>
+                                                <div class="input-field col s6 hidden_form_s_8">
+                                                    <textarea name="SaEdHotDescription" id="HotelDescriptionInput" class="materialize-textarea" length="100"><?php echo $hotelDetailsRow["Description"] ?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col offset-s1 s10">
+                                                <p class="col s4 detailshead_s_8">Τηλέφωνο: </p>
+
+                                                <p class="col s8 detailsbody_s_8"><?php echo $hotelDetailsRow["Tel"] ?></p>
+                                                <div class="input-field col s6 hidden_form_s_8">
+                                                    <input name="SaEdHotTel" id="SaEdHotTel" type="text" class="validate" value="<?php echo $hotelDetailsRow["Tel"] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col offset-s1 s10">
+                                                <p class="col s4 detailshead_s_8">Βαθμολογία: </p>
+
+                                                <p class="col s8 detailsbody_s_8"><?php echo $hotelDetailsRow["Grade"] ?></p>
+                                                <p class="col s6 detailsbody_s_8 hidden_form_s_8"><?php echo "  " . $hotelDetailsRow["Grade"] ?></p>
+                                            </div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col offset-s1 s10">
+                                                <p class="col s4 detailshead_s_8">Ανέσεις: </p>
+
+                                                <p class="col s8 detailsbody_s_8"><?php echo $hotelDetailsRow["Comforts"] ?></p>
+                                                <div class="input-field col s6 hidden_form_s_8">
+                                                    <textarea name="SaEdHotComforts" id="HotelDescriptionInput" class="materialize-textarea"><?php echo $hotelDetailsRow["Comforts"] ?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col offset-s1 s10">
+                                                <p class="col s4 detailshead_s_8">Τοποθεσία: </p>
+
+                                                <p class="col s6 detailsbody_s_8"><?php echo $hotelDetailsRow["Coordinates"] ?></p>
+                                                <div class="input-field col s6 hidden_form_s_8">
+                                                    <input name="SaEdHotCoordinates" id="HotelLocationInput" type="text" class="validate" value="<?php echo $hotelDetailsRow["Coordinates"] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col offset-s1 s10 divider"></div>
+                                            <div class="col s6 m6 l5 file-field input-field hidden_form_s_8">
+                                                <input name="SaEdHotImage" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+                                                <div class="btn">
+                                                    <span>File</span>
+                                                    <input type="file" />
+                                                </div>
+                                            </div>
+                                            <input name="SaEdHotID" style="display: none" type="text" class="validate" value="<?php echo $hotelDetailsRow["ID"] ?>">
+                                            <input name="SaEdHotAction" style="display: none" type="text" class="validate" value="edit">
+                                            <div class="col s12" style="padding-bottom: 20px;padding-top: 40px">
+                                                <button class="btn waves-effect waves-light hidden_form_s_8" type="submit" name="action">ΚΑΤΑΧΩΡΗΣΗ
+                                                    <i class="mdi-content-send right"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col s12 hidden_form_s_8" style='padding-bottom: 20px'>
+                                                <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--Hotel Details-->
+                                    <?php
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if (isRole("user")) {

@@ -5,8 +5,14 @@ require '../admin/configuration.php';
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Variables' declare">
 $table = "hotel";
-$dbColumns = array("Name", "Coordinates", "Description", "Comforts", "Image", "Tel", "ID", "Manager");
-$formGetNames = array("SaEdHotName", "SaEdHotCoordinates", "SaEdHotDescription", "SaEdHotComforts", "SaEdHotImage", "SaEdHotTel", "SaEdHotID", "SaEdHotChooseHotelier");
+
+$dbColumns = array("Name", "Coordinates", "Description", "Comforts", "Image", "Tel");
+$formGetNames = array("SaEdHotName", "SaEdHotCoordinates", "SaEdHotDescription", "SaEdHotComforts", "SaEdHotImage", "SaEdHotTel");
+if(strcmp($_GET["SaEdHotAction"], "edit") != 0)
+{
+    array_push($dbColumns, "ID","Manager");
+    array_push($formGetNames, "SaEdHotID","SaEdHotChooseHotelier");
+}
 $formValues = array();
 
 //error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
@@ -17,8 +23,7 @@ for ($i = 0; $i < count($formGetNames); $i++) {
 //error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 // </editor-fold>
 
-if (strcmp($_GET["SaEdHotID"], "null") != 0) {
-    echo "to implement code";
+if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
 
     // <editor-fold defaultstate="collapsed" desc="Connect to database">
     $con = db_connect();
@@ -32,8 +37,8 @@ if (strcmp($_GET["SaEdHotID"], "null") != 0) {
 
     $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
 
-    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionIDSave"];
-    error_log("Statemnt: " . $statement . "\"" . "\n", 3, $errorpath);
+    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["SaEdHotID"];
+    //error_log("Statement: " . $statement . "\"" . "\n", 3, $errorpath);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);

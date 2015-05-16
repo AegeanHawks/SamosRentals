@@ -58,9 +58,6 @@ if (strcmp($_GET["SaUsState"], "edit") == 0) {
     }
     // </editor-fold>
     mysqli_close($con);
-    /* error_log("The word parameter is empty" . "\n", 3, $errorpath);
-      echo "0";
-      exit(); */
 } else if (strcmp($_GET["SaUsState"], "new") == 0) {
 
     // </editor-fold>

@@ -28,13 +28,13 @@ function rotate(id) {
         }, 1000);
     }
 }
-function UserEditsProfile(edits) {
+function UserEditsProfile(edits, sectionNum) {
     if (edits == true) {
-        $(".detailsbody").hide();
-        $(".hidden_form_s_1").show();
+        $(".detailsbody_s_"+sectionNum).hide();
+        $(".hidden_form_s_"+sectionNum).show();
     } else {
-        $(".detailsbody").show();
-        $(".hidden_form_s_1").hide();
+        $(".detailsbody_s_"+sectionNum).show();
+        $(".hidden_form_s_"+sectionNum).hide();
     }
     return true;
     //detailsbody
