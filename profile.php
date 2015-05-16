@@ -87,64 +87,15 @@ function ownsProfile() {
         $Page_Title = "Προφίλ - " . $user;
         include 'head.php';
         ?>
-        <script>
-            function CurrentTab() {
-            var url = window.location.href;
-                    var num = url.match(/#.*/);
-                    //alert(num);
-
-                    if (num == null) {
-            $("#section_1").show();
-            } else {
-            num = num[0].match(/\d+/)[0];
-                    $(".tabregion").hide();
-                    $("#section_" + num).show();
-            }
-            }
-
-            function rotate(id) {
-            var cont = document.getElementById(id).className;
-                    if (cont.indexOf('rotateIn') != - 1) {
-            $('#' + id).removeClass('rotateIn');
-            } else {
-            $('#' + id).addClass('animated rotateIn');
-                    setTimeout(function () {
-                    $('#' + id).removeClass('rotateIn');
-                    }, 1000);
-            }
-            }
-            function UserEditsProfile(edits) {
-            if (edits == true) {
-            $(".detailsbody").hide();
-                    $(".hidden_form_s_1").show();
-            } else {
-            $(".detailsbody").show();
-                    $(".hidden_form_s_1").hide();
-            }
-            return true;
-                    //detailsbody
-            }
-        </script>
-        <script>
-            $(document).ready(function () {
-            $('.mytab').focus(function () {
-            var num = this.id.match(/\d+/)[0];
-                    $(".tabregion").hide();
-                    $("#section_" + num).show();
-                    /*if (this.id == "mytabE_13") {
-                     document.getElementById("SaUsState").value = "edit";
-                     document.getElementById("SaUsTitle").innerHTML = "Επεξεργασία";
-                     } else if (this.id == "mytab_13") {
-                     document.getElementById("SaUsState").value = "new";
-                     document.getElementById("SaUsTitle").innerHTML = "Προσθήκη";
-                     }*/
-            });
-            });</script>
+        <script src=profile/profilescripts.js></script>
         <style>
             .tabregion{
                 display: none;
             }
             .hidden_form_s_1{
+                display: none;
+            }
+            .PaginAuctionsHiEd{
                 display: none;
             }
             .detailshead{
@@ -156,7 +107,7 @@ function ownsProfile() {
             }
         </style>
     </head>
-    <body class="white" onload="CurrentTab()">
+    <body class="white" onload="CurrentTab(); PaginAuctionsHistory(0);">
 
         <!--Navigation Menu-->
         <?php
@@ -276,7 +227,7 @@ function ownsProfile() {
                     ?>
                     <div class="col offset-s1 s12" style='padding-bottom: 20px'>
                         <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(true)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
-                    </div>  
+                    </div>
                 <?php }
                 ?>
                 <form action="profile/saveuser.php" method="Get" id="EditUserForm">
@@ -383,17 +334,17 @@ function ownsProfile() {
                             <?php
                         }
                         ?>
-                    </div>   
+                    </div>
                     <?php if (ownsProfile()) {
-                        ?> 
+                        ?>
                         <div class="col offset-s1 s12 hidden_form_s_1" style='padding-bottom: 20px'>
                             <button class="btn waves-effect waves-light" type="submit">Υποβολή
                                 <i class="mdi-content-send right"></i>
                             </button>
-                        </div>  
+                        </div>
                         <div class="col offset-s1 s12 hidden_form_s_1" style='padding-bottom: 20px'>
                             <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
-                        </div>    
+                        </div>
                     <?php } ?>
 
                     <input name="SaUsState" id="SaUsState" style='display: none' value="edit">
@@ -405,42 +356,56 @@ function ownsProfile() {
             <!-- Auctions History/Edit -->
             <div class="card col s12 m8 tabregion" id="section_2">
                 <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
-                    <div class="col s12 m3">Τίτλος</div>                       
-                    <div class="col s12 m3">Τιμή Έναρξης</div>               
-                    <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>     
-                    <div class="col s12 m2">Επεξεργασία</div>     
+                    <div class="col s12 m3">Τίτλος</div>
+                    <div class="col s12 m3">Τιμή Έναρξης</div>
+                    <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>
+                    <div class="col s12 m2">Επεξεργασία</div>
                 </div>
                 <span class="divider col s12"></span>
-                <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
-                    <a class="col s12 m3 truncate" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας
-                        ευκαιρίας ευκαιρίας</a>
+                <?php
+                // SQL query to fetch all hotels
+                $acutionsStatment = "SELECT auction.Name,Buy_Price,End_Price,End_Date FROM auction, hotel WHERE hotel.Manager=? AND auction.hotel=hotel.id ORDER BY End_Date desc";
+                
+                if (!$userauctions = $con->prepare($acutionsStatment)) {
+                    error_log("Prepare Error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
+                } else {
+                    $userauctions->bind_param('s', $_SESSION['userid']);
 
-                    <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
-                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>55</div>
-                    <div class="col s12 m2 flow-text">
-                        <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
-                    </div>
-                    <div class="divider"></div>
-                </div>
-                <span class="divider col s12"></span>
-                <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
-                    <a class="col s12 m3" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
+                    if (!$userauctions->execute()) {
+                        error_log("Execute error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
+                        error_log("Execute failed: (" . $userauctions->errno . ") " . $userauctions->error . "\"" . "\n", 3, $errorpath);
+                    } else {
+                        $resultuserauction = $userauctions->get_result();
+                        for ($i = 0; $i < mysqli_num_rows($resultuserauction); $i++) {
+                            $userauctionsRow = mysqli_fetch_array($resultuserauction);
+                            ?>
+                            <div class="white col s12 PaginAuctionsHiEd" id="PaginAuctionsHiEd_<?php echo $i; ?>" style="padding-top: 10px;padding-bottom: 10px;">
+                                <a class="col s12 m3 truncate" href="#!"><i class="mdi-action-home"></i> <?php echo $userauctionsRow["Name"]; ?></a>
 
-                    <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i>35</div>
-                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i>40</div>
-                    <div class="col s12 m2 flow-text">
-                        <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
-                    </div>
-                </div>
+                                <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $userauctionsRow["Buy_Price"]; ?></div>
+                                <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $userauctionsRow["End_Price"]; ?></div>
+                                <div class="col s12 m2 flow-text">
+                                    <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
+                                </div>
+                                <div class="divider"></div>
+                            </div>
+                            <?php
+                        }
+                    }
+                }
+                ?>
                 <span class="divider col s12"></span>
                 <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
-                    <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-                        <li class="active"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
+                    <ul class="pagination" id="AuctionPaginationList">
+                        <li class="disabled"><a onclick="return PaginAuctionsHistory( - 2)" href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                        <li class="active" id="PaginationNumAuct_0"><a onclick="return PaginAuctionsHistory(0)" href="#!">1</a></li>
+                        <?php
+                        for ($i = 1; $i < mysqli_num_rows($resultuserauction)/6; $i++) {
+                            ?>
+                        <li class="waves-effect" id="PaginationNumAuct_<?php echo $i ?>"><a onclick="return PaginAuctionsHistory(<?php echo $i ?>)"><?php echo $i + 1 ?></a></li>
+                            <?php
+                        }
+                        ?>
                         <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
                     </ul>
                 </div>
@@ -450,12 +415,12 @@ function ownsProfile() {
 
             <!-- Users evaluation -->
             <div class="col s12 m8 tabregion" id="section_3">
-                <div class="z-depth-3 white col s12 " style="padding-top: 15px;padding-bottom: 15px;">                           
-                    <div class="col s12 m4 l4">Ονομ/νυμο</div>                       
-                    <div class="col s12 m3 l4">Δωμάτιο</div>             
-                    <div class="col s12 m5 l4">Βαθμολόγηση</div>     
+                <div class="z-depth-3 white col s12 " style="padding-top: 15px;padding-bottom: 15px;">
+                    <div class="col s12 m4 l4">Ονομ/νυμο</div>
+                    <div class="col s12 m3 l4">Δωμάτιο</div>
+                    <div class="col s12 m5 l4">Βαθμολόγηση</div>
                 </div>
-                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">
                     <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Κωνσταντίνος Χασιώτης </a>
                     <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
                     <div class="col s12 m5 l4">
@@ -466,7 +431,7 @@ function ownsProfile() {
                         <a onclick="" href="#"><i class="mdi-action-star-rate circle amber accent-3"></i></a>
                     </div>
                 </div>
-                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                <div class="z-depth-3 white col s12" style="padding-top: 15px;padding-bottom: 15px;">
                     <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Κωνσταντίνος Χασιώτης </a>
                     <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
                     <div class="col s12 m5 l4">
@@ -562,7 +527,7 @@ function ownsProfile() {
                                     <i class="mdi-action-description prefix"></i>
                                     <input name="PeopleCount" id="AuctionPeopleInput" type="text" pattern="[0-9]{0,2}" class="validate">
                                     <label for="AuctionPeopleInput">Αριθμός ατόμων</label>
-                                </div>                            
+                                </div>
                                 <div class="input-field col s12">
                                     <div class="input-field">
                                         <i class="mdi-social-cake prefix"></i>
@@ -581,7 +546,7 @@ function ownsProfile() {
                                 </div>
                                 <div class="input-field col s12" style="display: none;">
                                     <input value="null" name="AuctionIDSave" type="text">
-                                </div>  
+                                </div>
                                 <div class="input-field col s12">
                                     <button class="btn waves-effect waves-light" type="submit">Υποβολή
                                         <i class="mdi-content-send right"></i>
@@ -593,7 +558,7 @@ function ownsProfile() {
                     <!-- Create Auction -->
 
                     <!--Create hotel-->
-                    <div class="z-depth-3 col s12 m8 tabregion" id="section_5">   
+                    <div class="z-depth-3 col s12 m8 tabregion" id="section_5">
 
                         <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
                             <a class="waves-effect waves-light orange darken-1 btn">ΠΡΟΒΟΛΗ ΣΕΛΙΔΑΣ</a>
@@ -640,7 +605,7 @@ function ownsProfile() {
                             <div class="input-field col s6">
                                 <i class="mdi-communication-phone prefix"></i>
                                 <input name="SaEdHotTel" id="SaEdHotTel" type="text" class="validate">
-                                <label for="SaEdHotTel">Τηλέφωνο</label> 
+                                <label for="SaEdHotTel">Τηλέφωνο</label>
                             </div>
                             <div class="input-field col s6">
                                 <i class="mdi-communication-location-on prefix"></i>
@@ -668,7 +633,7 @@ function ownsProfile() {
                             </div>
                             <div class="input-field col s12" style="display: none;">
                                 <input value="null" name="SaEdHotID" type="text">
-                            </div>                              
+                            </div>
                             <div class="col s12" style="padding-bottom: 20px;padding-top: 40px">
                                 <button class="btn waves-effect waves-light" type="submit" name="action">ΚΑΤΑΧΩΡΗΣΗ
                                     <i class="mdi-content-send right"></i>
@@ -733,13 +698,13 @@ function ownsProfile() {
 
                     <!-- Hotel evaluation -->
                     <div class="z-depth-3 col s12 m8 tabregion" id="section_10">
-                        <div class="white col s12 " style="padding-top: 15px;padding-bottom: 15px;">                           
-                            <div class="col s12 m4 l4">Ξενοδοχείο</div>                       
-                            <div class="col s12 m3 l4">Δημοπρασία</div>             
-                            <div class="col s12 m5 l4">Βαθμολόγηση</div>     
+                        <div class="white col s12 " style="padding-top: 15px;padding-bottom: 15px;">
+                            <div class="col s12 m4 l4">Ξενοδοχείο</div>
+                            <div class="col s12 m3 l4">Δημοπρασία</div>
+                            <div class="col s12 m5 l4">Βαθμολόγηση</div>
                         </div>
                         <span class="divider col s12"></span>
-                        <div class=" white col s12" style="padding-top: 15px;padding-bottom: 15px;">                           
+                        <div class=" white col s12" style="padding-top: 15px;padding-bottom: 15px;">
                             <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
                             <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
                             <div class="col s12 m5 l4">
@@ -751,7 +716,7 @@ function ownsProfile() {
                             </div>
                         </div>
                         <span class="divider col s12"></span>
-                        <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">                          
+                        <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
                             <a class="col s12 m4 l4" href="#!"><i class="mdi-maps-hotel"></i> Grand Budapest Hotel </a>
                             <a class="col s12 m3 l4" href="#!"><i class="mdi-action-home"></i> Δωμάτια σε τιμή ευκαιρίας </a>
                             <div class="col s12 m5 l4">
@@ -780,9 +745,9 @@ function ownsProfile() {
                     <!-- Auctions History -->
                     <div class="card col s12 m8 tabregion" id="section_11">
                         <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
-                            <div class="col s12 m5">Τίτλος</div>                       
-                            <div class="col s12 m3">Τιμή Έναρξης</div>               
-                            <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>  
+                            <div class="col s12 m5">Τίτλος</div>
+                            <div class="col s12 m3">Τιμή Έναρξης</div>
+                            <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>
                         </div>
                         <span class="divider col s12"></span>
                         <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
@@ -821,9 +786,9 @@ function ownsProfile() {
                     <!-- Auctionσ Edit -->
                     <div class="card col s12 m8 tabregion" id="section_9">
                         <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
-                            <div class="col s12 m5">Ξενοδοχεία</div>                       
-                            <div class="col s12 m5">Τηλέφωνο</div>                 
-                            <div class="col s12 m2">Επεξεργασία</div>     
+                            <div class="col s12 m5">Ξενοδοχεία</div>
+                            <div class="col s12 m5">Τηλέφωνο</div>
+                            <div class="col s12 m2">Επεξεργασία</div>
                         </div>
                         <span class="divider col s12"></span>
                         <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
@@ -1042,7 +1007,7 @@ function ownsProfile() {
                                 <input type="password" name="password" id="reenter_password" maxlength="30" class="validate"
                                        required>
                                 <label for="reenter_password">Ξαναβάλε τον κωδικό</label>
-                            </div> 
+                            </div>
                             <div class="input-field col s12">
                                 <i class="mdi-communication-email prefix"></i>
                                 <input name="SaUsMail" id="SaUsMail" type="text" class="validate">
