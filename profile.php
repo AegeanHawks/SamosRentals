@@ -89,40 +89,62 @@ function ownsProfile() {
         ?>
         <script>
             function CurrentTab() {
-                var url = window.location.href;
-                var num = url.match(/#.*/);
-                //alert(num);
+            var url = window.location.href;
+                    var num = url.match(/#.*/);
+                    //alert(num);
 
-                if (num == null) {
-                    $("#section_1").show();
-                } else {
-                    num = num[0].match(/\d+/)[0];
+                    if (num == null) {
+            $("#section_1").show();
+            } else {
+            num = num[0].match(/\d+/)[0];
                     $(".tabregion").hide();
                     $("#section_" + num).show();
-                }
+            }
             }
 
-            $(document).ready(function () {
-                $('.mytab').focus(function () {
-                    var num = this.id.match(/\d+/)[0];
-                            $(".tabregion").hide();
-                    $("#section_" + num).show();
-                });
-            });
             function rotate(id) {
-                var cont = document.getElementById(id).className;
-                if (cont.indexOf('rotateIn') != -1) {
-                    $('#' + id).removeClass('rotateIn');
-                } else {
-                    $('#' + id).addClass('animated rotateIn');
+            var cont = document.getElementById(id).className;
+                    if (cont.indexOf('rotateIn') != - 1) {
+            $('#' + id).removeClass('rotateIn');
+            } else {
+            $('#' + id).addClass('animated rotateIn');
                     setTimeout(function () {
-                        $('#' + id).removeClass('rotateIn');
+                    $('#' + id).removeClass('rotateIn');
                     }, 1000);
-                }
+            }
+            }
+            function UserEditsProfile(edits) {
+            if (edits == true) {
+            $(".detailsbody").hide();
+                    $(".hidden_form_s_1").show();
+            } else {
+            $(".detailsbody").show();
+                    $(".hidden_form_s_1").hide();
+            }
+            return true;
+                    //detailsbody
             }
         </script>
+        <script>
+            $(document).ready(function () {
+            $('.mytab').focus(function () {
+            var num = this.id.match(/\d+/)[0];
+                    $(".tabregion").hide();
+                    $("#section_" + num).show();
+                    /*if (this.id == "mytabE_13") {
+                     document.getElementById("SaUsState").value = "edit";
+                     document.getElementById("SaUsTitle").innerHTML = "Επεξεργασία";
+                     } else if (this.id == "mytab_13") {
+                     document.getElementById("SaUsState").value = "new";
+                     document.getElementById("SaUsTitle").innerHTML = "Προσθήκη";
+                     }*/
+            });
+            });</script>
         <style>
             .tabregion{
+                display: none;
+            }
+            .hidden_form_s_1{
                 display: none;
             }
             .detailshead{
@@ -250,52 +272,137 @@ function ownsProfile() {
 
             <!--User Details-->
             <div class="card row col s12 m8 tabregion" id="section_1" style="display: none">
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">Όνομα: </p>
+                <?php if (ownsProfile()) {
+                    ?>
+                    <div class="col offset-s1 s12" style='padding-bottom: 20px'>
+                        <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(true)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
+                    </div>  
+                <?php }
+                ?>
+                <form action="profile/saveuser.php" method="Get" id="EditUserForm">
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">Όνομα: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $fname; ?></p>
-                </div>
-                <div class="col offset-s1 s10 divider"></div>
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">Επώνυμο: </p>
+                        <p class="col s8 detailsbody"><?php echo $fname; ?></p>
+                        <div class="input-field col s6 hidden_form_s_1">
+                            <input name="SaUsFirstName" type="text" class="validate" value="<?php echo $fname; ?>">
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">Επώνυμο: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $lname; ?></p>
-                </div>
-                <div class="col offset-s1 s10 divider"></div>
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">Ψευδώνυμο: </p>
+                        <p class="col s8 detailsbody"><?php echo $lname; ?></p>
+                        <div class="input-field col s6 hidden_form_s_1">
+                            <input name="SaUsLastname" type="text" class="validate" value="<?php echo $lname; ?>">
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">Ψευδώνυμο: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $username; ?></p>
-                </div>
-                <div class="col offset-s1 s10 divider"></div>
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">Τηλέφωνο: </p>
+                        <p class="col s8 detailsbody"><?php echo $username; ?></p>
+                        <p class="col s8 hidden_form_s_1"><?php echo $username; ?></p>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">Τηλέφωνο: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $tel; ?></p>
-                </div>
-                <div class="col offset-s1 s10 divider"></div>
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">E-mail: </p>
+                        <p class="col s8 detailsbody"><?php echo $tel; ?></p>
+                        <div class="input-field col s6 hidden_form_s_1">
+                            <input name="SaUsTel" type="text" pattern='[0-9]{0,12}' class="validate" value="<?php echo $tel; ?>">
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">E-mail: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $mail; ?></p>
-                </div>
-                <div class="col offset-s1 s10 divider"></div>
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">Ημερομηνία γέννησης: </p>
+                        <p class="col s8 detailsbody"><?php echo $mail; ?></p>
+                        <div class="input-field col s6 hidden_form_s_1">
+                            <input name="SaUsMail" type="text" class="validate" value="<?php echo $mail; ?>">
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">Ημερομηνία γέννησης: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $birthday; ?></p>
-                </div>
-                <div class="col offset-s1 s10 divider"></div>
-                <div class="col offset-s1 s10">
-                    <p class="col s4 detailshead">Ρόλος: </p>
+                        <p class="col s8 detailsbody"><?php echo $birthday; ?></p>
+                        <div class="col s6 input-field hidden_form_s_1">
+                            <input  name="SaUsBirthday" type="text" class="datepicker picker__input" value="<?php echo $birthday; ?>"
+                                    required form="SaveCreateUser">
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider hidden_form_s_1"></div>
+                    <div class="col offset-s1 s10 hidden_form_s_1">
+                        <p class="col s4 detailshead">Κωδικός: </p>
 
-                    <p class="col s8 detailsbody"><?php echo $role; ?></p>
-                </div>
+                        <div class="col s8 input-field tooltipped" data-position="top" data-delay="50"
+                             data-tooltip="Ο κωδικός είναι 8 χαρακτήρων και περιέχει τουλάχιστον 1 αριθμό,κεφαλαίο και μικρό γράμμα.">
+                            <input name="SaUsPassword" type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+                                   onchange="form.reenter_password.pattern = this.value;"
+                                   maxlength="30" class="validate" value="<?php echo $pass; ?>">
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10">
+                        <p class="col s4 detailshead">Φύλλο: </p>
+
+                        <p class="col s8 detailsbody"><?php echo $sex; ?></p>
+                        <div class="input-field col s6 hidden_form_s_1">
+                            <select name="SaUsSex" class="validate" required form="SaveCreateUser">
+                                <option value="male">Άνδρας
+                                </option>
+                                <option value="female">Γυναίκα
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col offset-s1 s10 divider"></div>
+                    <div class="col offset-s1 s10 hidden_form_s_1">
+                        <p class="col s4 detailshead">Ρόλος: </p>
+
+                        <p class="col s8 detailsbody"><?php echo $role; ?></p>
+                        <?php
+                        if (isRole("admin")) {
+                            ?>
+                            <div class="offset-s1 input-field col s6 hidden_form_s_1">
+                                <select id="SaUsRole" name="SaUsRole" class="validate" required form="SaveCreateUser">
+                                    <option value="0">Administrator
+                                    </option>
+                                    <option value="1">Hotelier
+                                    </option>
+                                    <option value="2">User
+                                    </option>
+                                </select>
+                                <label for="SaUsSex">Τύπος</label>
+                            </div>
+                            <?php
+                        } else {
+                            ?>
+                            <p class="col s6 hidden_form_s_1"><?php echo $role; ?></p>
+                            <?php
+                        }
+                        ?>
+                    </div>   
+                    <?php if (ownsProfile()) {
+                        ?> 
+                        <div class="col offset-s1 s12 hidden_form_s_1" style='padding-bottom: 20px'>
+                            <button class="btn waves-effect waves-light" type="submit">Υποβολή
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>  
+                        <div class="col offset-s1 s12 hidden_form_s_1" style='padding-bottom: 20px'>
+                            <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
+                        </div>    
+                    <?php } ?>
+
+                    <input name="SaUsState" id="SaUsState" style='display: none' value="edit">
+                </form>
             </div>
             <!--User Details-->
 
 
-            <!-- Auctionσ History/Edit -->
+            <!-- Auctions History/Edit -->
             <div class="card col s12 m8 tabregion" id="section_2">
                 <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
                     <div class="col s12 m3">Τίτλος</div>                       
@@ -338,7 +445,7 @@ function ownsProfile() {
                     </ul>
                 </div>
             </div>
-            <!-- Auctionσ History/Edit -->
+            <!-- Auctions History/Edit -->
 
 
             <!-- Users evaluation -->
@@ -406,13 +513,27 @@ function ownsProfile() {
                                         <option value="" disabled selected>Επιλέξτε εδώ</option>
                                         <?php
                                         // SQL query to fetch all hotels
-                                        $allhotels = $con->prepare('SELECT Name,ID FROM hotel ORDER BY Name');
-                                        $allhotels->execute();
-                                        $resultHotels = $allhotels->get_result();
+                                        $allhotelsStatement;
+                                        if (isRole("admin")) {
+                                            $allhotelsStatement = "SELECT Name,ID FROM hotel ORDER BY Name";
+                                        } else {
+                                            $allhotelsStatement = "SELECT Name,ID FROM hotel WHERE Manager=? ORDER BY Name";
+                                        }
+                                        if (!$allhotels = $con->prepare($allhotelsStatement)) {
+                                            error_log("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
+                                        } else {
+                                            $allhotels->bind_param('s', $_SESSION['userid']);
 
-                                        for ($i = 0; $i < mysqli_num_rows($resultHotels); $i++) {
-                                            $hotelsRow = mysqli_fetch_array($resultHotels);
-                                            echo '<option value="' . $hotelsRow["ID"] . '">' . $hotelsRow["Name"] . '</option>';
+                                            if (!$allhotels->execute()) {
+                                                error_log("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
+                                                error_log("Execute failed: (" . $allhotels->errno . ") " . $allhotels->error . "\"" . "\n", 3, $errorpath);
+                                            } else {
+                                                $resultHotels = $allhotels->get_result();
+                                                for ($i = 0; $i < mysqli_num_rows($resultHotels); $i++) {
+                                                    $hotelsRow = mysqli_fetch_array($resultHotels);
+                                                    echo '<option value="' . $hotelsRow["ID"] . '">' . $hotelsRow["Name"] . '</option>';
+                                                }
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -429,17 +550,17 @@ function ownsProfile() {
                                 </div>
                                 <div class="input-field col s12 m12 l6">
                                     <i class="mdi-editor-attach-money prefix"></i>
-                                    <input name="Bid_Price" id="AuctionStartPrice" type="text" class="validate">
+                                    <input name="Bid_Price" id="AuctionStartPrice" type="text" pattern="[0-9]{0,6}" class="validate">
                                     <label for="AuctionStartPrice">Τιμή εκκίνησης</label>
                                 </div>
                                 <div class="input-field col s12 m12 l6">
                                     <i class="mdi-editor-attach-money prefix"></i>
-                                    <input name="Buy_Price" id="AuctionBuyPriceInput" type="text" class="validate">
+                                    <input name="Buy_Price" id="AuctionBuyPriceInput" type="text" pattern="[0-9]{0,6}" class="validate">
                                     <label for="AuctionBuyPriceInput">Τιμή αγοράς</label>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="mdi-action-description prefix"></i>
-                                    <input name="PeopleCount" id="AuctionPeopleInput" type="text" class="validate">
+                                    <input name="PeopleCount" id="AuctionPeopleInput" type="text" pattern="[0-9]{0,2}" class="validate">
                                     <label for="AuctionPeopleInput">Αριθμός ατόμων</label>
                                 </div>                            
                                 <div class="input-field col s12">
@@ -484,29 +605,38 @@ function ownsProfile() {
                                 <input name="SaEdHotName" id="HotelNameInput" type="text" class="validate">
                                 <label for="HotelNameInput">Όνομα ξενοδοχείου</label>
                             </div>
-                            <div class="input-field col s6">
-                                <select name="SaEdHotChooseHotelier" form="CreateEditHotel">
-                                    <option value="" disabled selected>Επιλέξτε εδώ</option>
-                                    <?php
-                                    // SQL query to fetch all hotels
-                                    $allhoteliersQuery="SELECT Username FROM user WHERE role=1 ORDER BY Username";
-                                    $allhoteliers = $con->prepare($allhoteliersQuery);
-                                    $allhoteliers->execute();
+                            <?php
+                            if (isRole("admin")) {
+                                ?>
+                                <div class="input-field col s6">
+                                    <select name="SaEdHotChooseHotelier" form="CreateEditHotel">
+                                        <option value="" disabled selected>Επιλέξτε εδώ</option>
+                                        <?php
+                                        // SQL query to fetch all hotels
+                                        $allhoteliersQuery = "SELECT Username FROM user WHERE role<2 ORDER BY Username";
 
-                                    if ($allhoteliers == NULL) {
-                                        error_log("Could not run query: \"" . $allhoteliersQuery . "\"" . "\n", 3, $errorpath);
-                                        echo "0";
-                                    }
-                                    $resultHoteliers = $allhoteliers->get_result();
+                                        if (!$allhoteliers = $con->prepare($allhoteliersQuery)) {
+                                            error_log("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
+                                        } else {
+                                            $allhoteliers->execute();
 
-                                    for ($i = 0; $i < mysqli_num_rows($resultHoteliers); $i++) {
-                                        $hoteliersRow = mysqli_fetch_array($resultHoteliers);
-                                        echo '<option value="' . $hoteliersRow["Username"] . '">' . $hoteliersRow["Username"] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                                <label>Ξενοδόχοι</label>
-                            </div>
+                                            if ($allhoteliers == NULL) {
+                                                error_log("Could not run query: \"" . $allhoteliersQuery . "\"" . "\n", 3, $errorpath);
+                                            }
+                                            $resultHoteliers = $allhoteliers->get_result();
+
+                                            for ($i = 0; $i < mysqli_num_rows($resultHoteliers); $i++) {
+                                                $hoteliersRow = mysqli_fetch_array($resultHoteliers);
+                                                echo '<option value="' . $hoteliersRow["Username"] . '">' . $hoteliersRow["Username"] . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                    <label>Ξενοδόχοι</label>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="input-field col s6">
                                 <i class="mdi-communication-phone prefix"></i>
                                 <input name="SaEdHotTel" id="SaEdHotTel" type="text" class="validate">
@@ -647,7 +777,7 @@ function ownsProfile() {
                     </div>
                     <!-- Hotel evaluation -->
 
-                    <!-- Auctionσ History -->
+                    <!-- Auctions History -->
                     <div class="card col s12 m8 tabregion" id="section_11">
                         <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
                             <div class="col s12 m5">Τίτλος</div>                       
@@ -683,7 +813,7 @@ function ownsProfile() {
                             </ul>
                         </div>
                     </div>
-                    <!-- Auctionσ History/Edit -->
+                    <!-- Auctions History/Edit -->
                     <?php
                 }
                 if (isRole("admin")) {
@@ -730,7 +860,7 @@ function ownsProfile() {
                     <!-- Auctionσ Edit -->
 
 
-                    <!-- Edit User -->
+                    <!-- User Edit -->
                     <div class="col s12 m8 tabregion" id="section_12">
                         <ul class="collapsible" data-collapsible="accordion">
                             <li>
@@ -837,54 +967,7 @@ function ownsProfile() {
                             <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
                         </ul>
                     </div>
-                    <!-- Edit User -->
-
-
-                    <!-- Create User -->
-                    <div class="card col s12 m8 tabregion" id="section_13">
-                        <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
-                            <div class="input-field col s6">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="Name" type="text" class="validate">
-                                <label for="Name">Όνομα</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <i class="mdi-social-group prefix"></i>
-                                <input id="Surname" type="text" class="validate">
-                                <label for="Surname">Επώνυμο</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <i class="mdi-social-whatshot prefix"></i>
-                                <input id="Username" type="text" class="validate">
-                                <label for="Username">Ψευδώνυμο</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <i class="mdi-communication-phone prefix"></i>
-                                <input id="Phone" type="text" class="validate">
-                                <label for="Phone">Τηλέφωνο</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-communication-email prefix"></i>
-                                <input id="Mail" type="text" class="validate">
-                                <label for="Mail">E-mail</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <div class="input-field">
-                                    <i class="mdi-social-cake prefix"></i>
-                                    <input id="birthday" name="birthday" type="text" class="datepicker picker__input"
-                                           required form="register">
-                                    <label for="birthday">Ημερομηνία Γέννησης</label>
-                                </div>
-                            </div>
-                            <div class="input-field col s12" style="padding-top: 10px; padding-bottom: 10px">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Καταχωρηση
-                                    <i class="mdi-content-send right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Create User -->
-
+                    <!-- User Edit -->
                     <?php
                 }
                 ?>
@@ -921,6 +1004,94 @@ function ownsProfile() {
                 </div>
                 <!--Delete user-->
 
+                <!-- User Create/Edit -->
+                <div class="card col s12 m8 tabregion" id="section_13">
+                    <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
+                        <h4 id='SaUsTitle'></h4>
+                        <form id="SaveCreateUser" action="profile/saveuser.php" method="Get">
+                            <div class="input-field col s6">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input name="SaUsFirstName" id="SaUsFirstName" type="text" class="validate">
+                                <label for="SaUsFirstName">Όνομα</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-social-group prefix"></i>
+                                <input name="SaUsLastname" id="SaUsLastname" type="text" class="validate">
+                                <label for="SaUsLastname">Επώνυμο</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-social-whatshot prefix"></i>
+                                <input name="SaUsUsername" id="SaUsUsername" type="text" class="validate">
+                                <label for="SaUsUsername">Ψευδώνυμο</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="mdi-communication-phone prefix"></i>
+                                <input name="SaUsTel" id="SaUsTel" type="text" pattern='[0-9]{0,12}' class="validate">
+                                <label for="SaUsTel">Τηλέφωνο</label>
+                            </div>
+                            <div class="col s12 input-field tooltipped" data-position="top" data-delay="50"
+                                 data-tooltip="Ο κωδικός είναι 8 χαρακτήρων και περιέχει τουλάχιστον 1 αριθμό,κεφαλαίο και μικρό γράμμα.">
+                                <i class="mdi-communication-vpn-key prefix"></i>
+                                <input name="SaUsPassword" type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+                                       onchange="form.reenter_password.pattern = this.value;" id="SaUsPassword"
+                                       maxlength="30" class="validate">
+                                <label for="SaUsPassword">Κωδικός</label>
+                            </div>
+                            <div class="col s12 input-field">
+                                <i class="mdi-action-verified-user prefix"></i>
+                                <input type="password" name="password" id="reenter_password" maxlength="30" class="validate"
+                                       required>
+                                <label for="reenter_password">Ξαναβάλε τον κωδικό</label>
+                            </div> 
+                            <div class="input-field col s12">
+                                <i class="mdi-communication-email prefix"></i>
+                                <input name="SaUsMail" id="SaUsMail" type="text" class="validate">
+                                <label for="SaUsMail">E-mail</label>
+                            </div>
+                            <div class="col s12 input-field">
+                                <i class="mdi-social-cake prefix"></i>
+                                <input  name="SaUsBirthday" id="SaUsBirthday" type="text" class="datepicker picker__input"
+                                        required form="SaveCreateUser">
+                                <label for="SaUsBirthday">Ημερομηνία Γέννησης</label>
+                            </div>
+                            <?php
+                            if (isRole("admin")) {
+                                ?>
+                                <div class="offset-s1 input-field col s11">
+                                    <select id="SaUsRole" name="SaUsRole" class="validate" required form="SaveCreateUser">
+                                        <option value="0">Administrator
+                                        </option>
+                                        <option value="1">Hotelier
+                                        </option>
+                                        <option value="2">User
+                                        </option>
+                                    </select>
+                                    <label for="SaUsSex">Τύπος</label>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <div class="input-field col offset-s1 s11">
+                                <select id="SaUsSex" name="SaUsSex" class="validate" required form="SaveCreateUser">
+                                    <option value="male">Άνδρας
+                                    </option>
+                                    <option value="female">Γυναίκα
+                                    </option>
+                                </select>
+                                <label for="SaUsSex">Φύλο</label>
+                            </div>
+
+                            <input name="SaUsState" id="SaUsState" style='display: none' placeholder="new">
+
+                            <div class="input-field col s12" style="padding-top: 10px; padding-bottom: 10px">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">Καταχωρηση
+                                    <i class="mdi-content-send right"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- User Create/Edit -->
 
                 <?php
             }

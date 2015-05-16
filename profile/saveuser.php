@@ -5,21 +5,36 @@ require '../admin/configuration.php';
 session_start();
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Variables' declare">
-$table = "auction";
+$table = "user";
+$dbColumns = array("FirstName", "Lastname", "Tel", "Password", "Mail", "Birthday", "Sex");
+$formGetNames = array("SaUsFirstName", "SaUsLastname", "SaUsTel", "SaUsPassword", "SaUsMail", "SaUsBirthday", "SaUsSex");
+if ($_SESSION['role'] == 0) {
+    array_push($dbColumns, "Role");
+    array_push($formGetNames, "SaUsRole");
+        echo "nop1";
 
-$dbColumns = array("Name", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images", "id", "Hotel");
-$formGetNames = array("AuctionName", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images", "AuctionIDSave", "CreateAuctionHotelID");
-$formValues = array();
-
-$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
-for ($i = 0; $i < count($formGetNames); $i++) {
-    $formValues[] = $_GET[$formGetNames[$i]];
+    if (strcmp($_GET["SaUsState"], "new") == 0) {
+        echo "nop2";
+        array_push($dbColumns, "Username");
+        array_push($formGetNames, "SaUsUsername");
+    }
 }
-error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 
+// <editor-fold defaultstate="collapsed" desc="Personal data edit">
 // </editor-fold>
 
-if (strcmp($_GET["AuctionIDSave"], "null") != 0) {
+$formValues = array();
+
+//error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+//$_GET["SaUsBirthday"] = DateTime::createFromFormat('d F, Y', $_GET["SaUsBirthday"])->format('Y-m-d');
+for ($i = 0; $i < count($formGetNames); $i++) {
+    echo $formGetNames[$i]." ";
+    $formValues[] = $_GET[$formGetNames[$i]];
+}
+//error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+// </editor-fold>
+
+if (strcmp($_GET["SaUsState"], "edit") == 0) {
     echo "to implement code";
 
     // <editor-fold defaultstate="collapsed" desc="Connect to database">
@@ -41,6 +56,7 @@ if (strcmp($_GET["AuctionIDSave"], "null") != 0) {
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
         error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        error_log("Error: \"" . $mysqli->error . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
@@ -50,7 +66,7 @@ if (strcmp($_GET["AuctionIDSave"], "null") != 0) {
     /* error_log("The word parameter is empty" . "\n", 3, $errorpath);
       echo "0";
       exit(); */
-} else {
+} else if (strcmp($_GET["SaUsState"], "new") == 0) {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Connect to database">
@@ -72,6 +88,7 @@ if (strcmp($_GET["AuctionIDSave"], "null") != 0) {
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
         error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        error_log("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
