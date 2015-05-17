@@ -656,29 +656,42 @@ function ownsProfile() {
                 if (isRole("hotelier")) {
                     ?>
                     <!--Hotel Details-->
-                    <?php
-                    // SQL query to fetch all hotels
-                    if (isset($_GET['editHotel'])) {
-                        $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade FROM hotel WHERE hotel.Manager=? AND ID=?";
-
-                        if (!$hotelDetails = $con->prepare($hotelsDetailsStmt)) {
-                            error_log("Prepare Error: \"" . $hotelsDetailsStmt . "\"" . "\n", 3, $errorpath);
+                    <div class="card row col s12 m8 tabregion" id="section_8">
+                        <?php
+                        // SQL query to fetch 
+                        $hotelerrorflag = false;
+                        $errormessage = "<div class=\"col offset-s1 s10\">
+                            <p class=\"col s12\">Κάτι πήγε στραβά </p>
+                        </div>";
+                        if (!isset($_GET['editHotel'])) {
+                            $hotelerrorflag = true;
+                            echo $errormessage;
                         } else {
-                            $hotelDetails->bind_param('si', $_SESSION['userid'], $_GET['editHotel']);
+                            $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade FROM hotel WHERE hotel.Manager=? AND ID=?";
 
-                            if (!$hotelDetails->execute()) {
-                                error_log("Execute error: \"" . $hotelsDetailsStmt . "\"" . "\n", 3, $errorpath);
-                                error_log("Execute failed: (" . $hotelDetails->errno . ") " . $hotelDetails->error . "\"" . "\n", 3, $errorpath);
+                            if (!$hotelDetails = $con->prepare($hotelsDetailsStmt)) {
+                                error_log("Prepare Error: \"" . $hotelsDetailsStmt . "\"" . "\n", 3, $errorpath);
+                                $hotelerrorflag = true;
+                                echo $errormessage;
                             } else {
-                                $resulthoteldetails = $hotelDetails->get_result();
-                                $hotelDetailsRow;
-                                for ($i = 0; $i < mysqli_num_rows($resulthoteldetails); $i++) {
-                                    $hotelDetailsRow = mysqli_fetch_array($resulthoteldetails);
-                                }
-                                echo mysqli_num_rows($resulthoteldetails);
-                                if (mysqli_num_rows($resulthoteldetails) == 1) {
-                                    ?>
-                                    <div class="card row col s12 m8 tabregion" id="section_8">
+                                $hotelDetails->bind_param('si', $_SESSION['userid'], $_GET['editHotel']);
+
+                                if (!$hotelDetails->execute()) {
+                                    error_log("Execute error: \"" . $hotelsDetailsStmt . "\"" . "\n", 3, $errorpath);
+                                    error_log("Execute failed: (" . $hotelDetails->errno . ") " . $hotelDetails->error . "\"" . "\n", 3, $errorpath);
+                                    $hotelerrorflag = true;
+                                    echo $errormessage;
+                                } else {
+                                    $resulthoteldetails = $hotelDetails->get_result();
+                                    $hotelDetailsRow;
+                                    for ($i = 0; $i < mysqli_num_rows($resulthoteldetails); $i++) {
+                                        $hotelDetailsRow = mysqli_fetch_array($resulthoteldetails);
+                                    }
+                                    if (!(mysqli_num_rows($resulthoteldetails) == 1)) {
+                                        $hotelerrorflag = true;
+                                        echo $errormessage;
+                                    } else {
+                                        ?>
 
                                         <div class="col offset-s1 s12" style='padding-bottom: 20px'>
                                             <a class="waves-effect waves-light btn" href="#gomytab_8" onclick="return UserEditsProfile(true, 8)"><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
@@ -715,7 +728,7 @@ function ownsProfile() {
                                             <div class="col offset-s1 s10">
                                                 <p class="col s4 detailshead_s_8">Βαθμολογία: </p>
 
-                                                <p class="col s8 detailsbody_s_8"><?php echo $hotelDetailsRow["Grade"] ?></p>
+                                                <p class="col s8 detailsbody_s_8"><?php echo "  " . $hotelDetailsRow["Grade"] ?></p>
                                                 <p class="col s6 detailsbody_s_8 hidden_form_s_8"><?php echo "  " . $hotelDetailsRow["Grade"] ?></p>
                                             </div>
                                             <div class="col offset-s1 s10 divider"></div>
@@ -755,15 +768,18 @@ function ownsProfile() {
                                                 <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
                                             </div>
                                         </form>
-                                    </div>
-                                    <!--Hotel Details-->
-                                    <?php
+                                        <!--Hotel Details-->
+                                        <?php
+                                    }
                                 }
                             }
                         }
                     }
-                }
+                    ?>
+                </div>
+                <!--Hotel Details-->
 
+                <?php
                 if (isRole("user")) {
                     ?>
                     <!--Upgrade user-->
