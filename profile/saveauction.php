@@ -7,11 +7,20 @@ session_start();
 // <editor-fold defaultstate="collapsed" desc="Variables' declare">
 $table = "auction";
 
-$dbColumns = array("Name", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images", "id", "Hotel");
-$formGetNames = array("AuctionName", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images", "AuctionIDSave", "CreateAuctionHotelID");
+$dbColumns = array("Name", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images");
+$formGetNames = array("AuctionName", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images", );
+
+if (strcmp($_GET["SaAuDeAction"], "new") == 0) {
+    array_push($dbColumns, "Hotel");
+    array_push($formGetNames, "CrAuHotelID");
+} else if (strcmp($_GET["SaAuDeAction"], "edit") == 0) {
+    array_push($dbColumns, "Closed", "ID");
+    array_push($formGetNames, "Closed","AuctionID");
+}
+
 $formValues = array();
 
-$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
+//$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
 for ($i = 0; $i < count($formGetNames); $i++) {
     $formValues[] = $_GET[$formGetNames[$i]];
 }
@@ -19,8 +28,7 @@ error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorp
 
 // </editor-fold>
 
-if (strcmp($_GET["AuctionIDSave"], "null") != 0) {
-    echo "to implement code";
+if (strcmp($_GET["SaAuDeAction"], "edit") == 0) {
 
     // <editor-fold defaultstate="collapsed" desc="Connect to database">
     $con = db_connect();
@@ -34,7 +42,7 @@ if (strcmp($_GET["AuctionIDSave"], "null") != 0) {
 
     $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
 
-    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionIDSave"];
+    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionID"];
     error_log("Statemnt: " . $statement . "\"" . "\n", 3, $errorpath);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Run query">

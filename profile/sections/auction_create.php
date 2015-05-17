@@ -8,7 +8,7 @@
                 <label for="AuctionTitleInput">Τίτλος</label>
             </div>
             <div class="input-field col s6">
-                <select name="CreateAuctionHotelID" form="CreateEditAuction">
+                <select name="CrAuHotelID" form="CreateEditAuction">
                     <option value="" disabled selected>Επιλέξτε εδώ</option>
                     <?php
                     // SQL query to fetch all hotels
@@ -78,9 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="input-field col s12" style="display: none;">
-                <input value="null" name="AuctionIDSave" type="text">
-            </div>
+            <input name="SaAuDeAction" style="display: none" type="text" class="validate" value="new">
             <div class="input-field col s12">
                 <button class="btn waves-effect waves-light" type="submit">Υποβολή
                     <i class="mdi-content-send right"></i>

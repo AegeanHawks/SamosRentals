@@ -9,7 +9,7 @@
     ?>
     <form action="profile/saveuser.php" method="Get" id="EditUserForm">
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">Όνομα: </p>
+            <p class="col s4 detailshead">Όνομα: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $fname; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
@@ -18,7 +18,7 @@
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">Επώνυμο: </p>
+            <p class="col s4 detailshead">Επώνυμο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $lname; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
@@ -27,14 +27,14 @@
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">Ψευδώνυμο: </p>
+            <p class="col s4 detailshead">Ψευδώνυμο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $username; ?></p>
             <p class="col s8 hidden_form_s_1"><?php echo $username; ?></p>
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">Τηλέφωνο: </p>
+            <p class="col s4 detailshead">Τηλέφωνο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $tel; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
@@ -43,7 +43,7 @@
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">E-mail: </p>
+            <p class="col s4 detailshead">E-mail: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $mail; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
@@ -52,7 +52,7 @@
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">Ημερομηνία γέννησης: </p>
+            <p class="col s4 detailshead">Ημερομηνία γέννησης: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $birthday; ?></p>
             <div class="col s6 input-field hidden_form_s_1">
@@ -62,7 +62,7 @@
         </div>
         <div class="col offset-s1 s10 divider hidden_form_s_1"></div>
         <div class="col offset-s1 s10 hidden_form_s_1">
-            <p class="col s4 detailshead_s_1">Κωδικός: </p>
+            <p class="col s4 detailshead">Κωδικός: </p>
 
             <div class="col s8 input-field tooltipped" data-position="top" data-delay="50"
                  data-tooltip="Ο κωδικός είναι 8 χαρακτήρων και περιέχει τουλάχιστον 1 αριθμό,κεφαλαίο και μικρό γράμμα.">
@@ -73,7 +73,7 @@
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
-            <p class="col s4 detailshead_s_1">Φύλλο: </p>
+            <p class="col s4 detailshead">Φύλλο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $sex; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
@@ -87,7 +87,7 @@
         </div>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10 hidden_form_s_1">
-            <p class="col s4 detailshead_s_1">Ρόλος: </p>
+            <p class="col s4 detailshead">Ρόλος: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $role; ?></p>
             <?php
