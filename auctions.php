@@ -30,17 +30,17 @@ if (isset($_GET['page'])) {
 if (isset($_GET['search'])) {
     // SQL query to fetch information of hotel.
     $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
-    $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel AND (Auction.Name LIKE ? OR Auction.Description LIKE ?) ORDER BY Auction.id'); //SELECT * FROM Auction
+    $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.Buy_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel AND (Auction.Name LIKE ? OR Auction.Description LIKE ?) ORDER BY Auction.id'); //SELECT * FROM Auction
     $sql->bind_param('ss', $search, $search);
     $sql->execute();
     //Calculate pages
     $pages = ceil(mysqli_num_rows($result) / 6);
 } else {
     // SQL query to fetch information of hotel.
-    $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel ORDER BY Auction.id DESC LIMIT ? , ?'); //SELECT * FROM Auction
+    $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.Buy_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel ORDER BY Auction.id DESC LIMIT ? , ?'); //SELECT * FROM Auction
     $id = ($page - 1) * 6;
-    $end = $id + 6;
-    $sql->bind_param('ii', $id, $end);
+    $quantity = 6;
+    $sql->bind_param('ii', $id, $quantity);
     $sql->execute();
     //Calculate how many page do we need
     $pages = ceil($AllAuction / 6);
@@ -179,7 +179,7 @@ include 'header.php';
                 $Description = $row['Description'];
                 $Closed = $row['Closed'];
                 $Bid_Price = $row['Bid_Price'];
-                $End_Price = $row['End_Price'];
+                $Buy_Price = $row['Buy_Price'];
                 $Image = $row['Images'];
                 $Hotel = $row['Hotel'];
                 $HotelName = $row['HotelName'];
@@ -225,7 +225,7 @@ include 'header.php';
                             <p><?php echo $Description; ?>
 
                             <li class="divider"></li>
-                            <p>Τιμή Αγοράς: <?php echo $End_Price; ?></p>
+                            <p>Τιμή Αγοράς: <?php echo $Buy_Price; ?></p>
                             <li class="divider"></li>
                             <div
                                 style="padding-top: 10px; font-size: 1.2em;">
@@ -256,7 +256,7 @@ include 'header.php';
         <div class="row">
             <div id="pages">
                 <ul class="pagination right">
-                    <li class=<?php if ($page < 2) echo '"disabled"><a>'; else echo '"waves-effect"><a href="hotels.php?page=' . ($page - 1) . '">'; ?><i
+                    <li class=<?php if ($page < 2) echo '"disabled"><a>'; else echo '"waves-effect"><a href="auctions.php?page=' . ($page - 1) . '">'; ?><i
                         class="mdi-navigation-chevron-left"></i></a></li>
                     <?php
                     $i = 1;
@@ -268,7 +268,7 @@ include 'header.php';
                             } else {
                                 echo 'waves-effect';
                             }
-                            echo '"><a href="hotels.php?page=' . $pages . '">' . $pages . '</a></li>';
+                            echo '"><a href="auctions.php?page=' . $pages . '">' . $pages . '</a></li>';
                         } else {
                             echo '<li class="';
                             if ($page == $i) {
@@ -276,12 +276,12 @@ include 'header.php';
                             } else {
                                 echo 'waves-effect';
                             }
-                            echo '"><a href="hotels.php?page=' . $i . '">' . $i . '</a></li>';
+                            echo '"><a href="auctions.php?page=' . $i . '">' . $i . '</a></li>';
                         }
                         $i++;
                     }
                     ?>
-                    <li class=<?php if ($page + 1 > $pages) echo '"disabled"><a>'; else echo '"waves-effect"><a href="hotels.php?page=' . ($page + 1) . '">'; ?><i
+                    <li class=<?php if ($page + 1 > $pages) echo '"disabled"><a>'; else echo '"waves-effect"><a href="auctions.php?page=' . ($page + 1) . '">'; ?><i
                         class="mdi-navigation-chevron-right"></i></a></li>
                 </ul>
             </div>

@@ -39,8 +39,8 @@ if (isset($_GET['search'])) {
     // SQL query to fetch information of hotel.
     $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager ORDER BY Hotel.id DESC LIMIT ? , ?');
     $id = ($page - 1) * 6;
-    $end = $id + 6;
-    $sql->bind_param('ii', $id, $end);
+    $quantity = 6;
+    $sql->bind_param('ii', $id, $quantity);
     $sql->execute();
     //Calculate how many page do we need
     $pages = ceil($AllHotels / 6);
