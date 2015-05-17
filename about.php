@@ -40,9 +40,9 @@ include 'header.php';
             <script>
                 var tw = new Typewriter('.easter_egg', {
                     text: 'Μια φορά και έναν καιρό, στο μακρινό βασίλειο του Καρλοβάσου, ' +
-                    'την χώρα των "Ιγκουάνα" και των "αποδημητικών πουλιών", ζούσαν 2 πλάσματα. ' +
-                    'Το ένα κιθαρίστας και το άλλο ένα TROLL.... Μαζί θα κατασκεύζαν μια εκπληκτική, ' +
-                    'fully responsive Web εφαρμογή! Everyday i\'m rolling...',
+                    'την χώρα των "Ιγκουάνα" και των "αποδημητικών πουλιών", ζούσε ' +
+                    'ένας κιθαρίστας και ένα TROLL.... Μαζί θα κατασκεύζαν μια εκπληκτική, ' +
+                    'fully responsive Web εφαρμογή! Everyday i\'m hustling...',
                     interval: 'human',
                     lowerBound: 30,
                     upperBound: 130
