@@ -10,7 +10,7 @@ if (!($firefox || $safari || $chrome)) {
     die(include '404.php');
 }
 
-mb_internal_encoding( 'UTF-8' );
+mb_internal_encoding('UTF-8');
 
 //Server and Database
 $SERVER = "localhost";
@@ -18,10 +18,9 @@ $DB_USERNAME = "root";
 $DB_PASSWORD = "root";
 $DB_NAME = "samosrentals";
 
-$errorpath= "C:\Users\darknight\Documents\php.log";
+$errorpath = "C:\Users\darknight\Documents\php.log";
 
-function db_connect()
-{
+function db_connect() {
     global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 
     // Establishing Connection with Server
@@ -38,9 +37,8 @@ function db_connect()
     return $mysqli;
 }
 
-function islogged()
-{
-    if (isset($_SESSION['expire'])) {
+function islogged() {
+    if (isset($_SESSION['expire']) && session_status() == PHP_SESSION_ACTIVE) {
         $now = time();
         if ($now > $_SESSION['expire']) {
             session_destroy();
@@ -57,16 +55,14 @@ function islogged()
     return false;
 }
 
-function isAdmin()
-{
+function isAdmin() {
     if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
         return true;
     }
     return false;
 }
 
-function debug_to_console($data)
-{
+function debug_to_console($data) {
     if (is_array($data) || is_object($data)) {
         echo("<script>console.log('PHP: " . json_encode($data) . "');</script>");
     } else {
@@ -74,8 +70,8 @@ function debug_to_console($data)
     }
 }
 
-function cropOutput($str, $val)
-{
+function cropOutput($str, $val) {
     return strlen($str) <= $val ? $str : substr($str, 0, $val) . '...';
 }
+
 ?>
