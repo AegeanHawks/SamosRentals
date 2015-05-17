@@ -198,13 +198,15 @@ include 'header.php';
                               class="card-title activator grey-text text-darken-4"><?php echo $Name; ?><i
                                 class="mdi-navigation-more-vert right"></i></span>
 
-                            <div class="flow-text grey-text text-darken-2">Τρέχουσα τιμή: <?php echo $Bid_Price; ?>
+                            <div
+                                class="flow-text grey-text text-darken-2"><?php if ($Closed) echo 'Πωλήθηκε για '; else echo 'Τρέχουσα τιμή:';
+                                echo $Bid_Price; ?>
                                 Euro
                             </div>
                             <p>
                                 <?php
                                 if ($Closed) {
-                                    echo '<div class="flow-text red">Πωλήθηκε!</div>';
+                                    echo '<div class="flow-text red center">Έληξε</div>';
                                 } else {
                                     echo '<div id="Auction_Time' . $id . '" class="countdown-styled left-align"></div>';
                                     echo '<script>SetTimer(' . $id . ',\'' . $End_Date . '\')</script>';
