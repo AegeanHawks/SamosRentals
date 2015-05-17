@@ -2,23 +2,27 @@
 
 // <editor-fold defaultstate="collapsed" desc="Requires">
 require '../admin/configuration.php';
+session_start();
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Variables' declare">
 $table = "hotel";
 
-$dbColumns = array("Name", "Coordinates", "Description", "Comforts", "Image", "Tel");
-$formGetNames = array("SaEdHotName", "SaEdHotCoordinates", "SaEdHotDescription", "SaEdHotComforts", "SaEdHotImage", "SaEdHotTel");
-if(strcmp($_GET["SaEdHotAction"], "edit") != 0)
-{
-    array_push($dbColumns, "ID","Manager");
-    array_push($formGetNames, "SaEdHotID","SaEdHotChooseHotelier");
+$dbColumns = array("Name", "Coordinates", "Description", "Comforts", "Image", "Tel", "Manager");
+$formGetNames = array("SaEdHotName", "SaEdHotCoordinates", "SaEdHotDescription", "SaEdHotComforts", "SaEdHotImage", "SaEdHotTel", "SaEdHotChooseHotelier");
+
+if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
+    array_push($dbColumns, "ID");
+    array_push($formGetNames, "SaEdHotID");
+}
+if (!isAdmin()) {
+    $_GET["SaEdHotChooseHotelier"] = $_SESSION['userid'];
 }
 $formValues = array();
 
 //error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 //$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
 for ($i = 0; $i < count($formGetNames); $i++) {
-    $formValues[] = $_GET[$formGetNames[$i]];
+    $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
 //error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 // </editor-fold>
@@ -43,7 +47,8 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        error_log("Could not run update query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        error_log("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
@@ -53,7 +58,7 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     /* error_log("The word parameter is empty" . "\n", 3, $errorpath);
       echo "0";
       exit(); */
-} else {
+} else if (strcmp($_GET["SaEdHotAction"], "new") == 0) {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Connect to database">
@@ -74,12 +79,15 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        error_log("Could not run insert query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        error_log("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
     }
     // </editor-fold>
     mysqli_close($con);
+} else {
+    error_log("SaEdHotAction is empty \"\"" . "\n", 3, $errorpath);
 }
 ?>

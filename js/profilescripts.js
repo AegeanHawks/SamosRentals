@@ -30,11 +30,11 @@ function rotate(id) {
 }
 function UserEditsProfile(edits, sectionNum) {
     if (edits == true) {
-        $(".detailsbody_s_"+sectionNum).hide();
-        $(".hidden_form_s_"+sectionNum).show();
+        $(".detailsbody_s_" + sectionNum).hide();
+        $(".hidden_form_s_" + sectionNum).show();
     } else {
-        $(".detailsbody_s_"+sectionNum).show();
-        $(".hidden_form_s_"+sectionNum).hide();
+        $(".detailsbody_s_" + sectionNum).show();
+        $(".hidden_form_s_" + sectionNum).hide();
     }
     return true;
     //detailsbody
@@ -58,6 +58,31 @@ function PaginAuctionsHistory(pagenumber) {
     $(".PaginAuctionsHiEd").hide();
     for (var $i = firstvalue; $i < firstvalue + step; $i++) {
         $("#PaginAuctionsHiEd_" + $i).show();
+    }
+    return false;
+}
+
+function Paginate(idPart, classOfPagin, paginationWrapper, pagenumber) {
+    //var idPart = "PaginationNumHotel_";
+    //var classOfPagin = "PaginAuctionsHiEd";
+    //var paginationWrapper = "AuctionPaginationList";
+
+    var step = 6;
+    firstvalue = pagenumber * step;
+
+    var totalpagenumber = document.getElementById(paginationWrapper).childElementCount - 2;
+
+    for (var $i = 0; $i < totalpagenumber; $i++) {
+        document.getElementById(idPart + $i).className = "waves-effect";
+    }
+
+    document.getElementById(idPart + pagenumber.toString()).className = "active";
+
+
+    $("." + classOfPagin).hide();
+    for (var $i = firstvalue; $i < firstvalue + step; $i++) {
+        console.log("#"+idPart + $i);
+        $("#"+classOfPagin+"_" + $i).show();
     }
     return false;
 }

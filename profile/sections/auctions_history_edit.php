@@ -3,18 +3,26 @@
     <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
         <div class="col s12 m3">Τίτλος</div>
         <div class="col s12 m3">Τιμή Έναρξης</div>
-        <div class="col s12 m4">Υψηλότερη Πλειοδοσία</div>
+        <div class="col s12 m4">Τιμή Αγοράς</div>
         <div class="col s12 m2">Επεξεργασία</div>
     </div>
     <span class="divider col s12"></span>
     <?php
     // SQL query to fetch all hotels
-    $acutionsStatment = "SELECT auction.Name,Buy_Price,End_Price,End_Date FROM auction, hotel WHERE hotel.Manager=? AND auction.hotel=hotel.id ORDER BY End_Date desc";
+    if (isRole("hotelier")) {
+        $acutionsStatment = "SELECT auction.ID, auction.Name, Bid_Price, Buy_Price, End_Date FROM auction, hotel WHERE hotel.Manager=? AND auction.hotel=hotel.id ORDER BY End_Date desc";
+    } else if (isRole("admin")) {
+        $acutionsStatment = "SELECT auction.ID, auction.Name, Bid_Price, Buy_Price, End_Date FROM auction, hotel WHERE auction.hotel=hotel.id ORDER BY End_Date desc";
+    }
+
 
     if (!$userauctions = $con->prepare($acutionsStatment)) {
         error_log("Prepare Error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
     } else {
-        $userauctions->bind_param('s', $_SESSION['userid']);
+        if (isRole("hotelier")) {
+            $userauctions->bind_param('s', $_SESSION['userid']);
+        }
+            error_log("Execute error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
 
         if (!$userauctions->execute()) {
             error_log("Execute error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
@@ -25,12 +33,12 @@
                 $userauctionsRow = mysqli_fetch_array($resultuserauction);
                 ?>
                 <div class="white col s12 PaginAuctionsHiEd" id="PaginAuctionsHiEd_<?php echo $i; ?>" style="padding-top: 10px;padding-bottom: 10px;">
-                    <a class="col s12 m3 truncate" href="#!"><i class="mdi-action-home"></i> <?php echo $userauctionsRow["Name"]; ?></a>
+                    <a class="col s12 m3 truncate" href="#!"><i class="mdi-action-home"></i><?php echo $userauctionsRow["Name"]; ?></a>
 
-                    <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $userauctionsRow["Buy_Price"]; ?></div>
-                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $userauctionsRow["End_Price"]; ?></div>
+                    <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $userauctionsRow["Bid_Price"]; ?></div>
+                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $userauctionsRow["Buy_Price"]; ?></div>
                     <div class="col s12 m2 flow-text">
-                        <div class="btn-floating grey"><i class="mdi-editor-mode-edit"></i></div>
+                        <a class="btn-floating grey" href="?editAuction=<?php echo $userauctionsRow["ID"]; ?>#gomytab_15"><i class="mdi-editor-mode-edit"></i></a>
                     </div>
                     <div class="divider"></div>
                 </div>

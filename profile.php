@@ -126,7 +126,7 @@ function ownsProfile() {
         </style>
     </head>
     <body class="white" onload="CurrentTab();
-            PaginAuctionsHistory(0);">
+            PaginAuctionsHistory(0); Paginate('PaginationNumHotel_', 'ElementOFHotelList', 'HotelPaginationList',0);">
 
         <!--Navigation Menu-->
         <?php
@@ -165,7 +165,6 @@ function ownsProfile() {
                                     <a href="#gomytab_4" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
 
                                     <a href="#gomytab_2" class="collection-item mytab" id="mytab_2">Επεξεργασία</a>
-                                    <a href="#gomytab_15" class="collection-item mytab" id="mytab_15">Testing details</a>
                                     <?php
                                 }
                                 if (isRole("hotelier") && ownsProfile()) {
@@ -189,7 +188,6 @@ function ownsProfile() {
                                 ?>
                                 <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-maps-hotel"></i>Ξενοδοχεία</a>
                                 <div class = "collapsible-body collection">
-                                    <a href="#gomytab_14" class="collection-item mytab" id="mytab_14">Testing details</a>
                                     <a href="#gomytab_5" class="collection-item mytab" id="mytab_5">Δημιουργία</a>
                                     <a href="#gomytab_9" class="collection-item mytab" id="mytab_9">Επεξεργασία</a>
                                 </div>
@@ -266,9 +264,9 @@ function ownsProfile() {
                     //Auctions History/Edit
                     include 'profile/sections/auctions_history_edit.php';
                 }
-                if (isRole("admin")) {
                     //Auctionσ Edit
-                    include 'profile/sections/auctions_edit.php';
+                    include 'profile/sections/hotels_edit.php';
+                if (isRole("admin")) {
 
                     //User Edit
                     include 'profile/sections/user_edit.php';

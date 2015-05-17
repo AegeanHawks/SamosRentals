@@ -26,7 +26,7 @@ $formValues = array();
 //error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 //$_GET["SaUsBirthday"] = DateTime::createFromFormat('d F, Y', $_GET["SaUsBirthday"])->format('Y-m-d');
 for ($i = 0; $i < count($formGetNames); $i++) {
-    $formValues[] = $_GET[$formGetNames[$i]];
+    $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
 //error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 // </editor-fold>

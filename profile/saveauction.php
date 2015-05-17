@@ -22,7 +22,7 @@ $formValues = array();
 
 //$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
 for ($i = 0; $i < count($formGetNames); $i++) {
-    $formValues[] = $_GET[$formGetNames[$i]];
+    $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
 error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 

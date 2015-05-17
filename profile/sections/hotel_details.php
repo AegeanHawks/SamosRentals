@@ -7,7 +7,8 @@
         if (!isset($_GET['editHotel'])) {
             throw new Exception("Variable editAuction is not set at url");
         }
-        $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade FROM hotel WHERE hotel.Manager=? AND ID=?";
+        
+        $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade, Manager FROM hotel WHERE hotel.Manager=? AND ID=?";
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!$hotelDetails = $con->prepare($hotelsDetailsStmt)) {
@@ -29,7 +30,7 @@
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!(mysqli_num_rows($resulthoteldetails) == 1)) {
-            throw new Exception("Query lines are ".mysqli_num_rows($resulthoteldetails)." instead of 1");
+            throw new Exception("Query lines are " . mysqli_num_rows($resulthoteldetails) . " instead of 1");
         }
         // </editor-fold>
 
@@ -91,6 +92,11 @@
                 <div class="input-field col s6 hidden_form_s_14">
                     <input name="SaEdHotCoordinates" id="HotelLocationInput" type="text" class="validate" value="<?php echo $hotelDetailsRow["Coordinates"] ?>">
                 </div>
+            </div>
+            <div class="col offset-s1 s10 divider"></div>
+            <div class="col offset-s1 s10">
+                <p class="col s4 detailshead">Μανατζερ: </p>
+                <p class="col s4 detailsbody_s_14"><?php echo $hotelDetailsRow["Manager"] ?></p>
             </div>
             <div class="col offset-s1 s10 divider"></div>
             <div class="col s6 m6 l5 file-field input-field hidden_form_s_14">
