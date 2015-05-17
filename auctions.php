@@ -27,8 +27,29 @@ if (isset($_GET['page'])) {
     $page = htmlspecialchars($_GET['page']);
 }
 
-//Calculate how many page do we need
-$pages = ceil($AllAuction / 6);
+if (isset($_GET['search'])) {
+    // SQL query to fetch information of hotel.
+    $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
+    $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel AND (Auction.Name LIKE ? OR Auction.Description LIKE ?) ORDER BY Auction.id'); //SELECT * FROM Auction
+    $sql->bind_param('ss', $search, $search);
+    $sql->execute();
+    //Calculate pages
+    $pages = ceil(mysqli_num_rows($result) / 6);
+} else {
+    // SQL query to fetch information of hotel.
+    $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel ORDER BY Auction.id DESC LIMIT ? , ?'); //SELECT * FROM Auction
+    $id = ($page - 1) * 6;
+    $end = $id + 6;
+    $sql->bind_param('ii', $id, $end);
+    $sql->execute();
+    //Calculate how many page do we need
+    $pages = ceil($AllAuction / 6);
+}
+
+$result = $sql->get_result();
+if (mysqli_num_rows($result) == 0) {
+    die(include '404.php');
+}
 
 if ($page > $pages || $page < 1) {
     //Returns error that page not found
@@ -152,25 +173,6 @@ include 'header.php';
     <div class="row">
         <div id="stream">
             <?php
-            if (isset($_GET['search'])) {
-                // SQL query to fetch information of hotel.
-                $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
-                $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel AND (Auction.Name LIKE ? OR Auction.Description LIKE ?) ORDER BY Auction.id'); //SELECT * FROM Auction
-                $sql->bind_param('ss', $search, $search);
-                $sql->execute();
-            } else {
-                // SQL query to fetch information of hotel.
-                $sql = $con->prepare('SELECT Auction.ID,Auction.Name,Auction.Description,Auction.Closed,Auction.Bid_Price,Auction.End_Price,Auction.Hotel,Auction.Images, DATE_FORMAT(Auction.End_Date,\'%M %e, %Y %h:%i:%S\') AS End_Date, Hotel.Name AS HotelName, Hotel.Image AS HotelImage FROM Auction,Hotel WHERE Hotel.ID = Auction.Hotel ORDER BY Auction.id DESC LIMIT ? , ?'); //SELECT * FROM Auction
-                $id = ($page - 1) * 6;
-                $end = $id + 6;
-                $sql->bind_param('ii', $id, $end);
-                $sql->execute();
-            }
-
-            $result = $sql->get_result();
-            if (mysqli_num_rows($result) == 0) {
-                //die(include '404.php');
-            }
             while ($row = mysqli_fetch_array($result)) {
                 $id = $row['ID'];
                 $Name = $row['Name'];
@@ -181,7 +183,8 @@ include 'header.php';
                 $Image = $row['Images'];
                 $Hotel = $row['Hotel'];
                 $HotelName = $row['HotelName'];
-                $HotelImage = $row['HotelImage'];
+                //Explode HotelImage to get all images
+                $HotelImage = explode(";", $row['HotelImage']);
                 $End_Date = $row['End_Date'];
                 ?>
                 <div class="col s12 m6 l4">
@@ -230,8 +233,8 @@ include 'header.php';
                             <div class="center valign-wrapper" style="padding: 5px 50px 0px 50px;">
                                 <img id="<?php echo 'img_prof' . $id; ?>"
                                      onclick="rotate('<?php echo 'img_prof' . $id; ?>')"
-                                     class=" circle responsive-img z-depth-3 grey lighten-3" "
-                                src="<?php echo $HotelImage; ?>">
+                                     class=" circle responsive-img z-depth-3 grey lighten-3"
+                                     src="<?php echo $HotelImage[0]; ?>" style="height: 200px; width: 200px;">
                             </div>
                             </p>
                         </div>

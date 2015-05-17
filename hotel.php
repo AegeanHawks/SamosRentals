@@ -144,7 +144,7 @@ include 'header.php';
                 <span class="title">Τηλέφωνο επικοινωνίας</span>
 
                 <p>
-                    <?php echo $Tel; ?>
+                    <a href="tel:<?php echo $Tel; ?>"><?php echo $Tel; ?></a>
                 </p>
             </li>
             <li class="collection-item avatar">

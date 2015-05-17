@@ -27,9 +27,29 @@ if (isset($_GET['page'])) {
     $page = htmlspecialchars($_GET['page']);
 }
 
-//Calculate how many page do we need
-$pages = ceil($AllHotels / 6);
-//debug_to_console($page . ' ' . $pages);
+if (isset($_GET['search'])) {
+    // SQL query to fetch information of hotel.
+    $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
+    $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager AND (Hotel.Name LIKE ? OR Hotel.Description LIKE ?) ORDER BY Hotel.id');
+    $sql->bind_param('ss', $search, $search);
+    $sql->execute();
+    //Calculate pages
+    $pages = ceil(mysqli_num_rows($result) / 6);
+} else {
+    // SQL query to fetch information of hotel.
+    $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager ORDER BY Hotel.id DESC LIMIT ? , ?');
+    $id = ($page - 1) * 6;
+    $end = $id + 6;
+    $sql->bind_param('ii', $id, $end);
+    $sql->execute();
+    //Calculate how many page do we need
+    $pages = ceil($AllHotels / 6);
+}
+
+$result = $sql->get_result();
+if (mysqli_num_rows($result) == 0) {
+    die(include '404.php');
+}
 
 if ($page > $pages || $page < 1) {
     //Returns error that page not found
@@ -107,25 +127,6 @@ include 'header.php';
     <div class="row">
         <div id="stream">
             <?php
-            if (isset($_GET['search'])) {
-                // SQL query to fetch information of hotel.
-                $search = '%' . str_replace(" ", "%", $_GET['search']) . '%';
-                $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager AND (Hotel.Name LIKE ? OR Hotel.Description LIKE ?) ORDER BY Hotel.id'); //SELECT * FROM Auction
-                $sql->bind_param('ss', $search, $search);
-                $sql->execute();
-            } else {
-                // SQL query to fetch information of hotel.
-                $sql = $con->prepare('SELECT Hotel.*, User.LastName,User.FirstName,User.Image AS M_Image FROM Hotel, User WHERE User.Username=Hotel.Manager ORDER BY Hotel.id DESC LIMIT ? , ?'); //SELECT * FROM Hotel
-                $id = ($page - 1) * 6;
-                $end = $id + 6;
-                $sql->bind_param('ii', $id, $end);
-                $sql->execute();
-            }
-
-            $result = $sql->get_result();
-            if (mysqli_num_rows($result) == 0) {
-                //die(include '404.php');
-            }
             while ($row = mysqli_fetch_array($result)) {
                 $id = $row['ID'];
                 $Name = $row['Name'];
@@ -166,7 +167,8 @@ include 'header.php';
                             <p><?php echo $Description; ?>
 
                             <li class="divider"></li>
-                            <div style="padding: 10px 0px 10px 0px;">Τηλέφωνο: <?php echo $Tel; ?></div>
+                            <div style="padding: 10px 0px 10px 0px;">Τηλέφωνο: <a
+                                    href="tel:<?php echo $Tel; ?>"><?php echo $Tel; ?></a></div>
                             <li class="divider"></li>
                             <p>Βαθμολογία: <?php echo round($Grade, 1); ?>
                                 <input id="input-id" type="number" class="rating" value="<?php echo $Grade; ?>" max="5"
@@ -174,7 +176,9 @@ include 'header.php';
                             <li class="divider"></li>
                             <div
                                 style="padding-top: 10px; font-size: 1.2em;">
-                                Μάνατζερ: <?php echo $lname . ' ' . $fname; ?></div>
+                                Μάνατζερ: <a
+                                    href="profile.php?user=<?php echo $Manager; ?>"><?php echo $lname . ' ' . $fname; ?></a>
+                            </div>
 
                             <div class="center valign-wrapper" style="padding: 5px 50px 0px 50px;">
                                 <img id="<?php echo 'img_prof' . $id; ?>"
