@@ -23,7 +23,7 @@
 
 
                 <ul id="nav-mobile" class="right side-nav blue accent-3">
-                    <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
+                    <li><a href="hotels.php" class="white-text">Ξενοδοχεία</a></li>
                     <li><a href="auctions.php" class="white-text">Δημοπρασίες</a></li>
                     <li><a href="register.php" class=" white-text waves-effect waves-stamplay btn-flat">Εγγραφη</a></li>
                     <li><a href="login.php" class="waves-effect waves-light btn white-text">Συνδεση</a></li>
@@ -59,7 +59,7 @@
                         <span><?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></span>
                     </li>
                     <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>" class="white-text">Προφίλ</a>
-                    <li><a href="hotels.php" class="white-text">Ξενοδοχία</a></li>
+                    <li><a href="hotels.php" class="white-text">Ξενοδοχεία</a></li>
                     <li><a href="auctions.php" class="white-text">Δημοπρασίες</a></li>
                     <li><a href="logout.php" class="white-text waves-red">Αποσύνδεση</a></li>
                     </li>
@@ -70,7 +70,7 @@
 
             <ul class="right hide-on-med-and-down">
                 <li class="waves-effect waves-light"><a href="hotels.php" class="white-text" id="menu_hotels"
-                                                        onclick="$('#menu_hotels').addClass('animated swing')">Ξενοδοχία</a>
+                                                        onclick="$('#menu_hotels').addClass('animated swing')">Ξενοδοχεία</a>
                 </li>
                 <li class="waves-effect waves-light"><a href="auctions.php" class="white-text" id="menu_auctions"
                                                         onclick="$('#menu_auctions').addClass('animated swing')">Δημοπρασίες</a>
