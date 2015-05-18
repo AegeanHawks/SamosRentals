@@ -54,23 +54,6 @@ if ($num_row == 1) {
     die(include '404.php');
 }
 
-function isRole($role) {
-    if (!islogged()) {
-        return false;
-    }
-
-    $level = $_SESSION['role'];
-    if ($level == 0 && $role == "admin") {
-        return true;
-    } else if ($level == 1 && $role == "hotelier") {
-        return true;
-    } else if ($level == 2 && $role == "user") {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 function ownsProfile() {
     if (islogged() && $_SESSION['userid'] == $GLOBALS['user']) {
         return true;

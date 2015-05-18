@@ -74,4 +74,21 @@ function cropOutput($str, $val) {
     return strlen($str) <= $val ? $str : substr($str, 0, $val) . '...';
 }
 
+function isRole($role) {
+    if (!islogged()) {
+        return false;
+    }
+
+    $level = $_SESSION['role'];
+    if ($level == 0 && $role == "admin") {
+        return true;
+    } else if ($level == 1 && $role == "hotelier") {
+        return true;
+    } else if ($level == 2 && $role == "user") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>
