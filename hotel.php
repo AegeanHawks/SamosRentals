@@ -196,7 +196,7 @@ include 'header.php';
             </div>
             <?php
             // SQL query to fetch information all auctions of a hotel.
-            $sql = $con->prepare('SELECT ID,Name,Closed,Bid_Price,End_Price FROM Auction WHERE Hotel= ?');
+            $sql = $con->prepare('SELECT ID,Name,Closed,Bid_Price,Buy_Price FROM Auction WHERE Hotel= ?');
             $sql->bind_param('s', $_GET['id']);
             $sql->execute();
 
@@ -206,7 +206,7 @@ include 'header.php';
                 $Name = $row['Name'];
                 $Closed = $row['Closed'];
                 $Bid_Price = $row['Bid_Price'];
-                $End_Price = $row['End_Price'];
+                $Buy_Price = $row['Buy_Price'];
                 ?>
                 <li class="divider col s12"></li>
                 <div class="white col s12" style="padding-top: 10px;padding-bottom: 10px;">
@@ -215,7 +215,7 @@ include 'header.php';
 
                     <div class="col s12 m3 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $Bid_Price; ?>
                     </div>
-                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $End_Price; ?>
+                    <div class="col s12 m4 flow-text"><i class="mdi-editor-attach-money"> </i><?php echo $Buy_Price; ?>
                     </div>
                     <div class="col s12 m2 flow-text">
                         <div class="btn-floating disabled green"><i class="<?php if ($Closed) {

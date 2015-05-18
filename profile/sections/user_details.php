@@ -13,7 +13,8 @@
 
             <p class="col s8 detailsbody_s_1"><?php echo $fname; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
-                <input name="SaUsFirstName" type="text" class="validate" value="<?php echo $fname; ?>">
+                <input name="SaUsFirstName" type="text" class="validate" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$"
+                       value="<?php echo $fname; ?>">
             </div>
         </div>
         <div class="col offset-s1 s10 divider"></div>
@@ -22,7 +23,8 @@
 
             <p class="col s8 detailsbody_s_1"><?php echo $lname; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
-                <input name="SaUsLastname" type="text" class="validate" value="<?php echo $lname; ?>">
+                <input name="SaUsLastname" type="text" class="validate" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{2,20}$"
+                       value="<?php echo $lname; ?>">
             </div>
         </div>
         <div class="col offset-s1 s10 divider"></div>
@@ -38,7 +40,8 @@
 
             <p class="col s8 detailsbody_s_1"><?php echo $tel; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
-                <input name="SaUsTel" type="text" pattern='[0-9]{0,12}' class="validate" value="<?php echo $tel; ?>">
+                <input name="SaUsTel" type="text" pattern='[\+]\d{2}\d{10}' class="validate"
+                       value="<?php echo $tel; ?>">
             </div>
         </div>
         <div class="col offset-s1 s10 divider"></div>
@@ -47,7 +50,7 @@
 
             <p class="col s8 detailsbody_s_1"><?php echo $mail; ?></p>
             <div class="input-field col s6 hidden_form_s_1">
-                <input name="SaUsMail" type="text" class="validate" value="<?php echo $mail; ?>">
+                <input name="SaUsMail" type="email" class="validate" value="<?php echo $mail; ?>">
             </div>
         </div>
         <div class="col offset-s1 s10 divider"></div>
