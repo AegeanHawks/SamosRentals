@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="col offset-s1 s10 divider"></div>
-        <div class="col offset-s1 s10 hidden_form_s_1">
+        <div class="col offset-s1 s10">
             <p class="col s4 detailshead">Ρόλος: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $role; ?></p>
