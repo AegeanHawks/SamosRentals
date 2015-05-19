@@ -22,7 +22,7 @@ function getHighestBid(id) {
             }
         }
     }
-    xmlhttp.open("GET", "../bid/highest_bid.php?auctionID=" + id, true);
+    xmlhttp.open("GET", "http://"+window.location.host+"/bid/highest_bid.php?auctionID=" + id, true);
     xmlhttp.send();
 }
 
@@ -62,7 +62,7 @@ function userBid(auctionID) {
     }
 
     var value = document.getElementById("auctionUserBid").value;
-    xmlhttp.open("GET", "../bid/attempt_bid.php?bid_value=" + value + "&auctionID=" + auctionID, true);
+    xmlhttp.open("GET", "http://"+window.location.host+"/bid/attempt_bid.php?bid_value=" + value + "&auctionID=" + auctionID, true);
     xmlhttp.send();
 }
 
@@ -91,7 +91,7 @@ function auctionBuyNow(auctionID) {
         }
     }
 
-    xmlhttp.open("GET", "../bid/buy_now.php?auctionID=" + auctionID, true);
+    xmlhttp.open("GET", "http://"+window.location.host+"/bid/buy_now.php?auctionID=" + auctionID, true);
     xmlhttp.send();
 }
 
@@ -119,6 +119,6 @@ function userLastBid(auctionID) {
             }
         }
     }
-    xmlhttp.open("GET", "../bid/last_user_bid.php?auctionID=" + auctionID, true);
+    xmlhttp.open("GET", "http://"+window.location.host+"/bid/last_user_bid.php?auctionID=" + auctionID, true);
     xmlhttp.send();
 }
