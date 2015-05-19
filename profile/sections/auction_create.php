@@ -49,17 +49,20 @@
             </div>
             <div class="input-field col s12 m12 l6">
                 <i class="mdi-editor-attach-money prefix"></i>
-                <input name="Bid_Price" id="AuctionStartPrice" type="text" pattern="[0-9]{0,6}" class="validate">
+                <input name="Bid_Price" id="AuctionStartPrice" type="text" pattern="[0-9]{0,6}"
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="validate">
                 <label for="AuctionStartPrice">Τιμή εκκίνησης</label>
             </div>
             <div class="input-field col s12 m12 l6">
                 <i class="mdi-editor-attach-money prefix"></i>
-                <input name="Buy_Price" id="AuctionBuyPriceInput" type="text" pattern="[0-9]{0,6}" class="validate">
+                <input name="Buy_Price" id="AuctionBuyPriceInput" type="text" pattern="[0-9]{0,6}"
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="validate">
                 <label for="AuctionBuyPriceInput">Τιμή αγοράς</label>
             </div>
             <div class="input-field col s12">
                 <i class="mdi-action-description prefix"></i>
-                <input name="PeopleCount" id="AuctionPeopleInput" type="text" pattern="[0-9]{0,2}" class="validate">
+                <input name="PeopleCount" id="AuctionPeopleInput" type="text" pattern="[0-9]{0,2}"
+                       onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="validate">
                 <label for="AuctionPeopleInput">Αριθμός ατόμων</label>
             </div>
             <div class="input-field col s12">
