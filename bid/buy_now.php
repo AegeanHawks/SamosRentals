@@ -1,19 +1,28 @@
 <?php
 
 //http://localhost:8000/bid/buy_now.php?action=&buy_value=5&auctionID=7
+session_start();
+include_once '../admin/configuration.php';
+
 try {
-    if (!isset($_GET["buy_value"])) {
+    if (!isset($_GET["auctionID"])) {
         throw new Exception("buy_value is not set");
     }
 
-    //http_get("/bid/highest_bid?auctionID=" + $_GET["auctionID"]);
-    include '/highest_bid.php';
-    $var = json_decode($highestBid);
-    if ($var->value > $_GET["buy_value"]) {
-        echo "-1";
-    }
 
-    $auctionDetailsStmt = "INSERT INTO bid(Username,BidMoney,idAuction) VALUES (?,?,?)";
+    // <editor-fold defaultstate="collapsed" desc="Check if auction is closed">   
+    ob_start();
+    include '/auction_is_closed.php';
+    $isClosed = ob_get_clean();
+
+    $auctionIsClosed = json_decode($isClosed);
+    if ($auctionIsClosed->closed == "yes") {
+        throw new Exception("Auction is closed");
+    }
+    // </editor-fold>
+
+
+    $auctionDetailsStmt = "INSERT INTO bid(Username,BidMoney,idAuction) VALUES (?,(SELECT Buy_Price FROM auction WHERE ID=?),?)";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
     // <editor-fold defaultstate="collapsed" desc="Error checking">
@@ -22,7 +31,7 @@ try {
         throw new Exception("\nPrepared '" . $auctionDetailsStmt . "' statement failed. \nDetails: " . mysqli_error($con));
     }
     // </editor-fold>
-    $auctionDetails->bind_param('sii', $_SESSION["userid"], $_GET["buy_value"], $_GET["auctionID"]);
+    $auctionDetails->bind_param('sii', $_SESSION["userid"], $_GET["auctionID"], $_GET["auctionID"]);
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionDetails->execute()) {
@@ -36,8 +45,8 @@ try {
     $resulauctionDetails = $auctionDetails->get_result();
     //$res->num_rows
     if ($auctionDetails->affected_rows == 1) {
-        
-        $auctionDetailsStmt = "UPDATE auction SET Highest_Bidder=? WHERE ID=?";
+
+        $auctionDetailsStmt = "UPDATE auction SET Highest_Bidder=?, Closed=1 WHERE ID=?";
 
         // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
         // <editor-fold defaultstate="collapsed" desc="Error checking">

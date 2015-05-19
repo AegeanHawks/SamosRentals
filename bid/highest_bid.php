@@ -1,6 +1,11 @@
 <?php
-session_start();
-require '../admin/configuration.php';
+
+
+include_once '../admin/configuration.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 //http://localhost:8000/bid/highest_bid.php?auctionID=7
 
 try {
@@ -8,7 +13,7 @@ try {
         throw new Exception("Id is not set");
     }
     $con = db_connect();
-    $auctionDetailsStmt = "SELECT BidMoney FROM bid, auction WHERE auction.ID=? AND bid.idAuction=auction.ID";
+    $auctionDetailsStmt = "SELECT MAX(BidMoney) as BidMoney FROM bid, auction WHERE auction.ID=? AND bid.idAuction=auction.ID";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
     // <editor-fold defaultstate="collapsed" desc="Error checking">
@@ -16,7 +21,7 @@ try {
         throw new Exception("\nPrepared '" . $auctionDetailsStmt . "' statement failed. \nDetails: " . mysqli_error($con));
     }
     // </editor-fold>
-    $auctionDetails->bind_param('i', $_GET["id"]);
+    $auctionDetails->bind_param('i', $_GET["auctionID"]);
 
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
@@ -42,7 +47,7 @@ try {
         echo $highestBid;
     }
 } catch (Exception $e) {
-    error_log("##Error at ".__FILE__."\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
     $highestBid = '{"success":"no"}';
     echo $highestBid;
 }

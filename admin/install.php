@@ -97,7 +97,7 @@ CREATE TABLE Auction (
 CREATE TABLE Bid(
     Username    VARCHAR(60),
     idAuction   INT,
-    BidMoney    DECIMAL(2),
+    BidMoney    INT,
     Won BOOLEAN,
     FOREIGN KEY (Username) REFERENCES User (Username),
     FOREIGN KEY (idAuction) REFERENCES Auction (ID)

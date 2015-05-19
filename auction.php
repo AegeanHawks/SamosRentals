@@ -27,8 +27,9 @@ if (!isset($_GET["id"])) {
 
             }
         </style>
+        <script src="js/bid_scripts.js"></script>
     </head>
-    <body>
+    <body onload="initFuncIntervals(<?php echo $_GET["id"] ?>)">
         <?php
         include 'header.php';
         ?>
@@ -65,6 +66,7 @@ if (!isset($_GET["id"])) {
             // </editor-fold>
 
             $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
+            //$_SESSION["CurrentViewingAuctionBidPrice"]=$auctionDetailsRow["Bid_Price"];
         } catch (Exception $e) {
             error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
             $errormessage = "<div class=\"col offset-s1 s10\">
@@ -131,9 +133,6 @@ if (!isset($_GET["id"])) {
                             <?php
                             if ($auctionDetailsRow["Highest_Bidder"] == null) {
                                 echo $auctionDetailsRow["Bid_Price"];
-                            } else {
-                                echo $auctionDetailsRow["auctionID"];
-                                //getHighestBid($auctionDetailsRow["auctionID"]);
                             }
                             ?></p>
                     </div>
@@ -143,30 +142,29 @@ if (!isset($_GET["id"])) {
                         <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
                             <h5 class="grey-text bidheader truncate">ΠΛΕΙΟΔΟΤΗΣΑΤΕ</h5>
 
-                            <p class="bidnumber"><?php
-                                if ($auctionDetailsRow["Highest_Bidder"] != null) {
-                                    include "bid/last_user_bid.php";
-                                }
-                                ?></p>
+                            <p class="bidnumber" id="LastUserBid"><?php
+                    if ($auctionDetailsRow["Highest_Bidder"] != null) {
+                        //include "bid/last_user_bid.php";
+                    }
+                        ?></p>
                         </div>
-                        <form id="auctionBidForm" method="Get" action="bid/attemt_bid.php">
+                        <form id="auctionBidForm" method="Get">
                             <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Πλειοδοτησε 
-                                </button>
-                                <input class="validate bidnumber" style="height: 90px; margin-top: 45px" placeholder="" size="90" id="last_name" type="text" >
+                                <a class="btn waves-effect waves-light" onclick="userBid(<?php echo $_GET["id"]; ?>)" name="action">Πλειοδοτησε 
+                                </a>
+                                <input id="auctionUserBid" class="validate bidnumber" style="height: 90px; margin-top: 45px" placeholder="" size="90" name="bid_value" type="text" >
+                                <input name="auctionID" style="display: none" value="<?php echo $_GET["id"]; ?>">
                             </div>
                         </form>
                         <?php
                         if ($auctionDetailsRow["Buy_Price"] != 0) {
                             ?>
-                            <form id="auctionBuyForm" method="Get" action="bid/buy_now.php">
+                            <form id="auctionBuyForm" method="Get">
                                 <div class="col s12 m6 z-depth-1" style="padding: 10px; height: 190px;">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Αγορασε τωρα</button>
-                                    <p class="bidnumber">
+                                    <a class="btn waves-effect waves-light" name="action" onclick="auctionBuyNow(<?php echo $_GET["id"]; ?>)">Αγορασε τωρα</a>
+                                    <p class="bidnumber" id="BuyNowValue">
                                         <?php echo $auctionDetailsRow["Buy_Price"]; ?>
                                     </p>
-                                    <input name="buy_value" style="display: none" value="<?php echo $auctionDetailsRow["Buy_Price"]; ?>">
-                                    <input name="auctionID" style="display: none" value="<?php echo $_GET["id"]; ?>">
                                 </div>
                                 <?php
                             }
