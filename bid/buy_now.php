@@ -37,8 +37,8 @@ try {
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionDetails->execute()) {
-        error_log("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-        error_log("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
         throw new Exception("Statement failed to execute");
     }
     // </editor-fold>
@@ -60,8 +60,8 @@ try {
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!$auctionDetails->execute()) {
-            error_log("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-            error_log("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+            debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
+            debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
             throw new Exception("Statement failed to execute");
         }
         // </editor-fold>
@@ -72,7 +72,7 @@ try {
 
     echo '1';
 } catch (Exception $e) {
-    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
     echo '-1';
 }
 ?>

@@ -19,8 +19,8 @@ try {
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$userBid->execute()) {
-        error_log("Execute error: \"" . $userBidStmt . "\"" . "\n", 3, $errorpath);
-        error_log("Execute failed: (" . $userBid->errno . ") " . $userBid->error . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Execute error: \"" . $userBidStmt . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Execute failed: (" . $userBid->errno . ") " . $userBid->error . "\"" . "\n", 3, $errorpath);
         throw new Exception("Statement failed to execute");
     }
     // </editor-fold>
@@ -30,7 +30,7 @@ try {
     $userBidRow = mysqli_fetch_array($resultUserBid);
     echo '{"success":"yes", "value":"' . $userBidRow["UserBid"] . '"}';
 } catch (Exception $e) {
-    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
     echo $highestBid = '{"success":"no}';
 }
 ?>

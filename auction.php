@@ -53,8 +53,8 @@ if (!isset($_GET["id"])) {
 
             // <editor-fold defaultstate="collapsed" desc="Error checking">
             if (!$auctionDetails->execute()) {
-                error_log("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-                error_log("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+                debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
+                debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
                 throw new Exception("Statement failed to execute");
             }
             // </editor-fold>
@@ -68,7 +68,7 @@ if (!isset($_GET["id"])) {
             $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
             //$_SESSION["CurrentViewingAuctionBidPrice"]=$auctionDetailsRow["Bid_Price"];
         } catch (Exception $e) {
-            error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+            debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
             $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
             echo $errormessage;

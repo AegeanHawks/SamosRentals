@@ -19,13 +19,13 @@
                         $allhotelsStatement = "SELECT Name,ID FROM hotel WHERE Manager=? ORDER BY Name";
                     }
                     if (!$allhotels = $con->prepare($allhotelsStatement)) {
-                        error_log("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
+                        debug_to_console("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
                     } else {
                         $allhotels->bind_param('s', $_SESSION['userid']);
 
                         if (!$allhotels->execute()) {
-                            error_log("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
-                            error_log("Execute failed: (" . $allhotels->errno . ") " . $allhotels->error . "\"" . "\n", 3, $errorpath);
+                            debug_to_console("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
+                            debug_to_console("Execute failed: (" . $allhotels->errno . ") " . $allhotels->error . "\"" . "\n", 3, $errorpath);
                         } else {
                             $resultHotels = $allhotels->get_result();
                             for ($i = 0; $i < mysqli_num_rows($resultHotels); $i++) {
