@@ -49,7 +49,7 @@
             <?php
         }
     } catch (Exception $e) {
-        error_log("##Error at auction details: \"" . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    error_log("##Error at ".__FILE__."\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
         $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
         echo $errormessage;

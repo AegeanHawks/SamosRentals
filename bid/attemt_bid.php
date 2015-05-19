@@ -9,7 +9,7 @@ try {
         echo '{"success":"no"}';
     }
 
-    $auctionDetailsStmt = "INSERT INTO ('Username','BidMoney') VALUES (?,?)";
+    $auctionDetailsStmt = "INSERT INTO bid('Username','BidMoney','idAuction) VALUES (?,?,?)";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
     // <editor-fold defaultstate="collapsed" desc="Error checking">
@@ -17,7 +17,7 @@ try {
         throw new Exception("\nPrepared '" . $auctionDetailsStmt . "' statement failed. \nDetails: " . mysqli_error($con));
     }
     // </editor-fold>
-    $auctionDetails->bind_param('si', $_SESSION["userid"], $_GET["id"]);
+    $auctionDetails->bind_param('sii', $_SESSION["userid"], $_GET["id"],$_GET["auctionID"]);
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionDetails->execute()) {
@@ -28,10 +28,11 @@ try {
     // </editor-fold>
     // </editor-fold>
 
-    $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
+    $resulauctionDetails = $auctionDetails->get_result();
+    
     echo '{"success":"yes"}';
 } catch (Exception $e) {
-    error_log("##Error at auction details: \"" . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    error_log("##Error at ".__FILE__."\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
     echo '{"success":"no"}';
 }
 ?>

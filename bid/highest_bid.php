@@ -1,9 +1,13 @@
 <?php
+session_start();
+require '../admin/configuration.php';
+//http://localhost:8000/bid/highest_bid.php?auctionID=7
 
 try {
     if (!isset($_GET["auctionID"])) {
-        throw "Id is not set";
+        throw new Exception("Id is not set");
     }
+    $con = db_connect();
     $auctionDetailsStmt = "SELECT BidMoney FROM bid, auction WHERE auction.ID=? AND bid.idAuction=auction.ID";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
@@ -24,16 +28,23 @@ try {
     // </editor-fold>
 
     $resulauctionDetails = $auctionDetails->get_result();
-    if (mysqli_num_rows($resulauctionDetails) != 1) {
+    if (mysqli_num_rows($resulauctionDetails) > 1) {
         throw new Exception("Wrong number of results");
     }
     // </editor-fold>
 
     $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
-    echo '{"success":"yes", "value":"' . $auctionDetailsRow["BidMoney"] . '"}';
+    if ($resulauctionDetails->num_rows == 0) {
+        $highestBid = '{"success":"yes", "value":"0"}';
+        echo $highestBid;
+    } else {
+        $highestBid = '{"success":"yes", "value":"' . $auctionDetailsRow["BidMoney"] . '"}';
+        echo $highestBid;
+    }
 } catch (Exception $e) {
-    error_log("##Error at auction details: \"" . $e->getMessage() . "\"" . "\n", 3, $errorpath);
-    echo '{"success":"no"}';
+    error_log("##Error at ".__FILE__."\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    $highestBid = '{"success":"no"}';
+    echo $highestBid;
 }
 ?>
 

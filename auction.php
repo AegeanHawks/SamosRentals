@@ -66,7 +66,7 @@ if (!isset($_GET["id"])) {
 
             $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
         } catch (Exception $e) {
-            error_log("##Error at auction details: \"" . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+            error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
             $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
             echo $errormessage;
@@ -132,7 +132,8 @@ if (!isset($_GET["id"])) {
                             if ($auctionDetailsRow["Highest_Bidder"] == null) {
                                 echo $auctionDetailsRow["Bid_Price"];
                             } else {
-                                getHighestBid($auctionDetailsRow["auctionID"]);
+                                echo $auctionDetailsRow["auctionID"];
+                                //getHighestBid($auctionDetailsRow["auctionID"]);
                             }
                             ?></p>
                     </div>
@@ -142,22 +143,30 @@ if (!isset($_GET["id"])) {
                         <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
                             <h5 class="grey-text bidheader truncate">ΠΛΕΙΟΔΟΤΗΣΑΤΕ</h5>
 
-                            <p class="bidnumber">33</p>
+                            <p class="bidnumber"><?php
+                                if ($auctionDetailsRow["Highest_Bidder"] != null) {
+                                    include "bid/last_user_bid.php";
+                                }
+                                ?></p>
                         </div>
-                        <form id="auctionForm" method="Get" action="">
+                        <form id="auctionBidForm" method="Get" action="bid/attemt_bid.php">
                             <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
                                 <button class="btn waves-effect waves-light" type="submit" name="action">Πλειοδοτησε 
                                 </button>
                                 <input class="validate bidnumber" style="height: 90px; margin-top: 45px" placeholder="" size="90" id="last_name" type="text" >
                             </div>
-                            <?php
-                            if ($auctionDetailsRow["Buy_Price"] != 0) {
-                                ?>
+                        </form>
+                        <?php
+                        if ($auctionDetailsRow["Buy_Price"] != 0) {
+                            ?>
+                            <form id="auctionBuyForm" method="Get" action="bid/buy_now.php">
                                 <div class="col s12 m6 z-depth-1" style="padding: 10px; height: 190px;">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Αγορασε τωρα</button>
                                     <p class="bidnumber">
                                         <?php echo $auctionDetailsRow["Buy_Price"]; ?>
                                     </p>
+                                    <input name="buy_value" style="display: none" value="<?php echo $auctionDetailsRow["Buy_Price"]; ?>">
+                                    <input name="auctionID" style="display: none" value="<?php echo $_GET["id"]; ?>">
                                 </div>
                                 <?php
                             }
