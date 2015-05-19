@@ -18,8 +18,8 @@ try {
     
 
     $auctionIsClosedjson = json_decode($auctionIsClosed);
-    if ($auctionIsClosedjson->closed == 1) {
-        throw new Exception("Auction is closed");
+    if ($auctionIsClosedjson->success == "no" || $auctionIsClosedjson->closed == "yes") {
+        throw new Exception("Auction is closed or there is an error");
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Check if bid value is bigger than highest bid value">

@@ -20,7 +20,7 @@ try {
         throw new Exception("\nPrepared '" . $auctionClosedStmt . "' statement failed. \nDetails: " . mysqli_error($connectCloAu));
     }
     // </editor-fold>
-    $auctionClosed->bind_param('i', $_GET["id"]);
+    $auctionClosed->bind_param('i', $_GET["auctionID"]);
 
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
@@ -38,7 +38,7 @@ try {
     if ($auctionClosedRow["Closed"] == 1) {
         $auctionIsClosed = '{"success":"yes","closed":"yes"}';
         echo $auctionIsClosed;
-    } else {
+    } else if ($auctionClosedRow["Closed"] == 0){
         $auctionIsClosed = '{"success":"yes","closed":"no"}';
         echo $auctionIsClosed;
     }

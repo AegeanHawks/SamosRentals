@@ -109,7 +109,8 @@ VALUE ('rambou', 'Password1', 'Νικόλαος', 'Μπούσιος', 'male', 'r
 ('Chuck', 'Password1', 'Chuck', 'Norris', 'male', 'N.Chuck@samosrentals.gr', 1, '8 September,1970','images/hotelier.jpg',''),
 ('alex', 'Password1', 'Alexis', 'Ren', 'female', 'R.Alexis@samosrentals.gr', 2, '9 June,1993','images/user.jpg',''),
 ('Petros', 'Password1', 'Petros', 'Gleoudis', 'male', 'p.Gleoudis@samaina.gr', 1, '5 May,1968','//www.samaina-hotel-samos.com/pic-b/pic5-b.jpg',''),
-('scar', 'Password1', 'Scarlett', 'Johansson', 'female', 'j.scarlet@hololywood.com', 1, '22 November,1984','http://img0.ndsstatic.com/wallpapers/d2dd90c6e7f7d3e51f34f885a6e7ce7b_large.jpeg', '+306598526655');
+('scar', 'Password1', 'Scarlett', 'Johansson', 'female', 'j.scarlet@hololywood.com', 1, '22 November,1984','http://img0.ndsstatic.com/wallpapers/d2dd90c6e7f7d3e51f34f885a6e7ce7b_large.jpeg', '+306598526655'),
+('user', 'Password1', 'user', 'user', 'female', 'j.ssscarlet@hololywood.com', 2, '22 November,1984','http://img0.ndsstatic.com/wallpapers/d2dd90c6e7f7d3e51f34f885a6e7ce7b_large.jpeg', '+306598526655');
 
 INSERT INTO Hotel (Name, Tel, Description, Coordinates, Grade, Manager, Image, Comforts)
 VALUE ('Zeus', '+302273095373', 'Just 500 metres from the sea, in a magical green environment in the historical village of Ireon, lies the Zeus Studios. The complex features a beautiful garden, free Wi-Fi and free on-site parking. The Zeus studios and apartments are self catering, whilst are also suitable for guests with limited mobility. The apartments have a separate seating area and balcony with great views to the Ireon and the sea. Studios Zeus complex also features an outdoor pool. The pool area also includes a pool bar serving refreshments and light meals.',

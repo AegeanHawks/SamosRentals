@@ -10,14 +10,16 @@ try {
     }
 
 
-    // <editor-fold defaultstate="collapsed" desc="Check if auction is closed">   
+    
+    // <editor-fold defaultstate="collapsed" desc="Check if auction is closed">
     ob_start();
     include '/auction_is_closed.php';
-    $isClosed = ob_get_clean();
+    $auctionIsClosed = ob_get_clean();
+    
 
-    $auctionIsClosed = json_decode($isClosed);
-    if ($auctionIsClosed->closed == "yes") {
-        throw new Exception("Auction is closed");
+    $auctionIsClosedjson = json_decode($auctionIsClosed);
+    if ($auctionIsClosedjson->success == "no" || $auctionIsClosedjson->closed == "yes") {
+        throw new Exception("Auction is closed or there is an error");
     }
     // </editor-fold>
 
