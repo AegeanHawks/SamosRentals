@@ -19,12 +19,12 @@ if (!isAdmin()) {
 }
 $formValues = array();
 
-//error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+//debug_to_console("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 //$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
 for ($i = 0; $i < count($formGetNames); $i++) {
     $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
-//error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+//debug_to_console("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 // </editor-fold>
 
 if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
@@ -42,20 +42,20 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
 
     $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["SaEdHotID"];
-    //error_log("Statement: " . $statement . "\"" . "\n", 3, $errorpath);
+    //debug_to_console("Statement: " . $statement . "\"" . "\n", 3, $errorpath);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run update query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        error_log("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Could not run update query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
     }
     // </editor-fold>
     mysqli_close($con);
-    /* error_log("The word parameter is empty" . "\n", 3, $errorpath);
+    /* debug_to_console("The word parameter is empty" . "\n", 3, $errorpath);
       echo "0";
       exit(); */
 } else if (strcmp($_GET["SaEdHotAction"], "new") == 0) {
@@ -79,8 +79,8 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run insert query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        error_log("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Could not run insert query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
@@ -88,6 +88,6 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     // </editor-fold>
     mysqli_close($con);
 } else {
-    error_log("SaEdHotAction is empty \"\"" . "\n", 3, $errorpath);
+    debug_to_console("SaEdHotAction is empty \"\"" . "\n", 3, $errorpath);
 }
 ?>

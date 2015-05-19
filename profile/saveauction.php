@@ -24,7 +24,7 @@ $formValues = array();
 for ($i = 0; $i < count($formGetNames); $i++) {
     $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
-error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+debug_to_console("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 
 // </editor-fold>
 
@@ -43,19 +43,19 @@ if (strcmp($_GET["SaAuDeAction"], "edit") == 0) {
     $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
 
     $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionID"];
-    error_log("Statemnt: " . $statement . "\"" . "\n", 3, $errorpath);
+    debug_to_console("Statemnt: " . $statement . "\"" . "\n", 3, $errorpath);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
     }
     // </editor-fold>
     mysqli_close($con);
-    /* error_log("The word parameter is empty" . "\n", 3, $errorpath);
+    /* debug_to_console("The word parameter is empty" . "\n", 3, $errorpath);
       echo "0";
       exit(); */
 } else {
@@ -79,7 +79,7 @@ if (strcmp($_GET["SaAuDeAction"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";

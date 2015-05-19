@@ -23,12 +23,12 @@ if ($_SESSION['role'] == 0) {
 
 $formValues = array();
 
-//error_log("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+//debug_to_console("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 //$_GET["SaUsBirthday"] = DateTime::createFromFormat('d F, Y', $_GET["SaUsBirthday"])->format('Y-m-d');
 for ($i = 0; $i < count($formGetNames); $i++) {
     $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
-//error_log("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+//debug_to_console("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
 // </editor-fold>
 
 if (strcmp($_GET["SaUsState"], "edit") == 0) {
@@ -50,8 +50,8 @@ if (strcmp($_GET["SaUsState"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        error_log("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
@@ -79,8 +79,8 @@ if (strcmp($_GET["SaUsState"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        error_log("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        error_log("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        debug_to_console("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
         echo "0";
     } else {
         echo "1";
