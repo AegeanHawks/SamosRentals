@@ -21,6 +21,14 @@ if (!empty($_GET['user'])) {
     $user = $_SESSION['userid'];
 }
 
+//Upgrade user
+if (isset($_POST['upgrade']) && $_POST['upgrade'] == 1) {
+    // SQL query to fetch information of user.
+    $sql = $con->prepare('UPDATE user set upgrade=1 WHERE Username=?');
+    $sql->bind_param('s', $user);
+    $sql->execute();
+}
+
 // SQL query to fetch information of user.
 $sql = $con->prepare('SELECT * FROM user WHERE Username= ?');
 $sql->bind_param('s', $user);
@@ -38,6 +46,7 @@ if ($num_row == 1) {
     $tel = $row['Tel'];
     $mail = $row['Mail'];
     $sex = $row['Sex'];
+    $Upgrade = $row['Upgrade'];
     $birthday = $row['Birthday'];
     if ($row['Role'] == 0) {
         $role = "Διαχειριστής";
