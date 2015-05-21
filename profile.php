@@ -20,9 +20,8 @@ if (!empty($_GET['user'])) {
 } else {
     $user = $_SESSION['userid'];
 }
-
 //Upgrade user
-if (isset($_POST['upgrade']) && $_POST['upgrade'] == 1) {
+if (isset($_POST['upgrade']) && $_POST['upgrade'] == 1 && $_SESSION['role'] == 2) {
     // SQL query to fetch information of user.
     $sql = $con->prepare('UPDATE user set upgrade=1 WHERE Username=?');
     $sql->bind_param('s', $user);
