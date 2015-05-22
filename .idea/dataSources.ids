@@ -12,21 +12,23 @@
       <column name="Name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Description" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="PeopleCount" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="Closed" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Closed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="Bid_Price" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="End_Price" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Buy_Price" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Hotel" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Images" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="End_Date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Highest_Bidder" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="ID"/>
       <foreign-key name="auction_ibfk_1" columns="Hotel" ref-table="hotel" ref-schema="" ref-catalog="samosrentals" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="auction_ibfk_2" columns="Highest_Bidder" ref-table="user" ref-schema="" ref-catalog="samosrentals" ref-columns="Username" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="bid_ibfk_2" table="bid" schema="" catalog="samosrentals" columns="idAuction"/>
       <index name="ID" unique="true" columns="ID"/>
     </table>
     <table name="bid" schema="" catalog="samosrentals" type="TABLE">
       <column name="Username" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <column name="idAuction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="BidMoney" sqlType="DECIMAL" precision="2" scale="0" nullable="true" jdbcType="3"/>
+      <column name="BidMoney" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="Won" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
       <foreign-key name="bid_ibfk_1" columns="Username" ref-table="user" ref-schema="" ref-catalog="samosrentals" ref-columns="Username" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="bid_ibfk_2" columns="idAuction" ref-table="auction" ref-schema="" ref-catalog="samosrentals" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -35,11 +37,11 @@
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="Name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Tel" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Description" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Description" sqlType="VARCHAR" precision="1000" scale="0" nullable="false" jdbcType="12"/>
       <column name="Coordinates" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Comforts" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Grade" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
-      <column name="Manager" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Manager" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Image" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="Website" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="ID"/>
@@ -60,6 +62,7 @@
       <column name="Role" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Upgrade" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="Username"/>
+      <exported-key name="auction_ibfk_2" table="auction" schema="" catalog="samosrentals" columns="Highest_Bidder"/>
       <exported-key name="bid_ibfk_1" table="bid" schema="" catalog="samosrentals" columns="Username"/>
       <exported-key name="hotel_ibfk_1" table="hotel" schema="" catalog="samosrentals" columns="Manager"/>
       <index name="Mail" unique="true" columns="Mail"/>
