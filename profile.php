@@ -78,7 +78,15 @@ function ownsProfile() {
         $Page_Title = "Προφίλ - " . $user;
         include 'head.php';
         ?>
+        <!--CSS-->
+        <link href="css/star-rating.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!--Scripts-->
+        <script src="js/star-rating.min.js"></script>
+        <script src="http://malsup.github.com/jquery.form.js"></script>
         <script src=js/profilescripts.js></script>
+
         <style>
             .tabregion{
                 display: none;
@@ -117,7 +125,15 @@ function ownsProfile() {
         </style>
     </head>
     <body class="white" onload="CurrentTab();
-            PaginAuctionsHistory(0); Paginate('PaginationNumHotel_', 'ElementOFHotelList', 'HotelPaginationList',0);">
+    <?php if (isRole("admin") || isRole("hotelier")) {
+        echo "PaginAuctionsHistory(0);";
+        echo "Paginate('PaginationNumHotel_', 'ElementOFHotelList', 'HotelPaginationList',0);";
+    } ?>
+    <?php if (isRole("user")) {
+        echo "Paginate('PaginationNumUserHistory_', 'ElementOFUserHistory', 'UserHistoryPaginationList', 0);";
+        echo "Paginate('PaginationNumHotelEval_', 'ElementOFHotelEvaluation', 'HotelEvalPaginationList', 0);";
+    } ?>
+        ">
 
         <!--Navigation Menu-->
         <?php
@@ -243,6 +259,9 @@ function ownsProfile() {
 
                     //Auction Details
                     include 'profile/sections/auction_details.php';
+
+                    //Auctionσ Edit
+                    include 'profile/sections/hotels_edit.php';
                 }
                 if (isRole("user")) {
 
@@ -254,9 +273,10 @@ function ownsProfile() {
 
                     //Auctions History/Edit
                     include 'profile/sections/auctions_history_edit.php';
+
+                    //Auctions History
+                    include 'profile/sections/auctions_history.php';
                 }
-                    //Auctionσ Edit
-                    include 'profile/sections/hotels_edit.php';
                 if (isRole("admin")) {
 
                     //User Edit

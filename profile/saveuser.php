@@ -23,18 +23,15 @@ if ($_SESSION['role'] == 0) {
 
 $formValues = array();
 
-//debug_to_console("Con: " . $_GET["SaEdHotComforts"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
-//$_GET["SaUsBirthday"] = DateTime::createFromFormat('d F, Y', $_GET["SaUsBirthday"])->format('Y-m-d');
 for ($i = 0; $i < count($formGetNames); $i++) {
     $formValues[] = addslashes($_GET[$formGetNames[$i]]);
 }
-//debug_to_console("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
+
 // </editor-fold>
 
 if (strcmp($_GET["SaUsState"], "edit") == 0) {
-    // <editor-fold defaultstate="collapsed" desc="Connect to database">
     $con = db_connect();
-    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="Construct insert statement">
     $updateColumns = "";
     for ($j = 0; $j < count($dbColumns) - 1; $j++) {
@@ -50,11 +47,11 @@ if (strcmp($_GET["SaUsState"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
-        echo "0";
+        //error_reporting("Could not run query: \"" . $statement . "\"" . "\n");
+        //error_reporting("Error: \"" . mysqli_error($con) . "\"" . "\n");
+        echo '{"success":"no"}';
     } else {
-        echo "1";
+        echo '{"success":"yes"}';
     }
     // </editor-fold>
     mysqli_close($con);
@@ -79,11 +76,11 @@ if (strcmp($_GET["SaUsState"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Error: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
-        echo "0";
+        //error_reporting("Could not run query: \"" . $statement . "\"" . "\n");
+        //error_reporting("Error: \"" . mysqli_error($con) . "\"" . "\n");
+        echo '{"success":"no"}';
     } else {
-        echo "1";
+        echo '{"success":"yes"}';
     }
     // </editor-fold>
     mysqli_close($con);

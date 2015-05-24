@@ -152,7 +152,7 @@ include 'header.php';
                 <span class="title">Βαθμολογία ξενοδοχείου: <?php echo round($Grade, 1); ?></span><br>
 
                 <input id="input-id" type="number" class="rating" value="<?php echo $Grade; ?>" max="5"
-                       readonly="true" data-size="xs">
+                       readonly="false" data-size="xs">
             </li>
         </ul>
         <!--Google Map-->

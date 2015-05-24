@@ -4,6 +4,11 @@
 require '../admin/configuration.php';
 session_start();
 // </editor-fold>
+
+if (empty($_GET["SaEdHotName"])) {
+    echo '{"success":"no"}';
+    return;
+}
 // <editor-fold defaultstate="collapsed" desc="Variables' declare">
 $table = "hotel";
 
@@ -47,11 +52,11 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        debug_to_console("Could not run update query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
-        echo "0";
+        //debug_to_console("Could not run update query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        //debug_to_console("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
+        echo '{"success":"no"}';
     } else {
-        echo "1";
+        echo '{"success":"yes"}';
     }
     // </editor-fold>
     mysqli_close($con);
@@ -79,15 +84,15 @@ if (strcmp($_GET["SaEdHotAction"], "edit") == 0) {
     // <editor-fold defaultstate="collapsed" desc="Run query">
     $result = mysqli_query($con, $statement);
     if ($result == NULL) {
-        debug_to_console("Could not run insert query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
-        echo "0";
+        //debug_to_console("Could not run insert query: \"" . $statement . "\"" . "\n", 3, $errorpath);
+        //debug_to_console("Cause: \"" . mysqli_error($con) . "\"" . "\n", 3, $errorpath);
+        echo '{"success":"no"}';
     } else {
-        echo "1";
+        echo '{"success":"yes"}';
     }
     // </editor-fold>
     mysqli_close($con);
 } else {
-    debug_to_console("SaEdHotAction is empty \"\"" . "\n", 3, $errorpath);
+    //debug_to_console("SaEdHotAction is empty \"\"" . "\n", 3, $errorpath);
 }
 ?>

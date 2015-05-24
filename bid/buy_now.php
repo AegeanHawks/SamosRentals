@@ -70,10 +70,10 @@ try {
         $resulauctionDetails = $auctionDetails->get_result();
     }
 
-    echo '1';
+    echo '{"success":"yes"}';
 } catch (Exception $e) {
     debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
-    echo '-1';
+    echo '{"success":"no"}';
 }
 ?>
 

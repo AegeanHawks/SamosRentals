@@ -1,18 +1,14 @@
 function getHighestBid(id) {
 
     var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
     }
-    else
-    {// code for IE6, IE5
+    else {// code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.onreadystatechange = function ()
-    {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             $highestBidResponse = JSON.parse(xmlhttp.responseText);
 
             if ($highestBidResponse["success"] == "yes" && $highestBidResponse["value"] > 0) {
@@ -26,8 +22,7 @@ function getHighestBid(id) {
     xmlhttp.send();
 }
 
-function initFuncIntervals(auctionId)
-{
+function initFuncIntervals(auctionId) {
     setInterval(function () {
         getHighestBid(auctionId)
     }, 800);
@@ -36,27 +31,31 @@ function initFuncIntervals(auctionId)
     }, 800);
 }
 
+//var highestValStatic = 0;
+//var higestValFlag = false;
 function userBid(auctionID) {
 
     var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
     }
-    else
-    {// code for IE6, IE5
+    else {// code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.onreadystatechange = function ()
-    {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             $highestBidResponse = JSON.parse(xmlhttp.responseText);
 
             if ($highestBidResponse["success"] == "yes") {
                 document.getElementById("auctionUserBid").innerHTML = $highestBidResponse["value"];
+                Materialize.toast('Είστε ο υψηλότερος πλειοδότης', 5000);
+
             } else if ($highestBidResponse["success"] == "no") {
-                document.getElementById("auctionUserBid").innerHTML = "Failed";
+                if ($highestBidResponse["state"] == "-1") {
+                    Materialize.toast('Η τιμή που πλειοδοτήσατε είναι μικρότερη από τη τρέχουσα', 5000);
+                } else {
+                    document.getElementById("auctionUserBid").innerHTML = "Failed";
+                }
             }
         }
     }
@@ -69,23 +68,19 @@ function userBid(auctionID) {
 function auctionBuyNow(auctionID) {
 
     var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
     }
-    else
-    {// code for IE6, IE5
+    else {// code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.onreadystatechange = function ()
-    {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
-            $highestBidResponse = JSON.parse(xmlhttp.responseText);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            $evaluate = JSON.parse(xmlhttp.responseText);
 
-            if ($highestBidResponse["success"] == "yes") {
-                //document.getElementById("BuyNowValue").innerHTML = $highestBidResponse["value"];
-            } else if ($highestBidResponse["success"] == "no") {
+            if ($evaluate["success"] == "yes") {
+                Materialize.toast('Συγχαρητήρια, κερδίσατε τη δημοπρασία', 5000);
+            } else if ($evaluate["success"] == "no") {
                 //document.getElementById("BuyNowValue").innerHTML = "Failed";
             }
         }
@@ -98,18 +93,14 @@ function auctionBuyNow(auctionID) {
 function userLastBid(auctionID) {
 
     var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
     }
-    else
-    {// code for IE6, IE5
+    else {// code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.onreadystatechange = function ()
-    {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             $highestBidResponse = JSON.parse(xmlhttp.responseText);
 
             if ($highestBidResponse["success"] == "yes") {
