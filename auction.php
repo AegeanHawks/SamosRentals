@@ -1,3 +1,4 @@
+
 <?php
 include 'admin/configuration.php';
 session_start();
@@ -60,18 +61,27 @@ try {
     }
     // </editor-fold>
 
-            $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
-            //$_SESSION["CurrentViewingAuctionBidPrice"]=$auctionDetailsRow["Bid_Price"];
-        } catch (Exception $e) {
-            debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
-            $errormessage = "<div class=\"col offset-s1 s10\">
+    $resulauctionDetails = $auctionDetails->get_result();
+    if (mysqli_num_rows($resulauctionDetails) != 1) {
+        throw new Exception("Wrong number of results");
+    }
+    // </editor-fold>
+
+    $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
+    //$_SESSION["CurrentViewingAuctionBidPrice"]=$auctionDetailsRow["Bid_Price"];
+} catch (Exception $e) {
+    error_reporting("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
+    $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
-            echo $errormessage;
-        }
-        ?>
-        <div class="parallax-container">
-            <div class="parallax"><img src="http://static2.wallpedes.com/wallpaper/beach/beach-wallpapers-widescreen-best-desktop-3d-hd-wallpapers-beach-house-wallpaper-download-for-pc-android-mobile-windows-7-name-nature-animation.jpg"></div>
-        </div>
+    echo $errormessage;
+}
+?>
+<div class="parallax-container">
+    <div class="parallax"><img
+            src="<?php
+            $sql = $con->prepare("SELECT Images FROM auction WHERE ID=?");
+            $sql->bind_param('s', $_GET["id"]);
+            $sql->execute();
 
             $result = $sql->get_result();
             $resultRow = mysqli_fetch_array($result);
