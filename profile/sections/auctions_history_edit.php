@@ -1,4 +1,3 @@
-
 <div class="card col s12 m8 tabregion" id="section_2">
     <div class=" white col s12 " style="padding-top: 15px;padding-bottom: 15px; font-weight: bold">
         <div class="col s12 m3">Τίτλος</div>
@@ -50,7 +49,7 @@
     <span class="divider col s12"></span>
     <div class="white col s12" style="padding-top: 20px;padding-bottom: 20px;">
         <ul class="pagination" id="AuctionPaginationList">
-            <li class="disabled"><a onclick="return PaginAuctionsHistory(-2)" href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+            <li class="disabled"><a onclick="" href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
             <li class="active" id="PaginationNumAuct_0"><a onclick="return PaginAuctionsHistory(0)" href="#!">1</a></li>
             <?php
             for ($i = 1; $i < mysqli_num_rows($resultuserauction) / 6; $i++) {

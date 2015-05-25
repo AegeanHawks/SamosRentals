@@ -88,6 +88,7 @@ CREATE TABLE Auction (
   Hotel       INT          NOT NULL,
   Images      TEXT         NOT NULL,
   End_Date    DATETIME     NOT NULL,
+  Evaluation  int(1)       NULL,
   Highest_Bidder VARCHAR(60) NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (Hotel) REFERENCES Hotel (ID),

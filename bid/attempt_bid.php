@@ -15,7 +15,7 @@ try {
     ob_start();
     include '/auction_is_closed.php';
     $auctionIsClosed = ob_get_clean();
-    
+
 
     $auctionIsClosedjson = json_decode($auctionIsClosed);
     if ($auctionIsClosedjson->success == "no" || $auctionIsClosedjson->closed == "yes") {
@@ -26,7 +26,7 @@ try {
     ob_start();
     include '/highest_bid.php';
     $highestBid = ob_get_clean();
-    
+
     $highestBidjson = json_decode($highestBid);
     if ($highestBidjson->value >= $_GET["bid_value"]) {
         throw new Exception("The bid price is lower than the current price");
@@ -56,7 +56,7 @@ try {
     // </editor-fold>
 
     $resulauctionDetails = $auctionDetails->get_result(); // </editor-fold>
-    
+
 
     // <editor-fold defaultstate="collapsed" desc="Set highest bidder">
     $auctionDetailsStmt = "UPDATE auction SET Highest_Bidder=? WHERE ID=?";
@@ -83,8 +83,12 @@ try {
 
     echo '{"success":"yes"}';
 } catch (Exception $e) {
-    debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
-    echo '{"success":"no"}';
+    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
+    if ($e->getMessage() == "The bid price is lower than the current price") {
+        echo '{"success":"no","state":"-1"}';
+    } else {
+        echo '{"success":"no"}';
+    }
 }
 ?>
 
