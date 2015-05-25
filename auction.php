@@ -66,6 +66,9 @@ if (!isset($_GET["id"])) {
             // </editor-fold>
 
             $auctionDetailsRow = mysqli_fetch_array($resulauctionDetails);
+            $Image = $auctionDetailsRow['Images'];
+            //Explode Image to get all images
+            $Images = explode(";", $Image);
             //$_SESSION["CurrentViewingAuctionBidPrice"]=$auctionDetailsRow["Bid_Price"];
         } catch (Exception $e) {
             debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
@@ -74,8 +77,8 @@ if (!isset($_GET["id"])) {
             echo $errormessage;
         }
         ?>
-        <div class="parallax-container">
-            <div class="parallax"><img src="http://static2.wallpedes.com/wallpaper/beach/beach-wallpapers-widescreen-best-desktop-3d-hd-wallpapers-beach-house-wallpaper-download-for-pc-android-mobile-windows-7-name-nature-animation.jpg"></div>
+        <div class="parallax-container" style="height: 600px">
+            <div class="parallax"><img src="<?php echo $Images[0]; ?>"></div>
         </div>
 
         <div class="container">
@@ -175,40 +178,22 @@ if (!isset($_GET["id"])) {
                     ?>
                 </div>
             </div>
-            <!--Slider-->
-            <div class="slider col s8 offset-s2" >
-                <ul class="slides" >
-                    <li>
-                        <img src="http://www.gabelliconnect.com/wp-content/uploads/2014/08/luxury-hotel-rooms-pamilla-cape-town.jpg"> <!-- random image -->
-                        <div class="caption center-align">
-                            <h3>This is our big Tagline!</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="http://hoteldolphinkatra.co.in/wp-content/gallery/dolphin/four-bed.jpg"> <!-- random image -->
-                        <div class="caption left-align">
-                            <h3>Left Aligned Caption</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="http://www.themresort.com/media/gallery/images/HOTEL-ROOMS/M-Resort-Hotel-Room-One-Bedroom-2.jpg"> <!-- random image -->
-                        <div class="caption right-align">
-                            <h3>Right Aligned Caption</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="http://www.hotelpanorama.com.hk/d/panaroma/media/__thumbs_980_490_crop/Room_1_Superior_Silver_twin-bed47a2ae.jpg?1362096164"> <!-- random image -->
-                        <div class="caption center-align">
-                            <h3>This is our big Tagline!</h3>
-                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                        </div>
-                    </li>
+            <!--SlideShow Images-->
+            <div class="slider col s12" style="margin-top: 15px;">
+                <ul class="slides ">
+                    <?php
+                    foreach ($Images as $img) {
+                        ?>
+                        <li>
+                            <img
+                                src="<?php echo $img; ?>">
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </div>
-            <!--Slider End-->
+            <!--SlideShow Images-->
         </div>
 
         <?php

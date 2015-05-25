@@ -18,8 +18,6 @@ $DB_USERNAME = "root";
 $DB_PASSWORD = "root";
 $DB_NAME = "samosrentals";
 
-$errorpath = "C:\Users\darknight\Documents\php.log";
-
 function db_connect() {
     global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 
@@ -90,5 +88,3 @@ function isRole($role) {
         return false;
     }
 }
-
-?>

@@ -41,8 +41,15 @@
                     </a>
 
                 <ul id="dropdown" class="card dropdown-content animated swing">
-                        <li><a href="#"><span class="mdi-action-settings left black-text"
-                                               style="padding-right: 10px"></span>Ρυθμίσεις</a></li>
+                    <?php if (isRole("user")) { ?>
+                        <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>#gomytab_11"><span
+                                    class="mdi-action-settings left black-text"
+                                    style="padding-right: 10px"></span>Ιστορικό</a></li>
+                    <?php } else if (isRole("hotelier")) { ?>
+                        <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>#gomytab_9"><span
+                                    class="mdi-action-settings left black-text"
+                                    style="padding-right: 10px"></span>Το ξενοδοχείο</a></li>
+                    <?php } ?>
                         <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>"><span
                                     class="mdi-social-person left black-text"
                                                style="padding-right: 10px"></span>Προφίλ</a></li>
