@@ -15,7 +15,7 @@
             </div>
             <div class="input-field col s6">
                 <i class="mdi-social-whatshot prefix"></i>
-                <input name="SaUsUsername" id="SaUsUsername" type="text" class="validate">
+                <input name="SaUsUsername" id="SaUsUsername" type="text" class="validate>
                 <label for="SaUsUsername">Ψευδώνυμο</label>
             </div>
             <div class="input-field col s6">
@@ -28,7 +28,7 @@
                 <i class="mdi-communication-vpn-key prefix"></i>
                 <input name="SaUsPassword" type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                        onchange="form.reenter_password.pattern = this.value;" id="SaUsPassword"
-                       maxlength="30" class="validate">
+                       maxlength="30" class="validate" value="<?php echo $resultRow["Password"] ?>">
                 <label for="SaUsPassword">Κωδικός</label>
             </div>
             <div class="col s12 input-field">

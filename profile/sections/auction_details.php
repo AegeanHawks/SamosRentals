@@ -140,7 +140,7 @@
         <!--Hotel Details-->
         <?php
     } catch (Exception $e) {
-    debug_to_console("##Error at ".__FILE__."\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+        error_reporting("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
         $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
         echo $errormessage;

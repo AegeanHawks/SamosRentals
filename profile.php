@@ -128,6 +128,7 @@ function ownsProfile() {
     <?php if (isRole("admin") || isRole("hotelier")) {
         echo "PaginAuctionsHistory(0);";
         echo "Paginate('PaginationNumHotel_', 'ElementOFHotelList', 'HotelPaginationList',0);";
+        echo "Paginate('PaginationNumEditUsers_', 'ElementOFEditUsers_', 'EditUsersPaginationList',0);";
     } ?>
     <?php if (isRole("user")) {
         echo "Paginate('PaginationNumUserHistory_', 'ElementOFUserHistory', 'UserHistoryPaginationList', 0);";

@@ -212,6 +212,23 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    // bind 'myForm' and provide a simple callback function
+    $('.FormAdminEditsUser').ajaxForm({
+        success: function (response) {
+            responsejson = JSON.parse(response);
+            if (responsejson["success"] == "yes") {
+                Materialize.toast('Ο χρήστης καταχωρήθηκε επιτυχώς!', 2000)
+                setInterval(function () {
+                    location.reload();
+                }, 2000);
+            } else {
+                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000)
+            }
+        }
+    });
+});
+
 function deleterUser(userID) {
 
     var xmlhttp;
