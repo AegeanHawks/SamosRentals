@@ -1,14 +1,4 @@
 <?php
-if (!isset($_POST["deleteUserID"]) || empty($_POST["deleteUserID"])) {
-} else {
-    $con = db_connect();
-// SQL query to fetch information of registerd users and finds user match.
-    $sql = $con->prepare('DELETE FROM user WHERE Username=?');
-    $sql->bind_param('s', $_POST["userID"]);
-    $sql->execute();
-    unset($con);
-    unset($sql);
-}
 
 $con = db_connect();
 // SQL query to fetch information of registerd users and finds user match.
@@ -125,7 +115,8 @@ $result = $sql->get_result();
                             Αποθήκευση
                         </button>
 
-                        <a class="waves-effect red waves-light btn modal-trigger left" href="#deleteuser_12"><i
+                        <a class="waves-effect red waves-light btn left"
+                           onclick="removeUser('<?php echo $resultRow["Username"] ?>')" href="#deleteuser_12"><i
                                 class="mdi-content-save left"></i>Διαγραφή</a>
                     </form>
                 </div>

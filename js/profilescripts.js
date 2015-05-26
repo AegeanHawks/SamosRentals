@@ -81,7 +81,7 @@ function Paginate(idPart, classOfPagin, paginationWrapper, pagenumber) {
 
     $("." + classOfPagin).hide();
     for (var $i = firstvalue; $i < firstvalue + step; $i++) {
-        console.log("#" + idPart + $i);
+        //console.log("#" + idPart + $i);
         $("#" + classOfPagin + "_" + $i).show();
     }
     return false;
@@ -157,6 +157,29 @@ function editUser(auctionID, grade) {
     }
 
     xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "/profile/evaluateBid.php?Grade=" + grade + "&auctionID=" + auctionID, true);
+    xmlhttp.send();
+}
+function removeUser(userID) {
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            //evaluate = JSON.parse(xmlhttp.responseText);
+
+            Materialize.toast('Ο χρήστης διαγράφηκε επιτυχώς', 1000);
+            setTimeout(function () {
+                location.reload();
+            }, 1100);
+        }
+    }
+
+    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "profile/delete_user.php?userID=" + userID, true);
     xmlhttp.send();
 }
 

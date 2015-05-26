@@ -8,8 +8,12 @@ session_start();
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Variables' declare">
 $table = "user";
-$dbColumns = array("FirstName", "Lastname", "Tel", "Password", "Mail", "Birthday", "Sex");
-$formGetNames = array("SaUsFirstName", "SaUsLastname", "SaUsTel", "SaUsPassword", "SaUsMail", "SaUsBirthday", "SaUsSex");
+$dbColumns = array("FirstName", "Lastname", "Tel", "Password", "Mail", "Sex");
+$formGetNames = array("SaUsFirstName", "SaUsLastname", "SaUsTel", "SaUsPassword", "SaUsMail", "SaUsSex");
+if (!empty($_GET["SaUsBirthday"])) {
+    array_push($dbColumns, "Birthday");
+    array_push($formGetNames, "SaUsBirthday");
+}
 if ($_SESSION['role'] == 0) {
     array_push($dbColumns, "Role");
     array_push($formGetNames, "SaUsRole");
