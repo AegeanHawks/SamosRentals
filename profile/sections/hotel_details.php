@@ -114,7 +114,8 @@
                 </button>
             </div>
             <div class="col s12 hidden_form_s_14" style='padding-bottom: 20px'>
-                <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
+                <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false,14)"
+                   id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
             </div>
         </form>
         <!--Hotel Details-->

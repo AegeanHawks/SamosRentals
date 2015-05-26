@@ -16,16 +16,16 @@
 
 
     if (!$userauctions = $con->prepare($acutionsStatment)) {
-        debug_to_console("Prepare Error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
+        error_reporting("Prepare Error: \"" . $acutionsStatment . "\"" . "\n");
     } else {
         if (isRole("hotelier")) {
             $userauctions->bind_param('s', $_SESSION['userid']);
         }
-            debug_to_console("Execute error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
+        error_reporting("Execute error: \"" . $acutionsStatment . "\"" . "\n");
 
         if (!$userauctions->execute()) {
-            debug_to_console("Execute error: \"" . $acutionsStatment . "\"" . "\n", 3, $errorpath);
-            debug_to_console("Execute failed: (" . $userauctions->errno . ") " . $userauctions->error . "\"" . "\n", 3, $errorpath);
+            error_reporting("Execute error: \"" . $acutionsStatment . "\"" . "\n");
+            error_reporting("Execute failed: (" . $userauctions->errno . ") " . $userauctions->error . "\"" . "\n");
         } else {
             $resultuserauction = $userauctions->get_result();
             for ($i = 0; $i < mysqli_num_rows($resultuserauction); $i++) {
