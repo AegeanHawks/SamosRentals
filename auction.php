@@ -71,6 +71,7 @@ try {
     //$_SESSION["CurrentViewingAuctionBidPrice"]=$auctionDetailsRow["Bid_Price"];
 } catch (Exception $e) {
     error_reporting("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
+    echo $e->getMessage() . "\n";
     $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
     echo $errormessage;
