@@ -8,7 +8,7 @@
 
     <?php
 
-    $sql = $con->prepare("SELECT Evaluation, hotel.Name as hotelName, auction.ID as auctionID, hotel.ID as hotelID, auction.name as auctionName FROM auction, hotel WHERE hotel.id=auction.hotel AND auction.Highest_Bidder=? AND Closed=1");
+    $sql = $con->prepare("SELECT GradeOfHotel as Evaluation, hotel.Name as hotelName, auction.ID as auctionID, hotel.ID as hotelID, auction.name as auctionName FROM auction, hotel WHERE hotel.id=auction.hotel AND auction.Highest_Bidder=? AND Closed=1");
     $sql->bind_param('s', $_SESSION["userid"]);
     $sql->execute();
 
@@ -33,10 +33,10 @@
                 data-size="xs">
         <div class="col s12 m5 l4">*/
             for ($j = 0; $j < $resultRow["Evaluation"]; $j++) {
-                echo '<a onclick="evaluateBid(' . $resultRow["auctionID"] . ',' . ($j + 1) . ')" href="#gomytab_10"><i class="mdi-action-star-rate circle amber accent-3"></i></a>';
+                echo '<a onclick="evaluateTheHotel(' . $resultRow["auctionID"] . ',' . ($j + 1) . ')" href="#gomytab_10"><i class="mdi-action-star-rate circle amber accent-3"></i></a>';
             }
             for ($j = $resultRow["Evaluation"]; $j < 5; $j++) {
-                echo '<a onclick="evaluateBid(' . $resultRow["auctionID"] . ',' . ($j + 1) . ')" href="#gomytab_10"><i class="mdi-action-star-rate circle gray"></i></a>';
+                echo '<a onclick="evaluateTheHotel(' . $resultRow["auctionID"] . ',' . ($j + 1) . ')" href="#gomytab_10"><i class="mdi-action-star-rate circle gray"></i></a>';
             }
             ?>
         </div>

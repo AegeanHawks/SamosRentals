@@ -102,7 +102,36 @@ $(document).ready(function () {
     });
 });
 
-function evaluateBid(auctionID, grade) {
+function evaluateTheHotel(auctionID, grade) {
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            evaluate = JSON.parse(xmlhttp.responseText);
+
+            if (evaluate["success"] == "yes") {
+                Materialize.toast('Η βαθμολογία σας καταχωρήθηκε επιτυχώς', 1000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 1100);
+
+            } else if (evaluate["success"] == "no") {
+                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παρακαλώ προσπαθήστε αργότερα', 5000);
+            }
+        }
+    }
+
+    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "/profile/evaluateBid.php?Grade=" + grade + "&auctionID=" + auctionID, true);
+    xmlhttp.send();
+}
+
+function evaluateTheUser(userID, grade) {
 
     var xmlhttp;
     if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -127,38 +156,10 @@ function evaluateBid(auctionID, grade) {
         }
     }
 
-    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "/profile/evaluateBid.php?Grade=" + grade + "&auctionID=" + auctionID, true);
+    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "profile/evaluate_user.php?Grade=" + grade + "&userID=" + userID, true);
     xmlhttp.send();
 }
 
-function editUser(auctionID, grade) {
-
-    var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            evaluate = JSON.parse(xmlhttp.responseText);
-
-            if (evaluate["success"] == "yes") {
-                Materialize.toast('Η βαθμολογία σας καταχωρήθηκε επιτυχώς', 3000);
-                setTimeout(function () {
-                    location.reload(true);
-                }, 3100);
-
-            } else if (evaluate["success"] == "no") {
-                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παρακαλώ προσπαθήστε αργότερα', 5000);
-            }
-        }
-    }
-
-    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "/profile/evaluateBid.php?Grade=" + grade + "&auctionID=" + auctionID, true);
-    xmlhttp.send();
-}
 function removeUser(userID) {
 
     var xmlhttp;

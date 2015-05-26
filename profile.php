@@ -62,241 +62,260 @@ if ($num_row == 1) {
     die(include '404.php');
 }
 
-function ownsProfile() {
+function ownsProfile()
+{
     if (islogged() && $_SESSION['userid'] == $GLOBALS['user']) {
         return true;
     }
     return false;
 }
+
 ?>
 
 
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <?php
-        $Page_Title = "Προφίλ - " . $user;
-        include 'head.php';
-        ?>
-        <!--CSS-->
-        <link href="css/star-rating.min.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+<head lang="en">
+    <?php
+    $Page_Title = "Προφίλ - " . $user;
+    include 'head.php';
+    ?>
+    <!--CSS-->
+    <link href="css/star-rating.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!--Scripts-->
-        <script src="js/star-rating.min.js"></script>
-        <script src="http://malsup.github.com/jquery.form.js"></script>
-        <script src=js/profilescripts.js></script>
+    <!--Scripts-->
+    <script src="js/star-rating.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src=js/profilescripts.js></script>
 
-        <style>
-            .tabregion{
-                display: none;
-            }
-            .hidden_form_s_1{
-                display: none;
-            }
-            .hidden_form_s_8{
-                display: none;
-            }
-            .hidden_form_s_14{
-                display: none;
-            }
-            .hidden_form_s_15{
-                display: none;
-            }
-            .PaginAuctionsHiEd{
-                display: none;
-            }
-            .detailshead{
-                font-weight: bold;
-                font-size: 20px;
-            }
-            .detailsbody_s_1{
-                font-size: 20px;
-            }
-            .detailsbody_s_8{
-                font-size: 20px;
-            }
-            .detailsbody_s_14{
-                font-size: 20px;
-            }
-            .detailsbody_s_15{
-                font-size: 20px;
-            }
-        </style>
-    </head>
-    <body class="white" onload="CurrentTab();
-    <?php if (isRole("admin") || isRole("hotelier")) {
-        echo "PaginAuctionsHistory(0);";
-        echo "Paginate('PaginationNumHotel_', 'ElementOFHotelList', 'HotelPaginationList',0);";
-        echo "Paginate('PaginationNumEditUsers_', 'ElementOFEditUsers_', 'EditUsersPaginationList',0);";
-    } ?>
-    <?php if (isRole("user")) {
-        echo "Paginate('PaginationNumUserHistory_', 'ElementOFUserHistory', 'UserHistoryPaginationList', 0);";
-        echo "Paginate('PaginationNumHotelEval_', 'ElementOFHotelEvaluation', 'HotelEvalPaginationList', 0);";
-    } ?>
-        ">
+    <style>
+        .tabregion {
+            display: none;
+        }
 
-        <!--Navigation Menu-->
-        <?php
-        include 'header.php';
-        ?>
-        <!--Navigation Menu-->
+        .hidden_form_s_1 {
+            display: none;
+        }
 
-        <div class="row container" style="padding-top: 60px">
-            <!--Tab Panels-->
-            <div class="col s12 m4">
-                <div class="center-align col s12 m12">
-                    <img id="img_prof" onclick="rotate('img_prof')"
-                         class=" circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
-                         src="<?php echo $image; ?>">
-                </div>
-                <div class="col s12 m12">
-                    <ul class="collapsible popout" data-collapsible="accordion">
+        .hidden_form_s_8 {
+            display: none;
+        }
 
-                        <li>
-                            <a class="collapsible-header active mytab" id="mytab_1" href="#gomytab_1"><i
-                                    class="mdi-action-perm-contact-cal"></i>Πληροφορίες</a>
-                                <?php
-                                if (ownsProfile()) {
-                                    ?>
-                                <div class="collapsible-body"><p>Επεξεργαστείτε προσωπικές πληροφορίες.</p></div>
-                            <?php }
-                            ?>
-                        </li>
+        .hidden_form_s_14 {
+            display: none;
+        }
 
-                        <li>
-                            <a class="collapsible-header mytab"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</a>
-                            <div class="collapsible-body collection">
-                                <?php
-                                if ((isRole("admin") || isRole("hotelier")) && ownsProfile()) {
-                                    ?>
-                                    <a href="#gomytab_4" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
+        .hidden_form_s_15 {
+            display: none;
+        }
 
-                                    <a href="#gomytab_2" class="collection-item mytab" id="mytab_2">Επεξεργασία</a>
-                                    <?php
-                                }
-                                if (isRole("hotelier") && ownsProfile()) {
-                                    ?>
-                                    <a href="#gomytab_3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
-                                    <?php
-                                }
-                                if (isRole("user") && ownsProfile()) {
-                                    ?>
-                                    <a href="#gomytab_11" class="collection-item mytab" id="mytab_11">Ιστορικό</a>
-                                    <a href="#gomytab_10" class="collection-item mytab" id="mytab_10">Βαθμολόγηση</a>
-                                <?php }
-                                ?>
-                            </div>
-                        </li>
-                        <li>
+        .PaginAuctionsHiEd {
+            display: none;
+        }
 
-                        <li>
-                            <?php
-                            if (ownsProfile() && (isRole("admin") || isRole("hotelier"))) {
-                                ?>
-                                <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-maps-hotel"></i>Ξενοδοχεία</a>
-                                <div class = "collapsible-body collection">
-                                    <a href="#gomytab_5" class="collection-item mytab" id="mytab_5">Δημιουργία</a>
-                                    <a href="#gomytab_9" class="collection-item mytab" id="mytab_9">Επεξεργασία</a>
-                                </div>
+        .detailshead {
+            font-weight: bold;
+            font-size: 20px;
+        }
 
-                            <?php }
-                            ?>
-                        </li>
-                        <li>
-                            <?php
-                            if (ownsProfile() && isRole("admin")) {
-                                ?>
-                                <a class = "collapsible-header mytab" id = "mytab_6" ><i class = "mdi-social-people"></i>Χρήστες</a>
-                                <div class = "collapsible-body collection">
-                                    <a href="#gomytab_13" class="collection-item mytab" id="mytab_13">Δημιουργία</a>
-                                    <a href="#gomytab_12" class="collection-item mytab" id="mytab_12">Επεξεργασία</a>
-                                </div>
+        .detailsbody_s_1 {
+            font-size: 20px;
+        }
 
-                            <?php }
-                            ?>
-                        </li>
-                        <?php
-                        if (isRole("user")) {
-                            ?>
-                            <li>
-                                <a class="collapsible-header mytab" id="mytab_6"  href="#gomytab_6"><i class="mdi-social-person-add"></i>Aναβάθμιση</a>
-                            </li>
-                            <?php
-                        }
-                        if (ownsProfile()) {
-                            ?>
-                            <li>
-                                <a class="collapsible-header mytab" href="#gomytab_7" id="mytab_7"><i class="mdi-action-delete"></i>Διαγραφή</a>
-                            </li>
-                            <?php
-                        }
+        .detailsbody_s_8 {
+            font-size: 20px;
+        }
+
+        .detailsbody_s_14 {
+            font-size: 20px;
+        }
+
+        .detailsbody_s_15 {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="white" onload="CurrentTab();
+<?php if (isRole("admin") || isRole("hotelier")) {
+    echo "PaginAuctionsHistory(0);";
+    echo "Paginate('PaginationNumHotel_', 'ElementOFHotelList', 'HotelPaginationList',0);";
+    echo "Paginate('PaginationNumEditUsers_', 'ElementOFEditUsers_', 'EditUsersPaginationList',0);";
+
+}
+if (isRole("hotelier")) {
+    echo "Paginate('PaginationNumEvalUser_', 'ElementOFUserEvaluation', 'UserEvalPaginationList',0);";
+}
+if (isRole("user")) {
+    echo "Paginate('PaginationNumUserHistory_', 'ElementOFUserHistory', 'UserHistoryPaginationList', 0);";
+    echo "Paginate('PaginationNumHotelEval_', 'ElementOFHotelEvaluation', 'HotelEvalPaginationList', 0);";
+} ?>
+    ">
+
+<!--Navigation Menu-->
+<?php
+include 'header.php';
+?>
+<!--Navigation Menu-->
+
+<div class="row container" style="padding-top: 60px">
+    <!--Tab Panels-->
+    <div class="col s12 m4">
+        <div class="center-align col s12 m12">
+            <img id="img_prof" onclick="rotate('img_prof')"
+                 class=" circle responsive-img z-depth-1 grey lighten-3" style="padding: 5px"
+                 src="<?php echo $image; ?>">
+        </div>
+        <div class="col s12 m12">
+            <ul class="collapsible popout" data-collapsible="accordion">
+
+                <li>
+                    <a class="collapsible-header active mytab" id="mytab_1" href="#gomytab_1"><i
+                            class="mdi-action-perm-contact-cal"></i>Πληροφορίες</a>
+                    <?php
+                    if (ownsProfile()) {
                         ?>
-                    </ul>
-                </div>
-            </div>
-            <!--Tab Panels-->
+                        <div class="collapsible-body"><p>Επεξεργαστείτε προσωπικές πληροφορίες.</p></div>
+                    <?php }
+                    ?>
+                </li>
 
-            <?php
-            //User Details
-            include 'profile/sections/user_details.php';
+                <li>
+                    <a class="collapsible-header mytab"><i class="mdi-social-notifications-on"></i>Δημοπρασίες</a>
+
+                    <div class="collapsible-body collection">
+                        <?php
+                        if ((isRole("admin") || isRole("hotelier")) && ownsProfile()) {
+                            ?>
+                            <a href="#gomytab_4" class="collection-item mytab" id="mytab_4">Δημιουργία</a>
+
+                            <a href="#gomytab_2" class="collection-item mytab" id="mytab_2">Επεξεργασία</a>
+                        <?php
+                        }
+                        if (isRole("hotelier") && ownsProfile()) {
+                            ?>
+                            <a href="#gomytab_3" class="collection-item mytab" id="mytab_3">Βαθμολόγηση</a>
+                        <?php
+                        }
+                        if (isRole("user") && ownsProfile()) {
+                            ?>
+                            <a href="#gomytab_11" class="collection-item mytab" id="mytab_11">Ιστορικό</a>
+                            <a href="#gomytab_10" class="collection-item mytab" id="mytab_10">Βαθμολόγηση</a>
+                        <?php }
+                        ?>
+                    </div>
+                </li>
+                <li>
+
+                <li>
+                    <?php
+                    if (ownsProfile() && (isRole("admin") || isRole("hotelier"))) {
+                        ?>
+                        <a class="collapsible-header mytab" id="mytab_6"><i class="mdi-maps-hotel"></i>Ξενοδοχεία</a>
+                        <div class="collapsible-body collection">
+                            <a href="#gomytab_5" class="collection-item mytab" id="mytab_5">Δημιουργία</a>
+                            <a href="#gomytab_9" class="collection-item mytab" id="mytab_9">Επεξεργασία</a>
+                        </div>
+
+                    <?php }
+                    ?>
+                </li>
+                <li>
+                    <?php
+                    if (ownsProfile() && isRole("admin")) {
+                        ?>
+                        <a class="collapsible-header mytab" id="mytab_6"><i class="mdi-social-people"></i>Χρήστες</a>
+                        <div class="collapsible-body collection">
+                            <a href="#gomytab_13" class="collection-item mytab" id="mytab_13">Δημιουργία</a>
+                            <a href="#gomytab_12" class="collection-item mytab" id="mytab_12">Επεξεργασία</a>
+                        </div>
+
+                    <?php }
+                    ?>
+                </li>
+                <?php
+                if (isRole("user")) {
+                    ?>
+                    <li>
+                        <a class="collapsible-header mytab" id="mytab_6" href="#gomytab_6"><i
+                                class="mdi-social-person-add"></i>Aναβάθμιση</a>
+                    </li>
+                <?php
+                }
+                if (ownsProfile()) {
+                    ?>
+                    <li>
+                        <a class="collapsible-header mytab" href="#gomytab_7" id="mytab_7"><i
+                                class="mdi-action-delete"></i>Διαγραφή</a>
+                    </li>
+                <?php
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+    <!--Tab Panels-->
+
+    <?php
+    //User Details
+    include 'profile/sections/user_details.php';
+
+    //Auctions History/Edit
+    include 'profile/sections/auctions_history_edit.php';
+
+    //Users evaluation
+    include 'profile/sections/users_evaluation.php';
+
+    if (ownsProfile()) {
+        if ((isRole("admin") || isRole("hotelier"))) {
+            //Auction Create
+            include 'profile/sections/auction_create.php';
+
+            //Hotel Create
+            include 'profile/sections/hotel_create.php';
+
+            //Hotel Details
+            include 'profile/sections/hotel_details.php';
+
+            //Auction Details
+            include 'profile/sections/auction_details.php';
+
+            //Auctionσ Edit
+            include 'profile/sections/hotels_edit.php';
+        }
+        if (isRole("user")) {
+
+            //Upgrade user
+            include 'profile/sections/upgrade_user.php';
+
+            //Hotel evaluation
+            include 'profile/sections/hotel_evaluation.php';
 
             //Auctions History/Edit
             include 'profile/sections/auctions_history_edit.php';
 
-            //Users evaluation
-            include 'profile/sections/users_evaluation.php';
+            //Auctions History
+            include 'profile/sections/auctions_history.php';
+        }
+        if (isRole("admin")) {
 
-            if (ownsProfile()) {
-                if ((isRole("admin") || isRole("hotelier"))) {
-                    //Auction Create
-                    include 'profile/sections/auction_create.php';
+            //User Edit
+            include 'profile/sections/user_edit.php';
+        }
 
-                    //Hotel Create
-                    include 'profile/sections/hotel_create.php';
+        //Use Delete
+        include 'profile/sections/user_delete.php';
 
-                    //Hotel Details
-                    include 'profile/sections/hotel_details.php';
+        //User Create
+        include 'profile/sections/user_create.php';
+    }
+    ?>
+    <!--Tab Panels-->
 
-                    //Auction Details
-                    include 'profile/sections/auction_details.php';
+</div>
 
-                    //Auctionσ Edit
-                    include 'profile/sections/hotels_edit.php';
-                }
-                if (isRole("user")) {
-
-                    //Upgrade user
-                    include 'profile/sections/upgrade_user.php';
-
-                    //Hotel evaluation
-                    include 'profile/sections/hotel_evaluation.php';
-
-                    //Auctions History/Edit
-                    include 'profile/sections/auctions_history_edit.php';
-
-                    //Auctions History
-                    include 'profile/sections/auctions_history.php';
-                }
-                if (isRole("admin")) {
-
-                    //User Edit
-                    include 'profile/sections/user_edit.php';
-                }
-
-                //Use Delete
-                include 'profile/sections/user_delete.php';
-
-                //User Create                
-                include 'profile/sections/user_create.php';
-            }
-            ?>
-            <!--Tab Panels-->
-
-        </div>
-
-        <?php
-        include 'footer.php';
-        ?>
-    </body>
+<?php
+include 'footer.php';
+?>
+</body>
 </html>

@@ -1,18 +1,17 @@
 <?php
 include_once "../admin/configuration.php";
-session_start();
 
 if (!isset($_GET["Grade"]) or empty($_GET["Grade"])) {
     echo '{"success":"no"}';
     return;
 }
-if (!isset($_GET["auctionID"]) or empty($_GET["auctionID"])) {
+if (!isset($_GET["userID"]) or empty($_GET["userID"])) {
     echo '{"success":"no"}';
     return;
 }
 $con = db_connect();
-$sql = $con->prepare("UPDATE auction SET GradeOfHotel=? WHERE Highest_Bidder=? AND ID=?");
-$sql->bind_param('isi', $_GET["Grade"], $_SESSION["userid"], $_GET["auctionID"]);
+$sql = $con->prepare("UPDATE auction SET GradeOfUser=? WHERE Highest_Bidder=?");
+$sql->bind_param('is', $_GET["Grade"], $_GET["userID"]);
 $sql->execute();
 
 $result = $sql->get_result();
