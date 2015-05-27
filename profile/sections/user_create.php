@@ -2,7 +2,8 @@
 <div class="card col s12 m8 tabregion" id="section_13">
     <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
         <h4 id='SaUsTitle'></h4>
-        <form id="SaveCreateUser" action="profile/saveuser.php" method="Get">
+
+        <form id="SaveCreateUser" action="profile/saveuser.php" method="post">
             <div class="input-field col s6">
                 <i class="mdi-action-account-circle prefix"></i>
                 <input name="SaUsFirstName" id="SaUsFirstName" type="text" class="validate">

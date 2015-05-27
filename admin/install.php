@@ -57,7 +57,7 @@ CREATE TABLE User (
   Mail      VARCHAR(255) NOT NULL UNIQUE,
   Birthday  VARCHAR(30),
   Image     TEXT,
-  Role      INT          NOT NULL,
+  Role      INT          NOT NULL DEFAULT 2,
   Upgrade   INT          NOT NULL,
   Active    BOOLEAN      NOT NULL DEFAULT 1,
   PRIMARY KEY (Username)

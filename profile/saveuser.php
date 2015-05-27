@@ -1,125 +1,60 @@
 <?php
-// Report all PHP errors (see changelog)
-error_reporting(E_ALL);
 
-// <editor-fold defaultstate="collapsed" desc="Requires">
-require '../admin/configuration.php';
+include "../admin/configuration.php";
 session_start();
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Variables' declare">
-$table = "user";
-$dbColumns = array("FirstName", "Lastname", "Tel", "Mail", "Sex");
-$formGetNames = array("SaUsFirstName", "SaUsLastname", "SaUsTel", "SaUsMail", "SaUsSex");
 
-if (!empty($_GET["SaUsPassword"])) {
-    array_push($dbColumns, "Password");
-    array_push($formGetNames, "SaUsPassword");
-}
-if (!empty($_GET["SaUsBirthday"])) {
-    array_push($dbColumns, "Birthday");
-    array_push($formGetNames, "SaUsBirthday");
-}
-if ($_SESSION['role'] == 0) {
-    array_push($dbColumns, "Role");
-    array_push($formGetNames, "SaUsRole");
+$con = db_connect();
 
-    if (strcmp($_GET["SaUsState"], "new") == 0 || strcmp($_GET["SaUsState"], "adminedit") == 0) {
-        array_push($dbColumns, "Username");
-        array_push($formGetNames, "SaUsUsername");
+if (strcmp($_POST["SaUsState"], "edit") == 0) {
+    $query = "UPDATE user SET FirstName=?, Lastname=?, Tel=?, Mail=?, Sex=? WHERE Username=?";
+    $sql = $con->prepare($query);
+    $sql->bind_param('ssssss', $_POST["SaUsFirstName"], $_POST["SaUsLastname"], $_POST["SaUsTel"], $_POST["SaUsMail"], $_POST["SaUsSex"], $_SESSION['userid']);
+    $sql->execute();
+
+    if (!empty($_POST["SaUsPassword"])) {
+        $query = "UPDATE user SET Password=? WHERE Username=?";
+        $sql = $con->prepare($query);
+        $sql->bind_param('ss', $_POST["SaUsPassword"], $_SESSION['userid']);
+        $sql->execute();
     }
-}
+    if (!empty($_POST["SaUsBirthday"])) {
+        $query = "UPDATE user SET SaUsPassword=? WHERE Username=?";
+        $sql = $con->prepare($query);
+        $sql->bind_param('ss', $_POST["SaUsBirthday"], $_SESSION['userid']);
+        $sql->execute();
 
-// <editor-fold defaultstate="collapsed" desc="Personal data edit">
-// </editor-fold>
-
-$formValues = array();
-
-for ($i = 0; $i < count($formGetNames); $i++) {
-    $formValues[] = addslashes($_GET[$formGetNames[$i]]);
-}
-
-// </editor-fold>
-
-if (strcmp($_GET["SaUsState"], "edit") == 0) {
-    $con = db_connect();
-
-    // <editor-fold defaultstate="collapsed" desc="Construct insert statement">
-    $updateColumns = "";
-    for ($j = 0; $j < count($dbColumns) - 1; $j++) {
-
-        $updateColumns = $updateColumns . $dbColumns[$j] . "='" . $formValues[$j] . "',";
+        echo '{"success":"yes"}';
     }
 
-    $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
+} else if (strcmp($_POST["SaUsState"], "adminedit") == 0) {
+    $query = "UPDATE user SET FirstName=?, Lastname=?, Tel=?, Mail=?, Sex=?, Role=? WHERE Username=?";
+    $sql = $con->prepare($query);
+    $sql->bind_param('sssssis', $_POST["SaUsFirstName"], $_POST["SaUsLastname"], $_POST["SaUsTel"], $_POST["SaUsMail"], $_POST["SaUsSex"], $_POST['SaUsRole'], $_POST['SaUsUsername']);
+    $sql->execute();
 
-    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE Username='" . $_SESSION['userid']."'";
+    if (!empty($_POST["SaUsPassword"])) {
+        $query = "UPDATE user SET Password=? WHERE Username=?";
+        $sql = $con->prepare($query);
+        $sql->bind_param('ss', $_POST["SaUsPassword"], $_POST['SaUsUsername']);
+        $sql->execute();
+    }
+    if (!empty($_POST["SaUsBirthday"])) {
+        $query = "UPDATE user SET SaUsPassword=? WHERE Username=?";
+        $sql = $con->prepare($query);
+        $sql->bind_param('ss', $_POST["SaUsBirthday"], $_POST['SaUsUsername']);
+        $sql->execute();
+    }
 
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Run query">
-    $result = mysqli_query($con, $statement);
-    if ($result == NULL) {
-        echo("Could not run query: \"" . $statement . "\"" . "\n");
-        echo("Error: \"" . mysqli_error($con) . "\"" . "\n");
+    echo '{"success":"yes"}';
+
+} else if (strcmp($_POST["SaUsState"], "new") == 0) {
+    $query = "INSERT INTO user(FirstName, Lastname, Tel, Mail, Sex, Password, Birthday, Username) VALUES(?,?,?,?,?,?,?,?)";
+    $sql = $con->prepare($query);
+    $sql->bind_param('ssssssss', $_POST["SaUsFirstName"], $_POST["SaUsLastname"], $_POST["SaUsTel"], $_POST["SaUsMail"], $_POST["SaUsSex"], $_POST["SaUsPassword"], $_POST["SaUsBirthday"], $_POST["SaUsUsername"]);
+    if (!$sql->execute()) {
         echo '{"success":"no"}';
     } else {
         echo '{"success":"yes"}';
     }
-    // </editor-fold>
-    mysqli_close($con);
-} else if (strcmp($_GET["SaUsState"], "adminedit") == 0) {
-    $con = db_connect();
 
-    // <editor-fold defaultstate="collapsed" desc="Construct insert statement">
-    $updateColumns = "";
-    for ($j = 0; $j < count($dbColumns) - 1; $j++) {
-
-        $updateColumns = $updateColumns . $dbColumns[$j] . "='" . $formValues[$j] . "',";
-    }
-
-    $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
-
-    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE Username='" . $_GET['SaUsUsername'] . "'";
-
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Run query">
-    $result = mysqli_query($con, $statement);
-    if ($result == NULL) {
-        //error_reporting("Could not run query: \"" . $statement . "\"" . "\n");
-        //error_reporting("Error: \"" . mysqli_error($con) . "\"" . "\n");
-        echo '{"success":"no"}';
-    } else {
-        echo '{"success":"yes"}';
-    }
-    // </editor-fold>
-    mysqli_close($con);
-} else if (strcmp($_GET["SaUsState"], "new") == 0) {
-
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Connect to database">
-    $con = db_connect();
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Construct insert statement">
-    $insertColumns = "";
-    $insertValues = "'";
-    for ($j = 0; $j < count($dbColumns) - 1; $j++) {
-        $insertColumns = $insertColumns . $dbColumns[$j] . ",";
-        $insertValues = $insertValues . $formValues[$j] . "','";
-    }
-    $insertColumns = $insertColumns . $dbColumns[count($dbColumns) - 1];
-    $insertValues = $insertValues . $formValues[count($dbColumns) - 1] . "'";
-    $statement = "SELECT " . $insertColumns . " FROM " . $table;
-    $statement = "INSERT INTO " . $table . "(" . $insertColumns . ")" . " VALUES( " . $insertValues . ")";
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Run query">
-    $result = mysqli_query($con, $statement);
-    if ($result == NULL) {
-        //error_reporting("Could not run query: \"" . $statement . "\"" . "\n");
-        //error_reporting("Error: \"" . mysqli_error($con) . "\"" . "\n");
-        echo '{"success":"no"}';
-    } else {
-        echo '{"success":"yes"}';
-    }
-    // </editor-fold>
-    mysqli_close($con);
 }
-?>

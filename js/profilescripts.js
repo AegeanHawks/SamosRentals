@@ -252,6 +252,9 @@ $(document).ready(function () {
             responsejson = JSON.parse(response);
             if (responsejson["success"] == "yes") {
                 Materialize.toast('Ο χρήστης καταχωρήθηκε επιτυχώς!', 4000)
+                setInterval(function () {
+                    location.reload();
+                }, 4000);
             } else {
                 Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000)
             }

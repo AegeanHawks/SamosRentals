@@ -26,7 +26,7 @@ $result = $sql->get_result();
                 </div>
                 <div class="collapsible-body">
                     <form class="FormAdminEditsUser" id="FormAdminEditsUser_<?php echo $i ?>"
-                          action="profile/saveuser.php" method="get">
+                          action="profile/saveuser.php" method="post">
                         <div class="row col s12">
                             <div class="input-field col m4 l3 s12">
                                 <i class="mdi-action-account-circle prefix"></i>

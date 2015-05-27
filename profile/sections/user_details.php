@@ -7,7 +7,7 @@
         </div>
     <?php }
     ?>
-    <form action="profile/saveuser.php" method="Get" id="EditUserForm">
+    <form action="profile/saveuser.php" method="post" id="EditUserForm">
         <div class="col offset-s1 s10">
             <p class="col s4 detailshead">Όνομα: </p>
 
