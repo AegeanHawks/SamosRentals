@@ -222,13 +222,12 @@ $(document).ready(function () {
         success: function (response) {
             responsejson = JSON.parse(response);
             if (responsejson["success"] == "yes") {
-                Materialize.toast('Η δημοπρασία καταχωρήθηκε επιτυχώς!', 4000)
+                Materialize.toast('Η δημοπρασία καταχωρήθηκε επιτυχώς!', 4000);
             } else {
                 Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000)
             }
         }
     });
-
 });
 
 $(document).ready(function () {

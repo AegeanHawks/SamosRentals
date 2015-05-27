@@ -4,87 +4,59 @@
 require '../admin/configuration.php';
 session_start();
 // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Variables' declare">
-$table = "auction";
 
-$dbColumns = array("Name", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images");
-$formGetNames = array("AuctionName", "Description", "Bid_Price", "Buy_Price", "PeopleCount", "End_Date", "Images", );
 
-if (strcmp($_GET["SaAuDeAction"], "new") == 0) {
-    array_push($dbColumns, "Hotel");
-    array_push($formGetNames, "CrAuHotelID");
-} else if (strcmp($_GET["SaAuDeAction"], "edit") == 0) {
-    array_push($dbColumns, "Closed", "ID");
-    array_push($formGetNames, "Closed","AuctionID");
+// <editor-fold defaultstate="collapsed" desc="Use later">
+$image_string_to_database_save;
+if (isset($_POST['submit'])) {
+    $j = 0; //Variable for indexing uploaded image
+
+    $target_path = "images/"; //Declaring Path for uploaded images
+    for ($i = 0; $i < count($_FILES['fileToUpload']['name']); $i++) {//loop to get individual element from the array
+
+        $validextensions = array("jpeg", "jpg", "png");  //Extensions which are allowed
+        $ext = explode('.', basename($_FILES['file']['name'][$i]));//explode file name from dot(.)
+        $file_extension = end($ext); //store extensions in the variable
+
+        $target_path = $target_path . md5(uniqid()) . "." . $ext[count($ext) - 1];//set the target path with a new name of image
+        $j = $j + 1;//increment the number of uploaded images according to the files in array
+
+        if (($_FILES["file"]["size"][$i] < 1000000) //Approx. 100kb files can be uploaded.
+            && in_array($file_extension, $validextensions)
+        ) {
+            if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $target_path)) {//if file moved to uploads folder
+                echo $j . ').<span id="noerror">Image uploaded successfully!.</span><br/><br/>';
+                $image_string_to_database_save += $target_path . ";";
+            } else {//if file was not moved.
+                echo $j . ').<span id="error">please try again!.</span><br/><br/>';
+            }
+        } else {//if file size and file type was incorrect.
+            echo $j . ').<span id="error">***Invalid file Size or Type***</span><br/><br/>';
+        }
+    }
 }
-
-$formValues = array();
-
-//$_GET["End_Date"] = DateTime::createFromFormat('d F, Y', $_GET["End_Date"])->format('Y-m-d') . " 23:59:59";
-for ($i = 0; $i < count($formGetNames); $i++) {
-    $formValues[] = addslashes($_GET[$formGetNames[$i]]);
-}
-//debug_to_console("Date: " . $_GET["End_Date"] . "\t Test: \"" . "\"" . "\n", 3, $errorpath);
-
 // </editor-fold>
 
-if (strcmp($_GET["SaAuDeAction"], "edit") == 0) {
 
-    // <editor-fold defaultstate="collapsed" desc="Connect to database">
-    $con = db_connect();
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Construct insert statement">
-    $updateColumns = "";
-    for ($j = 0; $j < count($dbColumns) - 1; $j++) {
+$con = db_connect();
 
-        $updateColumns = $updateColumns . $dbColumns[$j] . "='" . $formValues[$j] . "',";
-    }
+if (strcmp($_POST["SaAuDeAction"], "edit") == 0) {
+    $query = "UPDATE auction SET Name=?, Description=?, Bid_Price=?, Buy_Price=?, PeopleCount=?, End_Date=?, Images=?, Closed=? WHERE ID=?";
+    $sql = $con->prepare($query);
+    $sql->bind_param('ssiiisbii', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
+        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["Images"], $_POST["Closed"], $_POST["AuctionID"]);
+    $sql->execute();
 
-    $updateColumns = $updateColumns . $dbColumns[count($dbColumns) - 1] . "='" . $formValues[count($dbColumns) - 1] . "'";
+    //$statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionID"];
 
-    $statement = "UPDATE " . $table . " SET " . $updateColumns . " WHERE ID=" . $_GET["AuctionID"];
-    //debug_to_console("Statemnt: " . $statement . "\"" . "\n", 3, $errorpath);
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Run query">
-    $result = mysqli_query($con, $statement);
-    if ($result == NULL) {
-        //debug_to_console("Could not run query: \"" . $statement . "\"" . "\n", 3, $errorpath);
-        echo '{"success":"no"}';
-    } else {
-        echo '{"success":"yes"}';
-    }
-    // </editor-fold>
-    mysqli_close($con);
-    /* debug_to_console("The word parameter is empty" . "\n", 3, $errorpath);
-      echo "0";
-      exit(); */
-} else {
+} else if (strcmp($_POST["SaAuDeAction"], "new") == 0) {
+    $query = "INSERT INTO auction(Name, Description, Bid_Price, Buy_Price, PeopleCount, End_Date, Images, Hotel) VALUES (?,?,?,?,?,?,?,?)";
+    $sql = $con->prepare($query);
+    $sql->bind_param('ssiiisbi', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
+        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["Images"], $_POST["CrAuHotelID"]);
+    $sql->execute();
 
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Connect to database">
-    $con = db_connect();
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Construct insert statement">
-    $insertColumns = "";
-    $insertValues = "'";
-    for ($j = 0; $j < count($dbColumns) - 1; $j++) {
-        $insertColumns = $insertColumns . $dbColumns[$j] . ",";
-        $insertValues = $insertValues . $formValues[$j] . "','";
-    }
-    $insertColumns = $insertColumns . $dbColumns[count($dbColumns) - 1];
-    $insertValues = $insertValues . $formValues[count($dbColumns) - 1] . "'";
-    $statement = "SELECT " . $insertColumns . " FROM " . $table;
-    $statement = "INSERT INTO " . $table . "(" . $insertColumns . ")" . " VALUES( " . $insertValues . ")";
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Run query">
-    $result = mysqli_query($con, $statement);
-    if ($result == NULL) {
-        //error_reporting("Could not run query: \"" . $statement . "\"" . "\n");
-        echo '{"success":"no"}';
-    } else {
-        echo '{"success":"yes"}';
-    }
-    // </editor-fold>
-    mysqli_close($con);
+    //$statement = "INSERT INTO " . $table . "(" . $insertColumns . ")" . " VALUES( " . $insertValues . ")";
 }
+echo '{"success":"yes"}';
 ?>
