@@ -7,7 +7,7 @@
         </div>
     <?php }
     ?>
-    <form action="profile/saveuser.php" method="post" id="EditUserForm">
+    <form action="profile/saveuser.php" id="EditUserForm" method="POST" enctype="multipart/form-data">
         <div class="col offset-s1 s10">
             <p class="col s4 detailshead">Όνομα: </p>
 
@@ -115,6 +115,22 @@
             }
             ?>
         </div>
+        <div class="col offset-s1 s10 divider"></div>
+        <div class="col offset-s1 s2 file-field input-field hidden_form_s_1">
+            <img class="circle responsive-img "
+                 src="<?php if (empty($image)) echo 'images/website/avatar.jpg'; else echo $image; ?>">
+        </div>
+        <div class="col s8 file-field input-field hidden_form_s_1">
+            <div class="file-field input-field">
+                <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+
+                <div class="btn">
+                    <span>File</span>
+                    <input id="fileToUpload" name="fileToUpload" type="file"/>
+                </div>
+            </div>
+        </div>
+
         <?php if (ownsProfile()) {
             ?>
             <div class="col offset-s1 s12 hidden_form_s_1" style='padding-bottom: 20px'>

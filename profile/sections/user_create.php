@@ -3,7 +3,7 @@
     <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
         <h4 id='SaUsTitle'></h4>
 
-        <form id="SaveCreateUser" action="profile/saveuser.php" method="post">
+        <form id="SaveCreateUser" action="profile/saveuser.php" method="POST" enctype="multipart/form-data">
             <div class="input-field col s6">
                 <i class="mdi-action-account-circle prefix"></i>
                 <input name="SaUsFirstName" id="SaUsFirstName" type="text" class="validate">
@@ -16,7 +16,7 @@
             </div>
             <div class="input-field col s6">
                 <i class="mdi-social-whatshot prefix"></i>
-                <input name="SaUsUsername" id="SaUsUsername" type="text" class="validate>
+                <input name="SaUsUsername" id="SaUsUsername" type="text" class="validate">
                 <label for="SaUsUsername">Ψευδώνυμο</label>
             </div>
             <div class="input-field col s6">
@@ -74,6 +74,17 @@
                     </option>
                 </select>
                 <label for="SaUsSex">Φύλο</label>
+            </div>
+
+            <div class="col s12 file-field input-field">
+                <div class="file-field input-field">
+                    <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
+
+                    <div class="btn">
+                        <span>File</span>
+                        <input id="fileToUpload" name="fileToUpload" type="file"/>
+                    </div>
+                </div>
             </div>
 
             <input name="SaUsState" id="SaUsState" style='display: none' value="new">

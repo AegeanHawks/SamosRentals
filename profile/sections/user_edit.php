@@ -26,7 +26,7 @@ $result = $sql->get_result();
                 </div>
                 <div class="collapsible-body">
                     <form class="FormAdminEditsUser" id="FormAdminEditsUser_<?php echo $i ?>"
-                          action="profile/saveuser.php" method="post">
+                          action="profile/saveuser.php" method="POST" enctype="multipart/form-data">
                         <div class="row col s12">
                             <div class="input-field col m4 l3 s12">
                                 <i class="mdi-action-account-circle prefix"></i>
@@ -84,16 +84,15 @@ $result = $sql->get_result();
 
                             <div class="col s12 m12">
                                 <div class="col s2 m4">
-                                    <img class="circle responsive-img " src="images/website/avatar.jpg">
+                                    <img class="circle responsive-img "
+                                         src="<?php if (empty($resultRow["Image"])) echo 'images/website/avatar.jpg'; else echo $resultRow["Image"]; ?>">
                                 </div>
                                 <div class="col s10 m8 file-field input-field">
                                     <div class="input-field col s12 m12">
                                         <input class="file-path validate" type="text"/>
-
                                         <div class="btn">
-
                                             <span>File</span>
-                                            <input type="file"/>
+                                            <input id="fileToUpload" name="fileToUpload" type="file"/>
                                         </div>
                                         <div class="input-field col s12 m12">
                                             <select id="SaUsRole" name="SaUsRole" class="validate">
