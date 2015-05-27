@@ -49,11 +49,10 @@ if (!$sql->execute()) {
                 die('{"success":"no","message":" Invalid file Size or Type!"}');
             }
         }
-        $query = "UPDATE auction SET Images=? WHERE ID=?";
+        $query = "UPDATE auction SET Images=? WHERE ID=LAST_INSERT_ID()";
         $sql = $con->prepare($query);
-        $sql->bind_param('si', $image_str, $_POST["AuctionID"]);
+        $sql->bind_param('s', $image_str);
         $sql->execute();
-        die('{"success":"no","message":"' . $image_str . '"}');
     }
     // </editor-fold>
 
