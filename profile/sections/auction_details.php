@@ -41,7 +41,7 @@
         <div class="col offset-s1 s12" style='padding-bottom: 20px'>
             <a class="waves-effect waves-light btn" href="#gomytab_15" onclick="return UserEditsProfile(true, 15)"><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
         </div>
-        <form action="profile/saveauction.php" method="post" id="SaveAuctionDetailsForm">
+        <form action="profile/saveauction.php" method="post" enctype="multipart/form-data" id="SaveAuctionDetailsForm">
             <div class="col offset-s1 s10">
                 <p class="col s4 detailshead">Όνομα: </p>
 
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="col offset-s1 s10 divider"></div>
-            <div class="col s6 m6 l5 file-field input-field hidden_form_s_15">
+            <div class="col offset-s1 s6 file-field input-field hidden_form_s_15">
                 <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
                 <div class="btn">
                     <span>File</span>

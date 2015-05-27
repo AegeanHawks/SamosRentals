@@ -41,4 +41,5 @@ if (strcmp($_POST["SaEdHotAction"], "edit") == 0) {
         return;
     }
 }
+
 echo '{"success":"no"}';
