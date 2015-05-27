@@ -70,11 +70,11 @@ $result = $sql->get_result();
                             </div>
                             <div class="input-field col m4 l3 s12">
                                 <select name="SaUsSex">
-                                    <option value="1" <?php if ($resultRow["Sex"] == "male") {
+                                    <option value="male" <?php if ($resultRow["Sex"] == "male") {
                                         echo "selected";
                                     } ?>>Άνδρας
                                     </option>
-                                    <option value="2" <?php if ($resultRow["Sex"] == "female") {
+                                    <option value="female" <?php if ($resultRow["Sex"] == "female") {
                                         echo "selected";
                                     } ?>>Γυναίκα
                                     </option>
