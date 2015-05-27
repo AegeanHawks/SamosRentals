@@ -36,6 +36,7 @@ function db_connect() {
 }
 
 function islogged() {
+    //check session
     if (isset($_SESSION['expire']) && session_status() == PHP_SESSION_ACTIVE) {
         $now = time();
         if ($now > $_SESSION['expire']) {
@@ -47,6 +48,20 @@ function islogged() {
         $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
 
         if (isset($_SESSION['role']) && $_SESSION['role'] >= 0) {
+
+            //ask database
+            $con = db_connect();
+            // SQL query to fetch information of registerd users and finds user match.
+            $sql = $con->prepare('select Active from user WHERE Username=?');
+            $sql->bind_param('s', $_SESSION["userid"]);
+            $sql->execute();
+
+            $result = $sql->get_result();
+            $row = mysqli_fetch_array($result);
+            if ($row['Active'] == '0') {
+                return false;
+            }
+
             return true;
         }
     }

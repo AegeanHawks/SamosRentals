@@ -16,6 +16,12 @@ if (isRole('admin')) {
 
             header('location: profile.php?user=' . $_GET["userID"]);
         }
+    } else {
+        $sql->bind_param('s', $_SESSION['userid']);
+        $sql->execute();
+        session_destroy();
+
+        header('location: ../profile.php?user=' . $_SESSION['userid']);
     }
 } else {
     $sql->bind_param('s', $_SESSION['userid']);
