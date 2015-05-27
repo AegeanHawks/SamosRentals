@@ -7,15 +7,15 @@
         if (!isset($_GET['editHotel'])) {
             throw new Exception("Variable editAuction is not set at url");
         }
-        
-        $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade, Manager FROM hotel WHERE hotel.Manager=? AND ID=?";
-
-        // <editor-fold defaultstate="collapsed" desc="Error checking">
-        if (!$hotelDetails = $con->prepare($hotelsDetailsStmt)) {
-            throw new Exception("Prepared statement failed");
+        if (isRole("admin")) {
+            $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade, Manager FROM hotel WHERE ID=?";
+            $hotelDetails = $con->prepare($hotelsDetailsStmt);
+            $hotelDetails->bind_param('i', $_GET['editHotel']);
+        } else {
+            $hotelsDetailsStmt = "SELECT ID,Name, Tel, Description, Coordinates,Comforts,Grade, Manager FROM hotel WHERE hotel.Manager=? AND ID=?";
+            $hotelDetails = $con->prepare($hotelsDetailsStmt);
+            $hotelDetails->bind_param('si', $_SESSION['userid'], $_GET['editHotel']);
         }
-        // </editor-fold>
-        $hotelDetails->bind_param('si', $_SESSION['userid'], $_GET['editHotel']);
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!$hotelDetails->execute()) {
