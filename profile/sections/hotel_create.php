@@ -1,6 +1,6 @@
 
 <div class="z-depth-3 col s12 m8 tabregion" id="section_5">
-    <form action="profile/savehotel.php" method="GET" id="CreateEditHotel">
+    <form action="profile/savehotel.php" method="post" id="CreateEditHotel">
         <div class="input-field col s6">
             <i class="mdi-action-account-circle prefix"></i>
             <input name="SaEdHotName" id="HotelNameInput" type="text" class="validate">
@@ -14,7 +14,7 @@
                     <option value="" disabled selected>Επιλέξτε εδώ</option>
                     <?php
                     // SQL query to fetch all hotels
-                    $allhoteliersQuery = "SELECT Username FROM user WHERE role<2 ORDER BY Username";
+                    $allhoteliersQuery = "SELECT Username FROM user WHERE role=1 ORDER BY Username";
 
                     if (!$allhoteliers = $con->prepare($allhoteliersQuery)) {
                         debug_to_console("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);

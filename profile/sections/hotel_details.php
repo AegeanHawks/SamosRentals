@@ -40,7 +40,7 @@
         <div class="col offset-s1 s12" style='padding-bottom: 20px'>
             <a class="waves-effect waves-light btn" href="#gomytab_14" onclick="return UserEditsProfile(true, 14)"><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
         </div>
-        <form action="profile/savehotel.php" method="get" id="SaveHotelForm">
+        <form action="profile/savehotel.php" method="post" id="SaveHotelForm">
             <div class="col offset-s1 s10">
                 <p class="col s4 detailshead">Όνομα: </p>
 
