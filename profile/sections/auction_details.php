@@ -7,7 +7,7 @@
         if (!isset($_GET['editAuction'])) {
             throw new Exception("Variable editAuction is not set at url");
         }
-        $auctionsDetailsStmt = "SELECT auction.ID, auction.Name, auction.Description, PeopleCount, Closed, Bid_Price, Buy_Price, End_Date FROM auction, hotel WHERE hotel.Manager=? AND auction.Hotel=hotel.id AND auction.ID=?";
+        $auctionsDetailsStmt = "SELECT auction.ID, auction.Name, auction.Description, PeopleCount, Closed, Bid_Price, Buy_Price, End_Date FROM auction, hotel WHERE auction.Hotel=hotel.id AND auction.ID=?";
 
         // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
         // <editor-fold defaultstate="collapsed" desc="Error checking">
@@ -15,12 +15,13 @@
             throw new Exception("\nPrepared '".$auctionsDetailsStmt."' statement failed. \nDetails: ".mysqli_error($con));
         }
         // </editor-fold>
-        $auctionDetails->bind_param('si', $_SESSION['userid'], $_GET['editAuction']);
+        $auctionDetails->bind_param('i', $_GET['editAuction']);
+
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!$auctionDetails->execute()) {
-            debug_to_console("Execute error: \"" . $auctionsDetailsStmt . "\"" . "\n", 3, $errorpath);
-            debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+            trigger_error("Execute error: \"" . $auctionsDetailsStmt . "\"" . "\n");
+            trigger_error("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n");
             throw new Exception("Statement failed to execute");
         }
         // </editor-fold>
@@ -144,7 +145,7 @@
         <!--Hotel Details-->
         <?php
     } catch (Exception $e) {
-        error_reporting("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
+        trigger_error("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
         $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
         echo $errormessage;
