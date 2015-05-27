@@ -40,7 +40,7 @@
         <div class="col offset-s1 s12" style='padding-bottom: 20px'>
             <a class="waves-effect waves-light btn" href="#gomytab_15" onclick="return UserEditsProfile(true, 15)"><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
         </div>
-        <form action="profile/saveauction.php" method="get" id="SaveAuctionDetailsForm">
+        <form action="profile/saveauction.php" method="post" id="SaveAuctionDetailsForm">
             <div class="col offset-s1 s10">
                 <p class="col s4 detailshead">Όνομα: </p>
 
@@ -73,7 +73,7 @@
 
                 <p class="col s8 detailsbody_s_15">
                     <?php
-                    if ($auctionDetailsRow["Closed"] = 1) {
+                    if ($auctionDetailsRow["Closed"] == 0) {
                         echo "Ενεργή";
                     } else {
                         echo "Ανενεργή";
@@ -82,9 +82,13 @@
                 </p>
                 <div class="input-field col s6 hidden_form_s_15">
                     <select name="Closed" class="validate" required form="SaveAuctionDetailsForm">
-                        <option value="1">Ενεργή
+                        <option value="0" <?php if ($auctionDetailsRow["Closed"] == 0) {
+                            echo "selected";
+                        } ?>>Ενεργή
                         </option>
-                        <option value="0">Ανενεργή
+                        <option value="1" <?php if ($auctionDetailsRow["Closed"] == 1) {
+                            echo "selected";
+                        } ?>>Ανενεργή
                         </option>
                     </select>
                 </div>

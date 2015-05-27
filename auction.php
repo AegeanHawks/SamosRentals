@@ -41,7 +41,7 @@ try {
     // SQL query to fetch
     $con = db_connect();
 
-    $auctionDetailsStmt = "SELECT auction.ID as auctionID, hotel.ID as hotelID, hotel.Name as hotelName, auction.Name as auctionName, auction.Description, PeopleCount, Closed, Bid_Price, "
+    $auctionDetailsStmt = "SELECT auction.Closed, auction.ID as auctionID, hotel.ID as hotelID, hotel.Name as hotelName, auction.Name as auctionName, auction.Description, PeopleCount, Closed, Bid_Price, "
         . "Buy_Price, Hotel, Images, End_Date, Highest_Bidder, Tel, Grade FROM auction, hotel WHERE hotel.ID=auction.Hotel AND auction.ID=?";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
@@ -159,7 +159,7 @@ try {
                     ?></p>
             </div>
             <?php
-            if (isRole("user")) {
+            if (isRole("user") && $auctionDetailsRow["Closed"] == 0) {
                 ?>
                 <div class="col s12 m6 l6 z-depth-1" style="padding: 10px; height: 200px;">
                     <h5 class="grey-text bidheader truncate">ΠΛΕΙΟΔΟΤΗΣΑΤΕ</h5>

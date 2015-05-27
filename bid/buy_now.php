@@ -18,8 +18,11 @@ try {
     
 
     $auctionIsClosedjson = json_decode($auctionIsClosed);
-    if ($auctionIsClosedjson->success == "no" || $auctionIsClosedjson->closed == "yes") {
-        throw new Exception("Auction is closed or there is an error");
+    if ($auctionIsClosedjson->success == "no") {
+        throw new Exception("There is an error in auction_is_closed.php");
+    }
+    if ($auctionIsClosedjson->closed == "yes") {
+        throw new Exception("Auction is closed");
     }
     // </editor-fold>
 
@@ -37,8 +40,8 @@ try {
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionDetails->execute()) {
-        debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+        trigger_error("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n");
+        trigger_error("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n");
         throw new Exception("Statement failed to execute");
     }
     // </editor-fold>
@@ -60,8 +63,8 @@ try {
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!$auctionDetails->execute()) {
-            debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-            debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+            trigger_error("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n");
+            trigger_error("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n");
             throw new Exception("Statement failed to execute");
         }
         // </editor-fold>
@@ -72,7 +75,7 @@ try {
 
     echo '{"success":"yes"}';
 } catch (Exception $e) {
-    debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    trigger_error("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
     echo '{"success":"no"}';
 }
 ?>

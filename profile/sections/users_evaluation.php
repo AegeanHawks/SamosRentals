@@ -8,7 +8,7 @@
 
     <?php
 
-    $sql = $con->prepare("SELECT auction.Highest_Bidder, auction.GradeOfUser as Evaluation, auction.Name as auctionName, auction.ID as auctionID FROM auction, hotel WHERE hotel.Manager=? AND auction.Hotel=hotel.ID AND Closed=1");
+    $sql = $con->prepare("SELECT auction.Highest_Bidder, auction.GradeOfUser as Evaluation, auction.Name as auctionName, auction.ID as auctionID FROM auction, hotel WHERE hotel.Manager=? AND Highest_Bidder IS NOT NULL AND auction.Hotel=hotel.ID AND Closed=1");
 
     $sql->bind_param('s', $_SESSION["userid"]);
     $sql->execute();
