@@ -18,7 +18,7 @@
                             θέλετε να συνεχίσετε;</p>
                     </div>
                     <div class="modal-footer">
-                        <a onclick="Materialize.toast(\'<span>Ο χρήστης πήρε τον π...</span>\', 3000, \'rounded\')" href="#!"
+                        <a href="profile/delete_user.php"
                            class=" modal-action modal-close waves-effect waves-green btn-flat">Ναι</a>
                         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Όχι</a>
                     </div>
