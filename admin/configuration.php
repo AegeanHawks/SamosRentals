@@ -48,11 +48,10 @@ function islogged() {
         $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
 
         if (isset($_SESSION['role']) && $_SESSION['role'] >= 0) {
-
             //ask database
             $con = db_connect();
             // SQL query to fetch information of registerd users and finds user match.
-            $sql = $con->prepare('select Active from user WHERE Username=?');
+            $sql = $con->prepare('select Active,Role from user WHERE Username=?');
             $sql->bind_param('s', $_SESSION["userid"]);
             $sql->execute();
 
@@ -61,6 +60,7 @@ function islogged() {
             if ($row['Active'] == '0') {
                 return false;
             }
+            $_SESSION['role'] = $row['Role'];
 
             return true;
         }
