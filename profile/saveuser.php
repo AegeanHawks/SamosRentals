@@ -79,7 +79,7 @@ if (isset($_FILES['fileToUpload']['name'])) {
             && in_array($file_extension, $validextensions)
         ) {
             if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_path)) {//if file moved to uploads folder
-                $image_str = $image_str . str_replace("../", "", $target_path) . ";";
+                $image_str = $image_str . str_replace("../", "", $target_path);
             } else {//if file was not moved.
                 die('{"success":"no","message":" please try again to upload image!"}');
             }
