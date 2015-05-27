@@ -27,7 +27,7 @@ function authenticate()
         return;
     }
     // SQL query with prepared statement(sql injections) to fetch information of registerd users and finds user match.
-    $sql = $con->prepare('SELECT * FROM user WHERE Password = ? AND Username= ?');
+    $sql = $con->prepare('SELECT * FROM user WHERE Password = ? AND Username= ? AND Active=1');
     $sql->bind_param('ss', $password, $username);
     $sql->execute();
 

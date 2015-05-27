@@ -21,7 +21,6 @@
         if (isRole("hotelier")) {
             $userauctions->bind_param('s', $_SESSION['userid']);
         }
-        error_reporting("Execute error: \"" . $acutionsStatment . "\"" . "\n");
 
         if (!$userauctions->execute()) {
             error_reporting("Execute error: \"" . $acutionsStatment . "\"" . "\n");

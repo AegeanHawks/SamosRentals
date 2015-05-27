@@ -59,6 +59,7 @@ CREATE TABLE User (
   Image     TEXT,
   Role      INT          NOT NULL,
   Upgrade   INT          NOT NULL,
+  Active    BOOLEAN      NOT NULL DEFAULT 1,
   PRIMARY KEY (Username)
 );
 

@@ -2,7 +2,7 @@
 
 $con = db_connect();
 // SQL query to fetch information of registerd users and finds user match.
-$sql = $con->prepare('SELECT * FROM user');
+$sql = $con->prepare('SELECT * FROM user WHERE Active=1');
 $sql->execute();
 $result = $sql->get_result();
 
