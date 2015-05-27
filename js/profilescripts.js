@@ -184,6 +184,30 @@ function removeUser(userID) {
     xmlhttp.send();
 }
 
+function updateUser(userID) {
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            //evaluate = JSON.parse(xmlhttp.responseText);
+
+            Materialize.toast('Ο χρήστης διαγράφηκε επιτυχώς', 1000);
+            setTimeout(function () {
+                location.reload();
+            }, 1100);
+        }
+    }
+
+    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "profile/update_user.php?userID=" + userID, true);
+    xmlhttp.send();
+}
+
 $(document).ready(function () {
     // bind 'myForm' and provide a simple callback function
     $('#EditUserForm').ajaxForm(function () {

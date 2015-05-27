@@ -1,10 +1,5 @@
 
 <div class="z-depth-3 col s12 m8 tabregion" id="section_5">
-
-    <div class="col s12" style="padding-top: 20px; padding-bottom: 30px;">
-        <a class="waves-effect waves-light orange darken-1 btn">ΠΡΟΒΟΛΗ ΣΕΛΙΔΑΣ</a>
-    </div>
-
     <form action="profile/savehotel.php" method="GET" id="CreateEditHotel">
         <div class="input-field col s6">
             <i class="mdi-action-account-circle prefix"></i>

@@ -2,7 +2,7 @@
 
 $con = db_connect();
 // SQL query to fetch information of registerd users and finds user match.
-$sql = $con->prepare('SELECT * FROM user WHERE Active=1');
+$sql = $con->prepare('SELECT * FROM user WHERE Active=1 ORDER BY Upgrade DESC, Username ASC ');
 $sql->execute();
 $result = $sql->get_result();
 
@@ -14,10 +14,15 @@ $result = $sql->get_result();
             $resultRow = mysqli_fetch_array($result);
             ?>
             <li class="ElementOFEditUsers_" id="ElementOFEditUsers__<?php echo $i ?>">
-                <div class="collapsible-header">
+                <div class="collapsible-header ">
                     <div class="col s2 truncate"><?php echo $resultRow["Username"] ?></div>
                     <div class="col s3 truncate"><?php echo $resultRow["FirstName"] ?></div>
-                    <div class="col s4 truncate"><?php echo $resultRow["LastName"] ?></div>
+                    <div class="col s3 truncate"><?php echo $resultRow["LastName"] ?></div>
+                    <?php if ($resultRow["Upgrade"] == 1) { ?>
+                        <div class="col s4 truncate"><a class="waves-effect light-green waves-light btn right"
+                                                        onclick="updateUser('<?php echo $resultRow["Username"] ?>')"
+                                                        href="#updateuser_12">ΑΝΑΒΑΘΜΙΣΗ</a></div>
+                    <?php } ?>
                 </div>
                 <div class="collapsible-body">
                     <form class="FormAdminEditsUser" id="FormAdminEditsUser_<?php echo $i ?>"
@@ -92,11 +97,17 @@ $result = $sql->get_result();
                                         </div>
                                         <div class="input-field col s12 m12">
                                             <select id="SaUsRole" name="SaUsRole" class="validate">
-                                                <option value="0">Administrator
+                                                <option value="0" <?php if ($resultRow["Role"] == 0) {
+                                                    echo "selected";
+                                                } ?>>Administrator
                                                 </option>
-                                                <option value="1">Hotelier
+                                                <option value="1" <?php if ($resultRow["Role"] == 1) {
+                                                    echo "selected";
+                                                } ?>>Hotelier
                                                 </option>
-                                                <option value="2">User
+                                                <option value="2" <?php if ($resultRow["Role"] == 2) {
+                                                    echo "selected";
+                                                } ?>>User
                                                 </option>
                                             </select>
                                             <label>Ρολος</label>
