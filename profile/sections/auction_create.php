@@ -1,7 +1,7 @@
 
 <div class="card col s12 m8 tabregion" id="section_4">
     <div class="white col s12" style="padding-top: 15px;padding-bottom: 15px;">
-        <form id="CreateEditAuction" action="profile/saveauction.php" method="GET">
+        <form id="CreateEditAuction" action="profile/saveauction.php" method="POST" enctype="multipart/form-data">
             <div class="input-field col s6">
                 <i class="mdi-action-account-circle prefix"></i>
                 <input name="AuctionName" id="AuctionTitleInput" type="text" class="validate">
@@ -77,7 +77,7 @@
                     <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
                     <div class="btn">
                         <span>File</span>
-                        <input type="file" />
+                        <input type="file" class="upload"/>
                     </div>
                 </div>
             </div>
