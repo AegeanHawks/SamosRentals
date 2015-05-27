@@ -77,7 +77,7 @@
                     <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
                     <div class="btn">
                         <span>File</span>
-                        <input type="file" class="upload"/>
+                        <input name="fileToUpload" type="file" class="upload"/>
                     </div>
                 </div>
             </div>
