@@ -94,15 +94,10 @@ if (isset($_FILES['fileToUpload']['name'])) {
         $sql->bind_param('ss', $image_str, $_SESSION['userid']);
         $sql->execute();
     }
-    if (strcmp($_POST["SaUsState"], "adminedit") == 0) {
+    if (strcmp($_POST["SaUsState"], "adminedit") == 0 || strcmp($_POST["SaUsState"], "new") == 0) {
         $query = "UPDATE user SET Image=? WHERE Username=?";
         $sql = $con->prepare($query);
         $sql->bind_param('ss', $image_str, $_POST['SaUsUsername']);
-        $sql->execute();
-    } else if (strcmp($_POST["SaUsState"], "new") == 0) {
-        $query = "UPDATE user SET Image=? WHERE ID=LAST_INSERT_ID()";
-        $sql = $con->prepare($query);
-        $sql->bind_param('s', $image_str);
         $sql->execute();
     }
 

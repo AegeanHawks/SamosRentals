@@ -97,6 +97,13 @@
             <div class="col offset-s1 s10">
                 <p class="col s4 detailshead">Μανατζερ: </p>
                 <p class="col s4 detailsbody_s_14"><?php echo $hotelDetailsRow["Manager"] ?></p>
+
+                <p class="col s4 hidden_form_s_14"><?php echo $hotelDetailsRow["Manager"] ?></p>
+
+                <div class="input-field col s6" style="display: none">
+                    <input name="SaEdHotChooseHotelier" type="text" class="validate"
+                           value="<?php echo $hotelDetailsRow["Manager"] ?>">
+                </div>
             </div>
             <div class="col offset-s1 s10 divider"></div>
             <div class="col offset-s1 s6 file-field input-field hidden_form_s_14">
