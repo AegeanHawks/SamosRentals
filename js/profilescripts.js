@@ -211,7 +211,17 @@ function updateUser(userID) {
 $(document).ready(function () {
     // bind 'myForm' and provide a simple callback function
     $('#EditUserForm').ajaxForm(function () {
-        location.reload();
+        console.log("test");
+        responsejson = JSON.parse(response);
+        console.log("test2");
+        if (responsejson["success"] == "yes") {
+            Materialize.toast('Το ξενοδοχείο καταχωρήθηκε επιτυχώς!', 4000);
+            setInterval(function () {
+                location.reload();
+            }, 4000);
+        } else {
+            Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000);
+        }
     });
 });
 
