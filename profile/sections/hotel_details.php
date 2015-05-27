@@ -99,11 +99,11 @@
                 <p class="col s4 detailsbody_s_14"><?php echo $hotelDetailsRow["Manager"] ?></p>
             </div>
             <div class="col offset-s1 s10 divider"></div>
-            <div class="col s6 m6 l5 file-field input-field hidden_form_s_14">
+            <div class="col offset-s1 s6 file-field input-field hidden_form_s_14">
                 <input name="SaEdHotImage" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
                 <div class="btn">
                     <span>File</span>
-                    <input type="file" />
+                    <input id="fileToUpload" name="fileToUpload" type="file"/>
                 </div>
             </div>
             <input name="SaEdHotID" style="display: none" type="text" class="validate" value="<?php echo $hotelDetailsRow["ID"] ?>">

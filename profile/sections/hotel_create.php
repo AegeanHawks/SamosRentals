@@ -62,7 +62,7 @@
             <input name="SaEdHotImage" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
             <div class="btn">
                 <span>File</span>
-                <input type="file" />
+                <input id="fileToUpload" name="fileToUpload" type="file"/>
             </div>
         </div>
         <div class="input-field col s12" style="display: none;">

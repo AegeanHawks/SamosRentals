@@ -127,7 +127,7 @@
                 <input name="Images" placeholder="Φωτογραφία" class="file-path validate" type="text"/>
                 <div class="btn">
                     <span>File</span>
-                    <input type="file" />
+                    <input id="fileToUpload" name="fileToUpload" type="file"/>
                 </div>
             </div>
             <div class="col offset-s1 s10 divider"></div>

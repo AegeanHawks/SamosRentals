@@ -241,7 +241,7 @@ $(document).ready(function () {
                     location.reload();
                 }, 4000);
             } else {
-                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000);
+                Materialize.toast('Υπήρξε κάποιο πρόβλημα, ' + responsejson["message"], 4000);
             }
         }
     });
@@ -259,7 +259,7 @@ $(document).ready(function () {
                     location.reload();
                 }, 4000);
             } else {
-                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000);
+                Materialize.toast('Υπήρξε κάποιο πρόβλημα, ' + responsejson["message"], 4000);
             }
         }
     });
@@ -277,7 +277,7 @@ $(document).ready(function () {
                     location.reload();
                 }, 4000);
             } else {
-                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000);
+                Materialize.toast('Υπήρξε κάποιο πρόβλημα, ' + responsejson["message"], 4000);
             }
         }
     });
@@ -295,7 +295,7 @@ $(document).ready(function () {
                     location.reload();
                 }, 4000);
             } else {
-                Materialize.toast('Υπήρξε κάποιο πρόβλημα, παράκαλω ελέγξτε τις τιμές που εισάγατε!', 4000);
+                Materialize.toast('Υπήρξε κάποιο πρόβλημα, ' + responsejson["message"], 4000);
             }
         }
     });
