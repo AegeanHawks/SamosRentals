@@ -73,10 +73,14 @@ if (!$sql->execute()) {
             }
         }
 
-        $query = "UPDATE auction SET Images=? WHERE ID=?";
+        $query = " UPDATE Auction SET Images=? WHERE ID=? ;";
+        $con = db_connect(); ///Προσοχή χρειάζετε διότι η σύνδεση έκλεινε. Fuck my life and the fucking SQL bullshit!!!!!
         $sql = $con->prepare($query);
-        $sql->bind_param('si', $image_str, $id);
-        $sql->execute();
+        $sql->bind_param("ss", $image_str, $id);
+
+        if (!$sql->execute()) {
+            die('{"success":"no","message":"Η ενημέρωση της εικόνας απέτυχε!"}');
+        }
 
     }
     // </editor-fold>
