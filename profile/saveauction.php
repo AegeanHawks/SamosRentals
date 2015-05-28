@@ -6,19 +6,21 @@ session_start();
 // </editor-fold>
 
 $con = db_connect();
+if (isset($_POST["End_Date"])) {
+    $_POST["End_Date"] = str_replace(',', '', $_POST["End_Date"]);
+    $vardate = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
+}
 
 if (strcmp($_POST["SaAuDeAction"], "edit") == 0) {
-    $_POST["End_Date"] = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
     $query = "UPDATE auction SET Name=?, Description=?, Bid_Price=?, Buy_Price=?, PeopleCount=?, End_Date=?, Closed=? WHERE ID=?";
     $sql = $con->prepare($query);
     $sql->bind_param('ssiiisii', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
-        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["Closed"], $_POST["AuctionID"]);
+        $_POST["PeopleCount"], $vardate, $_POST["Closed"], $_POST["AuctionID"]);
 } else if (strcmp($_POST["SaAuDeAction"], "new") == 0) {
-    $_POST["End_Date"] = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
     $query = "INSERT INTO auction(Name, Description, Bid_Price, Buy_Price, PeopleCount, End_Date, Hotel) VALUES (?,?,?,?,?,?,?)";
     $sql = $con->prepare($query);
     $sql->bind_param('ssiiisi', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
-        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["CrAuHotelID"]);
+        $_POST["PeopleCount"], $vardate, $_POST["CrAuHotelID"]);
 }
 
 if (!$sql->execute()) {
@@ -35,9 +37,13 @@ if (!$sql->execute()) {
     }
 
     $eventName = $_POST["AuctionName"] . $id;
-    $mysqlDate = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
-    $query = "CREATE EVENT " . $eventName . " ON SCHEDULE AT '" . $mysqlDate . "' DO UPDATE Auction SET Closed = 1 WHERE ID=" . $id;
-    $con->multi_query($query);
+    //$mysqlDate = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
+
+    $query = "DROP EVENT IF EXISTS " . $eventName . "; CREATE EVENT " . $eventName . " ON SCHEDULE AT '" . $vardate . "' DO UPDATE Auction SET Closed = 1 WHERE ID=" . $id;
+
+    if ($con->multi_query($query) === FALSE) {
+        die('{"success":"no","message":"Η λήξη της αγγελίας επέτυχε ' . $con->error . '"}');
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Upload Image">
     $image_str = "";
