@@ -45,6 +45,8 @@
 
 // Create Tables
         $sql = "
+SET GLOBAL event_scheduler = ON;
+
 SET CHARACTER SET 'utf8';
 SET NAMES 'utf8';
 CREATE TABLE User (

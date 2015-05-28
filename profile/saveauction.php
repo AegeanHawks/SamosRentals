@@ -22,6 +22,13 @@ if (strcmp($_POST["SaAuDeAction"], "edit") == 0) {
 if (!$sql->execute()) {
     echo '{"success":"no","message":"ελέξτε όλα τα στοιχεία ότι είναι σωστά!"}';
 } else {
+    $rand = $_POST["AuctionName"] . rand(000000, 999999);
+    $mysqlDate = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
+    $query = "CREATE EVENT " . $rand . " ON SCHEDULE AT '" . $mysqlDate . "' DO UPDATE Auction SET Closed = 1 WHERE ID=LAST_INSERT_ID()";
+    $sql1 = $con->prepare($query);
+    $sql1->execute();
+    //die('{"success":"no","message":"' . $mysqlDate . '"}');
+
     // <editor-fold defaultstate="collapsed" desc="Upload Image">
     $image_str = "";
     $j = 0; //Variable for indexing uploaded image
