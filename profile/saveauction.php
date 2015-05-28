@@ -37,9 +37,7 @@ if (!$sql->execute()) {
     $eventName = $_POST["AuctionName"] . $id;
     $mysqlDate = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
     $query = "CREATE EVENT " . $eventName . " ON SCHEDULE AT '" . $mysqlDate . "' DO UPDATE Auction SET Closed = 1 WHERE ID=" . $id;
-    $sql1 = $con->prepare($query);
-    //$sql1->execute();
-    //die('{"success":"no","message":"' . $mysqlDate . '"}');
+    $con->multi_query($query);
 
     // <editor-fold defaultstate="collapsed" desc="Upload Image">
     $image_str = "";
