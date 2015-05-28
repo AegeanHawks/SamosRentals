@@ -8,25 +8,37 @@ session_start();
 $con = db_connect();
 
 if (strcmp($_POST["SaAuDeAction"], "edit") == 0) {
-    $query = "UPDATE auction SET Name=?, Description=?, Bid_Price=?, Buy_Price=?, PeopleCount=?, End_Date=?, Images=?, Closed=? WHERE ID=?";
+    $_POST["End_Date"] = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
+    $query = "UPDATE auction SET Name=?, Description=?, Bid_Price=?, Buy_Price=?, PeopleCount=?, End_Date=?, Closed=? WHERE ID=?";
     $sql = $con->prepare($query);
-    $sql->bind_param('ssiiisbii', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
-        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["Images"], $_POST["Closed"], $_POST["AuctionID"]);
+    $sql->bind_param('ssiiisii', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
+        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["Closed"], $_POST["AuctionID"]);
 } else if (strcmp($_POST["SaAuDeAction"], "new") == 0) {
-    $query = "INSERT INTO auction(Name, Description, Bid_Price, Buy_Price, PeopleCount, End_Date, Images, Hotel) VALUES (?,?,?,?,?,?,?,?)";
+    $_POST["End_Date"] = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
+    $query = "INSERT INTO auction(Name, Description, Bid_Price, Buy_Price, PeopleCount, End_Date, Hotel) VALUES (?,?,?,?,?,?,?)";
     $sql = $con->prepare($query);
-    $sql->bind_param('ssiiisbi', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
-        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["Images"], $_POST["CrAuHotelID"]);
+    $sql->bind_param('ssiiisi', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
+        $_POST["PeopleCount"], $_POST["End_Date"], $_POST["CrAuHotelID"]);
 }
 
 if (!$sql->execute()) {
     echo '{"success":"no","message":"ελέξτε όλα τα στοιχεία ότι είναι σωστά!"}';
 } else {
-    $rand = $_POST["AuctionName"] . rand(000000, 999999);
+    if (!isset($_POST["AuctionID"])) {
+        $query = "Select LAST_INSERT_ID() as id";
+        $sql = $con->prepare($query);
+        $sql->execute();
+        $result = $sql->get_result();
+        $id = mysqli_fetch_array($result)['id'];
+    } else {
+        $id = $_POST["AuctionID"];
+    }
+
+    $eventName = $_POST["AuctionName"] . $id;
     $mysqlDate = date('Y-m-d H:i:s', strtotime($_POST["End_Date"]));
-    $query = "CREATE EVENT " . $rand . " ON SCHEDULE AT '" . $mysqlDate . "' DO UPDATE Auction SET Closed = 1 WHERE ID=LAST_INSERT_ID()";
+    $query = "CREATE EVENT " . $eventName . " ON SCHEDULE AT '" . $mysqlDate . "' DO UPDATE Auction SET Closed = 1 WHERE ID=" . $id;
     $sql1 = $con->prepare($query);
-    $sql1->execute();
+    //$sql1->execute();
     //die('{"success":"no","message":"' . $mysqlDate . '"}');
 
     // <editor-fold defaultstate="collapsed" desc="Upload Image">
@@ -57,17 +69,10 @@ if (!$sql->execute()) {
             }
         }
 
-        if (isset($_POST["AuctionID"])) {
-            $query = "UPDATE auction SET Images=? WHERE ID=?";
-            $sql = $con->prepare($query);
-            $sql->bind_param('si', $image_str, $_POST["AuctionID"]);
-            $sql->execute();
-        } else {
-            $query = "UPDATE auction SET Images=? WHERE ID=LAST_INSERT_ID()";
-            $sql = $con->prepare($query);
-            $sql->bind_param('s', $image_str);
-            $sql->execute();
-        }
+        $query = "UPDATE auction SET Images=? WHERE ID=?";
+        $sql = $con->prepare($query);
+        $sql->bind_param('si', $image_str, $id);
+        $sql->execute();
 
     }
     // </editor-fold>
