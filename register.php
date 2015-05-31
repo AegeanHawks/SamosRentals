@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<script>Materialize.toast('" . $error_msg . "', 5000)</script>";
         } else {
             $sql = $con->prepare("INSERT INTO User (Username, Password, FirstName, LastName, Sex, Mail, Tel, Birthday, Role, Image, Upgrade)
-              VALUE (?, ?, ?, ?, ?, ?, ?, ?, 2,'images/website/avatar.jpg',?)");
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, 2,'images/website/avatar.jpg',?)");
             $sql->bind_param('ssssssssi', $username, $password, $fname, $lname, $sex, $email, $tel, $birthday, $hotelier);
             $sql->execute();
 
