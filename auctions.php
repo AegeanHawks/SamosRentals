@@ -180,7 +180,8 @@ include 'header.php';
                 $Closed = $row['Closed'];
                 $Bid_Price = $row['Bid_Price'];
                 $Buy_Price = $row['Buy_Price'];
-                $Image = $row['Images'];
+                //Explode Image to get all images
+                $Image = explode(";", $row['Images']);
                 $Hotel = $row['Hotel'];
                 $HotelName = $row['HotelName'];
                 //Explode HotelImage to get all images
@@ -191,7 +192,7 @@ include 'header.php';
                     <div id="<?php echo 'Auction_' . $id; ?>" class="card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" onclick="flip('<?php echo 'Auction_' . $id; ?>')"
-                                 src="<?php echo $Image; ?>">
+                                 src="<?php echo $Image[0]; ?>">
                         </div>
                         <div class="card-content">
                         <span onclick="flip('<?php echo 'Auction_' . $id; ?>')" src="images/office1.jpg"

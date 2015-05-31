@@ -100,7 +100,6 @@ $resultRowhotelGrade = mysqli_fetch_array($resulthotelGrade);
             $result = $sql->get_result();
             $resultRow = mysqli_fetch_array($result);
             $split = explode(";", $resultRow["Images"]);
-            echo $split[0];
             ?>">
     </div>
 </div>
