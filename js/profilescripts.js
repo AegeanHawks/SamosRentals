@@ -131,7 +131,7 @@ function evaluateTheHotel(auctionID, grade) {
     xmlhttp.send();
 }
 
-function evaluateTheUser(userID, grade) {
+function evaluateTheUser(userID, auctionID, grade) {
 
     var xmlhttp;
     if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -156,7 +156,7 @@ function evaluateTheUser(userID, grade) {
         }
     }
 
-    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "profile/evaluate_user.php?Grade=" + grade + "&userID=" + userID, true);
+    xmlhttp.open("GET", window.location.toString().replace(/profile.php.*/i, '') + "profile/evaluate_user.php?Grade=" + grade + "&auctionID=" + auctionID + "&userID=" + userID, true);
     xmlhttp.send();
 }
 

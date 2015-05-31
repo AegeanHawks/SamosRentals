@@ -1,9 +1,18 @@
+<?php
 
+$sql = $con->prepare("SELECT avg(auction.GradeOfUser) as Grade FROM auction, bid, user WHERE user.Username=? AND bid.Username=user.Username AND bid.idAuction=auction.ID GROUP BY user.Username");
+$sql->bind_param('s', $_SESSION["userid"]);
+$sql->execute();
+
+$result = $sql->get_result();
+$resultRow = mysqli_fetch_array($result);
+?>
 <div class="card row col s12 m8 tabregion" id="section_1" style="display: none">
     <?php if (ownsProfile()) {
         ?>
         <div class="col offset-s1 s12" style='padding-bottom: 20px'>
-            <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(true, 1)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
+            <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(true, 1)"
+               id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Επεξεργασια</a>
         </div>
     <?php }
     ?>
@@ -12,6 +21,7 @@
             <p class="col s4 detailshead">Όνομα: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $fname; ?></p>
+
             <div class="input-field col s6 hidden_form_s_1">
                 <input name="SaUsFirstName" type="text" class="validate" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$"
                        value="<?php echo $fname; ?>">
@@ -22,6 +32,7 @@
             <p class="col s4 detailshead">Επώνυμο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $lname; ?></p>
+
             <div class="input-field col s6 hidden_form_s_1">
                 <input name="SaUsLastname" type="text" class="validate" pattern="^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{2,20}$"
                        value="<?php echo $lname; ?>">
@@ -32,6 +43,7 @@
             <p class="col s4 detailshead">Ψευδώνυμο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $username; ?></p>
+
             <p class="col s8 hidden_form_s_1"><?php echo $username; ?></p>
         </div>
         <div class="col offset-s1 s10 divider"></div>
@@ -39,6 +51,7 @@
             <p class="col s4 detailshead">Τηλέφωνο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $tel; ?></p>
+
             <div class="input-field col s6 hidden_form_s_1">
                 <input name="SaUsTel" type="text" pattern='[\+]\d{2}\d{10}' class="validate"
                        value="<?php echo $tel; ?>">
@@ -49,6 +62,7 @@
             <p class="col s4 detailshead">E-mail: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $mail; ?></p>
+
             <div class="input-field col s6 hidden_form_s_1">
                 <input name="SaUsMail" type="email" class="validate" value="<?php echo $mail; ?>">
             </div>
@@ -58,9 +72,10 @@
             <p class="col s4 detailshead">Ημερομηνία γέννησης: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $birthday; ?></p>
+
             <div class="col s6 input-field hidden_form_s_1">
-                <input  name="SaUsBirthday" type="text" class="datepicker picker__input" value="<?php echo $birthday; ?>"
-                        required form="EditUserForm">
+                <input name="SaUsBirthday" type="text" class="datepicker picker__input" value="<?php echo $birthday; ?>"
+                       required form="EditUserForm">
             </div>
         </div>
         <div class="col offset-s1 s10 divider hidden_form_s_1"></div>
@@ -74,11 +89,23 @@
                        maxlength="30" class="validate">
             </div>
         </div>
+        <?php
+        if (isRole("user")) {
+            ?>
+            <div class="col offset-s1 s10 divider"></div>
+            <div class="col offset-s1 s10">
+                <p class="col s4 detailshead">Βαθμολογία: </p>
+
+                <p class="col s6 detailsbody_s_1"><?php echo floor($resultRow["Grade"] * 10) / 10 ?></p>
+            </div>
+        <?php
+        } ?>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
             <p class="col s4 detailshead">Φύλλο: </p>
 
             <p class="col s8 detailsbody_s_1"><?php echo $sex; ?></p>
+
             <div class="input-field col s6 hidden_form_s_1">
                 <select name="SaUsSex" class="validate" required form="EditUserForm">
                     <option value="male">Άνδρας
@@ -107,11 +134,11 @@
                     </select>
                     <label for="SaUsSex">Τύπος</label>
                 </div>
-                <?php
+            <?php
             } else {
                 ?>
                 <p class="col s6 hidden_form_s_1"><?php echo $role; ?></p>
-                <?php
+            <?php
             }
             ?>
         </div>
@@ -139,7 +166,8 @@
                 </button>
             </div>
             <div class="col offset-s1 s12 hidden_form_s_1" style='padding-bottom: 20px'>
-                <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false,1)" id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
+                <a class="waves-effect waves-light btn" href="#gomytab_1" onclick="return UserEditsProfile(false,1)"
+                   id='mytabE_13'><i class="mdi-editor-mode-edit right"></i>Ακύρωση</a>
             </div>
         <?php } ?>
 

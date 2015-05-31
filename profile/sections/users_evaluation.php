@@ -34,10 +34,10 @@
                 data-size="xs">
         <div class="col s12 m5 l4">*/
             for ($j = 0; $j < $resultRow["Evaluation"]; $j++) {
-                echo '<a onclick="evaluateTheUser(\'' . $resultRow["Highest_Bidder"] . '\',' . ($j + 1) . ')" href="#gomytab_3"><i class="mdi-action-star-rate circle amber accent-3"></i></a>';
+                echo '<a onclick="evaluateTheUser(\'' . $resultRow["Highest_Bidder"] . '\',' . $resultRow["auctionID"] . ',' . ($j + 1) . ')" href="#gomytab_3"><i class="mdi-action-star-rate circle amber accent-3"></i></a>';
             }
             for ($j = $resultRow["Evaluation"]; $j < 5; $j++) {
-                echo '<a onclick="evaluateTheUser(\'' . $resultRow["Highest_Bidder"] . '\',' . ($j + 1) . ')" href="#gomytab_3"><i class="mdi-action-star-rate circle gray"></i></a>';
+                echo '<a onclick="evaluateTheUser(\'' . $resultRow["Highest_Bidder"] . '\',' . $resultRow["auctionID"] . ',' . ($j + 1) . ')" href="#gomytab_3"><i class="mdi-action-star-rate circle gray"></i></a>';
             }
             ?>
         </div>

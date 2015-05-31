@@ -1,4 +1,3 @@
-
 <?php
 include 'admin/configuration.php';
 session_start();
@@ -41,12 +40,16 @@ try {
     // SQL query to fetch
     $con = db_connect();
 
-    $auctionDetailsStmt = "SELECT auction.Closed, auction.ID as auctionID, hotel.ID as hotelID, hotel.Name as hotelName, auction.Name as auctionName, auction.Description, PeopleCount, Closed, Bid_Price, "
-        . "Buy_Price, Hotel, Images, End_Date, Highest_Bidder, Tel, Grade FROM auction, hotel WHERE hotel.ID=auction.Hotel AND auction.ID=?";
+    $auctionDetailsStmt = "";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
     // <editor-fold defaultstate="collapsed" desc="Error checking">
-    if (!$auctionDetails = $con->prepare($auctionDetailsStmt)) {
+    $auctionDetails = $con->prepare("
+    SELECT auction.Closed, auction.ID as auctionID, hotel.ID as hotelID, hotel.Name as hotelName, auction.Name as auctionName, auction.Description, PeopleCount, Closed, Bid_Price, Buy_Price, Hotel, Images, End_Date, Highest_Bidder, Tel
+    FROM auction, hotel WHERE hotel.ID=auction.Hotel AND auction.ID=?");
+
+
+    if (!$auctionDetails) {
         throw new Exception("\nPrepared '" . $auctionDetailsStmt . "' statement failed. \nDetails: " . mysqli_error($con));
     }
     // </editor-fold>
@@ -76,6 +79,16 @@ try {
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
     echo $errormessage;
 }
+
+$hotelGrade = $con->prepare("
+    SELECT avg(auction.GradeOfHotel) as Grade
+    FROM hotel, auction WHERE hotel.ID=? and auction.Hotel=hotel.id");
+
+$hotelGrade->bind_param('i', $auctionDetailsRow["hotelID"]);
+$hotelGrade->execute();
+$resulthotelGrade = $hotelGrade->get_result();
+$resultRowhotelGrade = mysqli_fetch_array($resulthotelGrade);
+
 ?>
 <div class="parallax-container">
     <div class="parallax"><img
@@ -135,7 +148,7 @@ try {
                 </li>
                 <li class="collection-item">
                     <?php
-                    $starsNum = floor($auctionDetailsRow["Grade"]);
+                    $starsNum = floor($resultRowhotelGrade["Grade"]);
 
                     for ($l = 0; $l < $starsNum; $l++) {
                         echo "<i class=\"mdi-action-star-rate circle amber accent-3\"></i>";

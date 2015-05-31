@@ -15,7 +15,8 @@ if ($con->connect_errno) {
 }
 
 // SQL query to fetch information of hotel.
-$sql = $con->prepare('SELECT * FROM Hotel WHERE ID= ?');
+//$sql = $con->prepare('SELECT * FROM Hotel WHERE ID= ?');
+$sql = $con->prepare('SELECT Hotel.Name, Comforts,Tel,Hotel.Description,Coordinates,Manager,Hotel.Image,avg(auction.GradeOfHotel) as Grade FROM Hotel,auction WHERE Hotel.ID= ? AND Hotel.id=auction.Hotel GROUP BY Hotel.ID');
 $sql->bind_param('s', $_GET['id']);
 $sql->execute();
 

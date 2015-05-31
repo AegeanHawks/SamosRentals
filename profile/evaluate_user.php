@@ -9,9 +9,14 @@ if (!isset($_GET["userID"]) or empty($_GET["userID"])) {
     echo '{"success":"no"}';
     return;
 }
+if (!isset($_GET["auctionID"]) or empty($_GET["auctionID"])) {
+    echo '{"success":"no"}';
+    return;
+}
+
 $con = db_connect();
-$sql = $con->prepare("UPDATE auction SET GradeOfUser=? WHERE Highest_Bidder=?");
-$sql->bind_param('is', $_GET["Grade"], $_GET["userID"]);
+$sql = $con->prepare("UPDATE auction SET GradeOfUser=? WHERE Highest_Bidder=? AND ID=?");
+$sql->bind_param('isi', $_GET["Grade"], $_GET["userID"], $_GET["auctionID"]);
 $sql->execute();
 
 $result = $sql->get_result();
