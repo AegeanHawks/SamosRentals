@@ -8,7 +8,7 @@
 
     <?php
 
-    $sql = $con->prepare("SELECT Name, Highest_Bidder, Bid_Price FROM auction, bid WHERE auction.ID=bid.idAuction AND bid.Username=? AND Closed=1");
+    $sql = $con->prepare("SELECT Name, Highest_Bidder, Bid_Price FROM auction, bid WHERE auction.ID=bid.idAuction AND bid.Username=? AND Closed=1 GROUP BY auction.ID");
     $sql->bind_param('s', $_SESSION["userid"]);
     $sql->execute();
 
