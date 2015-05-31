@@ -17,7 +17,7 @@ if (strcmp($_POST["SaAuDeAction"], "edit") == 0) {
     $sql->bind_param('ssiiisii', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
         $_POST["PeopleCount"], $vardate, $_POST["Closed"], $_POST["AuctionID"]);
 } else if (strcmp($_POST["SaAuDeAction"], "new") == 0) {
-    $query = "INSERT INTO auction(Name, Description, Bid_Price, Buy_Price, PeopleCount, End_Date, Hotel) VALUES (?,?,?,?,?,?,?)";
+    $query = "INSERT INTO auction(Name, Description, Bid_Price, Buy_Price, PeopleCount, End_Date, Hotel, Images) VALUES (?,?,?,?,?,?,?,'images/nopic.jpg')";
     $sql = $con->prepare($query);
     $sql->bind_param('ssiiisi', $_POST["AuctionName"], $_POST["Description"], $_POST["Bid_Price"], $_POST["Buy_Price"],
         $_POST["PeopleCount"], $vardate, $_POST["CrAuHotelID"]);

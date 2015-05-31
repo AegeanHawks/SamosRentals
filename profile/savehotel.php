@@ -8,21 +8,21 @@ session_start();
 $con = db_connect();
 
 if (strcmp($_POST["SaEdHotAction"], "edit") == 0) {
-    $query = "UPDATE hotel SET Name=?, Coordinates=?, Description=?, Comforts=?, Image=?, Tel=?, Manager=? WHERE ID=?";
+    $query = "UPDATE hotel SET Name=?, Coordinates=?, Description=?, Comforts=?, Tel=?, Manager=? WHERE ID=?";
     $sql = $con->prepare($query);
 
     if (!isRole("admin")) {
         $_POST["SaEdHotChooseHotelier"] = $_SESSION['userid'];
     }
-    $sql->bind_param('sssssssi', $_POST["SaEdHotName"], $_POST["SaEdHotCoordinates"], $_POST["SaEdHotDescription"], $_POST["SaEdHotComforts"], $_POST["SaEdHotImage"], $_POST['SaEdHotTel'], $_POST['SaEdHotChooseHotelier'], $_POST['SaEdHotID']);
+    $sql->bind_param('ssssssi', $_POST["SaEdHotName"], $_POST["SaEdHotCoordinates"], $_POST["SaEdHotDescription"], $_POST["SaEdHotComforts"], $_POST['SaEdHotTel'], $_POST['SaEdHotChooseHotelier'], $_POST['SaEdHotID']);
 } else if (strcmp($_POST["SaEdHotAction"], "new") == 0) {
-    $query = "INSERT INTO hotel(Name, Coordinates, Description, Comforts, Image, Tel, Manager) VALUES(?,?,?,?,?,?,?)";
+    $query = "INSERT INTO hotel(Name, Coordinates, Description, Comforts, Image, Tel, Manager) VALUES(?,?,?,?,'images/nopic.jpg',?,?)";
     $sql = $con->prepare($query);
 
     if (!isRole("admin")) {
         $_POST["SaEdHotChooseHotelier"] = $_SESSION['userid'];
     }
-    $sql->bind_param('sssssss', $_POST["SaEdHotName"], $_POST["SaEdHotCoordinates"], $_POST["SaEdHotDescription"], $_POST["SaEdHotComforts"], $_POST["SaEdHotImage"], $_POST['SaEdHotTel'], $_POST['SaEdHotChooseHotelier']);
+    $sql->bind_param('ssssss', $_POST["SaEdHotName"], $_POST["SaEdHotCoordinates"], $_POST["SaEdHotDescription"], $_POST["SaEdHotComforts"], $_POST['SaEdHotTel'], $_POST['SaEdHotChooseHotelier']);
 } else {
     die('{"success":"no","message":"intruder!"}');
 }

@@ -49,7 +49,7 @@ if (strcmp($_POST["SaUsState"], "edit") == 0) {
     echo '{"success":"yes"}';
 
 } else if (strcmp($_POST["SaUsState"], "new") == 0) {
-    $query = "INSERT INTO user(FirstName, Lastname, Tel, Mail, Sex, Password, Birthday, Username) VALUES(?,?,?,?,?,?,?,?)";
+    $query = "INSERT INTO user(FirstName, Lastname, Tel, Mail, Sex, Password, Birthday, Username, Image) VALUES(?,?,?,?,?,?,?,?,'images/website/avatar.jpg')";
     $sql = $con->prepare($query);
     $sql->bind_param('ssssssss', $_POST["SaUsFirstName"], $_POST["SaUsLastname"], $_POST["SaUsTel"], $_POST["SaUsMail"], $_POST["SaUsSex"], $_POST["SaUsPassword"], $_POST["SaUsBirthday"], $_POST["SaUsUsername"]);
     if (!$sql->execute()) {
