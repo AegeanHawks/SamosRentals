@@ -146,13 +146,13 @@ INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, Buy_Pric
 ('CH8', 'CH8', 2, 0, 11, 13, 2, 'images/nopic.jpg', '2015-05-30 23:59:59'),
 ('CH10', 'CH10', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
 ('CH9', 'CH9', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('Lux Suit', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 60, 1, 'images/office.jpg', '2015-05-18 16:48:17'),
+('mpla mpla', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 5, 1, 'images/office.jpg', '2015-05-20 16:48:17'),
 ('White room - Doryssa', 'Προσφορά το λευκό δωμάτιο. Εξαιρετικό για διαμονή με την κοπέλα σας. Το σίγουρο είναι πως στο τέλος της νύχτας το λευκό δωμάτιο θα λεκιάσει...', 3, 0, 26, 60, 3, '//doryssa.gr/photos/Home_backgrounds_EN/backround_only_gardenview.jpg', NOW() + Interval 1 DAY ),
 ('2 persom room - Samaina', 'Προσφορά μέτριας κατηγορίας δωμάτιο στο πυθαγόριο. Κοντά στην θάλλασα και στο χωρίο, είναι ότι πρέπει για να έχετε ένα σημείο ξεκούρασης κατα την διάρκεια των διακοπών σας.', 2, 0, 10, 25, 4, '//www.samaina-hotel-samos.com/pic-b/pic3-b.jpg', NOW() + Interval 3 DAY ),
 ('Προσφορά στο Zeus', 'Η ποιο γαμάτη σουίτα!', 4, 1, 28, 30, 1, 'http://lunar.thegamez.net/bedroomideaspic/contemporary-interior-design-ideas/modern-interior-design-hotel-room-ventasaludcom-1120x840.jpg', NOW() + Interval 3 DAY ),
 ('Μόνο για λίγες μέρες στο Lido', 'Ψηλή ξανθιά γαλανομάτα γκόμενα. Μωρό εισαγώμενο κατευθείαν από Ουκρανία (το κορίτσι έφυγε λόγο εμφύλιου)...', 1, 0, 65, 100, 8, 'images/alcatraz111.jpg', NOW() + Interval 9 DAY ),
-('Προσφορά στο Nefeli', 'Προσφορά μόνο για λίγες μέρες. Τρέξτε να το κλείσετε...', 4, 0, 32, 40, 6, 'http://www.hotelnepheli.com/uploads/photos/1_34.jpg', NOW() + Interval 4 DAY ),
-('Lux Suit', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 60, 1, 'images/office.jpg', '2015-05-18 16:48:17'),
-('mpla mpla', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 5, 1, 'images/office.jpg', '2015-05-20 16:48:17');
+('Προσφορά στο Nefeli', 'Προσφορά μόνο για λίγες μέρες. Τρέξτε να το κλείσετε...', 4, 0, 32, 40, 6, 'http://www.hotelnepheli.com/uploads/photos/1_34.jpg', NOW() + Interval 4 DAY );
 ";
 
         if ($conn->multi_query($sql) === TRUE) {
