@@ -89,17 +89,12 @@ $resultRow = mysqli_fetch_array($result);
                        maxlength="30" class="validate">
             </div>
         </div>
-        <?php
-        if (isRole("user")) {
-            ?>
             <div class="col offset-s1 s10 divider"></div>
             <div class="col offset-s1 s10">
                 <p class="col s4 detailshead">Βαθμολογία: </p>
 
                 <p class="col s6 detailsbody_s_1"><?php echo floor($resultRow["Grade"] * 10) / 10 ?></p>
             </div>
-        <?php
-        } ?>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
             <p class="col s4 detailshead">Φύλλο: </p>
