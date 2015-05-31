@@ -138,21 +138,21 @@ VALUE ('Zeus', '+302273095373', 'Just 500 metres from the sea, in a magical gree
 '37.958545,23.719464', 4.5, 'Chuck', 'https://scontent-vie.xx.fbcdn.net/hphotos-xpf1/t31.0-8/1655099_279227022246395_1919956323_o.jpg;https://scontent-vie.xx.fbcdn.net/hphotos-xpf1/t31.0-8/904636_279228625579568_26480372_o.jpg;https://scontent-vie.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10917358_10152614373352543_5595763220626204857_n.jpg?oh=1b048e342b418721a581004a01927498&oe=55C57E82;https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10922553_10152618435002543_2751694248850244023_n.jpg?oh=3934c37e508d722831313e0dca307743&oe=560DADF4&__gda__=1439362274_91fc80589a0d35a5124595fbda8e0fe0;https://scontent-vie.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/11081221_10152765793922543_987972985133053954_n.jpg?oh=756b728e390d4c323fad5fd2448ddeca&oe=560B1042','ΣΚΛΗΡΟ ΛΕΣΒΙΑΚΟ, ΟΙ ΦΥΛΑΚΙΣΜΕΝΟΙ, BLADE, ΤΖΑΚΣΟΝ, ΛΕΣΒΙΑΚΟ ΑΠΛΟ, ΔΙΟΝΥΣΙΑΚΑ, ΠΥΡΙΝΙΚΟΣ ΠΟΛΕΜΟΣ, ΑΣΤΥΝΟΜΟΣ, Ες-Ες, ΜΠΑΛΑΡΙΝΑ, ΙΝΔΙΑΝΑ ΚΑΙ ΚΑΟΥΜΠΟΙ, ΠΕΙΡΑΤΕΣ, ΜΠΑΤΜΑΝ');
 
 INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, Buy_Price, Hotel, Images, End_Date) VALUES
+('CH3', 'CH3', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH4', 'CH4', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH5', 'CH5', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH6', 'CH6', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH7', 'CH7', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH8', 'CH8', 2, 0, 11, 13, 2, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH10', 'CH10', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
+('CH9', 'CH9', 2, 0, 11, 13, 8, 'images/nopic.jpg', '2015-05-30 23:59:59'),
 ('White room - Doryssa', 'Προσφορά το λευκό δωμάτιο. Εξαιρετικό για διαμονή με την κοπέλα σας. Το σίγουρο είναι πως στο τέλος της νύχτας το λευκό δωμάτιο θα λεκιάσει...', 3, 0, 26, 60, 3, '//doryssa.gr/photos/Home_backgrounds_EN/backround_only_gardenview.jpg', NOW() + Interval 1 DAY ),
 ('2 persom room - Samaina', 'Προσφορά μέτριας κατηγορίας δωμάτιο στο πυθαγόριο. Κοντά στην θάλλασα και στο χωρίο, είναι ότι πρέπει για να έχετε ένα σημείο ξεκούρασης κατα την διάρκεια των διακοπών σας.', 2, 0, 10, 25, 4, '//www.samaina-hotel-samos.com/pic-b/pic3-b.jpg', NOW() + Interval 3 DAY ),
 ('Προσφορά στο Zeus', 'Η ποιο γαμάτη σουίτα!', 4, 1, 28, 30, 1, 'http://lunar.thegamez.net/bedroomideaspic/contemporary-interior-design-ideas/modern-interior-design-hotel-room-ventasaludcom-1120x840.jpg', NOW() + Interval 3 DAY ),
 ('Μόνο για λίγες μέρες στο Lido', 'Ψηλή ξανθιά γαλανομάτα γκόμενα. Μωρό εισαγώμενο κατευθείαν από Ουκρανία (το κορίτσι έφυγε λόγο εμφύλιου)...', 1, 0, 65, 100, 8, 'images/alcatraz111.jpg', NOW() + Interval 9 DAY ),
 ('Προσφορά στο Nefeli', 'Προσφορά μόνο για λίγες μέρες. Τρέξτε να το κλείσετε...', 4, 0, 32, 40, 6, 'http://www.hotelnepheli.com/uploads/photos/1_34.jpg', NOW() + Interval 4 DAY ),
 ('Lux Suit', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 60, 1, 'images/office.jpg', '2015-05-18 16:48:17'),
-('mpla mpla', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 5, 1, 'images/office.jpg', '2015-05-20 16:48:17'),
-('CH3', 'CH3', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59'),
-('CH4', 'CH4', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59'),
-('CH5', 'CH5', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59'),
-('CH6', 'CH6', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59'),
-('CH7', 'CH7', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59'),
-('CH8', 'CH8', 2, 0, 11, 13, 2, '', '2015-05-30 23:59:59'),
-('CH10', 'CH10', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59'),
-('CH9', 'CH9', 2, 0, 11, 13, 8, '', '2015-05-30 23:59:59');
+('mpla mpla', 'Η ποιο γαμάτη σουίτα!', 4, 0, 10, 5, 1, 'images/office.jpg', '2015-05-20 16:48:17');
 ";
 
         if ($conn->multi_query($sql) === TRUE) {
@@ -161,7 +161,7 @@ INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, Buy_Pric
             Print_MSG("Πρόβλημα κατά την δημιουργία πινάκων: " . $conn->error);
             mysqli_query($conn, "DROP DATABASE " . $DB_NAME . ";");
         }
-
+        sleep(1);
 //Close Connection
         $conn->close();
         Print_MSG("Η σύνδεση με την βάση έκλεισε.");
@@ -171,6 +171,59 @@ INSERT INTO Auction (Name, Description, PeopleCount, Closed, Bid_Price, Buy_Pric
             echo $msq;
             echo '</span>';
             echo '<br>';
+        }
+
+
+        $con = db_connect();
+        $images = glob("../images/*");
+        $sql = "SELECT Image FROM User UNION SELECT Image FROM Hotel UNION SELECT Images FROM auction";
+        $result = $con->query($sql);
+
+        echo "<span style='color:blue'><b>Στην βάση</b></span><br>";
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                $localimages = explode(";", $row["Image"]);
+
+                //στην βάση
+                foreach ($localimages as $lim) {
+                    if (strpos($lim, '//') !== false) {
+                        break;
+                    } else if (strpos($lim, 'armageddonas') !== false) {
+                        break;
+                    } else if (strpos($lim, 'loading') !== false) {
+                        break;
+                    }
+                    $DatabaseImage[] = $lim;
+                    echo "<span style='color:green'><b>" . $lim . "</b></span><br>";
+                }
+            }
+        }
+
+        echo "<span style='color:blue'><b>Τοπικα</b></span><br>";
+        foreach ($images as $image) {
+            $var = str_replace('../', '', $image);
+            if (strpos($var, '.jpg') !== false) {
+                $LocalImages[] = $image;
+            } elseif (strpos($var, '.png') !== false) {
+                $LocalImages[] = $image;
+            }
+            echo "<span style='color:green'><b>" . $var . "</b></span><br>";
+        }
+
+        echo "<br><span style='color:blue'><b>Διαγραφή</b></span><br>";
+        foreach ($LocalImages as $l) {
+            $Delete = true;
+            $l = str_replace('../', '', $l);
+            foreach ($DatabaseImage as $d) {
+                if (strcmp($l, $d) == 0) {
+                    $Delete = false;
+                }
+            }
+            if ($Delete) {
+                echo "<span style='color:red'><b>" . $l . "</b></span><br>";
+                @unlink("../" . $l);
+            }
         }
         ?>
 
