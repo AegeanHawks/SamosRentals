@@ -1,9 +1,12 @@
 <?php
-define('PRIVATE_KEY', '#github#samosrentals#project#');
+require(__DIR__ . "/GitHubHandler.php");
+define('PRIVATE_KEY', '');
 
-echo shell_exec("git pull");
+use GitHubWebhook\Handler;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_REQUEST['secret'] === PRIVATE_KEY) {
-    echo shell_exec("git pull");
-    echo 'Everything Worked!!';
+$handler = new Handler(PRIVATE_KEY, __DIR__);
+if ($handler->handle()) {
+    echo "OK";
+} else {
+    echo "Wrong secret";
 }
