@@ -1,7 +1,7 @@
 <?php
 
-$sql = $con->prepare("SELECT avg(auction.GradeOfUser) as Grade FROM auction, bid, user WHERE user.Username=? AND bid.Username=user.Username AND bid.idAuction=auction.ID GROUP BY user.Username");
-$sql->bind_param('s', $_SESSION["userid"]);
+$sql = $con->prepare("SELECT avg(auction.GradeOfUser) as Grade, role FROM auction, bid, user WHERE user.Username=? AND bid.Username=user.Username AND bid.idAuction=auction.ID GROUP BY user.Username");
+$sql->bind_param('s', $_GET["user"]);
 $sql->execute();
 
 $result = $sql->get_result();
@@ -89,12 +89,18 @@ $resultRow = mysqli_fetch_array($result);
                        maxlength="30" class="validate">
             </div>
         </div>
+        <?php
+        if ($resultRow["role"] == 2) {
+            ?>
             <div class="col offset-s1 s10 divider"></div>
             <div class="col offset-s1 s10">
                 <p class="col s4 detailshead">Βαθμολογία: </p>
 
                 <p class="col s6 detailsbody_s_1"><?php echo floor($resultRow["Grade"] * 10) / 10 ?></p>
             </div>
+        <?php
+        }
+        ?>
         <div class="col offset-s1 s10 divider"></div>
         <div class="col offset-s1 s10">
             <p class="col s4 detailshead">Φύλλο: </p>
