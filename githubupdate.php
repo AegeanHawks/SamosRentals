@@ -60,12 +60,7 @@ $payload = json_decode($json);
 switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
     case 'push':
         exec("git pull");
-        die();
-        break;
-
-    case 'pull':
-        exec("git pull");
-        die();
+        echo 'ok';
         break;
 
     default:
@@ -73,6 +68,5 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
         echo "Event:$_SERVER[HTTP_X_GITHUB_EVENT] Payload:\n";
         print_r($payload); # For debug only. Can be found in GitHub hook log.
         die();*/
-        exec("git pull");
-        die();
 }
+die();
