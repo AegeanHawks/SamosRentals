@@ -83,7 +83,7 @@ try {
 
     echo '{"success":"yes"}';
 } catch (Exception $e) {
-    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
+    trigger_error("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
     if ($e->getMessage() == "The bid price is lower than the current price") {
         echo '{"success":"no","state":"-1"}';
     } else {
