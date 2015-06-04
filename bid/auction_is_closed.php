@@ -1,5 +1,5 @@
 <?php
-trigger_error("df");
+
 include_once '../admin/configuration.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -43,7 +43,7 @@ try {
         echo $auctionIsClosed;
     }
 } catch (Exception $e) {
-    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
+    trigger_error("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
     $auctionIsClosed = '{"success":"no"}';
     echo $auctionIsClosed;
 }
