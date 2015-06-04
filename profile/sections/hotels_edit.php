@@ -25,8 +25,8 @@
 
         // <editor-fold defaultstate="collapsed" desc="Error checking">
         if (!$hotelsViewDetails->execute()) {
-            debug_to_console("Execute error: \"" . $hotelsViewDetailsStmt . "\"" . "\n", 3, $errorpath);
-            debug_to_console("Execute failed: (" . $hotelsViewDetails->errno . ") " . $hotelsViewDetails->error . "\"" . "\n", 3, $errorpath);
+            trigger_error("Execute error: \"" . $hotelsViewDetailsStmt . "\"" . "\n");
+            trigger_error("Execute failed: (" . $hotelsViewDetails->errno . ") " . $hotelsViewDetails->error . "\"" . "\n");
             throw new Exception("Statement failed to execute");
         }
         // </editor-fold>
@@ -49,7 +49,7 @@
             <?php
         }
     } catch (Exception $e) {
-    debug_to_console("##Error at ".__FILE__."\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+        trigger_error("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
         $errormessage = "<div class=\"col offset-s1 s10\">
                             <p class=\"col s12\">Κάτι πήγε στραβά </p></div>";
         echo $errormessage;

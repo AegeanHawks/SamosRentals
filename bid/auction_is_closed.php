@@ -1,5 +1,5 @@
 <?php
-
+trigger_error("df");
 include_once '../admin/configuration.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -25,8 +25,8 @@ try {
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionClosed->execute()) {
-        debug_to_console("Execute error: \"" . $auctionClosedStmt . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Execute failed: (" . $auctionClosed->errno . ") " . $auctionClosed->error . "\"" . "\n", 3, $errorpath);
+        trigger_error("Execute error: \"" . $auctionClosedStmt . "\"" . "\n");
+        trigger_error("Execute failed: (" . $auctionClosed->errno . ") " . $auctionClosed->error . "\"" . "\n");
         throw new Exception("Statement failed to execute");
     }
     // </editor-fold>
@@ -43,7 +43,7 @@ try {
         echo $auctionIsClosed;
     }
 } catch (Exception $e) {
-    debug_to_console("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n", 3, $errorpath);
+    error_log("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
     $auctionIsClosed = '{"success":"no"}';
     echo $auctionIsClosed;
 }

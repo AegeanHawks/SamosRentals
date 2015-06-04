@@ -48,8 +48,8 @@ try {
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionDetails->execute()) {
-        debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+        trigger_error("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n");
+        trigger_error("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n");
         throw new Exception("Statement failed to execute");
     }
     // </editor-fold>
@@ -71,8 +71,8 @@ try {
 
     // <editor-fold defaultstate="collapsed" desc="Error checking">
     if (!$auctionDetails->execute()) {
-        debug_to_console("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n", 3, $errorpath);
-        debug_to_console("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n", 3, $errorpath);
+        trigger_error("Execute error: \"" . $auctionDetailsStmt . "\"" . "\n");
+        trigger_error("Execute failed: (" . $auctionDetails->errno . ") " . $auctionDetails->error . "\"" . "\n");
         throw new Exception("Statement failed to execute");
     }
     // </editor-fold>

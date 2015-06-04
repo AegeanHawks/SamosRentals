@@ -17,12 +17,12 @@
                     $allhoteliersQuery = "SELECT Username FROM user WHERE role=1 ORDER BY Username";
 
                     if (!$allhoteliers = $con->prepare($allhoteliersQuery)) {
-                        debug_to_console("Error: \"" . $allhotelsStatement . "\"" . "\n", 3, $errorpath);
+                        trigger_error("Error: \"" . $allhotelsStatement . "\"" . "\n");
                     } else {
                         $allhoteliers->execute();
 
                         if ($allhoteliers == NULL) {
-                            debug_to_console("Could not run query: \"" . $allhoteliersQuery . "\"" . "\n", 3, $errorpath);
+                            trigger_error("Could not run query: \"" . $allhoteliersQuery . "\"" . "\n");
                         }
                         $resultHoteliers = $allhoteliers->get_result();
 

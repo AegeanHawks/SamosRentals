@@ -18,6 +18,8 @@
       <column name="Hotel" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Images" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="End_Date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="GradeOfHotel" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="GradeOfUser" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="Highest_Bidder" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="ID"/>
       <foreign-key name="auction_ibfk_1" columns="Hotel" ref-table="hotel" ref-schema="" ref-catalog="samosrentals" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -59,8 +61,9 @@
       <column name="Mail" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Birthday" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
       <column name="Image" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="Role" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Role" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="Mg=="/>
       <column name="Upgrade" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Active" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
       <primary-key name="PRIMARY" columns="Username"/>
       <exported-key name="auction_ibfk_2" table="auction" schema="" catalog="samosrentals" columns="Highest_Bidder"/>
       <exported-key name="bid_ibfk_1" table="bid" schema="" catalog="samosrentals" columns="Username"/>
