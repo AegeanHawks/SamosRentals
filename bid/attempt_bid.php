@@ -1,15 +1,16 @@
 <?php
-
+error_reporting(0);
 include_once '../admin/configuration.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 try {
+    $con = db_connect();
     // <editor-fold defaultstate="collapsed" desc="Check values">
     // <editor-fold defaultstate="collapsed" desc="Check if variables are set">
     if (!isset($_GET["bid_value"]) || !isset($_GET["auctionID"])) {
-        throw new Exception("Id is not set");
+        throw new Exception("Id or bid value is not set");
     }// </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Check if auction is closed">
     ob_start();
@@ -24,18 +25,31 @@ try {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Check if bid value is bigger than highest bid value">
     ob_start();
-    include '/highest_bid.php';
+    include './highest_bid.php';
     $highestBid = ob_get_clean();
 
     $highestBidjson = json_decode($highestBid);
     if ($highestBidjson->value >= $_GET["bid_value"]) {
-        throw new Exception("The bid price is lower than the current price");
+        throw new Exception("Wrong price");
     }// </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Check prices">
+
+    $queryPrices = $con->prepare('SELECT Bid_Price, Buy_Price FROM auction WHERE ID= ?');
+    $queryPrices->bind_param('i', $_GET["auctionID"]);
+    $queryPrices->execute();
+
+    $PricesResult = $queryPrices->get_result();
+    $PricesResultRow = mysqli_fetch_array($PricesResult);
+
+    if ($_GET["bid_value"] > $PricesResultRow["Buy_Price"] || $_GET["bid_value"] < $PricesResultRow["Bid_Price"]) {
+        throw new Exception("Wrong price");
+    }
+    // </editor-fold>
     // </editor-fold>
 
 
     // <editor-fold defaultstate="collapsed" desc="Insert values into bid">
-    $con = db_connect();
     $auctionDetailsStmt = "INSERT INTO bid(Username,BidMoney,idAuction) VALUES (?,?,?)";
 
     // <editor-fold defaultstate="collapsed" desc="Prepare and run statement">
@@ -84,7 +98,7 @@ try {
     echo '{"success":"yes"}';
 } catch (Exception $e) {
     trigger_error("##Error at " . __FILE__ . "\"\nDetails: " . $e->getMessage() . "\"" . "\n");
-    if ($e->getMessage() == "The bid price is lower than the current price") {
+    if ($e->getMessage() == "Wrong price") {
         echo '{"success":"no","state":"-1"}';
     } else {
         echo '{"success":"no"}';

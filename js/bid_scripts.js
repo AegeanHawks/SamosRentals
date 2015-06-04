@@ -52,7 +52,7 @@ function userBid(auctionID) {
 
             } else if ($highestBidResponse["success"] == "no") {
                 if ($highestBidResponse["state"] == "-1") {
-                    Materialize.toast('Η τιμή που πλειοδοτήσατε είναι μικρότερη από τη τρέχουσα', 5000);
+                    Materialize.toast('Η τιμή που πλειοδοτήσατε είναι μικρότερη από τη τρέχουσα η μεγαλύτερη από τη μέγιστη', 5000);
                 } else {
                     document.getElementById("auctionUserBid").innerHTML = "Failed";
                 }

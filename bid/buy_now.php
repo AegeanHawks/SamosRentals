@@ -13,7 +13,7 @@ try {
     
     // <editor-fold defaultstate="collapsed" desc="Check if auction is closed">
     ob_start();
-    include '/auction_is_closed.php';
+    include './auction_is_closed.php';
     $auctionIsClosed = ob_get_clean();
     
 
