@@ -88,6 +88,7 @@ function ownsProfile()
     <script src="js/star-rating.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src=js/profilescripts.js></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
     <style>
         .tabregion {

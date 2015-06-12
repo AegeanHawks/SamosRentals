@@ -49,6 +49,34 @@
             <label for="HotelLocationInput">Τοποθεσία</label>
         </div>
         <div class="input-field col s12">
+            <div align="center" id="map" style="width:auto;height:300px;"></div>
+            <br>
+            <script>
+                function initialize() {
+                    var mcenter = new google.maps.LatLng(37.75, 26.80);
+                    var marker = new google.maps.Marker({
+                        position: mcenter
+                    });
+                    var mapProp = {
+                        zoom: 11,
+                        center: mcenter,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("map"), mapProp);
+                    google.maps.event.addListener(map, 'click', function (event) {
+                        marker.setMap(null);
+                        marker = new google.maps.Marker({
+                            position: event.latLng,
+                            map: map
+                        });
+                        document.getElementById('HotelLocationInput').value = marker.getPosition().lat() + "," + marker.getPosition().lng();
+                    });
+                }
+                google.maps.event.addDomListener(window, 'load', initialize);
+
+            </script>
+        </div>
+        <div class="input-field col s12">
             <i class="mdi-action-description prefix"></i>
             <textarea name="SaEdHotDescription" id="HotelDescriptionInput" class="materialize-textarea" length="500"></textarea>
             <label for="HotelDescriptionInput">Περιγραφή</label>
