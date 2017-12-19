@@ -60,7 +60,7 @@ CREATE TABLE User (
   Birthday  VARCHAR(30),
   Image     TEXT,
   Role      INT          NOT NULL DEFAULT 2,
-  Upgrade   INT          NOT NULL,
+  Upgrade   INT          NOT NULL DEFAULT 0,
   Active    BOOLEAN      NOT NULL DEFAULT 1,
   PRIMARY KEY (Username)
 );
