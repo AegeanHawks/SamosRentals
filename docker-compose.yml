@@ -8,8 +8,8 @@ services:
           - VIRTUAL_HOST=samosrentals.rambou.gr,www.samosrentals.rambou.gr
           - LETSENCRYPT_HOST=samosrentals.rambou.gr,www.samosrentals.rambou.gr
           - LETSENCRYPT_EMAIL=admin@rambou.gr
-      ports:
-          - "8080:80"
+      #ports:
+      #    - "8080:80"
       volumes:
           - .:/code
           - ./site.conf:/etc/nginx/conf.d/default.conf
