@@ -2,7 +2,7 @@ version: "3"
 services:
   web:
       image: nginx:latest
-      container_name: nginx
+      container_name: nginx-samos
       restart: always
       environment:
           - VIRTUAL_HOST=samosrentals.rambou.gr,www.samosrentals.rambou.gr
