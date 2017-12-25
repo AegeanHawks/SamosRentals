@@ -1,0 +1,40 @@
+version: "3"
+services:
+  web:
+      image: nginx:latest
+      container_name: nginx-samos
+      restart: always
+      environment:
+          - VIRTUAL_HOST=www.samosrentals.rambou.gr,samosrentals.rambou.gr
+          - LETSENCRYPT_HOST=www.samosrentals.rambou.gr,samosrentals.rambou.gr
+          - LETSENCRYPT_EMAIL=admin@rambou.gr
+      #ports:
+      #    - "8080:80"
+      volumes:
+          - .:/code
+          - ./site.conf:/etc/nginx/conf.d/default.conf
+      links:
+          - php
+  php:
+      build: .
+      #image: php:7-fpm
+      container_name: php7_fpm
+      volumes:
+        - .:/code
+      #  - ./log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+      restart: always
+      links:
+          - database
+      #command: docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli pdo pdo_mysql
+  database:
+      image: mysql
+      container_name: mysql
+      restart: always
+      #ports:
+      #  - 3306:3306
+      volumes:
+        - ./database:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: root
+        MYSQL_DATABASE: samosrentals

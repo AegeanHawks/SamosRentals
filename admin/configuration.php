@@ -13,7 +13,7 @@ if (!($firefox || $safari || $chrome)) {
 mb_internal_encoding('UTF-8');
 
 //Server and Database
-$SERVER = "localhost";
+$SERVER = "database";
 $DB_USERNAME = "root";
 $DB_PASSWORD = "root";
 $DB_NAME = "samosrentals";
@@ -22,7 +22,7 @@ function db_connect() {
     global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 
     // Establishing Connection with Server
-    $mysqli = @new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+    $mysqli = new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 
 
     if ($mysqli->connect_error) {
