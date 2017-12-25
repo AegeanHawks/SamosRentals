@@ -130,16 +130,6 @@ include 'header.php';
                 </p>
             </li>
 
-            <!--<li class="collection-item avatar">
-                <i class="mdi-communication-messenger circle orange"></i>
-                <span class="title truncate">Σελίδα ξενοδοχείου</span>
-
-                <p><a href="<?php echo $website; ?>">
-                        Ιστότοπος
-                    </a>
-                </p>
-            </li>-->
-
             <li class="collection-item avatar">
                 <i class="mdi-communication-phone circle green"></i>
                 <span class="title">Τηλέφωνο επικοινωνίας</span>

@@ -13,7 +13,7 @@ if (!($firefox || $safari || $chrome)) {
 mb_internal_encoding('UTF-8');
 
 //Server and Database
-$SERVER = "database";
+$SERVER = "localhost";
 $DB_USERNAME = "root";
 $DB_PASSWORD = "root";
 $DB_NAME = "samosrentals";

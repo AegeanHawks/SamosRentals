@@ -11,7 +11,6 @@
         include 'configuration.php';
 
         $Page_Title = "Ξενοδοχεία";
-        include '../head.php';
         ?>
     </head>
     <body class="white">
