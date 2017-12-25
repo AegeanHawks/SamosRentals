@@ -11,3 +11,6 @@ The configuration file is located at Admin/configuration.php .There you can edit
 ## Install 
 To install default values on your database simply run {YOUR_IP}/Admin/install.php
 It creates a database etc.
+
+### Ubuntu
+Mysql tables in ubuntu are by default case sensitive. To change that in `sudo nano /etc/mysql/my.cnf` under `[mysqld]` add `lower_case_table_names = 1`
