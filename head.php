@@ -9,9 +9,9 @@
 </noscript>
 
 <!-- CSS  -->
-<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-<link href="css/animate.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
 
 <!--  Scripts-->
 <script src="js/jquery-2.1.1.min.js"></script>
