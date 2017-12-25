@@ -338,11 +338,6 @@ if ($registered){
                     </div>
                 </div>
 
-                <div class="g-recaptcha coll validate" name="recaptcha"
-                     data-sitekey="6Ldc7AUTAAAAANnRbW3E9zA9nNaS5HVV9fmmxZaL"
-                     form="register" required>
-                </div>
-
                 <div class="row">
                     <button type="submit" class="center-btn waves-effect waves-light btn" id="register_btn"
                             form="register"><i
