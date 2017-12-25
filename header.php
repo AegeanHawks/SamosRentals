@@ -4,11 +4,11 @@
             <div class="valign-demo valign-wrapper left">
                 <a id="logo-container" href="index.php" class="brand-logo"
                    onclick="$('#logo-container').addClass('animated pulse')">
-                    <div class="hide-on-med-and-down">
+                    <div class="hide-on-med-and-down" style="margin-top: 80px">
                         <span class="left" style="height: 74px; z-index: 99;"><img src="images/website/logo.png"></span>
                         <span class="white-text left " style="padding-left:15px;font-size: 0.7em;font-weight:300;">Samos Rentals</span>
                     </div>
-                    <div class="hide-on-large-only">
+                    <div class="hide-on-large-only" style="margin-top: 65px">
                         <span class="white-text truncate">Samos Rentals</span>
                     </div>
                 </a>
