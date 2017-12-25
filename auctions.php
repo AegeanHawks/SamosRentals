@@ -155,12 +155,12 @@ include 'header.php';
 <div class="row" style="z-index: 100;">
     <nav class="blue z-depth-1">
         <div class="nav-wrapper">
-            <form method="get" class="offset-l2 col l8 s12" style="margin-top: 10px;">
-                <div class="input-field ">
+            <form method="get" class="offset-l2 col l8 s12" style="margin-top: 20px;">
+                <div class="input-field" style="height: 35px;">
                     <input id="search" name="search" type="search" placeholder="    Αναζητήστε εδώ..."
                            required>
-                    <label for="search"><i class="mdi-action-search"></i></label>
-                    <i class="mdi-navigation-close"></i>
+                    <label style="margin-top:-15px" for="search"><i class="mdi-action-search"></i></label>
+                    <i style="margin-top:-15px" class="mdi-navigation-close"></i>
                 </div>
             </form>
         </div>
