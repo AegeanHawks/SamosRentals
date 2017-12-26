@@ -87,51 +87,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     debug_to_console($_POST);
     //Validate Data
-    if (preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $fname)) {
-        $valid = true;
-    } else {
-        $valid = false;
-    }
+    $valid = true;
 
-    if (preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $lname)) {
-        $valid = true;
-    } else {
+    if (!preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $fname)) {
         $valid = false;
-    }
-
-    if (preg_match('/^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$/', $username)) {
-        $valid = true;
-    } else {
+    } else if (!preg_match('/^[Α-ΩA-Z][α-ωa-zA-Z-ά-ώ]{3,20}$/', $lname)) {
         $valid = false;
-    }
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $valid = true;
-    } else {
+    } else if (!preg_match('/^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$/', $username)) {
         $valid = false;
-    }
-
-    if (preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password)) {
-        $valid = true;
-    } else {
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $valid = false;
-    }
-
-    if (preg_match('/[\+]\d{2}\d{10}/', $tel)) {
-        $valid = true;
-    } else {
+    } else if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password)) {
         $valid = false;
-    }
-
-    if (preg_match('/(male)|(female)/', $sex)) {
-        $valid = true;
-    } else {
+    } else if (!preg_match('/[\+]\d{2}\d{10}/', $tel)) {
         $valid = false;
-    }
-
-    if (preg_match('/^[0-9]{2}[ ][a-zA-Z]{3,}[,][ ][0-9]{4}$/', $birthday)) {
-        $valid = true;
-    } else {
+    } else if (!preg_match('/(male)|(female)/', $sex)) {
+        $valid = false;
+    } else if (!preg_match('/^[0-9][0-9]?[ ][a-zA-Z]{3,}[,][ ][0-9]{4}$/', $birthday)) {
         $valid = false;
     }
 
