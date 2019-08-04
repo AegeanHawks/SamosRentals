@@ -1,5 +1,11 @@
 <?php
 
+// load enviromental variables
+require __DIR__.'/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::create(__DIR__);
+$dotenv->load();
+$dotenv->required(['DB_SERVER_NAME', 'DB_USERNAME', 'DB_PASSWORD', 'DB_NAME'])->notEmpty();
+
 //Check if browser is internet Explorer and die, multiple times....
 $firefox = strpos($_SERVER["HTTP_USER_AGENT"], 'Firefox') ? true : false;
 $safari = strpos($_SERVER["HTTP_USER_AGENT"], 'Safari') ? true : false;
@@ -13,16 +19,16 @@ if (!($firefox || $safari || $chrome)) {
 mb_internal_encoding('UTF-8');
 
 //Server and Database
-$SERVER = "localhost";
-$DB_USERNAME = "root";
-$DB_PASSWORD = "root";
-$DB_NAME = "samosrentals";
+$SERVER = $_ENV['DB_SERVER_NAME'];
+$DB_USERNAME = $_ENV['DB_USERNAME'];
+$DB_PASSWORD = $_ENV['DB_PASSWORD'];
+$DB_NAME = $_ENV['DB_NAME'];
 
 function db_connect() {
     global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 
     // Establishing Connection with Server
-    $mysqli = new mysqli($SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+    $mysqli = new mysqli($_ENV['DB_SERVER_NAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
 
 
     if ($mysqli->connect_error) {
