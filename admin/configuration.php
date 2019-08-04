@@ -1,8 +1,8 @@
 <?php
 
 // load enviromental variables
-require __DIR__.'/vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::create(__DIR__);
+require __DIR__.'/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::create(__DIR__."/../");
 $dotenv->load();
 $dotenv->required(['DB_SERVER_NAME', 'DB_USERNAME', 'DB_PASSWORD', 'DB_NAME'])->notEmpty();
 
