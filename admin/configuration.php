@@ -23,12 +23,13 @@ $SERVER = $_ENV['DB_SERVER_NAME'];
 $DB_USERNAME = $_ENV['DB_USERNAME'];
 $DB_PASSWORD = $_ENV['DB_PASSWORD'];
 $DB_NAME = $_ENV['DB_NAME'];
+$DB_PORT = $_ENV['DB_PORT'];
 
 function db_connect() {
-    global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
+    global $SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME, $DB_PORT;
 
     // Establishing Connection with Server
-    $mysqli = new mysqli($_ENV['DB_SERVER_NAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
+    $mysqli = new mysqli($_ENV['DB_SERVER_NAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME'], $_ENV['DB_PORT']);
 
 
     if ($mysqli->connect_error) {
